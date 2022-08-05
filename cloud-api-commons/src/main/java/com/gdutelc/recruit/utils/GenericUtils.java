@@ -10,7 +10,7 @@ import java.util.Set;
  * @author TufSolareyes
  * @date 2022-08-06
  */
-public class SomeUtils {
+public class GenericUtils {
 
     /**
      * 标准时间模式串

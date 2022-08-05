@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gdutelc.recruit.entities.wx.LoginInfo;
 import com.gdutelc.recruit.service.Code2Session_Wx;
-import com.gdutelc.recruit.utils.SomeUtils;
+import com.gdutelc.recruit.utils.GenericUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ public class Code2SessionImpl implements Code2Session_Wx {
 
     @Override
     public LoginInfo code2Session(String appid, String secret, String js_code, String grant_type) throws JsonProcessingException {
-        String url = SomeUtils.getValueFromFile("code2Session");
+        String url = GenericUtils.getValueFromFile("code2Session");
         url = url + "?" +"appid=" + appid + "&" + "secret=" + secret + "&" + "js_code=" + js_code + "&" + "grant_type=" + grant_type;
         ResponseEntity<String> entity = restTemplate.getForEntity(url, String.class);
         if(entity.getStatusCodeValue() != SUCCESS){
