@@ -11,6 +11,7 @@ import lombok.Setter;
  * 简要信息包含学号、姓名、性别、第一意向部门、学院
  *
  * @author aaa
+ * @date 2022-8-5
  */
 @Data
 @AllArgsConstructor
