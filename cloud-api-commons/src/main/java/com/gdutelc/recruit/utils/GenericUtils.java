@@ -41,7 +41,7 @@ public class GenericUtils {
     public static String getFullTimeStr(String pattern){
         SimpleDateFormat sdf = null;
         Date date = new Date();
-        if(!ofNullabled(pattern)||!TIME_PATTERN.contains(pattern)){
+        if(!ofNullable(pattern)||!TIME_PATTERN.contains(pattern)){
             sdf = new SimpleDateFormat(TIME_PATTERN);
             return sdf.format(date);
         }
@@ -57,7 +57,7 @@ public class GenericUtils {
      * @param args ...
      * @return boolean
      */
-    public static boolean allOfNullabled(Object... args){
+    public static boolean allOfNullable(Object... args){
         for (Object a:args){
             if(a instanceof String){
                 if(a==null||((String) a).length() == 0){
@@ -80,7 +80,7 @@ public class GenericUtils {
      * @param o
      * @return
      */
-    public static boolean ofNullabled(Object o){
+    public static boolean ofNullable(Object o){
         if(o == null){
             return false;
         }else{
@@ -98,14 +98,14 @@ public class GenericUtils {
      * @return String
      */
     public static String splicingUrlStr(String sourceUrl, Map<String,String> params){
-        if(!allOfNullabled(sourceUrl,params)){
+        if(!allOfNullable(sourceUrl,params)){
             return sourceUrl;
         }
         StringBuilder url = new StringBuilder(sourceUrl);
         url.append("?");
         Set<String> keys = params.keySet();
         for (String key : keys){
-            if(!ofNullabled(key)&&ofNullabled(params.get(key))){
+            if(!ofNullable(key)&&ofNullable(params.get(key))){
                 return sourceUrl;
             }
             key = key + "=";
