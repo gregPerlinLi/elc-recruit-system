@@ -92,4 +92,11 @@ public class DetailedInfo {
     @Getter
     @Setter
     private String clazz;
+
+    /**
+     * 在哪里了解电协
+     */
+    @Getter
+    @Setter
+    private String whereFind;
 }
