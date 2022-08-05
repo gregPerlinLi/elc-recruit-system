@@ -33,4 +33,5 @@ public class ResultVO<T> {
     public ResultVO(Integer code, String message) {
         this(code, message, null);
     }
+
 }
