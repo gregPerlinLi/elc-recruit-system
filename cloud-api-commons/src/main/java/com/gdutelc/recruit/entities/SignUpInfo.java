@@ -9,8 +9,8 @@ import lombok.Setter;
 /**
  * 学生报名信息
  *
- * @author aaa
- * @date 2022-8-5
+ * @author TufSolareyes
+ * @date 2022-08-05
  */
 @Data
 @AllArgsConstructor

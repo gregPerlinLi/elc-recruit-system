@@ -3,8 +3,8 @@ package com.gdutelc.recruit.utils;
 /**
  * ResultVO中的状态码接口
  *
- * @author aaa
- * @date 2022--8-5
+ * @author TufSolareyes
+ * @date 2022-08-05
  */
 public interface ResultStatusCode {
 

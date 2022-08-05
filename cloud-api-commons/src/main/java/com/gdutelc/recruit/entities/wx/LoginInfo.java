@@ -4,7 +4,9 @@ package com.gdutelc.recruit.entities.wx;
 import lombok.*;
 
 /**
- * 小程序登录实体类
+ * 小程序登录信息实体类
+ * @author TufSolareyes
+ * @date 2022-08-05
  */
 @Data
 @AllArgsConstructor

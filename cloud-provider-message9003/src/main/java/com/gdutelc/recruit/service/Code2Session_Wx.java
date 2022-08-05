@@ -5,6 +5,8 @@ import com.gdutelc.recruit.entities.wx.LoginInfo;
 
 /**
  * 对应微信小程序登录接口
+ * @author TufSolareyes
+ * @date 2022-08-05
  */
 public interface Code2Session_Wx {
 

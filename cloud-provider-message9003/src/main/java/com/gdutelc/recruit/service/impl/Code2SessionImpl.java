@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 import static com.gdutelc.recruit.utils.ResultStatusCode.SUCCESS;
 
+
 @Service
 public class Code2SessionImpl implements Code2Session_Wx {
 

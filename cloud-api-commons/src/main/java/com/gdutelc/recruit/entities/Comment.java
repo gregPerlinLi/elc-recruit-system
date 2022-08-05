@@ -8,6 +8,8 @@ import lombok.Setter;
 
 /**
  * 面试评价
+ * @author TufSolareyes
+ * @date 2022-08-05
  */
 @Data
 @AllArgsConstructor

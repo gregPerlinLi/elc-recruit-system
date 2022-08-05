@@ -7,11 +7,11 @@ import lombok.Setter;
 
 
 /**
- * 学生简要信息实体类<br/>
+ * 学生简要信息实体类
  * 简要信息包含学号、姓名、性别、第一意向部门、学院、当前面试状态
  *
- * @author aaa
- * @date 2022-8-5
+ * @author TufSolareyes
+ * @date 2022-08-05
  */
 @Data
 @AllArgsConstructor
