@@ -1,56 +1,45 @@
 package com.gdutelc.recruit.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+/**
+ * 用于和前端进行数据交互
+ *
+ * @author gregperlinli
+ */
 @Data
-public class ResultVO {
+@AllArgsConstructor
+@NoArgsConstructor
+public class ResultVO<T> {
 
+    /**
+     * 消息代码
+     */
     @Getter
     private Integer code;
 
+    /**
+     * 返回信息
+     */
     @Getter
     private String msg;
 
+    /**
+     * 返回前端需要获取的实体对象
+     */
     @Getter
-    private Object data;
-
-    private ResultVO(){
-
-    }
-
-    private ResultVO(Integer code,String msg,Object data){
-
-    }
+    private T data;
 
     /**
-     * 处理成功返回
-     * @param msg
-     * @param data
-     * @return
+     * 返回错误结果方法
+     *
+     * @param code 错误代码
+     * @param message 错误信息
      */
-    public static ResultVO success(String msg,Object data){
-        return new ResultVO(200,msg,data);
-    }
-
-
-    /**
-     * 处理完成，但可能出现非期望情况（比如没有结果之类的）
-     * @param msg
-     * @param data
-     * @return
-     */
-    public static ResultVO expection(String msg,Object data){
-        return new ResultVO(204,msg,data);
-    }
-
-    /**
-     * 处理过程报错
-     * @param msg
-     * @param data
-     * @return
-     */
-    public static ResultVO error(String msg,Object data){
-        return new ResultVO(500,msg,data);
+    public ResultVO(Integer code, String message) {
+        this(code, message, null);
     }
 }
