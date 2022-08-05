@@ -1,4 +1,4 @@
-package com.gdutelc.recruit.pojo;
+package com.gdutelc.recruit.entities;
 
 import lombok.Data;
 import lombok.Getter;
