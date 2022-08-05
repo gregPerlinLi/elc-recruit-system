@@ -13,21 +13,30 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Comment {
 
+    /**
+     * 学号
+     */
     @Getter
     @Setter
-    private String stu_id;
+    private String stuId;
 
     /**
-     * 打分
+     * 打分 (1~5)
      */
     @Getter
     @Setter
     private Integer mark;
 
+    /**
+     * 评价
+     */
     @Getter
     @Setter
     private String comment;
 
+    /**
+     * 面试官
+     */
     @Getter
     @Setter
     private String interviewer;
