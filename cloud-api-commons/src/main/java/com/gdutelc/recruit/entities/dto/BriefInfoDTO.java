@@ -1,4 +1,4 @@
-package com.gdutelc.recruit.entities;
+package com.gdutelc.recruit.entities.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -18,7 +18,7 @@ import lombok.Setter;
 @Data
 @AllArgsConstructor
 @ApiModel("学生简要信息 实体类")
-public class BriefInfo {
+public class BriefInfoDTO {
 
     /**
      * 学号

@@ -1,4 +1,4 @@
-package com.gdutelc.recruit.entities;
+package com.gdutelc.recruit.entities.vo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

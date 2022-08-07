@@ -1,4 +1,4 @@
-package com.gdutelc.recruit.entities;
+package com.gdutelc.recruit.entities.dto;
 
 
 import io.swagger.annotations.ApiModel;
@@ -16,7 +16,7 @@ import lombok.Setter;
 @Data
 @AllArgsConstructor
 @ApiModel("面试评价 实体类")
-public class Comment {
+public class CommentDTO {
 
     /**
      * 学号
