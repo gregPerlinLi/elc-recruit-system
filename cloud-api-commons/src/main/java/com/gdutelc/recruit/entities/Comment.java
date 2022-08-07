@@ -1,6 +1,8 @@
 package com.gdutelc.recruit.entities;
 
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -13,6 +15,7 @@ import lombok.Setter;
  */
 @Data
 @AllArgsConstructor
+@ApiModel("面试评价 实体类")
 public class Comment {
 
     /**
@@ -20,6 +23,7 @@ public class Comment {
      */
     @Getter
     @Setter
+    @ApiModelProperty(value = "学号")
     private String stuId;
 
     /**
@@ -27,6 +31,7 @@ public class Comment {
      */
     @Getter
     @Setter
+    @ApiModelProperty(value = "打分 (1~5)")
     private Integer mark;
 
     /**
@@ -34,6 +39,7 @@ public class Comment {
      */
     @Getter
     @Setter
+    @ApiModelProperty(value = "评价")
     private String comment;
 
     /**
@@ -41,5 +47,6 @@ public class Comment {
      */
     @Getter
     @Setter
+    @ApiModelProperty(value = "面试官")
     private String interviewer;
 }
