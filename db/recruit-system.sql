@@ -41,6 +41,23 @@ CREATE TABLE `adjust_stu_info` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `admin_list`
+--
+
+DROP TABLE IF EXISTS `admin_list`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `admin_list` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `admin_list_username_uindex` (`username`),
+  UNIQUE KEY `admin_list_id_uindex` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='管理员列表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `comment`
 --
 
@@ -56,6 +73,24 @@ CREATE TABLE `comment` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `comment_id_uindex` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='对学生的评价';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `interviewer_list`
+--
+
+DROP TABLE IF EXISTS `interviewer_list`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `interviewer_list` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(20) NOT NULL,
+  `dept` int NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `interviewer_list_username_uindex` (`username`),
+  UNIQUE KEY `interviewer_list_id_uindex` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='面试官列表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -115,4 +150,4 @@ CREATE TABLE `stu_info` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-05  0:11:24
+-- Dump completed on 2022-08-07 18:39:08
