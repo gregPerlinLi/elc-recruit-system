@@ -1,4 +1,4 @@
-package com.gdutelc.recruit.entities.dto;
+package com.gdutelc.recruit.domain.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -9,23 +9,15 @@ import lombok.Setter;
 
 
 /**
- * 学生报名信息
+ * 学生详细信息
  *
  * @author TufSolareyes
  * @date 2022-08-05
  */
 @Data
 @AllArgsConstructor
-@ApiModel("学生报名信息 实体类")
-public class ApplyInfoDTO {
-
-    /**
-     * 微信id
-     */
-    @Getter
-    @Setter
-    @ApiModelProperty(value = "微信 ID")
-    private String openid;
+@ApiModel("学生详细信息 实体类")
+public class DetailedInfoDTO {
 
     /**
      * 学号
@@ -122,5 +114,4 @@ public class ApplyInfoDTO {
     @Setter
     @ApiModelProperty(value = "在哪里了解电协")
     private String whereFind;
-
 }

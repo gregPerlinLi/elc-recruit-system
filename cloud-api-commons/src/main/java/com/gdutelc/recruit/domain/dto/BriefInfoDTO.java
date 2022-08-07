@@ -1,4 +1,4 @@
-package com.gdutelc.recruit.entities.dto;
+package com.gdutelc.recruit.domain.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

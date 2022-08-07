@@ -2,7 +2,7 @@ package com.gdutelc.recruit.service.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gdutelc.recruit.entities.wx.LoginInfo;
+import com.gdutelc.recruit.domain.wx.LoginInfo;
 import com.gdutelc.recruit.service.Code2Session_Wx;
 import com.gdutelc.recruit.utils.GenericUtils;
 import org.springframework.beans.factory.annotation.Autowired;

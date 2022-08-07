@@ -2,7 +2,7 @@ package com.gdutelc.recruit.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
-import com.gdutelc.recruit.entities.vo.ResultVO;
+import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.utils.ResultStatusCode;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

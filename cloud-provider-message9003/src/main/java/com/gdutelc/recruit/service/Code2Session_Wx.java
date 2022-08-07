@@ -1,7 +1,7 @@
 package com.gdutelc.recruit.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.gdutelc.recruit.entities.wx.LoginInfo;
+import com.gdutelc.recruit.domain.wx.LoginInfo;
 
 /**
  * 对应微信小程序登录接口
