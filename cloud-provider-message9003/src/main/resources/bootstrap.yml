@@ -20,3 +20,7 @@ mybatis:
   type-aliases-package: com.gdutelc.recruit.entities
   configuration:
     map-underscore-to-camel-case: true
+
+wx:
+  url:
+    code2Session: https://api.weixin.qq.com/sns/jscode2session
