@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gdutelc.recruit.entities.wx.LoginInfo;
 import com.gdutelc.recruit.service.Code2Session_Wx;
 import com.gdutelc.recruit.utils.GenericUtils;
-import com.gdutelc.recruit.utils.SomeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
