@@ -15,7 +15,7 @@ import lombok.Setter;
  */
 @Data
 @AllArgsConstructor
-@ApiModel("面试评价 实体类")
+@ApiModel("面试评价")
 public class CommentDTO {
 
     /**

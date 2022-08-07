@@ -16,7 +16,7 @@ import lombok.Setter;
  */
 @Data
 @AllArgsConstructor
-@ApiModel("学生报名信息 实体类")
+@ApiModel("学生报名信息")
 public class ApplyInfoDTO {
 
     /**

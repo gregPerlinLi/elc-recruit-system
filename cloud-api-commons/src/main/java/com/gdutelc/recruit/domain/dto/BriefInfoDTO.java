@@ -17,7 +17,7 @@ import lombok.Setter;
  */
 @Data
 @AllArgsConstructor
-@ApiModel("学生简要信息 实体类")
+@ApiModel("学生简要信息")
 public class BriefInfoDTO {
 
     /**
