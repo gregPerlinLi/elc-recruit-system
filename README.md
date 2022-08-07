@@ -29,4 +29,9 @@
 
 <span style='color:yellow;background:背景颜色;font-size:文字大小;'>注意⚠️：为了数据库安全起见，MySQL数据库账户请使用`recruit`而不是`root`账户进行登录（密码和用户名一致），相应地，`recruit`只授权对`recruit_system`数据库的读写许可！</span>
 
+```sql
+CREATE USER 'recruit'@'localhost' IDENTIFIED BY 'recruit';
+GRANT ALL PRIVILEGES ON recruit_system.* TO 'recruit'@'localhost';
+```
+
 Redis数据库使用的索引为`5`
