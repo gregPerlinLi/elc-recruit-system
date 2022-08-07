@@ -2,12 +2,20 @@ server:
   port: 91
 
 spring:
+  main:
+    allow-circular-references: true
   application:
     name: cloud-consumer-recruit
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
   cloud:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yaml
     sentinel:
       transport:
         # 配置 Sentinel Dashboard 地址
@@ -15,4 +23,13 @@ spring:
         # 默认 8719 端口，假如被占用会自动从 8719 开始依次 +1 扫描, 直到找到未被占用的端口为止
         port: 8719
         # 本地服务 IP
-        client-ip: 127.0.0.1
+        client-ip: 192.168.31.20
+#      datasource:
+#        ds1:
+#          nacos:
+#            namespace: public
+#            server-addr: 127.0.0.1:8848
+#            data-id: cloud-recruit-sentinel-service
+#            group-id: DEFAULT_GROUP
+#            data-type: json
+#            rule-type: flow
