@@ -1,5 +1,7 @@
-package com.gdutelc.recruit.entities;
+package com.gdutelc.recruit.domain.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -14,13 +16,15 @@ import lombok.Setter;
  */
 @Data
 @AllArgsConstructor
-public class SignUpInfo {
+@ApiModel("学生报名信息")
+public class ApplyInfoDTO {
 
     /**
      * 微信id
      */
     @Getter
     @Setter
+    @ApiModelProperty(value = "微信 ID")
     private String openid;
 
     /**
@@ -28,6 +32,7 @@ public class SignUpInfo {
      */
     @Getter
     @Setter
+    @ApiModelProperty(value = "学号")
     private String stuId;
 
     /**
@@ -35,6 +40,7 @@ public class SignUpInfo {
      */
     @Getter
     @Setter
+    @ApiModelProperty(value = "姓名")
     private String name;
 
     /**
@@ -42,6 +48,7 @@ public class SignUpInfo {
      */
     @Getter
     @Setter
+    @ApiModelProperty(value = "性别")
     private Integer gender;
 
     /**
@@ -49,6 +56,7 @@ public class SignUpInfo {
      */
     @Getter
     @Setter
+    @ApiModelProperty(value = "自我简介")
     private String profile;
 
     /**
@@ -56,6 +64,7 @@ public class SignUpInfo {
      */
     @Getter
     @Setter
+    @ApiModelProperty(value = "能力")
     private String skill;
 
     /**
@@ -63,6 +72,7 @@ public class SignUpInfo {
      */
     @Getter
     @Setter
+    @ApiModelProperty(value = "已加入的社团")
     private String hasJoin;
 
     /**
@@ -70,6 +80,7 @@ public class SignUpInfo {
      */
     @Getter
     @Setter
+    @ApiModelProperty(value = "第一志愿部门")
     private Integer firstDept;
 
     /**
@@ -77,6 +88,7 @@ public class SignUpInfo {
      */
     @Getter
     @Setter
+    @ApiModelProperty(value = "第二志愿部门")
     private Integer secondDept;
 
     /**
@@ -84,6 +96,7 @@ public class SignUpInfo {
      */
     @Getter
     @Setter
+    @ApiModelProperty(value = "专业")
     private String major;
 
     /**
@@ -91,6 +104,7 @@ public class SignUpInfo {
      */
     @Getter
     @Setter
+    @ApiModelProperty(value = "学院")
     private Integer college;
 
     /**
@@ -98,6 +112,7 @@ public class SignUpInfo {
      */
     @Getter
     @Setter
+    @ApiModelProperty(value = "班级")
     private String clazz;
 
     /**
@@ -105,7 +120,7 @@ public class SignUpInfo {
      */
     @Getter
     @Setter
+    @ApiModelProperty(value = "在哪里了解电协")
     private String whereFind;
-
 
 }

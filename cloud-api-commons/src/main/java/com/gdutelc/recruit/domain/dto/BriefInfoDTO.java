@@ -1,5 +1,7 @@
-package com.gdutelc.recruit.entities;
+package com.gdutelc.recruit.domain.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -15,13 +17,15 @@ import lombok.Setter;
  */
 @Data
 @AllArgsConstructor
-public class BriefInfo {
+@ApiModel("学生简要信息")
+public class BriefInfoDTO {
 
     /**
      * 学号
      */
     @Getter
     @Setter
+    @ApiModelProperty(value = "学号")
     private String stuId;
 
     /**
@@ -29,6 +33,7 @@ public class BriefInfo {
      */
     @Getter
     @Setter
+    @ApiModelProperty(value = "姓名")
     private String name;
 
     /**
@@ -36,6 +41,7 @@ public class BriefInfo {
      */
     @Getter
     @Setter
+    @ApiModelProperty(value = "性别")
     private Integer gender;
 
     /**
@@ -43,6 +49,7 @@ public class BriefInfo {
      */
     @Getter
     @Setter
+    @ApiModelProperty(value = "第一志愿部门")
     private Integer firstDept;
 
     /**
@@ -50,6 +57,7 @@ public class BriefInfo {
      */
     @Getter
     @Setter
+    @ApiModelProperty(value = "学院")
     private Integer college;
 
     /**
@@ -57,6 +65,7 @@ public class BriefInfo {
      */
     @Getter
     @Setter
+    @ApiModelProperty(value = "当前面试状态")
     private Integer status;
 
 }

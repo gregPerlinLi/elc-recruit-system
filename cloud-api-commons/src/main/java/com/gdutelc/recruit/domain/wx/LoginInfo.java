@@ -1,4 +1,4 @@
-package com.gdutelc.recruit.entities.wx;
+package com.gdutelc.recruit.domain.wx;
 
 
 import lombok.*;

@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "wx.url.code2Session",
+      "type": "java.lang.String",
+      "description": "登录凭证校验链接."
+    }
+  ]
+}

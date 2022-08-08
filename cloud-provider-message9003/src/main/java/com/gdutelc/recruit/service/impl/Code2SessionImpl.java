@@ -2,11 +2,11 @@ package com.gdutelc.recruit.service.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gdutelc.recruit.entities.wx.LoginInfo;
+import com.gdutelc.recruit.domain.wx.LoginInfo;
 import com.gdutelc.recruit.service.Code2Session_Wx;
 import com.gdutelc.recruit.utils.GenericUtils;
-import com.gdutelc.recruit.utils.SomeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -26,9 +26,12 @@ public class Code2SessionImpl implements Code2Session_Wx {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Value(value = "${wx.url.code2Session}")
+    private String url;
+
     @Override
     public LoginInfo code2Session(String appid, String secret, String js_code, String grant_type) throws JsonProcessingException {
-        String url = SomeUtils.getValueFromFile("code2Session");
+        // String url = SomeUtils.getValueFromFile("code2Session");
         Map<String,String> params = new HashMap<>();
         params.put("appid",appid);
         params.put("secret",secret);

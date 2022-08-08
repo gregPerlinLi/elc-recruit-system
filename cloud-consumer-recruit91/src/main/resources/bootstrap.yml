@@ -2,12 +2,26 @@ server:
   port: 91
 
 spring:
+  main:
+    allow-circular-references: true
   application:
     name: cloud-consumer-recruit
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/recruit_system?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: recruit
+    password: recruit
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
   cloud:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yaml
     sentinel:
       transport:
         # 配置 Sentinel Dashboard 地址
@@ -15,4 +29,32 @@ spring:
         # 默认 8719 端口，假如被占用会自动从 8719 开始依次 +1 扫描, 直到找到未被占用的端口为止
         port: 8719
         # 本地服务 IP
-        client-ip: 127.0.0.1
+        client-ip: 192.168.31.20
+#      datasource:
+#        ds1:
+#          nacos:
+#            namespace: public
+#            server-addr: 127.0.0.1:8848
+#            data-id: cloud-recruit-sentinel-service
+#            group-id: DEFAULT_GROUP
+#            data-type: json
+#            rule-type: flow
+
+feign:
+  client:
+    config:
+      default:
+        # The time taken to establish the connection is applicable to the time taken to connect the end link under normal network conditions
+        connect-timeout: 5000
+        # The time it takes to read available resources from the server after the connection is established
+        read-timeout: 5000
+
+logging:
+  level:
+    # At what level does feign log monitor which interface
+    com.gregperlinli.springcloud.service.PaymentFeignService: debug
+
+service-url:
+  cloud-provider-apply: http://cloud-provider-apply
+  cloud-provider-interview: http://cloud-provider-interview
+  cloud-provider-message: http://cloud-providere-message
