@@ -1,4 +1,4 @@
-package com.gsutelc.recruit.generator;
+package com.gdutelc.recruit.generator;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
