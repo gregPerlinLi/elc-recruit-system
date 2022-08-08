@@ -63,8 +63,12 @@ Sentinel的限流规则通过Nacos进行持久化
 由于Java17与Sentinel之间存在兼容性问题，因此在启动SentinelDashboard的时候请使用以下的指令来启用
 
 ```shell
-$ java -jar --add-exports=java.base/sun.net.util=ALL-UNNAMED sentinel-dashboard-1.8.4.jar  
+$ java -jar --add-exports=java.base/sun.net.util=ALL-UNNAMED sentinel-dashboard-1.8.4-customized.jar  
 ```
+
+<span style='color:yellow;background:背景颜色;font-size:文字大小;'>注意⚠️：为了能够实现在SentinelDashboard上新增的流控规则可以自动持久化到Nacos中，我们重写了SentinelDashboard的源码, 如何重写请参阅: </span>
+
+https://github.com/alibaba/Sentinel/wiki/Sentinel-控制台（集群流控管理）#规则配置
 
 ## 关于 Swagger
 
