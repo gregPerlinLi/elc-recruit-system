@@ -75,8 +75,8 @@ public class SwaggerConfig {
                                     .description("这里是广工电协的招新系统API文档")
                                     .version("v1.0")
                                     .contact(new Contact("gregPerlinLi", "https://github.com/gregPerlinLi", "lihaolin13@outlook.com"))
-                                    .license("招新系统API文档")
-                                    .licenseUrl("https://github.com/gregPerlinLi/elc-recruit-system")
+                                    .license("GNU GENERAL PUBLIC LICENSE v3")
+                                    .licenseUrl("https://github.com/gregPerlinLi/elc-recruit-system/blob/dev/LICENSE")
                                     .build();
     }
 
