@@ -11,6 +11,7 @@
     <module>cloud-provider-interview9002</module>
     <module>cloud-provider-message9003</module>
       <module>cloud-api-commons</module>
+      <module>mybatis-plus-generator</module>
   </modules>
   <name>Archetype - elc-recruit-system</name>
   <url>http://maven.apache.org</url>
