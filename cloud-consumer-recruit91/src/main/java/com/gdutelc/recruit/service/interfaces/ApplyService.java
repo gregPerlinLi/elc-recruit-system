@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @author TUFSolareyes
  */
 @Service
-@FeignClient
+@FeignClient("cloud-provider-apply")
 public interface ApplyService {
 
     @PostMapping("/recruit/elc_access/apply")
