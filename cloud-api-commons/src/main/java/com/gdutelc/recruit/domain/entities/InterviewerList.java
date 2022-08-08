@@ -9,17 +9,19 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * 调剂学生名单
+ * <p>
+ * 面试官列表
+ * </p>
  *
  * @author gregPerlinLi
- * @date 2022-08-08
+ * @since 2022-08-08
  */
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Data
-@TableName("adjust_stu_info")
-public class AdjustStuInfo implements Serializable {
+@TableName("interviewer_list")
+public class InterviewerList implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -27,19 +29,11 @@ public class AdjustStuInfo implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    private String openid;
+    private String username;
 
-    private String stuId;
+    private String password;
 
-    private String name;
-
-    private Integer adjustDept;
-
-    private String major;
-
-    private Integer college;
-
-    private Integer status;
+    private Integer dept;
 
 
 }

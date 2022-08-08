@@ -9,17 +9,18 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * 调剂学生名单
+ * <p>
+ * 学生信息
+ * </p>
  *
  * @author gregPerlinLi
- * @date 2022-08-08
+ * @since 2022-08-08
  */
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Data
-@TableName("adjust_stu_info")
-public class AdjustStuInfo implements Serializable {
+@TableName("stu_info")
+public class StuInfo implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -33,11 +34,25 @@ public class AdjustStuInfo implements Serializable {
 
     private String name;
 
-    private Integer adjustDept;
+    private Integer gender;
+
+    private String profile;
+
+    private String skill;
+
+    private String hasJoin;
+
+    private Integer firstDept;
+
+    private Integer secondDept;
 
     private String major;
 
     private Integer college;
+
+    private String clazz;
+
+    private String whereFind;
 
     private Integer status;
 
