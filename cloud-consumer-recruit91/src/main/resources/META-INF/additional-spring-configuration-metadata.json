@@ -1,0 +1,19 @@
+{
+  "properties": [
+    {
+      "name": "service-url.cloud-provider-apply",
+      "type": "java.lang.String",
+      "description": "报名服务生产者地址."
+    },
+    {
+      "name": "service-url.cloud-provider-interview",
+      "type": "java.lang.String",
+      "description": "面试服务生产者地址."
+    },
+    {
+      "name": "service-url.cloud-provider-message",
+      "type": "java.lang.String",
+      "description": "消息推送服务生产者."
+    }
+  ]
+}

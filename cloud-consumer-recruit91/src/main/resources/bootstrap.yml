@@ -33,3 +33,22 @@ spring:
 #            group-id: DEFAULT_GROUP
 #            data-type: json
 #            rule-type: flow
+
+feign:
+  client:
+    config:
+      default:
+        # The time taken to establish the connection is applicable to the time taken to connect the end link under normal network conditions
+        connect-timeout: 5000
+        # The time it takes to read available resources from the server after the connection is established
+        read-timeout: 5000
+
+logging:
+  level:
+    # At what level does feign log monitor which interface
+    com.gregperlinli.springcloud.service.PaymentFeignService: debug
+
+service-url:
+  cloud-provider-apply: http://cloud-provider-apply
+  cloud-provider-interview: http://cloud-provider-interview
+  cloud-provider-message: http://cloud-providere-message
