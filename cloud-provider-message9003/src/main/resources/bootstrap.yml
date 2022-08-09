@@ -30,7 +30,7 @@ spring:
 
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.gdutelc.recruit.entities
+  type-aliases-package: com.gdutelc.recruit.domain.entities
   configuration:
     map-underscore-to-camel-case: true
 
