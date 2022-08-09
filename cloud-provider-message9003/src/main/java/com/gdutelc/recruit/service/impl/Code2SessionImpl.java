@@ -2,11 +2,14 @@ package com.gdutelc.recruit.service.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.domain.wx.LoginInfo;
 import com.gdutelc.recruit.service.Code2Session_Wx;
 import com.gdutelc.recruit.utils.GenericUtils;
+import com.gdutelc.recruit.utils.ResultStatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -24,14 +27,16 @@ public class Code2SessionImpl implements Code2Session_Wx {
     private RestTemplate restTemplate;
 
     @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+
+    @Autowired
     private ObjectMapper objectMapper;
 
     @Value(value = "${wx.url.code2Session}")
     private String url;
 
     @Override
-    public LoginInfo code2Session(String appid, String secret, String js_code, String grant_type) throws JsonProcessingException {
-        // String url = SomeUtils.getValueFromFile("code2Session");
+    public ResultVO<LoginInfo> code2Session(String appid, String secret, String js_code, String grant_type) throws JsonProcessingException {
         Map<String,String> params = new HashMap<>();
         params.put("appid",appid);
         params.put("secret",secret);
@@ -41,10 +46,16 @@ public class Code2SessionImpl implements Code2Session_Wx {
         url = GenericUtils.splicingUrlStr(url,params);
         ResponseEntity<String> entity = restTemplate.getForEntity(url, String.class);
         if(entity.getStatusCodeValue() != SUCCESS){
-            return null;
+            return new ResultVO<>(ResultStatusCode.FORBIDDEN,"微信服务器忙碌",null);
         }
         String body = entity.getBody();
         LoginInfo loginInfo = objectMapper.readValue(body, LoginInfo.class);
-        return loginInfo;
+        if(loginInfo != null&&loginInfo.getOpenid() != null){
+            stringRedisTemplate.opsForSet().add("user:stuId-openid",loginInfo.getOpenid());
+            return new ResultVO<>(SUCCESS,"登录成功",loginInfo);
+        }else{
+            return new ResultVO<>(ResultStatusCode.SERVER_ERROR,"处理失败",null);
+        }
+
     }
 }
