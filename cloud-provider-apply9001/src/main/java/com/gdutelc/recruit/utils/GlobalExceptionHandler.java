@@ -1,6 +1,6 @@
 package com.gdutelc.recruit.utils;
 
-import com.gdutelc.recruit.entities.vo.ResultVO;
+import com.gdutelc.recruit.domain.vo.ResultVO;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
