@@ -100,11 +100,11 @@ CREATE TABLE `interviewer_list` (
 DROP TABLE IF EXISTS `process`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `poccess` (
+CREATE TABLE `process` (
   `id` int NOT NULL AUTO_INCREMENT,
   `status` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `poccess_id_uindex` (`id`)
+  UNIQUE KEY `process_id_uindex` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='面试整体进度';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
