@@ -3,7 +3,7 @@ package com.gdutelc.recruit.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.gdutelc.recruit.domain.entities.Process;
 import com.gdutelc.recruit.mapper.ProcessMapper;
-import com.gdutelc.recruit.service.IProcessService;
+import com.gdutelc.recruit.service.interfaces.IProcessService;
 import org.springframework.stereotype.Service;
 
 /**

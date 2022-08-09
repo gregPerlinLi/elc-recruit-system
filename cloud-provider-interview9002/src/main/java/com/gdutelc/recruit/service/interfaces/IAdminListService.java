@@ -1,4 +1,4 @@
-package com.gdutelc.recruit.service;
+package com.gdutelc.recruit.service.interfaces;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.gdutelc.recruit.domain.entities.AdminList;

@@ -3,7 +3,7 @@ package com.gdutelc.recruit.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.gdutelc.recruit.domain.entities.StuInfo;
 import com.gdutelc.recruit.mapper.StuInfoMapper;
-import com.gdutelc.recruit.service.IStuInfoService;
+import com.gdutelc.recruit.service.interfaces.IStuInfoService;
 import org.springframework.stereotype.Service;
 
 /**

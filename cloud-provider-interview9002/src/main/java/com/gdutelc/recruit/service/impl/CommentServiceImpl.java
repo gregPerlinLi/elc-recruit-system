@@ -3,7 +3,7 @@ package com.gdutelc.recruit.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.gdutelc.recruit.domain.entities.Comment;
 import com.gdutelc.recruit.mapper.CommentMapper;
-import com.gdutelc.recruit.service.ICommentService;
+import com.gdutelc.recruit.service.interfaces.ICommentService;
 import org.springframework.stereotype.Service;
 
 /**

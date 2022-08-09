@@ -3,7 +3,7 @@ package com.gdutelc.recruit.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.gdutelc.recruit.domain.entities.InterviewerList;
 import com.gdutelc.recruit.mapper.InterviewerListMapper;
-import com.gdutelc.recruit.service.IInterviewerListService;
+import com.gdutelc.recruit.service.interfaces.IInterviewerListService;
 import org.springframework.stereotype.Service;
 
 /**
