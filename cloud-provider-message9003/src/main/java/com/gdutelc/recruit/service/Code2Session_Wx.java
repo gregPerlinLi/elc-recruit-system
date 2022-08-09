@@ -1,6 +1,7 @@
 package com.gdutelc.recruit.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.domain.wx.LoginInfo;
 
 /**
@@ -19,5 +20,5 @@ public interface Code2Session_Wx {
      * @return LoginInfo
      * @throws JsonProcessingException
      */
-    LoginInfo code2Session(String appid, String secret, String js_code, String grant_type) throws JsonProcessingException ;
+    ResultVO<LoginInfo> code2Session(String appid, String secret, String js_code, String grant_type) throws JsonProcessingException ;
 }

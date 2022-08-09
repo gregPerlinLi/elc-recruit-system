@@ -1,5 +1,6 @@
 package com.gdutelc.recruit.utils;
 
+import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
@@ -67,6 +68,22 @@ public class GenericUtils {
                 if(a==null){
                     return false;
                 }
+            }
+        }
+        return true;
+    }
+
+
+    public static boolean allOfNullable(Object obj) throws IllegalAccessException {
+        if(obj == null){
+            return false;
+        }
+        Class c = obj.getClass();
+        Field[] fields = c.getDeclaredFields();
+        for(Field field : fields) {
+            field.setAccessible(true);
+            if(field.get(obj) == null){
+                return false;
             }
         }
         return true;
