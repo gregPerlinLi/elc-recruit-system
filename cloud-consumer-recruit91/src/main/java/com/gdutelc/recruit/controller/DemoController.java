@@ -27,6 +27,6 @@ public class DemoController {
     }
 
     public ResultVO<String> handlerException(@PathVariable("text") String text, BlockException exception) {
-        return new ResultVO<>(ResultStatusCode.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t Service Unavailable ...");
+        return new ResultVO<>(ResultStatusCode.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
 }
