@@ -10,5 +10,5 @@ import com.gdutelc.recruit.domain.vo.ResultVO;
  */
 public interface ApplyService {
 
-    ResultVO apply(ApplyInfoDTO applyInfoDTO);
+    ResultVO apply(ApplyInfoDTO applyInfoDTO) throws IllegalAccessException;
 }

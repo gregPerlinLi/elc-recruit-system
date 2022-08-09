@@ -123,4 +123,6 @@ public class ApplyInfoDTO {
     @ApiModelProperty(value = "在哪里了解电协")
     private String whereFind;
 
+    @Getter
+    private Integer status = 0;
 }

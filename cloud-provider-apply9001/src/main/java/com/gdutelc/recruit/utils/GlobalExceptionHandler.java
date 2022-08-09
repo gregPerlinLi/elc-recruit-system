@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
  */
 
 @ControllerAdvice
-public class GlobalExpectionHandler {
+public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResultVO expectionHandler(Exception e){
