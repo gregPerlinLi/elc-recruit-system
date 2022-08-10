@@ -13,10 +13,6 @@ public interface ResultStatusCode {
      */
     int SUCCESS = 200;
 
-    /**
-     * 前端传的参数有问题
-     */
-    int PARAM_EXCEPTION = 202;
 
     /**
      * 处理结果为空
@@ -32,6 +28,11 @@ public interface ResultStatusCode {
      * 请求过多，被限流
      */
     int TO_MANY_REQUEST = 429;
+
+    /**
+     * 参数异常（参数不合法）
+     */
+    int PARAM_EXCEPTION = 450;
 
     /**
      * 处理过程报错
