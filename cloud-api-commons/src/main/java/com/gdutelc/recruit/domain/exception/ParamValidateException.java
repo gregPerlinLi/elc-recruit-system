@@ -1,6 +1,7 @@
 package com.gdutelc.recruit.domain.exception;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serial;
@@ -11,6 +12,7 @@ import java.io.Serial;
  * @author gregPerlinLi
  * @date 2022-08-10
  */
+@NoArgsConstructor
 public class ParamValidateException extends RuntimeException {
 
     @Serial
@@ -22,17 +24,17 @@ public class ParamValidateException extends RuntimeException {
 
     @Getter
     @Setter
-    private String message;
+    private String msg;
 
-    public ParamValidateException(int code, String message) {
-        super(message);
+    public ParamValidateException(int code, String msg) {
+        super(msg);
         this.code = code;
-        this.message = message;
+        this.msg = msg;
     }
 
-    public ParamValidateException(int code, String message, Throwable cause) {
-        super(message, cause);
+    public ParamValidateException(int code, String msg, Throwable cause) {
+        super(msg, cause);
         this.code = code;
-        this.message = message;
+        this.msg = msg;
     }
 }

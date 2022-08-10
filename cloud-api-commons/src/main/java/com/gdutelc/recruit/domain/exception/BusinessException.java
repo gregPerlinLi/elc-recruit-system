@@ -1,6 +1,7 @@
 package com.gdutelc.recruit.domain.exception;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serial;
@@ -11,6 +12,7 @@ import java.io.Serial;
  * @author gregPerlinLi
  * @date 2022-08-10
  */
+@NoArgsConstructor
 public class BusinessException extends RuntimeException {
 
     @Serial
@@ -22,17 +24,17 @@ public class BusinessException extends RuntimeException {
 
     @Getter
     @Setter
-    private String message;
+    private String msg;
 
-    public BusinessException(int code, String message) {
-        super(message);
+    public BusinessException(int code, String msg) {
+        super(msg);
         this.code = code;
-        this.message = message;
+        this.msg = msg;
     }
 
-    public BusinessException(int code, String message, Throwable cause) {
-        super(message, cause);
+    public BusinessException(int code, String msg, Throwable cause) {
+        super(msg, cause);
         this.code = code;
-        this.message = message;
+        this.msg = msg;
     }
 }
