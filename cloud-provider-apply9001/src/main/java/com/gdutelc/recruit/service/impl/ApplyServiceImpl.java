@@ -31,7 +31,7 @@ public class ApplyServiceImpl implements IApplyService {
         }
         String openid = applyInfoDTO.getOpenid();
         //判断openid
-        if(!stringRedisTemplate.opsForSet().isMember("user:stuId-opendi",openid)){
+        if(Boolean.FALSE.equals(stringRedisTemplate.opsForSet().isMember("user:stuId-openid", openid))){
             return new ResultVO(ResultStatusCode.FORBIDDEN,"openid缺失",null);
         }
 
