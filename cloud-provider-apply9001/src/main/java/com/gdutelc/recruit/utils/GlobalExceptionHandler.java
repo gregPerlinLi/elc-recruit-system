@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
-    public ResultVO expectionHandler(Exception e){
+    public ResultVO exceptionHandler(Exception e){
         String msg = e.getMessage();
         if (e instanceof NumberFormatException){
             return new ResultVO(ResultStatusCode.PARAM_EXCEPTION,msg,null);
