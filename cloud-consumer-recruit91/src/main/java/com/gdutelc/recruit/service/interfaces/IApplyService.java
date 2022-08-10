@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @author TUFSolareyes
  */
 @Service
-@FeignClient("cloud-provider-apply")
+@FeignClient(name = "cloud-provider-apply", contextId = "ApplyServiceApi")
 public interface IApplyService {
 
     /**
