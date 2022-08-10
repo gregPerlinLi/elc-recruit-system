@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
  * @author gregPerlinLi
  * @date 2022-08-09
  */
-@Controller
+@RestController
 @RequestMapping("/pro/elc_public")
 public class LoginController {
 
@@ -22,7 +22,6 @@ public class LoginController {
      * @return 是否登录成功
      */
     @GetMapping(value = "/interviewer_login/{username}/{password}")
-    @ResponseBody
     public ResultVO<String> interviewerLogin(@PathVariable("username") String username, @PathVariable("password") String password) {
         return null;
     }
@@ -35,7 +34,6 @@ public class LoginController {
      * @return 是否登录成功
      */
     @GetMapping(value = "/admin_login/{username}/{password}")
-    @ResponseBody
     public ResultVO<String> adminLogin(@PathVariable("username") String username, @PathVariable("password") String password) {
         return null;
     }

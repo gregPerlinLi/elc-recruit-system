@@ -10,12 +10,11 @@ import org.springframework.web.bind.annotation.*;
  * @author gregPerlinLi
  * @date 2022-08-10
  */
-@Controller
+@RestController
 @RequestMapping("/pro/demo")
 public class DemoController {
 
     @GetMapping(value = "/test/{text}")
-    @ResponseBody
     public ResultVO<String> test(@PathVariable("text") String text) {
         if ( "".equals(text) ) {
             return new ResultVO(444, "请输入内容");
