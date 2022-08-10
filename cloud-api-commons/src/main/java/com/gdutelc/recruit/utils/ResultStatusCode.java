@@ -39,6 +39,11 @@ public interface ResultStatusCode {
     int SERVER_ERROR = 500;
 
     /**
+     * 业务异常
+     */
+    int BUSINESS_EXCEPTION = 550;
+
+    /**
      * 微服务间请求连接超时
      */
     int SERVER_TIME_OUT = 599;
