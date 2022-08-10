@@ -1,10 +1,8 @@
 package com.gdutelc.recruit.controller;
 
 import com.gdutelc.recruit.domain.vo.ResultVO;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 面试官和管理员登录接口
@@ -12,7 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @author gregPerlinLi
  * @date 2022-08-09
  */
-@RestController("/pro/elc_public")
+@Controller
+@RequestMapping("/pro/elc_public")
 public class LoginController {
 
     /**
