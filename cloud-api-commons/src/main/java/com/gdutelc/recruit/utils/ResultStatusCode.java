@@ -30,9 +30,9 @@ public interface ResultStatusCode {
     int TO_MANY_REQUEST = 429;
 
     /**
-     * 参数异常（参数不合法）
+     * 参数校验异常（参数不合法）
      */
-    int PARAM_EXCEPTION = 450;
+    int PARAM_VALIDATE_EXCEPTION = 450;
 
     /**
      * 处理过程报错

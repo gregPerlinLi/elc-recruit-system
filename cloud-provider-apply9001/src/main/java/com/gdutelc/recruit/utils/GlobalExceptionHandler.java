@@ -17,7 +17,7 @@ public class GlobalExceptionHandler {
     public ResultVO exceptionHandler(Exception e){
         String msg = e.getMessage();
         if (e instanceof ParamValidateException){
-            return new ResultVO(ResultStatusCode.PARAM_EXCEPTION,msg,null);
+            return new ResultVO(ResultStatusCode.PARAM_VALIDATE_EXCEPTION,msg,null);
         }
         return new ResultVO(ResultStatusCode.SERVER_ERROR,msg,null);
     }

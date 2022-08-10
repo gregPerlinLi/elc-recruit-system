@@ -27,7 +27,7 @@ public class ApplyServiceImpl implements IApplyService {
     public ResultVO apply(ApplyInfoDTO applyInfoDTO) throws IllegalAccessException {
         //判空
         if(!GenericUtils.allOfNullable(applyInfoDTO)){
-            return new ResultVO(ResultStatusCode.PARAM_EXCEPTION,"参数有误",null);
+            return new ResultVO(ResultStatusCode.PARAM_VALIDATE_EXCEPTION,"参数有误",null);
         }
         String openid = applyInfoDTO.getOpenid();
         //判断openid
