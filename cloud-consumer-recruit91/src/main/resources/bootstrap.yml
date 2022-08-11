@@ -30,15 +30,15 @@ spring:
         port: 8719
         # 本地服务 IP
         client-ip: 192.168.31.20
-#      datasource:
-#        ds1:
-#          nacos:
-#            namespace: public
-#            server-addr: 127.0.0.1:8848
-#            data-id: cloud-recruit-sentinel-service
-#            group-id: DEFAULT_GROUP
-#            data-type: json
-#            rule-type: flow
+      datasource:
+        consumer-recruit:
+          nacos:
+            server-addr: 127.0.0.1:8848
+            namespace: public
+            group-id: SENTINEL_GROUP
+            data-id: cloud-consumer-recruit-flow-rules
+            data-type: json
+            rule-type: flow
 
 feign:
   client:

@@ -13,10 +13,6 @@ public interface ResultStatusCode {
      */
     int SUCCESS = 200;
 
-    /**
-     * 前端传的参数有问题
-     */
-    int PARAM_EXCEPTION = 202;
 
     /**
      * 处理结果为空
@@ -34,9 +30,19 @@ public interface ResultStatusCode {
     int TO_MANY_REQUEST = 429;
 
     /**
+     * 参数校验异常（参数不合法）
+     */
+    int PARAM_VALIDATE_EXCEPTION = 450;
+
+    /**
      * 处理过程报错
      */
     int SERVER_ERROR = 500;
+
+    /**
+     * 业务异常
+     */
+    int BUSINESS_EXCEPTION = 550;
 
     /**
      * 微服务间请求连接超时

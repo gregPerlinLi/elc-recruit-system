@@ -12,9 +12,15 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @author TUFSolareyes
  */
 @Service
-@FeignClient("cloud-provider-apply")
-public interface ApplyService {
+@FeignClient(name = "cloud-provider-apply", contextId = "ApplyServiceApi")
+public interface IApplyService {
 
-    @PostMapping("/recruit/elc_access/apply")
+    /**
+     * 生产者报名接口
+     *
+     * @param applyInfoDTO 报名信息
+     * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
+     */
+    @PostMapping("/pro/recruit/elc_access/apply")
     ResultVO apply(ApplyInfoDTO applyInfoDTO);
 }
