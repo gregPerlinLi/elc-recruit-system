@@ -1,5 +1,6 @@
 package com.gdutelc.recruit.domain.dto;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,7 @@ import lombok.Setter;
 @Data
 @AllArgsConstructor
 @ApiModel("学生报名信息")
+@TableName("stu_info")
 public class ApplyInfoDTO {
 
     /**
@@ -124,5 +126,7 @@ public class ApplyInfoDTO {
     private String whereFind;
 
     @Getter
-    private Integer status = 0;
+    @Setter
+    @ApiModelProperty(value = "状态，报名时默认为0")
+    private Integer status;
 }

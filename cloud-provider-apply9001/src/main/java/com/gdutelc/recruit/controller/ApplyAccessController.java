@@ -2,17 +2,22 @@ package com.gdutelc.recruit.controller;
 
 import com.gdutelc.recruit.domain.dto.ApplyInfoDTO;
 import com.gdutelc.recruit.domain.vo.ResultVO;
-import org.springframework.stereotype.Controller;
+import com.gdutelc.recruit.service.interfaces.IApplyService;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * 报名模块生产者接口
  * @author TUFSolareyes
  * @date 2022-08-07
  */
-@Controller
+@RestController
 @RequestMapping(value = "/pro/recruit/elc_access")
 public class ApplyAccessController {
+
+    @Resource
+    private IApplyService iApplyService;
 
     /**
      * 报名接口，提交个人详细信息
@@ -21,8 +26,8 @@ public class ApplyAccessController {
      */
     @PostMapping(value = "/apply")
     @ResponseBody
-    public ResultVO apply(ApplyInfoDTO applyInfoDTO){
-        return null;
+    public ResultVO apply(ApplyInfoDTO applyInfoDTO) throws IllegalAccessException {
+        return iApplyService.apply(applyInfoDTO);
     }
 
     /**
@@ -33,7 +38,7 @@ public class ApplyAccessController {
     @GetMapping(value = "/get_apply_info")
     @ResponseBody
     public ResultVO<ApplyInfoDTO> getApplyInfo(String openid){
-        return null;
+        return iApplyService.getApplyInfo(openid);
     }
 
     /**
@@ -45,7 +50,7 @@ public class ApplyAccessController {
     @GetMapping(value = "/get_status")
     @ResponseBody
     public ResultVO<Integer> getStatus(String openid){
-        return null;
+        return iApplyService.getStatus(openid);
     }
 
     /**
@@ -58,7 +63,8 @@ public class ApplyAccessController {
     @PutMapping(value = "/update_apply_info")
     @ResponseBody
     public ResultVO updateApplyInfo(String openid,ApplyInfoDTO applyInfoDTO){
-        return null;
+        return iApplyService.updateApplyInfo(openid, applyInfoDTO);
     }
+
 
 }
