@@ -83,6 +83,6 @@ public class ApplyServiceImpl implements IApplyService {
         applyInfoDTO.setOpenid(openid);
         Wrapper<ApplyInfoDTO> wrapper = new UpdateWrapper<>();
         applyMapper.update(applyInfoDTO,wrapper);
-        return new ResultVO<>(ResultStatusCode.SUCCESS,"更新成功",null);
+        return new ResultVO<>(ResultStatusCode.SUCCESS,"更新成功",applyInfoDTO.getName());
     }
 }
