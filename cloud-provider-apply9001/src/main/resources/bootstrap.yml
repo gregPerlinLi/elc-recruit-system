@@ -2,18 +2,18 @@ server:
   port: 9001
 
 spring:
-#  application:
-#    name: cloud-provider-apply
+  application:
+    name: cloud-provider-apply
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/recruit-system?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
-    username: xxx
-    password: xxx
+    username: root
+    password: 20219988a!
   redis:
     host: 127.0.0.1
     port: 6379
-    database: 5
+    database: 0
     timeout: 3000
     client-type: lettuce
     lettuce:

@@ -26,7 +26,7 @@ public class ApplyAccessController {
      */
     @PostMapping(value = "/apply")
     @ResponseBody
-    public ResultVO apply(ApplyInfoDTO applyInfoDTO) throws IllegalAccessException {
+    public ResultVO<String> apply(ApplyInfoDTO applyInfoDTO) throws IllegalAccessException {
         return iApplyService.apply(applyInfoDTO);
     }
 
@@ -62,7 +62,7 @@ public class ApplyAccessController {
      */
     @PutMapping(value = "/update_apply_info")
     @ResponseBody
-    public ResultVO updateApplyInfo(String openid,ApplyInfoDTO applyInfoDTO){
+    public ResultVO<String> updateApplyInfo(String openid,ApplyInfoDTO applyInfoDTO){
         return iApplyService.updateApplyInfo(openid, applyInfoDTO);
     }
 

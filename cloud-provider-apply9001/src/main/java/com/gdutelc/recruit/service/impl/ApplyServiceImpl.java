@@ -11,14 +11,17 @@ import com.gdutelc.recruit.utils.GenericUtils;
 import com.gdutelc.recruit.utils.ResultStatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Set;
 
 /**
  * 招新生产者接口
  * @author TUFSolareyes
  * @date 22/08/09
  */
+@Service
 public class ApplyServiceImpl implements IApplyService {
 
     @Autowired
@@ -28,20 +31,20 @@ public class ApplyServiceImpl implements IApplyService {
     private ApplyMapper applyMapper;
 
     @Override
-    public ResultVO apply(ApplyInfoDTO applyInfoDTO) throws IllegalAccessException {
+    public ResultVO<String> apply(ApplyInfoDTO applyInfoDTO) throws IllegalAccessException {
         //判空
         if(!GenericUtils.allOfNullable(applyInfoDTO)){
-            return new ResultVO(ResultStatusCode.PARAM_VALIDATE_EXCEPTION,"参数有误",null);
+            return new ResultVO<>(ResultStatusCode.PARAM_VALIDATE_EXCEPTION,"参数有误",null);
         }
         String openid = applyInfoDTO.getOpenid();
         //判断openid
-        if(Boolean.FALSE.equals(stringRedisTemplate.opsForSet().isMember("user:stuId-openid", openid))){
-            return new ResultVO(ResultStatusCode.FORBIDDEN,"openid缺失",null);
+        if(Boolean.FALSE.equals(stringRedisTemplate.opsForSet().isMember("stu-openid", openid))){
+            return new ResultVO<>(ResultStatusCode.FORBIDDEN,"openid缺失",null);
         }
 
         applyMapper.insert(applyInfoDTO);
-        stringRedisTemplate.opsForSet().remove("user:stuId-openid",openid);
-        return new ResultVO(ResultStatusCode.SUCCESS,"参数有误",null);
+        stringRedisTemplate.opsForSet().remove("stu-openid",openid);
+        return new ResultVO<>(ResultStatusCode.SUCCESS,"报名成功",applyInfoDTO.getName());
     }
 
     @Override
@@ -73,13 +76,13 @@ public class ApplyServiceImpl implements IApplyService {
     }
 
     @Override
-    public ResultVO updateApplyInfo(String openid, ApplyInfoDTO applyInfoDTO) {
+    public ResultVO<String> updateApplyInfo(String openid, ApplyInfoDTO applyInfoDTO) {
         if(!GenericUtils.allOfNullable(openid,applyInfoDTO) || applyInfoDTO.getOpenid() != null){
             return new ResultVO<>(ResultStatusCode.PARAM_VALIDATE_EXCEPTION,"参数有误",null);
         }
         applyInfoDTO.setOpenid(openid);
         Wrapper<ApplyInfoDTO> wrapper = new UpdateWrapper<>();
         applyMapper.update(applyInfoDTO,wrapper);
-        return new ResultVO(ResultStatusCode.SUCCESS,"更新成功",null);
+        return new ResultVO<>(ResultStatusCode.SUCCESS,"更新成功",null);
     }
 }
