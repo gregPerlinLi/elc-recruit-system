@@ -1,6 +1,7 @@
 package com.gdutelc.recruit;
 
 import com.gdutelc.recruit.utils.SpringUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -29,6 +30,7 @@ public class MessageMain9003 {
  * @date 2022-08-13
  */
 @Component
+@Slf4j
 class Init {
 
     @Autowired
@@ -37,6 +39,7 @@ class Init {
     public void checkProcessKey(){
         if(Boolean.FALSE.equals(stringRedisTemplate.hasKey("process"))){
             stringRedisTemplate.opsForValue().set("process","10");
+            log.warn("Redis数据库中不存在面试总体进度值，已自动添加...");
         }
     }
 }
