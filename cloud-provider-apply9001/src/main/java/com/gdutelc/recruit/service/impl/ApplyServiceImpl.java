@@ -89,7 +89,7 @@ public class ApplyServiceImpl implements IApplyService {
     }
 
     @Override
-    public ResultVO<Integer> signIn(String openid) {
+    public ResultVO<Integer> signIn(String openid) throws NumberFormatException {
         if(!GenericUtils.ofNullable(openid)){
             return new ResultVO<>(ResultStatusCode.PARAM_VALIDATE_EXCEPTION,"参数有误",null);
         }

@@ -44,6 +44,7 @@ public interface IApplyService {
      * 签到，将状态值更新为1
      * @param openid
      * @return {@link ResultVO}
+     * @throws NumberFormatException 数值转换异常
      */
-    ResultVO<Integer> signIn(String openid);
+    ResultVO<Integer> signIn(String openid) throws NumberFormatException ;
 }
