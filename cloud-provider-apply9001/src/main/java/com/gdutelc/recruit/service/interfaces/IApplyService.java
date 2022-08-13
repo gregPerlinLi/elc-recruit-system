@@ -14,7 +14,7 @@ public interface IApplyService {
      * 报名服务
      *
      * @param applyInfoDTO 报名信息
-     * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
+     * @return {@link ResultVO}，其中包含报名者姓名
      * @throws IllegalAccessException 参数异常
      */
     ResultVO<String> apply(ApplyInfoDTO applyInfoDTO) throws IllegalAccessException;
@@ -43,7 +43,7 @@ public interface IApplyService {
     /**
      * 签到，将状态值更新为1
      * @param openid
-     * @return
+     * @return {@link ResultVO}
      */
-    ResultVO<String> signIn(String openid);
+    ResultVO<Integer> signIn(String openid);
 }

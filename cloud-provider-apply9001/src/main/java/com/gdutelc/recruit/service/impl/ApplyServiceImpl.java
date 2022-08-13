@@ -89,7 +89,7 @@ public class ApplyServiceImpl implements IApplyService {
     }
 
     @Override
-    public ResultVO<String> signIn(String openid) {
+    public ResultVO<Integer> signIn(String openid) {
         if(!GenericUtils.ofNullable(openid)){
             return new ResultVO<>(ResultStatusCode.PARAM_VALIDATE_EXCEPTION,"参数有误",null);
         }
@@ -101,7 +101,7 @@ public class ApplyServiceImpl implements IApplyService {
         int update = applyMapper.update(applyInfoDTO, wrapper);
         if(update == 1){
             String process = stringRedisTemplate.opsForValue().get("process");
-            return new ResultVO<>(ResultStatusCode.SUCCESS,"签到成功",process);
+            return new ResultVO<>(ResultStatusCode.SUCCESS,"签到成功",Integer.parseInt(process));
         }else{
             return new ResultVO<>(ResultStatusCode.NOT_FIND,"签到失败，请检查您的状态",null);
         }
