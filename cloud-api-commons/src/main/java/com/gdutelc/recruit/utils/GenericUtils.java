@@ -1,8 +1,12 @@
 package com.gdutelc.recruit.utils;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -11,6 +15,7 @@ import java.util.Set;
  * @author TufSolareyes
  * @date 2022-08-06
  */
+@Slf4j
 public class GenericUtils {
 
     /**
@@ -130,5 +135,57 @@ public class GenericUtils {
         }
         url.deleteCharAt(url.length()-1);
         return url.toString();
+    }
+
+    /**
+     * 将实体类转换为Map
+     *
+     * @param object 需要转换的对象
+     * @return 对象的 Map
+     * @throws IllegalAccessException 非法访问异常
+     */
+    public static Map<String, Object> entityToMap(Object object) throws IllegalAccessException {
+        if ( object == null ) {
+            return null;
+        }
+        Map<String, Object> map = new HashMap<String, Object>(10);
+
+        Field[] declaredFields = object.getClass().getDeclaredFields();
+        for (Field field : declaredFields) {
+            field.setAccessible(true);
+            map.put(field.getName(), field.get(object));
+        }
+        return map;
+    }
+
+    /**
+     *  将Map转换为实体类
+     *
+     * @param map 需要转换的Map
+     * @param entity 转换的实体类
+     * @return 转换后的实体类
+     * @param <T> 泛型
+     * @throws NoSuchMethodException 方法不存在异常
+     * @throws IllegalAccessException 非法访问异常
+     * @throws InvocationTargetException 调用目标异常
+     * @throws InstantiationException 实例化异常
+     */
+    public static <T> T mapToEntity(Map<String, Object> map, Class<T> entity) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        if (null == map){
+            return null;
+        }
+        T t = entity.getDeclaredConstructor().newInstance();
+        for(Field field : entity.getDeclaredFields()) {
+            if (map.containsKey(field.getName())) {
+                boolean flag = field.isAccessible();
+                field.setAccessible(true);
+                Object object = map.get(field.getName());
+                if (object!= null && field.getType().isAssignableFrom(object.getClass())) {
+                    field.set(t, object);
+                }
+                field.setAccessible(flag);
+            }
+        }
+        return t;
     }
 }
