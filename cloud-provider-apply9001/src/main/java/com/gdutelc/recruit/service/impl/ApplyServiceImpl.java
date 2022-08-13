@@ -1,6 +1,5 @@
 package com.gdutelc.recruit.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.gdutelc.recruit.domain.dto.ApplyInfoDTO;
@@ -81,7 +80,30 @@ public class ApplyServiceImpl implements IApplyService {
         }
         UpdateWrapper<ApplyInfoDTO> wrapper = new UpdateWrapper<>();
         wrapper.eq("openid",applyInfoDTO.getOpenid());
-        applyMapper.update(applyInfoDTO,wrapper);
-        return new ResultVO<>(ResultStatusCode.SUCCESS,"更新成功",applyInfoDTO.getName());
+        int update = applyMapper.update(applyInfoDTO, wrapper);
+        if(update == 1){
+            return new ResultVO<>(ResultStatusCode.SUCCESS,"更新成功",applyInfoDTO.getName());
+        }else{
+            return new ResultVO<>(ResultStatusCode.NOT_FIND,"更新失败，请检查您的信息",null);
+        }
+    }
+
+    @Override
+    public ResultVO<String> signIn(String openid) {
+        if(!GenericUtils.ofNullable(openid)){
+            return new ResultVO<>(ResultStatusCode.PARAM_VALIDATE_EXCEPTION,"参数有误",null);
+        }
+        UpdateWrapper<ApplyInfoDTO> wrapper = new UpdateWrapper<>();
+        wrapper.eq("openid",openid);
+        wrapper.eq("status",0);
+        ApplyInfoDTO applyInfoDTO = new ApplyInfoDTO();
+        applyInfoDTO.setStatus(1);
+        int update = applyMapper.update(applyInfoDTO, wrapper);
+        if(update == 1){
+            String process = stringRedisTemplate.opsForValue().get("process");
+            return new ResultVO<>(ResultStatusCode.SUCCESS,"签到成功",process);
+        }else{
+            return new ResultVO<>(ResultStatusCode.NOT_FIND,"签到失败，请检查您的状态",null);
+        }
     }
 }

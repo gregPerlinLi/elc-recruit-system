@@ -39,4 +39,11 @@ public interface IApplyService {
      * @return ResultVO
      */
     ResultVO<String> updateApplyInfo(ApplyInfoDTO applyInfoDTO);
+
+    /**
+     * 签到，将状态值更新为1
+     * @param openid
+     * @return
+     */
+    ResultVO<String> signIn(String openid);
 }

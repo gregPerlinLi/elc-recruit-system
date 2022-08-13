@@ -65,4 +65,14 @@ public class ApplyAccessController {
     }
 
 
+    /**
+     * 签到接口
+     * @param openid 微信openid
+     * @return 名字
+     */
+    public ResultVO<String> signIn(String openid){
+        return iApplyService.signIn(openid);
+    }
+
+
 }
