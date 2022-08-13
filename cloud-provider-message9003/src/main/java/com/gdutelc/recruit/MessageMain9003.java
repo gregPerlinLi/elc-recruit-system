@@ -35,7 +35,7 @@ class Init {
     private StringRedisTemplate stringRedisTemplate;
 
     public void checkProcessKey(){
-        if(!stringRedisTemplate.hasKey("process")){
+        if(Boolean.FALSE.equals(stringRedisTemplate.hasKey("process"))){
             stringRedisTemplate.opsForValue().set("process","10");
         }
     }
