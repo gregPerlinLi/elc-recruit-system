@@ -34,10 +34,9 @@ public interface IApplyService {
     ResultVO<Integer> getStatus(String openid);
 
     /**
-     * 更新报名信息，openid不能修改，修改信息中不能包含这个字段
-     * @param openid 微信的openid
+     * 更新报名信息，openid不能修改，修改信息中这个字段是为了定位
      * @param applyInfoDTO 修改信息的实体类，要修改的字段赋值，不修改的直接不传参就行
      * @return ResultVO
      */
-    ResultVO<String> updateApplyInfo(String openid,ApplyInfoDTO applyInfoDTO);
+    ResultVO<String> updateApplyInfo(ApplyInfoDTO applyInfoDTO);
 }

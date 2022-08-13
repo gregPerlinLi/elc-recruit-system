@@ -55,15 +55,13 @@ public class ApplyAccessController {
 
     /**
      * 修改学生面试信息接口
-     *
-     * @param openid 微信 openid
      * @param applyInfoDTO 要更新的学生报名信息
      * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
      */
     @PutMapping(value = "/update_apply_info")
     @ResponseBody
-    public ResultVO<String> updateApplyInfo(String openid,ApplyInfoDTO applyInfoDTO){
-        return iApplyService.updateApplyInfo(openid, applyInfoDTO);
+    public ResultVO<String> updateApplyInfo(ApplyInfoDTO applyInfoDTO){
+        return iApplyService.updateApplyInfo(applyInfoDTO);
     }
 
 

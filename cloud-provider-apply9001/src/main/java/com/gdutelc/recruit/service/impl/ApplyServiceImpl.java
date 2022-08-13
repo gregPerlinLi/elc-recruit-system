@@ -14,7 +14,6 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Set;
 
 /**
  * 招新生产者接口
@@ -76,12 +75,12 @@ public class ApplyServiceImpl implements IApplyService {
     }
 
     @Override
-    public ResultVO<String> updateApplyInfo(String openid, ApplyInfoDTO applyInfoDTO) {
-        if(!GenericUtils.allOfNullable(openid,applyInfoDTO) || applyInfoDTO.getOpenid() != null){
+    public ResultVO<String> updateApplyInfo(ApplyInfoDTO applyInfoDTO) {
+        if(!GenericUtils.ofNullable(applyInfoDTO) || !GenericUtils.ofNullable(applyInfoDTO.getOpenid()) || applyInfoDTO.getStatus() != 0){
             return new ResultVO<>(ResultStatusCode.PARAM_VALIDATE_EXCEPTION,"参数有误",null);
         }
-        applyInfoDTO.setOpenid(openid);
-        Wrapper<ApplyInfoDTO> wrapper = new UpdateWrapper<>();
+        UpdateWrapper<ApplyInfoDTO> wrapper = new UpdateWrapper<>();
+        wrapper.eq("openid",applyInfoDTO.getOpenid());
         applyMapper.update(applyInfoDTO,wrapper);
         return new ResultVO<>(ResultStatusCode.SUCCESS,"更新成功",applyInfoDTO.getName());
     }
