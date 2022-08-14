@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.domain.wx.LoginInfo;
-import com.gdutelc.recruit.service.Code2Session_Wx;
+import com.gdutelc.recruit.service.interfaces.Code2Session_Wx;
 import com.gdutelc.recruit.utils.GenericUtils;
 import com.gdutelc.recruit.utils.ResultStatusCode;
 import org.springframework.beans.factory.annotation.Autowired;

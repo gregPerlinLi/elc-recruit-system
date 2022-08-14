@@ -1,4 +1,4 @@
-package com.gdutelc.recruit.service;
+package com.gdutelc.recruit.service.interfaces;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.gdutelc.recruit.domain.vo.ResultVO;
