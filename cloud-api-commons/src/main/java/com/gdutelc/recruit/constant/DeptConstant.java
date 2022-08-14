@@ -1,4 +1,4 @@
-package com.gdutelc.recruit.utils;
+package com.gdutelc.recruit.constant;
 
 /**
  * 部门代号
@@ -6,7 +6,7 @@ package com.gdutelc.recruit.utils;
  * @author gregPerlinLi
  * @date 2022-08-07
  */
-public interface DeptCode {
+public interface DeptConstant {
     /**
      * 维修部
      */

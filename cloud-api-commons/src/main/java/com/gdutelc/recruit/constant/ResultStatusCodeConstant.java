@@ -1,4 +1,4 @@
-package com.gdutelc.recruit.utils;
+package com.gdutelc.recruit.constant;
 
 /**
  * ResultVO中的状态码接口
@@ -6,7 +6,7 @@ package com.gdutelc.recruit.utils;
  * @author TufSolareyes
  * @date 2022-08-05
  */
-public interface ResultStatusCode {
+public interface ResultStatusCodeConstant {
 
     /**
      * 请求成功

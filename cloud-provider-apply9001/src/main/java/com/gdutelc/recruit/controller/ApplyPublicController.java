@@ -2,7 +2,7 @@ package com.gdutelc.recruit.controller;
 
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.service.interfaces.ILoginService;
-import com.gdutelc.recruit.utils.ResultStatusCode;
+import com.gdutelc.recruit.constant.ResultStatusCodeConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,9 +35,9 @@ public class ApplyPublicController {
     public ResultVO login(@PathVariable String openid) throws Exception {
         boolean result = loginService.login(openid);
         if ( result ) {
-            return new ResultVO(ResultStatusCode.SUCCESS, "SUCCESS");
+            return new ResultVO(ResultStatusCodeConstant.SUCCESS, "SUCCESS");
         } else {
-            return new ResultVO(ResultStatusCode.SERVER_ERROR, "Failed to write openid into Redis");
+            return new ResultVO(ResultStatusCodeConstant.SERVER_ERROR, "Failed to write openid into Redis");
         }
     }
 }

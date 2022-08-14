@@ -5,7 +5,7 @@ import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.gdutelc.recruit.domain.dto.ApplyInfoDTO;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.service.interfaces.IApplyService;
-import com.gdutelc.recruit.utils.ResultStatusCode;
+import com.gdutelc.recruit.constant.ResultStatusCodeConstant;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
@@ -42,7 +42,7 @@ public class ApplyController {
      * Sentinel 异常处理——报名接口
      */
     public ResultVO<String> applyHandlerException (ApplyInfoDTO applyInfoDTO, BlockException exception) {
-        return new ResultVO<>(ResultStatusCode.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
+        return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
 
     /**
@@ -62,7 +62,7 @@ public class ApplyController {
      * Sentinel 异常处理——获取个人完整报名信息接口
      */
     public ResultVO<ApplyInfoDTO> getApplyInfoHandlerException (@PathVariable("openid") String openid, BlockException exception) {
-        return new ResultVO<>(ResultStatusCode.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
+        return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
 
     /**
@@ -82,7 +82,7 @@ public class ApplyController {
      * Sentinel 异常处理——获取当前学生面试状态接口
      */
     public ResultVO<Integer> getStatusHandlerException(@PathVariable("openid") String openid, BlockException exception) {
-        return new ResultVO<>(ResultStatusCode.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
+        return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
 
     /**
@@ -102,7 +102,7 @@ public class ApplyController {
      * Sentinel 异常处理——修改学生面试信息接口
      */
     public ResultVO<String> updateApplyInfoHandlerException(ApplyInfoDTO applyInfoDTO, BlockException exception) {
-        return new ResultVO<>(ResultStatusCode.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
+        return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
 
     /**
@@ -116,7 +116,7 @@ public class ApplyController {
     @ApiOperation(value = "学生签到接口", tags = "apply", response = ResultVO.class)
     public ResultVO<Integer> signIn(@ApiParam(value = "要签到的学生微信openid", required = true) @PathVariable("openid") String openid) {
         ResultVO<Integer> result = applyService.signIn(openid);
-        if ( result.getCode() == ResultStatusCode.SUCCESS ) {
+        if ( result.getCode() == ResultStatusCodeConstant.SUCCESS ) {
             // 这里是微信发送签到成功消息的调用
         }
         return result;
@@ -126,6 +126,6 @@ public class ApplyController {
      * Sentinel 异常处理——学生签到接口
      */
     public ResultVO<Integer> signInHandlerException(@PathVariable("openid") String openid, BlockException exception) {
-        return new ResultVO<>(ResultStatusCode.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
+        return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
 }

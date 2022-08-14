@@ -4,7 +4,7 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.service.interfaces.IInterviewService;
-import com.gdutelc.recruit.utils.ResultStatusCode;
+import com.gdutelc.recruit.constant.ResultStatusCodeConstant;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +33,6 @@ public class DemoController {
     }
 
     public ResultVO<String> handlerException(@PathVariable("text") String text, BlockException exception) {
-        return new ResultVO<>(ResultStatusCode.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
+        return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
 }

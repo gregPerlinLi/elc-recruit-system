@@ -6,7 +6,7 @@ import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.domain.wx.LoginInfo;
 import com.gdutelc.recruit.service.interfaces.ICode2Session;
 import com.gdutelc.recruit.utils.GenericUtils;
-import com.gdutelc.recruit.utils.ResultStatusCode;
+import com.gdutelc.recruit.constant.ResultStatusCodeConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -17,7 +17,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.gdutelc.recruit.utils.ResultStatusCode.SUCCESS;
+import static com.gdutelc.recruit.constant.ResultStatusCodeConstant.SUCCESS;
 
 
 @Service
@@ -52,7 +52,7 @@ public class Code2SessionImpl implements ICode2Session {
         url = GenericUtils.splicingUrlStr(url,params);
         ResponseEntity<String> entity = restTemplate.getForEntity(url, String.class);
         if(entity.getStatusCodeValue() != SUCCESS){
-            return new ResultVO<>(ResultStatusCode.FORBIDDEN,"微信服务器忙碌",null);
+            return new ResultVO<>(ResultStatusCodeConstant.FORBIDDEN,"微信服务器忙碌",null);
         }
         String body = entity.getBody();
         LoginInfo loginInfo = objectMapper.readValue(body, LoginInfo.class);
@@ -60,7 +60,7 @@ public class Code2SessionImpl implements ICode2Session {
             stringRedisTemplate.opsForSet().add("user:stuId-openid",loginInfo.getOpenid());
             return new ResultVO<>(SUCCESS,"登录成功",loginInfo);
         }else{
-            return new ResultVO<>(ResultStatusCode.SERVER_ERROR,"处理失败",null);
+            return new ResultVO<>(ResultStatusCodeConstant.SERVER_ERROR,"处理失败",null);
         }
 
     }

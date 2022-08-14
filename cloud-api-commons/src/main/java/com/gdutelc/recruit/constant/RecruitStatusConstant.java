@@ -1,4 +1,4 @@
-package com.gdutelc.recruit.utils;
+package com.gdutelc.recruit.constant;
 
 /**
  * 招新总体进度状态码接口
@@ -6,7 +6,7 @@ package com.gdutelc.recruit.utils;
  * @author gregPerlinLi
  * @date 2022-08-05
  */
-public interface RecruitStatusCode {
+public interface RecruitStatusConstant {
     /**
      * 报名
      */

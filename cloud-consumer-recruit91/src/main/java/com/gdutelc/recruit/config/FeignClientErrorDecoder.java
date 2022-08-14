@@ -5,7 +5,7 @@ import com.gdutelc.recruit.domain.exception.BusinessException;
 import com.gdutelc.recruit.domain.exception.ParamValidateException;
 import com.gdutelc.recruit.domain.exception.ServerException;
 import com.gdutelc.recruit.domain.vo.ResultVO;
-import com.gdutelc.recruit.utils.ResultStatusCode;
+import com.gdutelc.recruit.constant.ResultStatusCodeConstant;
 import feign.Response;
 import feign.Util;
 import feign.codec.ErrorDecoder;
@@ -30,13 +30,13 @@ public class FeignClientErrorDecoder implements ErrorDecoder {
             if (response.body() != null) {
                 String errorContent = Util.toString(response.body().asReader());
                 ObjectMapper mapper = new ObjectMapper();
-                if ( response.status() == ResultStatusCode.SERVER_ERROR ) {
+                if ( response.status() == ResultStatusCodeConstant.SERVER_ERROR ) {
                     ResultVO result = mapper.readValue(errorContent, ResultVO.class);
                     return new ServerException(result.getCode(), result.getMsg());
-                } else if ( response.status() == ResultStatusCode.PARAM_VALIDATE_EXCEPTION ) {
+                } else if ( response.status() == ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION ) {
                     ResultVO result =  mapper.readValue(errorContent, ResultVO.class);
                     return new ParamValidateException(result.getCode(), result.getMsg());
-                } else if ( response.status() == ResultStatusCode.BUSINESS_EXCEPTION ) {
+                } else if ( response.status() == ResultStatusCodeConstant.BUSINESS_EXCEPTION ) {
                     ResultVO result =  mapper.readValue(errorContent, ResultVO.class);
                     return new BusinessException(result.getCode(), result.getMsg());
                 }

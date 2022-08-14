@@ -1,5 +1,6 @@
 package com.gdutelc.recruit.utils;
 
+import com.gdutelc.recruit.constant.ResultStatusCodeConstant;
 import com.gdutelc.recruit.domain.exception.BusinessException;
 import com.gdutelc.recruit.domain.exception.ParamValidateException;
 import com.gdutelc.recruit.domain.exception.ServerException;
@@ -26,7 +27,7 @@ public class GlobalExceptionHandler {
     public ResultVO processBusinessException(HttpServletResponse response, BusinessException exception) {
         log.error(exception.getMsg(), exception);
         // 设置HTTP状态码
-        response.setStatus(ResultStatusCode.BUSINESS_EXCEPTION);
+        response.setStatus(ResultStatusCodeConstant.BUSINESS_EXCEPTION);
         response.setContentType("application/json;charset=UTF-8");
         return new ResultVO(exception.getCode(), exception.getMsg());
     }
@@ -38,9 +39,9 @@ public class GlobalExceptionHandler {
     public ResultVO processServerException(HttpServletResponse response, Exception exception) {
         log.error(exception.getMessage(), exception);
         // 设置HTTP状态码
-        response.setStatus(ResultStatusCode.SERVER_ERROR);
+        response.setStatus(ResultStatusCodeConstant.SERVER_ERROR);
         response.setContentType("application/json;charset=UTF-8");
-        return new ResultVO(ResultStatusCode.SERVER_ERROR, exception.getMessage());
+        return new ResultVO(ResultStatusCodeConstant.SERVER_ERROR, exception.getMessage());
     }
 
     /**
@@ -50,8 +51,8 @@ public class GlobalExceptionHandler {
     public ResultVO handleException(HttpServletResponse response, Exception exception) {
         log.error(exception.getMessage(), exception);
         // 设置HTTP状态码
-        response.setStatus(ResultStatusCode.PARAM_VALIDATE_EXCEPTION);
+        response.setStatus(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION);
         response.setContentType("application/json;charset=UTF-8");
-        return new ResultVO(ResultStatusCode.PARAM_VALIDATE_EXCEPTION, exception.getMessage());
+        return new ResultVO(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION, exception.getMessage());
     }
 }
