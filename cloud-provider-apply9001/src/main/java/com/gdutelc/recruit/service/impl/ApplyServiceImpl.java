@@ -2,6 +2,7 @@ package com.gdutelc.recruit.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.gdutelc.recruit.constant.RedisKeyConstant;
 import com.gdutelc.recruit.domain.dto.ApplyInfoDTO;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.mapper.ApplyMapper;
@@ -36,12 +37,12 @@ public class ApplyServiceImpl implements IApplyService {
         }
         String openid = applyInfoDTO.getOpenid();
         //判断openid
-        if(Boolean.FALSE.equals(stringRedisTemplate.opsForSet().isMember("stu-openid", openid))){
+        if(Boolean.FALSE.equals(stringRedisTemplate.opsForSet().isMember(RedisKeyConstant.STU_OPENID, openid))){
             return new ResultVO<>(ResultStatusCodeConstant.FORBIDDEN,"openid缺失",null);
         }
 
         applyMapper.insert(applyInfoDTO);
-        stringRedisTemplate.opsForSet().remove("stu-openid",openid);
+        stringRedisTemplate.opsForSet().remove(RedisKeyConstant.STU_OPENID, openid);
         return new ResultVO<>(ResultStatusCodeConstant.SUCCESS,"报名成功",applyInfoDTO.getName());
     }
 
@@ -100,7 +101,7 @@ public class ApplyServiceImpl implements IApplyService {
         applyInfoDTO.setStatus(1);
         int update = applyMapper.update(applyInfoDTO, wrapper);
         if(update == 1){
-            String process = stringRedisTemplate.opsForValue().get("process");
+            String process = stringRedisTemplate.opsForValue().get(RedisKeyConstant.PROCESS);
             return new ResultVO<>(ResultStatusCodeConstant.SUCCESS,"签到成功",Integer.parseInt(process));
         }else{
             return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND,"签到失败，请检查您的状态",null);

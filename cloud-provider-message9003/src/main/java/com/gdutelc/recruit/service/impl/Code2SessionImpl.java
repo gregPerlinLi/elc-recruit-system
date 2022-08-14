@@ -2,6 +2,7 @@ package com.gdutelc.recruit.service.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gdutelc.recruit.constant.RedisKeyConstant;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.domain.wx.LoginInfo;
 import com.gdutelc.recruit.service.interfaces.ICode2Session;
@@ -20,6 +21,9 @@ import java.util.Map;
 import static com.gdutelc.recruit.constant.ResultStatusCodeConstant.SUCCESS;
 
 
+/**
+ * @author TUFSolareyes
+ */
 @Service
 public class Code2SessionImpl implements ICode2Session {
 
@@ -43,7 +47,7 @@ public class Code2SessionImpl implements ICode2Session {
 
     @Override
     public ResultVO<LoginInfo> code2Session(String js_code, String grant_type) throws JsonProcessingException {
-        Map<String,String> params = new HashMap<>();
+        Map<String,String> params = new HashMap<>(5);
         params.put("appid",appid);
         params.put("secret",secret);
         params.put("js_code",js_code);
@@ -57,7 +61,7 @@ public class Code2SessionImpl implements ICode2Session {
         String body = entity.getBody();
         LoginInfo loginInfo = objectMapper.readValue(body, LoginInfo.class);
         if(loginInfo != null&&loginInfo.getOpenid() != null){
-            stringRedisTemplate.opsForSet().add("user:stuId-openid",loginInfo.getOpenid());
+            stringRedisTemplate.opsForSet().add(RedisKeyConstant.STU_OPENID, loginInfo.getOpenid());
             return new ResultVO<>(SUCCESS,"登录成功",loginInfo);
         }else{
             return new ResultVO<>(ResultStatusCodeConstant.SERVER_ERROR,"处理失败",null);

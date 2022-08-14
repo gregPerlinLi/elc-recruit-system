@@ -1,5 +1,6 @@
 package com.gdutelc.recruit;
 
+import com.gdutelc.recruit.constant.RedisKeyConstant;
 import com.gdutelc.recruit.utils.SpringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,8 @@ class Init {
     private StringRedisTemplate stringRedisTemplate;
 
     public void checkProcessKey(){
-        if(Boolean.FALSE.equals(stringRedisTemplate.hasKey("process"))){
-            stringRedisTemplate.opsForValue().set("process","10");
+        if(Boolean.FALSE.equals(stringRedisTemplate.hasKey(RedisKeyConstant.PROCESS))){
+            stringRedisTemplate.opsForValue().set(RedisKeyConstant.PROCESS,"10");
             log.warn("Redis数据库中不存在面试总体进度值，已自动添加...");
         }
     }
