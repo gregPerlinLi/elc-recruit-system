@@ -25,6 +25,12 @@ public class ApplyPublicController {
     @Resource
     private ILoginService loginService;
 
+    /**
+     * 生产者学生登录接口（将微信openid写入Redis中）
+     * @param openid 微信opened
+     * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
+     * @throws Exception 录入异常
+     */
     @GetMapping("/login/{openid}")
     public ResultVO login(@PathVariable String openid) throws Exception {
         boolean result = loginService.login(openid);
