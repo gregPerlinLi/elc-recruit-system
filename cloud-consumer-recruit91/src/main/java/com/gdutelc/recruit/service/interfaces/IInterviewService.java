@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 /**
- * 面试模块消费者服务层接口
+ * 面试模块生产者服务调用接口
  *
  * @author gregPerlinLi
  * @date 2022-08-10
