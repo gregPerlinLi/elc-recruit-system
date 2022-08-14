@@ -18,15 +18,6 @@ import org.springframework.web.bind.annotation.*;
 public interface IApplyService {
 
     /**
-     * 生产者学生登录接口（将微信openid写入Redis中）
-     *
-     * @param openid 微信opened
-     * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
-     */
-    @GetMapping(value = "/pro/recruit/elc_public/login/{openid}")
-    ResultVO login(@PathVariable("openid") String openid);
-
-    /**
      * 生产者报名接口
      *
      * @param applyInfoDTO 报名信息

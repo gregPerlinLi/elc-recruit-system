@@ -45,10 +45,7 @@ public class LoginController {
         ResultVO<LoginInfo> messageResult = messageService.wxLogin(jsCode, grantType);
         if ( messageResult.getCode() == ResultStatusCodeConstant.SUCCESS ) {
             String openid = messageResult.getData().getOpenid();
-            ResultVO applyResult = applyService.login(openid);
-            if ( applyResult.getCode() == ResultStatusCodeConstant.SUCCESS ) {
-                return new ResultVO<>(ResultStatusCodeConstant.SUCCESS, "LOGIN SUCCESS", openid);
-            }
+            return new ResultVO<>(ResultStatusCodeConstant.SUCCESS, "LOGIN SUCCESS", openid);
         }
         return new ResultVO<>(ResultStatusCodeConstant.SERVER_ERROR, "LOGIN FAILED");
     }
