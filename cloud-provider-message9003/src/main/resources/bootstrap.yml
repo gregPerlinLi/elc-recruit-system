@@ -35,5 +35,8 @@ mybatis-plus:
     map-underscore-to-camel-case: true
 
 wx:
+  applet:
+    appid: 123456
+    secret: 1rsbn1bg19gh9gsb198d1
   url:
     code2Session: https://api.weixin.qq.com/sns/jscode2session

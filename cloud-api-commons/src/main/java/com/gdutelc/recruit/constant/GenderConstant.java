@@ -1,4 +1,4 @@
-package com.gdutelc.recruit.utils;
+package com.gdutelc.recruit.constant;
 
 /**
  * 性别代码
@@ -6,7 +6,7 @@ package com.gdutelc.recruit.utils;
  * @author gregPerlinLi
  * @date 2022-08-05
  */
-public interface GenderCode {
+public interface GenderConstant {
     /**
      * 男性
      */

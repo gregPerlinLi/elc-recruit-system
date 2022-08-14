@@ -3,12 +3,17 @@ package com.gdutelc.recruit.controller;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.gdutelc.recruit.domain.vo.ResultVO;
-import com.gdutelc.recruit.utils.ResultStatusCode;
+import com.gdutelc.recruit.domain.wx.LoginInfo;
+import com.gdutelc.recruit.service.interfaces.IApplyService;
+import com.gdutelc.recruit.service.interfaces.IMessageService;
+import com.gdutelc.recruit.constant.ResultStatusCodeConstant;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
 
 /**
  * 登录用接口
@@ -18,6 +23,12 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController("/elc_public")
 public class LoginController {
+
+    @Resource
+    private IApplyService applyService;
+
+    @Resource
+    private IMessageService messageService;
 
     /**
      * 学生登录接口（微信登录）
@@ -29,9 +40,14 @@ public class LoginController {
     @GetMapping(value = "/login/{js_code}/{grant_type}")
     @SentinelResource(value = "login", blockHandler = "loginHandlerException")
     @ApiOperation(value = "登录", tags = "login", response = ResultVO.class)
-    public ResultVO<Integer> login(@ApiParam(value = "微信登录code", required = true) @PathVariable("js_code") String jsCode,
+    public ResultVO<String> login(@ApiParam(value = "微信登录code", required = true) @PathVariable("js_code") String jsCode,
                                   @ApiParam(value = "授权类型", required = true) @PathVariable("grant_type") String grantType) {
-        return null;
+        ResultVO<LoginInfo> messageResult = messageService.wxLogin(jsCode, grantType);
+        if ( messageResult.getCode() == ResultStatusCodeConstant.SUCCESS ) {
+            String openid = messageResult.getData().getOpenid();
+            return new ResultVO<>(ResultStatusCodeConstant.SUCCESS, "LOGIN SUCCESS", openid);
+        }
+        return new ResultVO<>(ResultStatusCodeConstant.SERVER_ERROR, "LOGIN FAILED");
     }
 
     /**
@@ -69,7 +85,7 @@ public class LoginController {
     public ResultVO<Integer> loginHandlerException(@PathVariable("js_code") String jsCode,
                                                    @PathVariable("grant_type") String grantType,
                                                    BlockException exception) {
-        return new ResultVO<>(ResultStatusCode.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
+        return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
 
     /**
@@ -78,7 +94,7 @@ public class LoginController {
     public ResultVO<String> interviewerLoginHandlerException(@PathVariable("username") String username,
                                                              @PathVariable("password") String password,
                                                              BlockException exception) {
-        return new ResultVO<>(ResultStatusCode.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
+        return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
 
     /**
@@ -87,7 +103,7 @@ public class LoginController {
     public ResultVO<String> adminLoginHandlerException(@PathVariable("username") String username,
                                                        @PathVariable("password") String password,
                                                        BlockException exception) {
-        return new ResultVO<>(ResultStatusCode.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
+        return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
 
 }

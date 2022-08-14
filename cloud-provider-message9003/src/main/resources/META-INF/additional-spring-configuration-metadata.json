@@ -4,6 +4,16 @@
       "name": "wx.url.code2Session",
       "type": "java.lang.String",
       "description": "登录凭证校验链接."
+    },
+    {
+      "name": "wx.applet.appid",
+      "type": "java.lang.String",
+      "description": "微信小程序AppID."
+    },
+    {
+      "name": "wx.applet.secret",
+      "type": "java.lang.String",
+      "description": "微信小程序Secret."
     }
   ]
 }

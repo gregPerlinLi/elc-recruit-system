@@ -1,4 +1,4 @@
-package com.gdutelc.recruit.service;
+package com.gdutelc.recruit.service.interfaces;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.gdutelc.recruit.domain.vo.ResultVO;
@@ -9,16 +9,14 @@ import com.gdutelc.recruit.domain.wx.LoginInfo;
  * @author TufSolareyes
  * @date 2022-08-05
  */
-public interface Code2Session_Wx {
+public interface ICode2Session {
 
     /**
      * 向微信获取用户登录信息
-     * @param appid 小程序appid
-     * @param secret 小程序appSecret
      * @param js_code 登录时由前端获取的code
      * @param grant_type 只需要填写 authorization_code
      * @return LoginInfo
      * @throws JsonProcessingException
      */
-    ResultVO<LoginInfo> code2Session(String appid, String secret, String js_code, String grant_type) throws JsonProcessingException ;
+    ResultVO<LoginInfo> code2Session(String js_code, String grant_type) throws JsonProcessingException ;
 }
