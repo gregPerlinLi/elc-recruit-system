@@ -9,7 +9,7 @@ import com.gdutelc.recruit.domain.wx.LoginInfo;
  * @author TufSolareyes
  * @date 2022-08-05
  */
-public interface Code2Session_Wx {
+public interface ICode2Session {
 
     /**
      * 向微信获取用户登录信息
