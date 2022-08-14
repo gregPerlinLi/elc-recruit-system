@@ -35,8 +35,14 @@ public class Code2SessionImpl implements Code2Session_Wx {
     @Value(value = "${wx.url.code2Session}")
     private String url;
 
+    @Value(value = "${wx.applet.appid}")
+    private String appid;
+
+    @Value(value = "${wx.applet.secret}")
+    private String secret;
+
     @Override
-    public ResultVO<LoginInfo> code2Session(String appid, String secret, String js_code, String grant_type) throws JsonProcessingException {
+    public ResultVO<LoginInfo> code2Session(String js_code, String grant_type) throws JsonProcessingException {
         Map<String,String> params = new HashMap<>();
         params.put("appid",appid);
         params.put("secret",secret);
