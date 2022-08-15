@@ -107,6 +107,9 @@ public class DetailedInfoDTO {
     @ApiModelProperty(value = "班级")
     private String clazz;
 
+    /**
+     * 联系电话
+     */
     @Getter
     @Setter
     @ApiModelProperty(value = "联系电话")
