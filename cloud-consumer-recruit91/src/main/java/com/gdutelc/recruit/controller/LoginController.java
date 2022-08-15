@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -21,7 +22,8 @@ import javax.annotation.Resource;
  * @author gregPerlinLi
  * @date 2022-08-09
  */
-@RestController("/elc_public")
+@RestController
+@RequestMapping(value = "/recruit/elc_access")
 public class LoginController {
 
     @Resource

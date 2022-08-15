@@ -18,7 +18,8 @@ import javax.annotation.Resource;
  * @date 22/08/07
  */
 @Slf4j
-@RestController("/recruit/elc_access")
+@RestController
+@RequestMapping(value = "/recruit/elc_access")
 public class ApplyController {
 
     @Resource
