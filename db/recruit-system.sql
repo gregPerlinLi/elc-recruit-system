@@ -129,6 +129,7 @@ CREATE TABLE `stu_info` (
   `major` varchar(50) NOT NULL,
   `college` int NOT NULL,
   `clazz` varchar(50) NOT NULL,
+  `phone` char(11) NOT NULL,
   `where_find` varchar(40) DEFAULT NULL,
   `status` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
@@ -138,7 +139,7 @@ CREATE TABLE `stu_info` (
   KEY `table_name_college_index` (`college`),
   KEY `table_name_first_dept_index` (`first_dept`),
   KEY `table_name_status_index` (`status`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='学生信息';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='学生信息';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -150,4 +151,4 @@ CREATE TABLE `stu_info` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-07 18:39:08
+-- Dump completed on 2022-08-15 18:19:02
