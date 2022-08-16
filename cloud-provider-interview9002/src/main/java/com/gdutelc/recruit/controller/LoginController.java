@@ -2,7 +2,7 @@ package com.gdutelc.recruit.controller;
 
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.service.interfaces.IInterviewerListService;
-import org.springframework.stereotype.Controller;
+import com.gdutelc.recruit.service.interfaces.ILoginVerifyService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -19,6 +19,9 @@ public class LoginController {
 
     @Resource
     IInterviewerListService interviewerListService;
+
+    @Resource
+    ILoginVerifyService loginVerifyService;
 
     /**
      * 面试官登录接口
@@ -48,5 +51,18 @@ public class LoginController {
                                         @PathVariable("password") String password,
                                         @PathVariable("session_id") String sessionId) {
         return null;
+    }
+
+    /**
+     * 面试官和管理员登录校验接口
+     *
+     * @param username 用户名
+     * @param sessionId 请求Session ID
+     * @return {@link ResultVO}，其中数据为校验的Session ID
+     */
+    @GetMapping(value = "/login_verify/{username}/{session_id}")
+    public ResultVO<String> loginVerify(@PathVariable("username") String username,
+                                        @PathVariable("session_id") String sessionId) {
+        return loginVerifyService.loginVerify(username, sessionId);
     }
 }
