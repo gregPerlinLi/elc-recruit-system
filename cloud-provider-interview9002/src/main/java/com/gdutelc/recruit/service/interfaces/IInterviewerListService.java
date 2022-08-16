@@ -19,8 +19,9 @@ public interface IInterviewerListService extends IService<InterviewerList> {
      *
      * @param username 面试官用户名
      * @param password 密码
+     * @param sessionId 请求Session ID
      * @return {@link ResultVO}，其中数据为该面试官所在的部门
      */
-    ResultVO<Integer> login(String username, String password);
+    ResultVO<Integer> login(String username, String password, String sessionId);
 
 }
