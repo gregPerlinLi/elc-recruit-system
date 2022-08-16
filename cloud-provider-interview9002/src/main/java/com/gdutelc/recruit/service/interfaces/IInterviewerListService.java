@@ -19,7 +19,7 @@ public interface IInterviewerListService extends IService<InterviewerList> {
      *
      * @param username 面试官用户名
      * @param password 密码
-     * @return {@link ResultVO} 其中数据为该面试官所在的部门
+     * @return {@link ResultVO}，其中数据为该面试官所在的部门
      */
     ResultVO<Integer> login(String username, String password);
 

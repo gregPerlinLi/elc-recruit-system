@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  * @date 2022-08-09
  */
 @RestController
-@RequestMapping("/pro/elc_public")
+@RequestMapping("/pro/interview/elc_public")
 public class LoginController {
 
     @Resource
@@ -25,7 +25,7 @@ public class LoginController {
      *
      * @param username 登录用户名
      * @param password 登录密码
-     * @return 是否登录成功
+     * @return {@link ResultVO}，其中数据为该面试官所在的部门
      */
     @GetMapping(value = "/interviewer_login/{username}/{password}")
     public ResultVO<Integer> interviewerLogin(@PathVariable("username") String username, @PathVariable("password") String password) {
