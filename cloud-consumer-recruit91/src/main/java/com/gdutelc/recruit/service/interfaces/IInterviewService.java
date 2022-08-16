@@ -30,10 +30,12 @@ public interface IInterviewService {
      *
      * @param username 登录用户名
      * @param password 登录密码
+     * @param sessionId 请求Session ID
      * @return 是否登录成功
      */
-    @GetMapping(value = "/pro/interview/elc_public/interviewer_login/{username}/{password}")
+    @GetMapping(value = "/pro/interview/elc_public/interviewer_login/{username}/{password}/{session_id}")
     ResultVO<Integer> interviewerLogin(@PathVariable("username") String username,
-                                       @PathVariable("password") String password);
+                                       @PathVariable("password") String password,
+                                       @PathVariable("session_id") String sessionId);
 
 }
