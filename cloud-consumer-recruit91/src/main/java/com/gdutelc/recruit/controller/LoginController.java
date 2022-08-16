@@ -66,7 +66,7 @@ public class LoginController {
     public ResultVO<Integer> interviewerLogin(@ApiParam(value = "用户名", required = true) @PathVariable("username") String username,
                                               @ApiParam(value = "密码（加密后的）", required = true) @PathVariable("password") String password,
                                               HttpServletRequest request) {
-        ResultVO<Integer> result = interviewService.interviewerLogin(username, password);
+        ResultVO<Integer> result = interviewService.interviewerLogin(username, password, request.getRequestedSessionId());
         if ( result.getCode() == ResultStatusCodeConstant.SUCCESS ) {
             request.getSession().setAttribute("username", username);
             return result;
