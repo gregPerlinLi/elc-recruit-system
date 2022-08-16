@@ -24,4 +24,16 @@ public interface IInterviewService {
      */
     @GetMapping(value = "/pro/demo/test/{text}")
     ResultVO<String> test(@PathVariable("text") String text);
+
+    /**
+     * 生产者面试官登录接口
+     *
+     * @param username 登录用户名
+     * @param password 登录密码
+     * @return 是否登录成功
+     */
+    @GetMapping(value = "/pro/interview/elc_public/interviewer_login/{username}/{password}")
+    ResultVO<Integer> interviewerLogin(@PathVariable("username") String username,
+                                       @PathVariable("password") String password);
+
 }
