@@ -38,4 +38,15 @@ public interface IInterviewService {
                                        @PathVariable("password") String password,
                                        @PathVariable("session_id") String sessionId);
 
+
+    /**
+     * 生产者面试官和管理员登录校验接口
+     *
+     * @param username 用户名
+     * @param sessionId 请求Session ID
+     * @return {@link ResultVO}，其中数据为校验的Session ID
+     */
+    @GetMapping(value = "/pro/interview/elc_public/login_verify/{username}/{session_id}")
+    ResultVO<String> loginVerify(@PathVariable("username") String username,
+                                 @PathVariable("session_id") String sessionId);
 }
