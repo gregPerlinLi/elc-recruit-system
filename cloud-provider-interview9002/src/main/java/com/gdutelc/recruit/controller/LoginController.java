@@ -1,8 +1,11 @@
 package com.gdutelc.recruit.controller;
 
 import com.gdutelc.recruit.domain.vo.ResultVO;
+import com.gdutelc.recruit.service.interfaces.IInterviewerListService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * 面试官和管理员登录接口
@@ -14,6 +17,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/pro/elc_public")
 public class LoginController {
 
+    @Resource
+    IInterviewerListService interviewerListService;
+
     /**
      * 面试官登录接口
      *
@@ -22,8 +28,8 @@ public class LoginController {
      * @return 是否登录成功
      */
     @GetMapping(value = "/interviewer_login/{username}/{password}")
-    public ResultVO<String> interviewerLogin(@PathVariable("username") String username, @PathVariable("password") String password) {
-        return null;
+    public ResultVO<Integer> interviewerLogin(@PathVariable("username") String username, @PathVariable("password") String password) {
+        return interviewerListService.login(username, password);
     }
 
     /**
@@ -34,7 +40,7 @@ public class LoginController {
      * @return 是否登录成功
      */
     @GetMapping(value = "/admin_login/{username}/{password}")
-    public ResultVO<String> adminLogin(@PathVariable("username") String username, @PathVariable("password") String password) {
+    public ResultVO<Integer> adminLogin(@PathVariable("username") String username, @PathVariable("password") String password) {
         return null;
     }
 }
