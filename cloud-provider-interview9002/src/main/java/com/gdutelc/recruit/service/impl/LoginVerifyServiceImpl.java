@@ -19,7 +19,7 @@ public class LoginVerifyServiceImpl implements ILoginVerifyService {
 
     @Override
     public ResultVO<String> loginVerify(String username, String sessionId) {
-        String loginSessionId = stringRedisTemplate.opsForValue().get(RedisKeyConstant.LOGIN_USER + ":" + username);
+        String loginSessionId = stringRedisTemplate.opsForValue().get(RedisKeyConstant.LOGIN_USER + username);
         if ( sessionId.equals(loginSessionId) ) {
             return new ResultVO<>(ResultStatusCodeConstant.SUCCESS, "登录校验成功", loginSessionId);
         }

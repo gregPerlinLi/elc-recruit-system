@@ -19,8 +19,8 @@ public interface RedisKeyConstant {
     String PROCESS = "process";
 
     /**
-     * 存放已登录面试官和管理员集合的key值
+     * 存放已登录面试官和管理员的key值
      */
-    String LOGIN_USER = "login-user";
+    String LOGIN_USER = "login-user:";
 
 }
