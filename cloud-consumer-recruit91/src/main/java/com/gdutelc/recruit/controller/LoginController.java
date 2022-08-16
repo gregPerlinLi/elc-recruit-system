@@ -57,14 +57,15 @@ public class LoginController {
      * 面试官登录接口
      * @param username 用户名
      * @param password 密码（加密后的）
+     * @param request HTTP 请求
      * @return {@link ResultVO}，其中数据为该面试官所在部门
      */
     @GetMapping(value = "/interviewer_login/{username}/{password}")
     @SentinelResource(value = "interviewer_login", blockHandler = "interviewerLoginHandlerException")
     @ApiOperation(value = "面试官登录", tags = "login", response = ResultVO.class)
     public ResultVO<Integer> interviewerLogin(@ApiParam(value = "用户名", required = true) @PathVariable("username") String username,
-                                             @ApiParam(value = "密码（加密后的）", required = true) @PathVariable("password") String password,
-                                             HttpServletRequest request) {
+                                              @ApiParam(value = "密码（加密后的）", required = true) @PathVariable("password") String password,
+                                              HttpServletRequest request) {
         ResultVO<Integer> result = interviewService.interviewerLogin(username, password);
         if ( result.getCode() == ResultStatusCodeConstant.SUCCESS ) {
             request.getSession().setAttribute("username", username);
@@ -78,13 +79,15 @@ public class LoginController {
      *
      * @param username 用户名
      * @param password 密码（加密后的）
+     * @param request HTTP 请求
      * @return 是否成功登陆
      */
     @GetMapping(value = "/admin_login/{username}/{password}")
     @SentinelResource(value = "admin_login", blockHandler = "adminLoginHandlerException")
     @ApiOperation(value = "管理员登录", tags = "login", response = ResultVO.class)
     public ResultVO<String> adminLogin(@ApiParam(value = "用户名", required = true) @PathVariable("username") String username,
-                                       @ApiParam(value = "密码（加密后的）", required = true) @PathVariable("password") String password) {
+                                       @ApiParam(value = "密码（加密后的）", required = true) @PathVariable("password") String password,
+                                       HttpServletRequest request) {
         return null;
     }
 
@@ -102,6 +105,7 @@ public class LoginController {
      */
     public ResultVO<String> interviewerLoginHandlerException(@PathVariable("username") String username,
                                                              @PathVariable("password") String password,
+                                                             HttpServletRequest request,
                                                              BlockException exception) {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
@@ -111,6 +115,7 @@ public class LoginController {
      */
     public ResultVO<String> adminLoginHandlerException(@PathVariable("username") String username,
                                                        @PathVariable("password") String password,
+                                                       HttpServletRequest request,
                                                        BlockException exception) {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
