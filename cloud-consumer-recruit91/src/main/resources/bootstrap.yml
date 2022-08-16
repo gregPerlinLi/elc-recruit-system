@@ -1,5 +1,8 @@
 server:
   port: 91
+  servlet:
+    session:
+      timeout: 30m
 
 spring:
   main:
