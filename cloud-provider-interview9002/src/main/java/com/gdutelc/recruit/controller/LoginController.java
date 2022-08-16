@@ -25,11 +25,14 @@ public class LoginController {
      *
      * @param username 登录用户名
      * @param password 登录密码
+     * @param sessionId 请求Session ID
      * @return {@link ResultVO}，其中数据为该面试官所在的部门
      */
-    @GetMapping(value = "/interviewer_login/{username}/{password}")
-    public ResultVO<Integer> interviewerLogin(@PathVariable("username") String username, @PathVariable("password") String password) {
-        return interviewerListService.login(username, password);
+    @GetMapping(value = "/interviewer_login/{username}/{password}/{session_id}")
+    public ResultVO<Integer> interviewerLogin(@PathVariable("username") String username,
+                                              @PathVariable("password") String password,
+                                              @PathVariable("session_id") String sessionId) {
+        return interviewerListService.login(username, password, sessionId);
     }
 
     /**
@@ -37,10 +40,13 @@ public class LoginController {
      *
      * @param username 登录用户名
      * @param password 登录密码
+     * @param sessionId 请求Session ID
      * @return 是否登录成功
      */
-    @GetMapping(value = "/admin_login/{username}/{password}")
-    public ResultVO<Integer> adminLogin(@PathVariable("username") String username, @PathVariable("password") String password) {
+    @GetMapping(value = "/admin_login/{username}/{password}/{session_id}")
+    public ResultVO<Integer> adminLogin(@PathVariable("username") String username,
+                                        @PathVariable("password") String password,
+                                        @PathVariable("session_id") String sessionId) {
         return null;
     }
 }
