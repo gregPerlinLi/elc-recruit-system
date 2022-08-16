@@ -4,7 +4,7 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.domain.wx.LoginInfo;
-import com.gdutelc.recruit.service.interfaces.IApplyService;
+import com.gdutelc.recruit.service.interfaces.IInterviewService;
 import com.gdutelc.recruit.service.interfaces.IMessageService;
 import com.gdutelc.recruit.constant.ResultStatusCodeConstant;
 import io.swagger.annotations.ApiOperation;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 登录用接口
@@ -27,7 +28,7 @@ import javax.annotation.Resource;
 public class LoginController {
 
     @Resource
-    private IApplyService applyService;
+    private IInterviewService interviewService;
 
     @Resource
     private IMessageService messageService;
@@ -37,7 +38,7 @@ public class LoginController {
      *
      * @param jsCode 微信登录code
      * @param grantType 授权类型
-     * @return 数据库表的id
+     * @return {@link ResultVO}，其中数据为该学生姓名
      */
     @GetMapping(value = "/login/{js_code}/{grant_type}")
     @SentinelResource(value = "login", blockHandler = "loginHandlerException")
@@ -56,14 +57,20 @@ public class LoginController {
      * 面试官登录接口
      * @param username 用户名
      * @param password 密码（加密后的）
-     * @return 是否成功登陆
+     * @return {@link ResultVO}，其中数据为该面试官所在部门
      */
     @GetMapping(value = "/interviewer_login/{username}/{password}")
     @SentinelResource(value = "interviewer_login", blockHandler = "interviewerLoginHandlerException")
     @ApiOperation(value = "面试官登录", tags = "login", response = ResultVO.class)
-    public ResultVO<String> interviewerLogin(@ApiParam(value = "用户名", required = true) @PathVariable("username") String username,
-                                             @ApiParam(value = "密码（加密后的）", required = true) @PathVariable("password") String password) {
-        return null;
+    public ResultVO<Integer> interviewerLogin(@ApiParam(value = "用户名", required = true) @PathVariable("username") String username,
+                                             @ApiParam(value = "密码（加密后的）", required = true) @PathVariable("password") String password,
+                                             HttpServletRequest request) {
+        ResultVO<Integer> result = interviewService.interviewerLogin(username, password);
+        if ( result.getCode() == ResultStatusCodeConstant.SUCCESS ) {
+            request.getSession().setAttribute("username", username);
+            return result;
+        }
+        return result;
     }
 
     /**
