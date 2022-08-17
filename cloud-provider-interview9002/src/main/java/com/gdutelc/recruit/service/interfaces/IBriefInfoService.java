@@ -2,6 +2,7 @@ package com.gdutelc.recruit.service.interfaces;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gdutelc.recruit.domain.dto.BriefInfoDTO;
+import com.gdutelc.recruit.domain.dto.PageDTO;
 
 /**
  * 学生简要信息 服务类
@@ -20,6 +21,6 @@ public interface IBriefInfoService {
      * @param stuStatusCode 面试状态筛选（20为全选）
      * @return {@link Page} 报名者简要信息分页集合
      */
-    Page<BriefInfoDTO> briefApplyQuery(Integer page, Integer limit, Integer department, Integer stuStatusCode);
+    PageDTO<BriefInfoDTO> briefApplyQuery(Integer page, Integer limit, Integer department, Integer stuStatusCode);
 
 }
