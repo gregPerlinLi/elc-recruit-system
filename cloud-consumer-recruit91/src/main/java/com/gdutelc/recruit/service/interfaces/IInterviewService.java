@@ -38,6 +38,19 @@ public interface IInterviewService {
                                        @PathVariable("password") String password,
                                        @PathVariable("session_id") String sessionId);
 
+    /**
+     * 生产者管理员登录接口
+     *
+     * @param username 登录用户名
+     * @param password 登录密码
+     * @param sessionId 请求Session ID
+     * @return {@link ResultVO}，其中数据为该管理员的用户名
+     */
+    @GetMapping(value = "/pro/interview/elc_public/admin_login/{username}/{password}/{session_id}")
+    ResultVO<String> adminLogin(@PathVariable("username") String username,
+                                @PathVariable("password") String password,
+                                @PathVariable("session_id") String sessionId);
+
 
     /**
      * 生产者面试官和管理员登录校验接口
