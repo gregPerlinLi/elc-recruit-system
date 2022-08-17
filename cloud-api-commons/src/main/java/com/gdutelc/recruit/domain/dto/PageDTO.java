@@ -13,6 +13,7 @@ import java.util.List;
  * @date 2022-08-17
  */
 @AllArgsConstructor
+@NoArgsConstructor
 @ApiModel("分页实体")
 @Data
 public class PageDTO<T> {
