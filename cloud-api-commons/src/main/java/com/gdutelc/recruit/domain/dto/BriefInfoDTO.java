@@ -15,6 +15,7 @@ import lombok.*;
  */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @ApiModel("学生简要信息")
 @TableName("stu_info")
 public class BriefInfoDTO {
