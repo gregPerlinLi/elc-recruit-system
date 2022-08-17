@@ -1,9 +1,12 @@
 package com.gdutelc.recruit.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.gdutelc.recruit.constant.ResultStatusCodeConstant;
 import com.gdutelc.recruit.domain.dto.BriefInfoDTO;
 import com.gdutelc.recruit.domain.dto.DetailedInfoDTO;
 import com.gdutelc.recruit.domain.dto.PageDTO;
 import com.gdutelc.recruit.domain.vo.ResultVO;
+import com.gdutelc.recruit.service.interfaces.IBriefInfoService;
 import com.gdutelc.recruit.service.interfaces.IStuInfoService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +27,9 @@ public class StudentQueryController {
 
     @Resource
     IStuInfoService stuInfoService;
+
+    @Resource
+    IBriefInfoService briefInfoService;
 
     /**
      * 生产者获取报名者详细信息接口
@@ -50,6 +56,8 @@ public class StudentQueryController {
                                                            @PathVariable("limit") Integer limit,
                                                            @PathVariable("department") Integer department,
                                                            @PathVariable("stu_status_code") Integer stuStatusCode) {
-        return null;
+
+        PageDTO<BriefInfoDTO> pages = briefInfoService.briefApplyQuery(page, limit, department, stuStatusCode);
+        return new ResultVO<>(ResultStatusCodeConstant.SUCCESS, "查询成功", pages);
     }
 }
