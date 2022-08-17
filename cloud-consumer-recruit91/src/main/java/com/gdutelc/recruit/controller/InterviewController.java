@@ -33,7 +33,7 @@ public class InterviewController {
      * @return {@link ResultVO}，其中数据为该报名者的详细信息
      */
     @GetMapping(value = "/detailed_apply_query/{stu_id}")
-    @SentinelResource(value = "studentQuery", blockHandler = "studentQueryBlockHandler")
+    @SentinelResource(value = "detailedApplyQuery", blockHandler = "studentQueryBlockHandler")
     @ApiOperation(value = "获取报名者详细信息", tags = "query", response = ResultVO.class)
     public ResultVO<DetailedInfoDTO> detailedApplyQuery(@ApiParam(value = "报名者学号", readOnly = true) @PathVariable("stu_id") String stuId) {
         return interviewService.detailedApplyQuery(stuId);
