@@ -76,5 +76,18 @@ public interface IInterviewService {
     ResultVO<DetailedInfoDTO> detailedApplyQuery(@PathVariable("stu_id") String stuId);
 
 
-
+    /**
+     * 生产者获取报名者简要信息集合接口
+     *
+     * @param page 需要查询第几页
+     * @param limit 每一页的列数限制
+     * @param department 部门筛选（0为全选）
+     * @param stuStatusCode 面试状态筛选（20为全选）
+     * @return {@link ResultVO}，其中数据为该报名者的简要信息集合
+     */
+    @GetMapping(value = "/pro/interview/elc_access/brief_apply_query/{page}/{limit}/{department}/{stu_status_code}")
+    ResultVO<PageDTO<BriefInfoDTO>> briefApplyQuery(@PathVariable("page") Integer page,
+                                                    @PathVariable("limit") Integer limit,
+                                                    @PathVariable("department") Integer department,
+                                                    @PathVariable("stu_status_code") Integer stuStatusCode);
 }
