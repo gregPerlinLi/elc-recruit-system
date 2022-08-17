@@ -1,6 +1,7 @@
 package com.gdutelc.recruit.controller;
 
 import com.gdutelc.recruit.domain.vo.ResultVO;
+import com.gdutelc.recruit.service.interfaces.IAdminListService;
 import com.gdutelc.recruit.service.interfaces.IInterviewerListService;
 import com.gdutelc.recruit.service.interfaces.ILoginVerifyService;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,9 @@ public class LoginController {
 
     @Resource
     IInterviewerListService interviewerListService;
+
+    @Resource
+    IAdminListService adminListService;
 
     @Resource
     ILoginVerifyService loginVerifyService;
@@ -44,13 +48,13 @@ public class LoginController {
      * @param username 登录用户名
      * @param password 登录密码
      * @param sessionId 请求Session ID
-     * @return 是否登录成功
+     * @return {@link ResultVO}，其中数据为该管理员的用户名
      */
     @GetMapping(value = "/admin_login/{username}/{password}/{session_id}")
-    public ResultVO<Integer> adminLogin(@PathVariable("username") String username,
+    public ResultVO<String> adminLogin(@PathVariable("username") String username,
                                         @PathVariable("password") String password,
                                         @PathVariable("session_id") String sessionId) {
-        return null;
+        return adminListService.login(username, password, sessionId);
     }
 
     /**
