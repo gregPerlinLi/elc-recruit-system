@@ -80,7 +80,7 @@ public class LoginController {
      * @param username 用户名
      * @param password 密码（加密后的）
      * @param request HTTP 请求
-     * @return 是否成功登陆
+     * @return {@link ResultVO}，其中数据为该管理员的用户名
      */
     @GetMapping(value = "/admin_login/{username}/{password}")
     @SentinelResource(value = "admin_login", blockHandler = "adminLoginHandlerException")
@@ -88,7 +88,12 @@ public class LoginController {
     public ResultVO<String> adminLogin(@ApiParam(value = "用户名", required = true) @PathVariable("username") String username,
                                        @ApiParam(value = "密码（加密后的）", required = true) @PathVariable("password") String password,
                                        HttpServletRequest request) {
-        return null;
+        ResultVO<String> result = interviewService.adminLogin(username, password, request.getSession().getId());
+        if ( result.getCode() == ResultStatusCodeConstant.SUCCESS ) {
+            request.getSession().setAttribute("username", username);
+            return result;
+        }
+        return result;
     }
 
     /**
