@@ -61,7 +61,7 @@ public class LoginController {
      * @return {@link ResultVO}，其中数据为该面试官所在部门
      */
     @GetMapping(value = "/interviewer_login/{username}/{password}")
-    @SentinelResource(value = "interviewer_login", blockHandler = "interviewerLoginHandlerException")
+    @SentinelResource(value = "interviewerLogin", blockHandler = "interviewerLoginHandlerException")
     @ApiOperation(value = "面试官登录", tags = "login", response = ResultVO.class)
     public ResultVO<Integer> interviewerLogin(@ApiParam(value = "用户名", required = true) @PathVariable("username") String username,
                                               @ApiParam(value = "密码（加密后的）", required = true) @PathVariable("password") String password,
@@ -82,7 +82,7 @@ public class LoginController {
      * @return {@link ResultVO}，其中数据为该管理员的用户名
      */
     @GetMapping(value = "/admin_login/{username}/{password}")
-    @SentinelResource(value = "admin_login", blockHandler = "adminLoginHandlerException")
+    @SentinelResource(value = "adminLogin", blockHandler = "adminLoginHandlerException")
     @ApiOperation(value = "管理员登录", tags = "login", response = ResultVO.class)
     public ResultVO<String> adminLogin(@ApiParam(value = "用户名", required = true) @PathVariable("username") String username,
                                        @ApiParam(value = "密码（加密后的）", required = true) @PathVariable("password") String password,
