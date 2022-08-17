@@ -1,11 +1,9 @@
 package com.gdutelc.recruit.domain.dto;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 
 /**
@@ -16,7 +14,9 @@ import lombok.Setter;
  */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @ApiModel("学生详细信息")
+@TableName("stu_info")
 public class DetailedInfoDTO {
 
     /**
