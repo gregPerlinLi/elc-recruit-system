@@ -52,8 +52,8 @@ public class LoginController {
      */
     @GetMapping(value = "/admin_login/{username}/{password}/{session_id}")
     public ResultVO<String> adminLogin(@PathVariable("username") String username,
-                                        @PathVariable("password") String password,
-                                        @PathVariable("session_id") String sessionId) {
+                                       @PathVariable("password") String password,
+                                       @PathVariable("session_id") String sessionId) {
         return adminListService.login(username, password, sessionId);
     }
 
