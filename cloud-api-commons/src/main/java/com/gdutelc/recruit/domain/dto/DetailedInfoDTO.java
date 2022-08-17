@@ -1,6 +1,7 @@
 package com.gdutelc.recruit.domain.dto;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.gdutelc.recruit.domain.entities.StuInfo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -122,4 +123,23 @@ public class DetailedInfoDTO {
     @Setter
     @ApiModelProperty(value = "在哪里了解电协")
     private String whereFind;
+
+    /**
+     * {@link StuInfo}类与{@link DetailedInfoDTO}的转换构造方法
+     * @param stuInfo 需要转换的实体类
+     */
+    public DetailedInfoDTO (StuInfo stuInfo) {
+        this.stuId = stuInfo.getStuId();
+        this.name = stuInfo.getName();
+        this.gender = stuInfo.getGender();
+        this.profile = stuInfo.getProfile();
+        this.skill = stuInfo.getSkill();
+        this.hasJoin = stuInfo.getHasJoin();
+        this.firstDept = stuInfo.getFirstDept();
+        this.secondDept = stuInfo.getSecondDept();
+        this.major = stuInfo.getMajor();
+        this.college = stuInfo.getCollege();
+        this.clazz = stuInfo.getClazz();
+        this.whereFind = stuInfo.getWhereFind();
+    }
 }
