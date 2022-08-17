@@ -1,5 +1,8 @@
 package com.gdutelc.recruit.service.interfaces;
 
+import com.gdutelc.recruit.domain.dto.BriefInfoDTO;
+import com.gdutelc.recruit.domain.dto.DetailedInfoDTO;
+import com.gdutelc.recruit.domain.dto.PageDTO;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
@@ -62,4 +65,16 @@ public interface IInterviewService {
     @GetMapping(value = "/pro/interview/elc_public/login_verify/{username}/{session_id}")
     ResultVO<String> loginVerify(@PathVariable("username") String username,
                                  @PathVariable("session_id") String sessionId);
+
+    /**
+     * 生产者获取报名者详细信息接口
+     *
+     * @param stuId 需要查询的报名者学号
+     * @return {@link ResultVO}，其中数据为该报名者的详细信息
+     */
+    @GetMapping(value = "/pro/interview/elc_access/detailed_apply_query/{stu_id}")
+    ResultVO<DetailedInfoDTO> detailedApplyQuery(@PathVariable("stu_id") String stuId);
+
+
+
 }
