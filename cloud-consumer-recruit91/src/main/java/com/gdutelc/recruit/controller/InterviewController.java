@@ -1,7 +1,9 @@
 package com.gdutelc.recruit.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.gdutelc.recruit.domain.dto.BriefInfoDTO;
 import com.gdutelc.recruit.domain.dto.DetailedInfoDTO;
+import com.gdutelc.recruit.domain.dto.PageDTO;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.service.interfaces.IInterviewService;
 import io.swagger.annotations.ApiOperation;
@@ -35,9 +37,26 @@ public class InterviewController {
     @GetMapping(value = "/detailed_apply_query/{stu_id}")
     @SentinelResource(value = "detailedApplyQuery", blockHandler = "detailedApplyQueryHandlerException")
     @ApiOperation(value = "获取报名者详细信息", tags = "query", response = ResultVO.class)
-    public ResultVO<DetailedInfoDTO> detailedApplyQuery(@ApiParam(value = "报名者学号", readOnly = true) @PathVariable("stu_id") String stuId) {
+    public ResultVO<DetailedInfoDTO> detailedApplyQuery(@ApiParam(value = "报名者学号", required = true) @PathVariable("stu_id") String stuId) {
         return interviewService.detailedApplyQuery(stuId);
     }
 
-
+    /**
+     * 获取报名者简要信息集合接口
+     *
+     * @param page 需要查询第几页
+     * @param limit 每一页的列数限制
+     * @param department 部门筛选（0为全选）
+     * @param stuStatusCode 面试状态筛选（20为全选）
+     * @return {@link ResultVO}，其中数据为该报名者的简要信息集合
+     */
+    @GetMapping(value = "/brief_apply_query/{page}/{limit}/{department}/{stu_status_code}")
+    @SentinelResource(value = "briefApplyQuery", blockHandler = "briefApplyQueryHandlerException")
+    @ApiOperation(value = "获取报名者简要信息集合", tags = "query", response = ResultVO.class)
+    public ResultVO<PageDTO<BriefInfoDTO>> briefApplyQuery(@ApiParam(value = "页数", required = true) @PathVariable("page") Integer page,
+                                                           @ApiParam(value = "每页最大内容数", required = true) @PathVariable("limit") Integer limit,
+                                                           @ApiParam(value = "部门筛选（0为全选）", required = true) @PathVariable("department") Integer department,
+                                                           @ApiParam(value = "面试状态筛选（20为全选）", required = true) @PathVariable("stu_status_code") Integer stuStatusCode) {
+        return interviewService.briefApplyQuery(page, limit, department, stuStatusCode);
+    }
 }
