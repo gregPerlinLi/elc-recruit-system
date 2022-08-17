@@ -8,6 +8,11 @@ package com.gdutelc.recruit.constant;
  */
 public interface GenderConstant {
     /**
+     * 全选
+     */
+    int ALL = 0;
+
+    /**
      * 男性
      */
     int MALE = 1;
