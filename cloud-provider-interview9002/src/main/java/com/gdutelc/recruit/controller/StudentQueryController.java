@@ -39,7 +39,11 @@ public class StudentQueryController {
      */
     @GetMapping(value = "/detailed_apply_query/{stu_id}")
     public ResultVO<DetailedInfoDTO> detailedApplyQuery(@PathVariable("stu_id") String stuId) {
-        return null;
+        DetailedInfoDTO detailedInfoDTO = stuInfoService.detailedApplyQuery(stuId);
+        if ( detailedInfoDTO != null ) {
+            return new ResultVO<>(ResultStatusCodeConstant.SUCCESS, "查询成功", detailedInfoDTO);
+        }
+        return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND, "没有该数据");
     }
 
     /**
