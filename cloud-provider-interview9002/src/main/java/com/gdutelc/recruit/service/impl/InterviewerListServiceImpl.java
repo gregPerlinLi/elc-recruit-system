@@ -35,7 +35,7 @@ public class InterviewerListServiceImpl extends ServiceImpl<InterviewerListMappe
 
     @Override
     public ResultVO<Integer> login(String username, String password, String sessionId) {
-        if ( !GenericUtils.allOfNullable(username, password) ) {
+        if ( !GenericUtils.allOfNullable(username, password, sessionId) ) {
             return new ResultVO<>(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION, "参数有误");
         }
         QueryWrapper<InterviewerList> queryWrapper = new QueryWrapper<>();
