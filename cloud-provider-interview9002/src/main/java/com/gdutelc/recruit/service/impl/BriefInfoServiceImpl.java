@@ -9,6 +9,7 @@ import com.gdutelc.recruit.domain.dto.BriefInfoDTO;
 import com.gdutelc.recruit.domain.dto.PageDTO;
 import com.gdutelc.recruit.mapper.BriefInfoMapper;
 import com.gdutelc.recruit.service.interfaces.IBriefInfoService;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 
@@ -17,6 +18,7 @@ import java.util.HashMap;
  * @author gregPerlinLi
  * @date 2022-08-17
  */
+@Service
 public class BriefInfoServiceImpl extends ServiceImpl<BriefInfoMapper, BriefInfoDTO> implements IBriefInfoService {
 
     @Override
