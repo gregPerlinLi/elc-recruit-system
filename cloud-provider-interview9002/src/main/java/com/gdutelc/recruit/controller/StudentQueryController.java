@@ -31,7 +31,7 @@ public class StudentQueryController {
     IBriefInfoService briefInfoService;
 
     /**
-     * 生产者获取报名者详细信息接口
+     * 获取报名者详细信息接口
      *
      * @param stuId 需要查询的报名者学号
      * @return {@link ResultVO}，其中数据为该报名者的详细信息
@@ -46,7 +46,7 @@ public class StudentQueryController {
     }
 
     /**
-     * 生产者获取报名者简要信息集合接口
+     * 获取报名者简要信息集合接口
      *
      * @param page 需要查询第几页
      * @param limit 每一页的列数限制
