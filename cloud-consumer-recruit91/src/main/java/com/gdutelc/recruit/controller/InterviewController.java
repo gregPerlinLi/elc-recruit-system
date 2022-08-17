@@ -1,6 +1,8 @@
 package com.gdutelc.recruit.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
+import com.gdutelc.recruit.constant.ResultStatusCodeConstant;
 import com.gdutelc.recruit.domain.dto.BriefInfoDTO;
 import com.gdutelc.recruit.domain.dto.DetailedInfoDTO;
 import com.gdutelc.recruit.domain.dto.PageDTO;
@@ -59,4 +61,24 @@ public class InterviewController {
                                                            @ApiParam(value = "面试状态筛选（20为全选）", required = true) @PathVariable("stu_status_code") Integer stuStatusCode) {
         return interviewService.briefApplyQuery(page, limit, department, stuStatusCode);
     }
+
+    /**
+     * Sentinel 异常处理 —— 获取报名者详细信息接口
+     */
+    public ResultVO<DetailedInfoDTO> detailedApplyQueryHandlerException(@PathVariable("stu_id") String stuId,
+                                                                        BlockException exception) {
+        return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
+    }
+
+    /**
+     * Sentinel 异常处理 —— 获取报名者简要信息集合接口
+     */
+    public ResultVO<PageDTO<BriefInfoDTO>> briefApplyQueryHandlerException(@PathVariable("page") Integer page,
+                                                                           @PathVariable("limit") Integer limit,
+                                                                           @PathVariable("department") Integer department,
+                                                                           @PathVariable("stu_status_code") Integer stuStatusCode,
+                                                                           BlockException exception) {
+        return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
+    }
+
 }
