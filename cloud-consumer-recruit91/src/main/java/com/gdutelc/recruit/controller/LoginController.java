@@ -69,7 +69,6 @@ public class LoginController {
         ResultVO<Integer> result = interviewService.interviewerLogin(username, password, request.getSession().getId());
         if ( result.getCode() == ResultStatusCodeConstant.SUCCESS ) {
             request.getSession().setAttribute("username", username);
-            return result;
         }
         return result;
     }
@@ -91,7 +90,6 @@ public class LoginController {
         ResultVO<String> result = interviewService.adminLogin(username, password, request.getSession().getId());
         if ( result.getCode() == ResultStatusCodeConstant.SUCCESS ) {
             request.getSession().setAttribute("username", username);
-            return result;
         }
         return result;
     }
