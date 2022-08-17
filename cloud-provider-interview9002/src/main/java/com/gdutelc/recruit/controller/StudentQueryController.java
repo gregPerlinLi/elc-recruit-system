@@ -1,6 +1,5 @@
 package com.gdutelc.recruit.controller;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gdutelc.recruit.constant.ResultStatusCodeConstant;
 import com.gdutelc.recruit.domain.dto.BriefInfoDTO;
 import com.gdutelc.recruit.domain.dto.DetailedInfoDTO;
