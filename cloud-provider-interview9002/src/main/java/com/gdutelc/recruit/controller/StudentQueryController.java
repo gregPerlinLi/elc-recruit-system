@@ -62,6 +62,8 @@ public class StudentQueryController {
                                                            @PathVariable("stu_status_code") Integer stuStatusCode) {
 
         PageDTO<BriefInfoDTO> pages = briefInfoService.briefApplyQuery(page, limit, department, stuStatusCode);
-        return new ResultVO<>(ResultStatusCodeConstant.SUCCESS, "查询成功", pages);
+        return new ResultVO<>(ResultStatusCodeConstant.SUCCESS,
+                                "查询成功, 共有" + pages.getTotal() + "条数据, 当前页面有" + pages.getList().size() + "条数据",
+                                pages);
     }
 }
