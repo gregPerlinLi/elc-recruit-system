@@ -37,7 +37,7 @@ public class InterviewController {
      * @return {@link ResultVO}，其中数据为该报名者的详细信息
      */
     @GetMapping(value = "/detailed_apply_query/{stu_id}")
-    @SentinelResource(value = "detailedApplyQuery", blockHandler = "detailedApplyQueryHandlerException")
+    @SentinelResource(value = "detailedApplyQuery", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "flowLimitException")
     @ApiOperation(value = "获取报名者详细信息", tags = "query", response = ResultVO.class)
     public ResultVO<DetailedInfoDTO> detailedApplyQuery(@ApiParam(value = "报名者学号", required = true) @PathVariable("stu_id") String stuId) {
         return interviewService.detailedApplyQuery(stuId);
@@ -53,7 +53,7 @@ public class InterviewController {
      * @return {@link ResultVO}，其中数据为该报名者的简要信息集合
      */
     @GetMapping(value = "/brief_apply_query/{page}/{limit}/{department}/{stu_status_code}")
-    @SentinelResource(value = "briefApplyQuery", blockHandler = "briefApplyQueryHandlerException")
+    @SentinelResource(value = "briefApplyQuery", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "flowLimitException")
     @ApiOperation(value = "获取报名者简要信息集合", tags = "query", response = ResultVO.class)
     public ResultVO<PageDTO<BriefInfoDTO>> briefApplyQuery(@ApiParam(value = "页数", required = true) @PathVariable("page") Integer page,
                                                            @ApiParam(value = "每页最大内容数", required = true) @PathVariable("limit") Integer limit,
@@ -88,25 +88,6 @@ public class InterviewController {
     @ApiOperation(value = "面试官发布评价", tags = "comment", response = ResultVO.class)
     public ResultVO addComment(@ApiParam(value = "评价信息", required = true) Comment comment) {
         return interviewService.addComment(comment);
-    }
-
-    /**
-     * Sentinel 异常处理 —— 获取报名者详细信息接口
-     */
-    public ResultVO<DetailedInfoDTO> detailedApplyQueryHandlerException(@PathVariable("stu_id") String stuId,
-                                                                        BlockException exception) {
-        return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
-    }
-
-    /**
-     * Sentinel 异常处理 —— 获取报名者简要信息集合接口
-     */
-    public ResultVO<PageDTO<BriefInfoDTO>> briefApplyQueryHandlerException(@PathVariable("page") Integer page,
-                                                                           @PathVariable("limit") Integer limit,
-                                                                           @PathVariable("department") Integer department,
-                                                                           @PathVariable("stu_status_code") Integer stuStatusCode,
-                                                                           BlockException exception) {
-        return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
 
 }
