@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 @FeignClient(name = "cloud-provider-interview", contextId = "InterviewServiceApi")
 public interface IInterviewService {
 
+    /* TODO:以下为示例接口 */
+
     /**
      * 示例接口
      *
@@ -30,6 +32,8 @@ public interface IInterviewService {
      */
     @GetMapping(value = "/pro/demo/test/{text}")
     ResultVO<String> test(@PathVariable("text") String text);
+
+    /* TODO:以下为登录相关接口 */
 
     /**
      * 生产者面试官登录接口
@@ -57,6 +61,7 @@ public interface IInterviewService {
                                 @PathVariable("password") String password,
                                 @PathVariable("session_id") String sessionId);
 
+    /* TODO: 以下为学生查询相关接口 */
 
     /**
      * 生产者面试官和管理员登录校验接口
@@ -103,7 +108,9 @@ public interface IInterviewService {
      */
     @GetMapping(value = "/pro/interview/elc_access/brief_adjust_apply_query/{page}/{limit}")
     ResultVO<PageDTO<BriefAdjustInfoDTO>> briefAdjustApplyQuery(@PathVariable("page") Integer page,
-                                                                       @PathVariable("limit") Integer limit);
+                                                                @PathVariable("limit") Integer limit);
+
+    /* TODO:以下为评价相关接口 */
 
     /**
      * 生产者面试官评价接口
@@ -113,4 +120,6 @@ public interface IInterviewService {
      */
     @PostMapping(value = "/pro/interview/elc_access/publish_comment")
     ResultVO addComment(Comment comment);
+
+    /* TODO:以下为面试相关接口 */
 }
