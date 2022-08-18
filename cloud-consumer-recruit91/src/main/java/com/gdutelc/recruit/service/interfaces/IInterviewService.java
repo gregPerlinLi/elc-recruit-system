@@ -1,5 +1,6 @@
 package com.gdutelc.recruit.service.interfaces;
 
+import com.gdutelc.recruit.domain.dto.BriefAdjustInfoDTO;
 import com.gdutelc.recruit.domain.dto.BriefInfoDTO;
 import com.gdutelc.recruit.domain.dto.DetailedInfoDTO;
 import com.gdutelc.recruit.domain.dto.PageDTO;
@@ -92,6 +93,17 @@ public interface IInterviewService {
                                                     @PathVariable("limit") Integer limit,
                                                     @PathVariable("department") Integer department,
                                                     @PathVariable("stu_status_code") Integer stuStatusCode);
+
+    /**
+     * 生产者获取调剂报名者简要信息集合接口
+     *
+     * @param page 需要查询第几页
+     * @param limit 每一页的列数限制
+     * @return {@link ResultVO}，其中数据为该调剂报名者的简要信息集合
+     */
+    @GetMapping(value = "/pro/interview/elc_access/brief_adjust_apply_query/{page}/{limit}")
+    public ResultVO<PageDTO<BriefAdjustInfoDTO>> briefAdjustApplyQuery(@PathVariable("page") Integer page,
+                                                                       @PathVariable("limit") Integer limit);
 
     /**
      * 生产者面试官评价接口
