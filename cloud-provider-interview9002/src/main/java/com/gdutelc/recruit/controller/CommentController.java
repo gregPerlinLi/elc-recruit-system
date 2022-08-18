@@ -38,7 +38,7 @@ public class CommentController {
      * @return {@link ResultVO}，其中数据为该报名者的评价集合
      */
     @PostMapping(value = "/query_comments/{stu_id}")
-    private ResultVO<List<Comment>> queryComments(@PathVariable("stu_id") String stuId) {
+    public ResultVO<List<Comment>> queryComments(@PathVariable("stu_id") String stuId) {
         return commentService.queryComment(stuId);
     }
 }
