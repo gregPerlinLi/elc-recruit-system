@@ -23,4 +23,14 @@ public interface RedisKeyConstant {
      */
     String LOGIN_USER = "login-user:";
 
+    /**
+     * 拼接已登录面试官和管理员的key值
+     *
+     * @param username 需要拼接的用户名
+     * @return 返回拼接后的key值 {@code login-user:username}
+     */
+    static String loginUserWith(String username) {
+        return LOGIN_USER + username;
+    }
+
 }
