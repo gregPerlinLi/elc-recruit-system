@@ -16,6 +16,7 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 面试相关接口
@@ -88,6 +89,19 @@ public class InterviewController {
     @ApiOperation(value = "面试官发布评价", tags = "comment", response = ResultVO.class)
     public ResultVO addComment(@ApiParam(value = "评价信息", required = true) Comment comment) {
         return interviewService.addComment(comment);
+    }
+
+    /**
+     * 查询学生的所有评价
+     *
+     * @param stuId 需要查询的学生学号
+     * @return {@link ResultVO}，其中数据为该报名者的评价集合
+     */
+    @GetMapping(value = "/query_comments/{stu_id}")
+    @SentinelResource(value = "queryComments", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "flowLimitException")
+    @ApiOperation(value = "查询学生的所有评价", tags = "comment", response = ResultVO.class)
+    public ResultVO<List<Comment>> queryComments(@ApiParam(value = "需要查询的学生学号", required = true) @PathVariable("stu_id") String stuId) {
+        return interviewService.queryComments(stuId);
     }
 
 }
