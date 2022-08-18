@@ -1,9 +1,6 @@
 package com.gdutelc.recruit.service.interfaces;
 
-
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.gdutelc.recruit.domain.dto.PageDTO;
 import com.gdutelc.recruit.domain.entities.Comment;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 
