@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 public class CommentController {
 
     @Resource
-    private ICommentService iCommentService;
+    private ICommentService commentService;
 
     /**
      * 面试官评价接口
@@ -27,6 +27,6 @@ public class CommentController {
      */
     @PostMapping(value = "/publish_comment")
     public ResultVO addComment(@RequestBody Comment comment) throws IllegalAccessException {
-        return iCommentService.addComment(comment);
+        return commentService.addComment(comment);
     }
 }
