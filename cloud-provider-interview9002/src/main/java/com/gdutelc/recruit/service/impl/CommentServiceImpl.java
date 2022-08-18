@@ -30,6 +30,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         if(!GenericUtils.ofNullable(comment)||!GenericUtils.allOfNullable(comment)){
             return new ResultVO(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION,"参数有误",null);
         }
+        if ( comment.getMark() > 5 || comment.getMark() < 0 ) {
+            return new ResultVO(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION, "评分应该在0~5之间", null);
+        }
         int insert = commentMapper.insert(comment);
         if(insert == 1){
             return new ResultVO(ResultStatusCodeConstant.SUCCESS,"发布成功",null);
