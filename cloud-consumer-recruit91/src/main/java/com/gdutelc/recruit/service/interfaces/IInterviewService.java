@@ -3,11 +3,13 @@ package com.gdutelc.recruit.service.interfaces;
 import com.gdutelc.recruit.domain.dto.BriefInfoDTO;
 import com.gdutelc.recruit.domain.dto.DetailedInfoDTO;
 import com.gdutelc.recruit.domain.dto.PageDTO;
+import com.gdutelc.recruit.domain.entities.Comment;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * 面试模块生产者服务调用接口
@@ -90,4 +92,13 @@ public interface IInterviewService {
                                                     @PathVariable("limit") Integer limit,
                                                     @PathVariable("department") Integer department,
                                                     @PathVariable("stu_status_code") Integer stuStatusCode);
+
+    /**
+     * 生产者面试官评价接口
+     *
+     * @param comment 评价实体类
+     * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
+     */
+    @PostMapping(value = "/pro/interview/elc_access/publish_comment")
+    ResultVO addComment(Comment comment);
 }
