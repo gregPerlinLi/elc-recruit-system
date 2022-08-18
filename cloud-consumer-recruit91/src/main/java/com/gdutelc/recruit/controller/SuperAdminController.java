@@ -5,6 +5,7 @@ import com.gdutelc.recruit.domain.vo.ResultVO;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -15,7 +16,8 @@ import java.util.List;
  * @author gregPerlinLi
  * @date 2022-08-10
  */
-@RestController("/super_admin/elc_access")
+@RestController
+@RequestMapping(value = "/recruit/elc_access")
 public class SuperAdminController {
 
     /**

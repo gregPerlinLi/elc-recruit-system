@@ -37,3 +37,7 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### MyBatis Plus Generator ###
+mybatis-plus-generator/src/main/java/com/gdutelc/recruit/out
+Icon

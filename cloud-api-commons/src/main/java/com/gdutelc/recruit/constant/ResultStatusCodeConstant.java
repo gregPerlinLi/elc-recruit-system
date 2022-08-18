@@ -30,6 +30,11 @@ public interface ResultStatusCodeConstant {
     int TO_MANY_REQUEST = 429;
 
     /**
+     * 请求失败
+     */
+    int FAILED = 444;
+
+    /**
      * 参数校验异常（参数不合法）
      */
     int PARAM_VALIDATE_EXCEPTION = 450;

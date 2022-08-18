@@ -7,6 +7,12 @@ package com.gdutelc.recruit.constant;
  * @date 2022-08-05
  */
 public interface StudentStatusConstant {
+
+    /**
+     * 全选
+     */
+    int ALL = 20;
+
     /**
      * 已注册
      */

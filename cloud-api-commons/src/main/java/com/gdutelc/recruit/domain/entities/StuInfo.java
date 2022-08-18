@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 
-import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -14,7 +13,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author gregPerlinLi
- * @since 2022-08-08
+ * @since 2022-08-15
  */
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,7 +21,6 @@ import java.io.Serializable;
 @TableName("stu_info")
 public class StuInfo implements Serializable {
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
@@ -51,6 +49,8 @@ public class StuInfo implements Serializable {
     private Integer college;
 
     private String clazz;
+
+    private String phone;
 
     private String whereFind;
 

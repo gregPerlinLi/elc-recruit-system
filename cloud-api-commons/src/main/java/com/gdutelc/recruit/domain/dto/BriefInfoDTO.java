@@ -1,11 +1,10 @@
 package com.gdutelc.recruit.domain.dto;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.gdutelc.recruit.domain.entities.StuInfo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 
 /**
@@ -17,7 +16,9 @@ import lombok.Setter;
  */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @ApiModel("学生简要信息")
+@TableName("stu_info")
 public class BriefInfoDTO {
 
     /**
@@ -67,5 +68,18 @@ public class BriefInfoDTO {
     @Setter
     @ApiModelProperty(value = "当前面试状态")
     private Integer status;
+
+    /**
+     * {@link StuInfo}类与{@link BriefInfoDTO}的转换构造方法
+     * @param stuInfo 需要转换的实体类
+     */
+    public BriefInfoDTO(StuInfo stuInfo) {
+        this.stuId = stuInfo.getStuId();
+        this.name = stuInfo.getName();
+        this.gender = stuInfo.getGender();
+        this.firstDept = stuInfo.getFirstDept();
+        this.college = stuInfo.getCollege();
+        this.status = stuInfo.getStatus();
+    }
 
 }

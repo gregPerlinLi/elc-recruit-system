@@ -7,6 +7,12 @@ package com.gdutelc.recruit.constant;
  * @date 2022-08-07
  */
 public interface DeptConstant {
+
+    /**
+     * 全选
+     */
+    int ALL = 0;
+
     /**
      * 维修部
      */

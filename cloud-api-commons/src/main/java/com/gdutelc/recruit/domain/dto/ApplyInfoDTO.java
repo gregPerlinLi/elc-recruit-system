@@ -116,6 +116,14 @@ public class ApplyInfoDTO {
     private String clazz;
 
     /**
+     * 联系电话
+     */
+    @Getter
+    @Setter
+    @ApiModelProperty(value = "联系电话")
+    private String phone;
+
+    /**
      * 在哪里了解电协
      */
     @Getter

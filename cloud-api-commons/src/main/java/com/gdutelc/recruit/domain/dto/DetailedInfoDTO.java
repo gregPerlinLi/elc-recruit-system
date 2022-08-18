@@ -1,11 +1,10 @@
 package com.gdutelc.recruit.domain.dto;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.gdutelc.recruit.domain.entities.StuInfo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 
 /**
@@ -16,7 +15,9 @@ import lombok.Setter;
  */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @ApiModel("学生详细信息")
+@TableName("stu_info")
 public class DetailedInfoDTO {
 
     /**
@@ -108,10 +109,37 @@ public class DetailedInfoDTO {
     private String clazz;
 
     /**
+     * 联系电话
+     */
+    @Getter
+    @Setter
+    @ApiModelProperty(value = "联系电话")
+    private String phone;
+
+    /**
      * 在哪里了解电协
      */
     @Getter
     @Setter
     @ApiModelProperty(value = "在哪里了解电协")
     private String whereFind;
+
+    /**
+     * {@link StuInfo}类与{@link DetailedInfoDTO}的转换构造方法
+     * @param stuInfo 需要转换的实体类
+     */
+    public DetailedInfoDTO (StuInfo stuInfo) {
+        this.stuId = stuInfo.getStuId();
+        this.name = stuInfo.getName();
+        this.gender = stuInfo.getGender();
+        this.profile = stuInfo.getProfile();
+        this.skill = stuInfo.getSkill();
+        this.hasJoin = stuInfo.getHasJoin();
+        this.firstDept = stuInfo.getFirstDept();
+        this.secondDept = stuInfo.getSecondDept();
+        this.major = stuInfo.getMajor();
+        this.college = stuInfo.getCollege();
+        this.clazz = stuInfo.getClazz();
+        this.whereFind = stuInfo.getWhereFind();
+    }
 }

@@ -18,7 +18,8 @@ import javax.annotation.Resource;
  * @date 22/08/07
  */
 @Slf4j
-@RestController("/recruit/elc_access")
+@RestController
+@RequestMapping(value = "/recruit/elc_access")
 public class ApplyController {
 
     @Resource
@@ -117,7 +118,7 @@ public class ApplyController {
     public ResultVO<Integer> signIn(@ApiParam(value = "要签到的学生微信openid", required = true) @PathVariable("openid") String openid) {
         ResultVO<Integer> result = applyService.signIn(openid);
         if ( result.getCode() == ResultStatusCodeConstant.SUCCESS ) {
-            // 这里是微信发送签到成功消息的调用
+            // TODO: 这里是微信发送签到成功消息的调用
         }
         return result;
     }

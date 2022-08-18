@@ -7,6 +7,12 @@ package com.gdutelc.recruit.constant;
  * @date 2022-08-05
  */
 public interface CollegeConstant {
+
+    /**
+     * 全选
+     */
+    int ALL = 0;
+
     /**
      * 机电工程学院
      */
