@@ -28,16 +28,16 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     @Override
     public ResultVO addComment(Comment comment) throws IllegalAccessException {
         if(!GenericUtils.ofNullable(comment)||!GenericUtils.allOfNullable(comment)){
-            return new ResultVO(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION,"参数有误",null);
+            return new ResultVO(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION,"参数有误");
         }
         if ( comment.getMark() > 5 || comment.getMark() < 0 ) {
-            return new ResultVO(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION, "评分应该在0~5之间", null);
+            return new ResultVO(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION, "评分应该在0~5之间");
         }
         int insert = commentMapper.insert(comment);
         if(insert == 1){
-            return new ResultVO(ResultStatusCodeConstant.SUCCESS,"发布成功",null);
+            return new ResultVO(ResultStatusCodeConstant.SUCCESS,"发布成功");
         }
-        return new ResultVO(ResultStatusCodeConstant.NOT_FIND,"插入失败",null);
+        return new ResultVO(ResultStatusCodeConstant.NOT_FIND,"插入失败");
 
     }
 }
