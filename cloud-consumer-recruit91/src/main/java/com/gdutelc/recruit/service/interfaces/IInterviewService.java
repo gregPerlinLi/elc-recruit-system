@@ -102,7 +102,7 @@ public interface IInterviewService {
      * @return {@link ResultVO}，其中数据为该调剂报名者的简要信息集合
      */
     @GetMapping(value = "/pro/interview/elc_access/brief_adjust_apply_query/{page}/{limit}")
-    public ResultVO<PageDTO<BriefAdjustInfoDTO>> briefAdjustApplyQuery(@PathVariable("page") Integer page,
+    ResultVO<PageDTO<BriefAdjustInfoDTO>> briefAdjustApplyQuery(@PathVariable("page") Integer page,
                                                                        @PathVariable("limit") Integer limit);
 
     /**
