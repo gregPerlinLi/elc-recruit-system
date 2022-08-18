@@ -6,14 +6,13 @@ import com.gdutelc.recruit.constant.ResultStatusCodeConstant;
 import com.gdutelc.recruit.domain.dto.BriefInfoDTO;
 import com.gdutelc.recruit.domain.dto.DetailedInfoDTO;
 import com.gdutelc.recruit.domain.dto.PageDTO;
+import com.gdutelc.recruit.domain.entities.Comment;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.service.interfaces.IInterviewService;
+import com.gdutelc.recruit.utils.SentinelBlockHandler;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -60,6 +59,19 @@ public class InterviewController {
                                                            @ApiParam(value = "部门筛选（0为全选）", required = true) @PathVariable("department") Integer department,
                                                            @ApiParam(value = "面试状态筛选（20为全选）", required = true) @PathVariable("stu_status_code") Integer stuStatusCode) {
         return interviewService.briefApplyQuery(page, limit, department, stuStatusCode);
+    }
+
+    /**
+     * 生产者面试官评价接口
+     *
+     * @param comment 评价实体类
+     * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
+     */
+    @PostMapping(value = "/publish_comment.post")
+    @SentinelResource(value = "publishComment", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "flowLimitException")
+    @ApiOperation(value = "面试官发布评价", tags = "comment", response = ResultVO.class)
+    public ResultVO addComment(@ApiParam(value = "评价信息", required = true) Comment comment) {
+        return interviewService.addComment(comment);
     }
 
     /**
