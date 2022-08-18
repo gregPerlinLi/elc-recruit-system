@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 /**
  * 面试模块生产者服务调用接口
  *
@@ -120,6 +122,15 @@ public interface IInterviewService {
      */
     @PostMapping(value = "/pro/interview/elc_access/publish_comment")
     ResultVO addComment(Comment comment);
+
+    /**
+     * 生产者查询学生的所有评价
+     *
+     * @param stuId 需要查询的学生学号
+     * @return {@link ResultVO}，其中数据为该报名者的评价集合
+     */
+    @PostMapping(value = "/pro/interview/elc_access/query_comments/{stu_id}")
+    ResultVO<List<Comment>> queryComments(@PathVariable("stu_id") String stuId);
 
     /* TODO:以下为面试相关接口 */
 }
