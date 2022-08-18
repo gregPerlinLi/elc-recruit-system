@@ -129,7 +129,7 @@ public interface IInterviewService {
      * @param stuId 需要查询的学生学号
      * @return {@link ResultVO}，其中数据为该报名者的评价集合
      */
-    @PostMapping(value = "/pro/interview/elc_access/query_comments/{stu_id}")
+    @GetMapping(value = "/pro/interview/elc_access/query_comments/{stu_id}")
     ResultVO<List<Comment>> queryComments(@PathVariable("stu_id") String stuId);
 
     /* TODO:以下为面试相关接口 */
