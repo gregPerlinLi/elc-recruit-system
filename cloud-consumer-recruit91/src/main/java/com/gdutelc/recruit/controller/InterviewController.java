@@ -78,7 +78,7 @@ public class InterviewController {
     }
 
     /**
-     * 生产者面试官评价接口
+     * 面试官评价接口
      *
      * @param comment 评价实体类
      * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
