@@ -83,7 +83,7 @@ public class InterviewController {
      * @param comment 评价实体类
      * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
      */
-    @PostMapping(value = "/publish_comment.post")
+    @PostMapping(value = "/publish_comment")
     @SentinelResource(value = "publishComment", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "flowLimitException")
     @ApiOperation(value = "面试官发布评价", tags = "comment", response = ResultVO.class)
     public ResultVO addComment(@ApiParam(value = "评价信息", required = true) Comment comment) {
