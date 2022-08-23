@@ -51,4 +51,13 @@ public class InterviewerListServiceImpl extends ServiceImpl<InterviewerListMappe
             return new ResultVO<>(ResultStatusCodeConstant.FAILED, "用户名或密码错误");
         }
     }
+
+    @Override
+    public ResultVO<Void> logout(String username) throws IllegalAccessException {
+        if ( !GenericUtils.allOfNullable(username) ) {
+            return new ResultVO<>(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION, "参数有误");
+        }
+        stringRedisTemplate.delete(RedisKeyConstant.loginUserWith(username));
+        return new ResultVO<>(ResultStatusCodeConstant.SUCCESS, "退出成功");
+    }
 }
