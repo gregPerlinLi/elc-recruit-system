@@ -63,6 +63,24 @@ public interface IInterviewService {
                                 @PathVariable("password") String password,
                                 @PathVariable("session_id") String sessionId);
 
+    /**
+     * 生产者面试官注销登录接口
+     *
+     * @param username 登录用户名
+     * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
+     */
+    @GetMapping(value = "/pro/interview/elc_access/interviewer_logout/{username}")
+    ResultVO<Void> interviewerLogout(@PathVariable("username") String username);
+
+    /**
+     * 生产者管理员注销登录接口
+     *
+     * @param username 登录用户名
+     * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
+     */
+    @GetMapping(value = "/pro/interview/elc_access/admin_logout/{username}")
+    ResultVO<Void> adminLogout(@PathVariable("username") String username);
+
     /* TODO: 以下为学生查询相关接口 */
 
     /**
