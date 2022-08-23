@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
  * @date 2022-08-09
  */
 @RestController
-@RequestMapping(value = "/recruit/elc_access")
+@RequestMapping(value = "/elc_public")
 public class LoginController {
 
     @Resource
