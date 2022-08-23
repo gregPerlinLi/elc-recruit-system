@@ -30,7 +30,9 @@ public class LogoutController {
      */
     @GetMapping(value = "/interviewer_logout")
     ResultVO<Void> interviewerLogout(HttpServletRequest request) {
-        return interviewService.interviewerLogout(request.getSession().getAttribute("username").toString());
+        String username = request.getSession().getAttribute("username").toString();
+        request.getSession().removeAttribute("username");
+        return interviewService.interviewerLogout(username);
     }
 
     /**
@@ -41,7 +43,9 @@ public class LogoutController {
      */
     @GetMapping(value = "/admin_logout")
     ResultVO<Void> adminLogout(HttpServletRequest request) {
-        return interviewService.adminLogout(request.getSession().getAttribute("username").toString());
+        String username = request.getSession().getAttribute("username").toString();
+        request.getSession().removeAttribute("username");
+        return interviewService.adminLogout(username);
     }
 
 }
