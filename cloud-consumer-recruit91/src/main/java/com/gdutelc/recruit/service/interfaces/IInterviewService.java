@@ -151,7 +151,7 @@ public interface IInterviewService {
     @GetMapping(value = "/pro/interview/elc_access/query_comments/{stu_id}")
     ResultVO<List<Comment>> queryComments(@PathVariable("stu_id") String stuId);
 
-    /* TODO:以下为面试相关接口 */
+    /* TODO:以下为面试进度相关接口 */
 
     /**
      * 生产者一面开始面试接口
