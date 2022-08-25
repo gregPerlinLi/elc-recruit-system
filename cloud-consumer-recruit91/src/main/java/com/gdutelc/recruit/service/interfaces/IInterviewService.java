@@ -201,7 +201,7 @@ public interface IInterviewService {
      * 二面调剂接口
      *
      * @param stuId 调剂的学生学号
-     * @param interviewerUsername 调剂的面试官用户名
+     * @param interviewerUsername 面试官用户名
      * @return {@link ResultVO}，其中数据为当前学生的第二志愿部门代码
      */
     @PutMapping(value = "/pro/interview/elc_access/stu_status_code/second_interview_adjust/{stu_id}/{interviewer_username}")
