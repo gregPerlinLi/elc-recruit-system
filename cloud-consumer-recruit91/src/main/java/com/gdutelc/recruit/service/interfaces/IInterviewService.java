@@ -226,4 +226,14 @@ public interface IInterviewService {
     @PutMapping(value = "/pro/interview/elc_access/stu_status_code/second_adjust_interview_pass/{stu_id}")
     ResultVO<Integer> secondAdjustInterviewPass(@PathVariable("stu_id") String stuId);
 
+    /* TODO: 以下为面试总进度相关接口 */
+
+    /**
+     * 生产者获取当前面试总进度
+     *
+     * @return {@link ResultVO}，其中数据为当前面试总进度
+     */
+    @GetMapping(value = "/pro/interview/elc_access/process_status_code/get_now_process")
+    ResultVO<Integer> getNowProcess();
+
 }
