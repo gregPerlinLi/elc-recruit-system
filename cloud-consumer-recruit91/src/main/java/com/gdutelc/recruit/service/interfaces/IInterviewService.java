@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.List;
 
@@ -151,4 +152,78 @@ public interface IInterviewService {
     ResultVO<List<Comment>> queryComments(@PathVariable("stu_id") String stuId);
 
     /* TODO:以下为面试相关接口 */
+
+    /**
+     * 生产者一面开始面试接口
+     *
+     * @param stuId 开始面试的学生学号
+     * @param interviewerUsername 面试官用户名
+     * @return {@link ResultVO}，其中数据为当前学生的状态码
+     */
+    @PutMapping(value = "/pro/interview/elc_access/stu_status_code/first_interview_start/{stu_id}/{interviewer_username}")
+    ResultVO<Integer> firstInterviewStart(@PathVariable("stu_id") String stuId,
+                                          @PathVariable("interviewer_username") String interviewerUsername);
+
+    /**
+     * 生产者二面开始面试接口
+     *
+     * @param stuId 开始面试的学生学号
+     * @param interviewerUsername 面试官用户名
+     * @return {@link ResultVO}，其中数据为当前学生的状态码
+     */
+    @PutMapping(value = "/pro/interview/elc_access/stu_status_code/second_interview_start/{stu_id}/{interviewer_username}")
+    ResultVO<Integer> secondInterviewStart(@PathVariable("stu_id") String stuId,
+                                           @PathVariable("interviewer_username") String interviewerUsername);
+
+    /**
+     * 生产者一面通过接口
+     *
+     * @param stuId 通过的学生学号
+     * @param interviewerUsername 面试官用户名
+     * @return {@link ResultVO}，其中数据为当前学生的状态码
+     */
+    @PutMapping(value = "/pro/interview/elc_access/stu_status_code/first_interview_pass/{stu_id}/{interviewer_username}")
+    ResultVO<Integer> firstInterviewPass(@PathVariable("stu_id") String stuId,
+                                         @PathVariable("interviewer_username") String interviewerUsername);
+
+    /**
+     * 生产者二面通过接口
+     *
+     * @param stuId 通过的学生学号
+     * @param interviewerUsername 面试官用户名
+     * @return {@link ResultVO}，其中数据为当前学生的状态码
+     */
+    @PutMapping(value = "/pro/interview/elc_access/stu_status_code/second_interview_pass/{stu_id}/{interviewer_username}")
+    ResultVO<Integer> secondInterviewPass(@PathVariable("stu_id") String stuId,
+                                          @PathVariable("interviewer_username") String interviewerUsername);
+
+    /**
+     * 二面调剂接口
+     *
+     * @param stuId 调剂的学生学号
+     * @param interviewerUsername 调剂的面试官用户名
+     * @return {@link ResultVO}，其中数据为当前学生的第二志愿部门代码
+     */
+    @PutMapping(value = "/pro/interview/elc_access/stu_status_code/second_interview_adjust/{stu_id}/{interviewer_username}")
+    ResultVO<Integer> secondInterviewAdjust(@PathVariable("stu_id") String stuId,
+                                            @PathVariable("interviewer_username") String interviewerUsername);
+
+    /**
+     * 二面调剂开始面试接口
+     *
+     * @param stuId 开始面试的学生学号
+     * @return {@link ResultVO}，其中数据为当前学生的状态码
+     */
+    @PutMapping(value = "/pro/interview/elc_access/stu_status_code/second_adjust_interview_start/{stu_id}")
+    ResultVO<Integer> secondAdjustInterviewStart(@PathVariable("stu_id") String stuId);
+
+    /**
+     * 二面调剂通过接口
+     *
+     * @param stuId 通过的学生学号
+     * @return {@link ResultVO}，其中数据为当前学生的状态码
+     */
+    @PutMapping(value = "/pro/interview/elc_access/stu_status_code/second_adjust_interview_pass/{stu_id}")
+    ResultVO<Integer> secondAdjustInterviewPass(@PathVariable("stu_id") String stuId);
+
 }
