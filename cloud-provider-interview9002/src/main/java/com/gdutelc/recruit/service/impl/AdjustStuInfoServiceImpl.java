@@ -46,4 +46,25 @@ public class AdjustStuInfoServiceImpl extends ServiceImpl<AdjustStuInfoMapper, A
             }
         }
     }
+
+    @Override
+    public Integer interviewPass(String stuId) {
+        QueryWrapper<AdjustStuInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("stu_id", stuId);
+        AdjustStuInfo adjustStuInfo = getOne(queryWrapper);
+        if ( adjustStuInfo == null ) {
+            return 0;
+        } else {
+            UpdateWrapper<AdjustStuInfo> updateWrapper = new UpdateWrapper<>();
+            updateWrapper.eq("stu_id", stuId);
+            updateWrapper.eq("status", StudentStatusConstant.INTERVIEWING);
+            adjustStuInfo.setStatus(StudentStatusConstant.PASS);
+            int update = adjustStuInfoMapper.update(adjustStuInfo, updateWrapper);
+            if ( update == 1 ) {
+                return StudentStatusConstant.PASS;
+            } else {
+                return ResultStatusCodeConstant.FAILED;
+            }
+        }
+    }
 }
