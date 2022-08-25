@@ -1,10 +1,12 @@
 package com.gdutelc.recruit.controller;
 
 import com.gdutelc.recruit.constant.ResultStatusCodeConstant;
+import com.gdutelc.recruit.domain.dto.BriefAdjustInfoDTO;
 import com.gdutelc.recruit.domain.dto.BriefInfoDTO;
 import com.gdutelc.recruit.domain.dto.DetailedInfoDTO;
 import com.gdutelc.recruit.domain.dto.PageDTO;
 import com.gdutelc.recruit.domain.vo.ResultVO;
+import com.gdutelc.recruit.service.interfaces.IBriefAdjustInfoService;
 import com.gdutelc.recruit.service.interfaces.IBriefInfoService;
 import com.gdutelc.recruit.service.interfaces.IStuInfoService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +31,9 @@ public class StudentQueryController {
 
     @Resource
     IBriefInfoService briefInfoService;
+
+    @Resource
+    IBriefAdjustInfoService briefAdjustInfoService;
 
     /**
      * 获取报名者详细信息接口
@@ -62,7 +67,25 @@ public class StudentQueryController {
 
         PageDTO<BriefInfoDTO> pages = briefInfoService.briefApplyQuery(page, limit, department, stuStatusCode);
         return new ResultVO<>(ResultStatusCodeConstant.SUCCESS,
-                                "查询成功, 共有" + pages.getTotal() + "条数据, 当前页面有" + pages.getList().size() + "条数据",
+                            "查询成功, 共有" + pages.getTotal() + "条数据, 当前页面有" + pages.getList().size() + "条数据",
                                 pages);
     }
+
+    /**
+     * 获取调剂报名者简要信息集合接口
+     *
+     * @param page 需要查询第几页
+     * @param limit 每一页的列数限制
+     * @return {@link ResultVO}，其中数据为该调剂报名者的简要信息集合
+     */
+    @GetMapping(value = "/brief_adjust_apply_query/{page}/{limit}")
+    public ResultVO<PageDTO<BriefAdjustInfoDTO>> briefAdjustApplyQuery(@PathVariable("page") Integer page,
+                                                                       @PathVariable("limit") Integer limit) {
+        PageDTO<BriefAdjustInfoDTO> pages = briefAdjustInfoService.briefAdjustApplyQuery(page, limit);
+        return new ResultVO<>(ResultStatusCodeConstant.SUCCESS,
+                            "查询成功, 共有" + pages.getTotal() + "条数据, 当前页面有" + pages.getList().size() + "条数据",
+                                pages);
+    }
+
+
 }

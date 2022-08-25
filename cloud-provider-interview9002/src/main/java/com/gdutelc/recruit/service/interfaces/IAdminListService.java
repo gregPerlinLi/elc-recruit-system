@@ -24,4 +24,12 @@ public interface IAdminListService extends IService<AdminList> {
      */
     ResultVO<String> login(String username, String password, String sessionId);
 
+    /**
+     * 管理员退出业务
+     * @param username 管理员用户名
+     * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
+     * @throws IllegalAccessException 非法访问异常
+     */
+    ResultVO<Void> logout(String username) throws IllegalAccessException;
+
 }
