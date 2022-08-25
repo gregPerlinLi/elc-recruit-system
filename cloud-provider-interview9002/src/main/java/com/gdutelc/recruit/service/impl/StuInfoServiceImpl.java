@@ -65,4 +65,30 @@ public class StuInfoServiceImpl extends ServiceImpl<StuInfoMapper, StuInfo> impl
             }
         }
     }
+
+    @Override
+    public Integer interviewPass(String stuId, String interviewerUsername) {
+        QueryWrapper<StuInfo> studentQueryWrapper = new QueryWrapper<>();
+        QueryWrapper<InterviewerList> interviewerListQueryWrapper = new QueryWrapper<>();
+        studentQueryWrapper.eq("stuId", stuId);
+        StuInfo stuInfo = getOne(studentQueryWrapper);
+        interviewerListQueryWrapper.eq("username", interviewerUsername);
+        InterviewerList interviewerList = interviewerListMapper.selectOne(interviewerListQueryWrapper);
+        if ( stuInfo == null ) {
+            return 0;
+        } else if ( !stuInfo.getFirstDept().equals(interviewerList.getDept()) ) {
+            return ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION;
+        } else {
+            UpdateWrapper<StuInfo> studentUpdateWrapper = new UpdateWrapper<>();
+            studentUpdateWrapper.eq("stuId", stuId);
+            studentUpdateWrapper.eq("status", StudentStatusConstant.INTERVIEWING);
+            stuInfo.setStatus(StudentStatusConstant.PASS);
+            int update = stuInfoMapper.update(stuInfo, studentUpdateWrapper);
+            if (update == 1) {
+                return StudentStatusConstant.PASS;
+            } else {
+                return ResultStatusCodeConstant.FAILED;
+            }
+        }
+    }
 }
