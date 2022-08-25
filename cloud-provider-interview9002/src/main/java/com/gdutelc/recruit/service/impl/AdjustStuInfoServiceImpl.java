@@ -6,7 +6,11 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.gdutelc.recruit.constant.ResultStatusCodeConstant;
 import com.gdutelc.recruit.constant.StudentStatusConstant;
 import com.gdutelc.recruit.domain.entities.AdjustStuInfo;
+import com.gdutelc.recruit.domain.entities.InterviewerList;
+import com.gdutelc.recruit.domain.entities.StuInfo;
 import com.gdutelc.recruit.mapper.AdjustStuInfoMapper;
+import com.gdutelc.recruit.mapper.InterviewerListMapper;
+import com.gdutelc.recruit.mapper.StuInfoMapper;
 import com.gdutelc.recruit.service.interfaces.IAdjustStuInfoService;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +29,41 @@ public class AdjustStuInfoServiceImpl extends ServiceImpl<AdjustStuInfoMapper, A
 
     @Resource
     AdjustStuInfoMapper adjustStuInfoMapper;
+
+    @Resource
+    StuInfoMapper stuInfoMapper;
+
+    @Resource
+    InterviewerListMapper interviewerListMapper;
+
+    @Override
+    public Integer adjust(String stuId, String interviewerUsername) {
+        QueryWrapper<StuInfo> studentQueryWrapper = new QueryWrapper<>();
+        QueryWrapper<InterviewerList> interviewerQueryWrapper = new QueryWrapper<>();
+        studentQueryWrapper.eq("stuId", stuId);
+        StuInfo stuInfo = stuInfoMapper.selectOne(studentQueryWrapper);
+        interviewerQueryWrapper.eq("username", interviewerUsername);
+        InterviewerList interviewerList = interviewerListMapper.selectOne(interviewerQueryWrapper);
+        if ( stuInfo == null ) {
+            return 0;
+        } else if ( !stuInfo.getFirstDept().equals(interviewerList.getDept()) ) {
+            return ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION;
+        } else {
+            AdjustStuInfo adjustStuInfo = new AdjustStuInfo(stuInfo);
+            adjustStuInfo.setStatus(StudentStatusConstant.CHECKED_IN);
+            stuInfo.setStatus(StudentStatusConstant.CHECKED_IN);
+            UpdateWrapper<StuInfo> studentUpdateWrapper = new UpdateWrapper<>();
+            studentUpdateWrapper.eq("stuId", stuId);
+            studentUpdateWrapper.eq("status", StudentStatusConstant.INTERVIEWING);
+            int insertAdjustStuInfo = adjustStuInfoMapper.insert(adjustStuInfo);
+            int updateStuInfo = stuInfoMapper.update(stuInfo, studentUpdateWrapper);
+            if ( insertAdjustStuInfo == 1 && updateStuInfo == 1 ) {
+                return stuInfo.getSecondDept();
+            } else {
+                return ResultStatusCodeConstant.FAILED;
+            }
+        }
+    }
 
     @Override
     public Integer interviewStart(String stuId) {
