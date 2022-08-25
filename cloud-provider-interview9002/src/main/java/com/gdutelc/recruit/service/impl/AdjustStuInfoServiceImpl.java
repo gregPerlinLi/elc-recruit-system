@@ -37,7 +37,7 @@ public class AdjustStuInfoServiceImpl extends ServiceImpl<AdjustStuInfoMapper, A
     InterviewerListMapper interviewerListMapper;
 
     @Override
-    public Integer adjust(String stuId, String interviewerUsername) {
+    public Integer adjust(String stuId, Integer department, String interviewerUsername) {
         QueryWrapper<StuInfo> studentQueryWrapper = new QueryWrapper<>();
         QueryWrapper<InterviewerList> interviewerQueryWrapper = new QueryWrapper<>();
         studentQueryWrapper.eq("stuId", stuId);
@@ -50,6 +50,9 @@ public class AdjustStuInfoServiceImpl extends ServiceImpl<AdjustStuInfoMapper, A
             return ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION;
         } else {
             AdjustStuInfo adjustStuInfo = new AdjustStuInfo(stuInfo);
+            if ( department != null ) {
+                adjustStuInfo.setAdjustDept(department);
+            }
             adjustStuInfo.setStatus(StudentStatusConstant.CHECKED_IN);
             stuInfo.setStatus(StudentStatusConstant.CHECKED_IN);
             UpdateWrapper<StuInfo> studentUpdateWrapper = new UpdateWrapper<>();
