@@ -58,7 +58,7 @@ public class StuInfoServiceImpl extends ServiceImpl<StuInfoMapper, StuInfo> impl
             studentUpdateWrapper.eq("status", StudentStatusConstant.CHECKED_IN);
             stuInfo.setStatus(StudentStatusConstant.INTERVIEWING);
             int update = stuInfoMapper.update(stuInfo, studentUpdateWrapper);
-            if (update == 1) {
+            if ( update == 1 ) {
                 return StudentStatusConstant.INTERVIEWING;
             } else {
                 return ResultStatusCodeConstant.FAILED;
@@ -84,7 +84,7 @@ public class StuInfoServiceImpl extends ServiceImpl<StuInfoMapper, StuInfo> impl
             studentUpdateWrapper.eq("status", StudentStatusConstant.INTERVIEWING);
             stuInfo.setStatus(StudentStatusConstant.PASS);
             int update = stuInfoMapper.update(stuInfo, studentUpdateWrapper);
-            if (update == 1) {
+            if ( update == 1 ) {
                 return StudentStatusConstant.PASS;
             } else {
                 return ResultStatusCodeConstant.FAILED;
