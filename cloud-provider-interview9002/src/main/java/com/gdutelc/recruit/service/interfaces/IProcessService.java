@@ -13,4 +13,11 @@ import com.gdutelc.recruit.domain.entities.Process;
  */
 public interface IProcessService extends IService<Process> {
 
+    /**
+     * 获取当前面试总进度
+     *
+     * @return 当前面试总进度代码
+     */
+    Integer getNowProcess();
+
 }
