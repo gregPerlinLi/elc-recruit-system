@@ -167,7 +167,7 @@ public class StudentStatusController {
      * @param stuId 通过的学生学号
      * @return {@link ResultVO}，其中数据为当前学生的状态码
      */
-    @PutMapping(value = "/second_interview_adjust_pass/{stu_id}")
+    @PutMapping(value = "/second_adjust_interview_pass/{stu_id}")
     public ResultVO<Integer> secondInterviewAdjustPass(@PathVariable("stu_id") String stuId) {
         Integer result = adjustStuInfoService.interviewPass(stuId);
         if ( result == 0 ) {
