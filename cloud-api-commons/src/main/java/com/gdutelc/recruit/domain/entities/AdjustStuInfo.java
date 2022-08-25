@@ -41,5 +41,17 @@ public class AdjustStuInfo implements Serializable {
 
     private Integer status;
 
-
+    /**
+     * {@link StuInfo} 与 {@link AdjustStuInfo} 的转换构造方法
+     *
+     * @param stuInfo 需要转换的 {@link StuInfo} 实体类
+     */
+    public AdjustStuInfo(StuInfo stuInfo) {
+        this.openid = stuInfo.getOpenid();
+        this.stuId = stuInfo.getStuId();
+        this.name = stuInfo.getName();
+        this.adjustDept = stuInfo.getSecondDept();
+        this.major = stuInfo.getMajor();
+        this.college = stuInfo.getCollege();
+    }
 }
