@@ -32,11 +32,11 @@ public class BriefInfoServiceImpl extends ServiceImpl<BriefInfoMapper, BriefInfo
             queryWrapper.eq("status", stuStatusCode);
             resultPage = page(briefInfoPage, queryWrapper);
         } else if (stuStatusCode == StudentStatusConstant.ALL) {
-            queryWrapper.eq("firstDept", department);
+            queryWrapper.eq("first_dept", department);
             resultPage = page(briefInfoPage, queryWrapper);
         } else {
             HashMap<String, Integer> params = new HashMap<>(2);
-            params.put("firstDept", department);
+            params.put("first_dept", department);
             params.put("status", stuStatusCode);
             queryWrapper.allEq(params);
             resultPage = page(briefInfoPage, queryWrapper);

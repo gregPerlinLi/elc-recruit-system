@@ -36,7 +36,11 @@ public class ApplyController {
     @ApiOperation(value = "报名", tags = "apply", response = ResultVO.class)
     public ResultVO<String> apply (@ApiParam(value = "报名信息", required = true) ApplyInfoDTO applyInfoDTO) {
         log.warn(applyInfoDTO.toString());
-        return applyService.apply(applyInfoDTO);
+        ResultVO<String> result = applyService.apply(applyInfoDTO);
+        if ( result.getCode()  == ResultStatusCodeConstant.SUCCESS ) {
+            // TODO: 微信推送报名成功信息
+        }
+        return result;
     }
 
     /**

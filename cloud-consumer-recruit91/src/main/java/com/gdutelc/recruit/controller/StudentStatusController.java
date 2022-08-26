@@ -1,6 +1,7 @@
 package com.gdutelc.recruit.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.gdutelc.recruit.constant.ResultStatusCodeConstant;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.service.interfaces.IInterviewService;
 import com.gdutelc.recruit.utils.SentinelBlockHandler;
@@ -40,7 +41,11 @@ public class StudentStatusController {
     @ApiOperation(value = "一面开始面试接口", tags = "studentStatus", response = ResultVO.class)
     public ResultVO<Integer> firstInterviewStart(@ApiParam(value = "开始面试的学生学号", required = true) @PathVariable("stu_id") String stuId,
                                                  @ApiParam(value = "面试官用户名", required = true) @PathVariable("interviewer_username") String interviewerUsername) {
-        return interviewService.firstInterviewStart(stuId, interviewerUsername);
+        ResultVO<Integer> result = interviewService.firstInterviewStart(stuId, interviewerUsername);
+        if ( result.getCode() == ResultStatusCodeConstant.SUCCESS ) {
+            // TODO: 微信推送开始面试消息
+        }
+        return result;
     }
 
     /**
@@ -55,7 +60,11 @@ public class StudentStatusController {
     @ApiOperation(value = "二面开始面试接口", tags = "studentStatus", response = ResultVO.class)
     public ResultVO<Integer> secondInterviewStart(@ApiParam(value = "开始面试学生学号", required = true) @PathVariable("stu_id") String stuId,
                                                   @ApiParam(value = "面试官用户名", required = true) @PathVariable("interviewer_username") String interviewerUsername) {
-        return interviewService.secondInterviewStart(stuId, interviewerUsername);
+        ResultVO<Integer> result = interviewService.secondInterviewStart(stuId, interviewerUsername);
+        if ( result.getCode() == ResultStatusCodeConstant.SUCCESS ) {
+            // TODO: 微信推送开始面试消息
+        }
+        return result;
     }
 
     /* 一二面面试通过接口 */
@@ -97,15 +106,17 @@ public class StudentStatusController {
      * 二面调剂接口
      *
      * @param stuId               调剂的学生学号
+     * @param dept                学生想要调剂的部门
      * @param interviewerUsername 调剂的面试官用户名
      * @return {@link ResultVO}，其中数据为当前学生的第二志愿部门代码
      */
-    @PutMapping(value = "/second_interview_adjust/{stu_id}/{interviewer_username}")
+    @PutMapping(value = "/second_interview_adjust/{stu_id}/{dept}/{interviewer_username}")
     @SentinelResource(value = "secondInterviewAdjust", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "flowLimitException")
     @ApiOperation(value = "二面调剂接口", tags = "studentStatus", response = ResultVO.class)
     public ResultVO<Integer> secondInterviewAdjust(@ApiParam(value = "调剂的学生学号", required = true) @PathVariable("stu_id") String stuId,
+                                                   @ApiParam(value = "学生想要调剂的部门", required = true) @PathVariable("dept") Integer dept,
                                                    @ApiParam(value = "面试官用户名", required = true) @PathVariable("interviewer_username") String interviewerUsername) {
-        return interviewService.secondInterviewAdjust(stuId, interviewerUsername);
+        return interviewService.secondInterviewAdjust(stuId, dept, interviewerUsername);
     }
 
     /**
@@ -118,7 +129,11 @@ public class StudentStatusController {
     @SentinelResource(value = "secondAdjustInterviewStart", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "flowLimitException")
     @ApiOperation(value = "二面调剂开始面试接口", tags = "studentStatus", response = ResultVO.class)
     public ResultVO<Integer> secondAdjustInterviewStart(@ApiParam(value = "开始面试的学生学号", required = true) @PathVariable("stu_id") String stuId) {
-        return interviewService.secondAdjustInterviewStart(stuId);
+        ResultVO<Integer> result = interviewService.secondAdjustInterviewStart(stuId);
+        if ( result.getCode() == ResultStatusCodeConstant.SUCCESS ) {
+            // TODO: 微信推送开始面试消息
+        }
+        return result;
     }
 
     /**

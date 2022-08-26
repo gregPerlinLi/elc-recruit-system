@@ -29,7 +29,7 @@ public class LogoutController {
      * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
      */
     @GetMapping(value = "/interviewer_logout")
-    ResultVO<Void> interviewerLogout(HttpServletRequest request) {
+    public ResultVO<Void> interviewerLogout(HttpServletRequest request) {
         String username = request.getSession().getAttribute("username").toString();
         request.getSession().removeAttribute("username");
         return interviewService.interviewerLogout(username);
@@ -42,7 +42,7 @@ public class LogoutController {
      * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
      */
     @GetMapping(value = "/admin_logout")
-    ResultVO<Void> adminLogout(HttpServletRequest request) {
+    public ResultVO<Void> adminLogout(HttpServletRequest request) {
         String username = request.getSession().getAttribute("username").toString();
         request.getSession().removeAttribute("username");
         return interviewService.adminLogout(username);

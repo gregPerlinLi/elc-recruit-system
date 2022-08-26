@@ -29,8 +29,7 @@ public interface IInterviewerListService extends IService<InterviewerList> {
      *
      * @param username 面试官用户名
      * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
-     * @throws IllegalAccessException 非法访问异常
      */
-    ResultVO<Void> logout(String username) throws IllegalAccessException;
+    ResultVO<Void> logout(String username);
 
 }

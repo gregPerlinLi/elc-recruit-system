@@ -2,6 +2,7 @@ package com.gdutelc.recruit.domain.entities;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.gdutelc.recruit.domain.dto.CommentDTO;
 import lombok.*;
 
 import java.io.Serial;
@@ -35,5 +36,14 @@ public class Comment implements Serializable {
 
     private String interviewer;
 
-
+    /**
+     * {@link CommentDTO} 转 {@link Comment}
+     * @param commentDTO 需要转换的{@link CommentDTO}实体
+     */
+    public Comment(CommentDTO commentDTO) {
+        this.stuId = commentDTO.getStuId();
+        this.mark = commentDTO.getMark();
+        this.comment = commentDTO.getComment();
+        this.interviewer = commentDTO.getInterviewer();
+    }
 }

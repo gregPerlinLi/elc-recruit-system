@@ -6,9 +6,9 @@ import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.service.interfaces.IInterviewService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,11 +22,10 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
 
-    @Resource
-    IInterviewService interviewService;
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+
+        IInterviewService interviewService = WebApplicationContextUtils.getRequiredWebApplicationContext(request.getServletContext()).getBean(IInterviewService.class);
         String username = (String) request.getSession().getAttribute("username");
         String sessionId = request.getSession().getId();
         if ( username != null ) {

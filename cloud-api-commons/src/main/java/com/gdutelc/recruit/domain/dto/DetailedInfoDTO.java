@@ -140,6 +140,7 @@ public class DetailedInfoDTO {
         this.major = stuInfo.getMajor();
         this.college = stuInfo.getCollege();
         this.clazz = stuInfo.getClazz();
+        this.phone = stuInfo.getPhone();
         this.whereFind = stuInfo.getWhereFind();
     }
 }

@@ -1,12 +1,10 @@
 package com.gdutelc.recruit.domain.dto;
 
 
+import com.gdutelc.recruit.domain.entities.Comment;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * 面试评价
@@ -15,6 +13,7 @@ import lombok.Setter;
  */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @ApiModel("面试评价")
 public class CommentDTO {
 
@@ -49,4 +48,16 @@ public class CommentDTO {
     @Setter
     @ApiModelProperty(value = "面试官")
     private String interviewer;
+
+    /**
+     * {@link Comment} 转 {@link CommentDTO}
+     *
+     * @param comment 需要转换的{@link Comment}实体
+     */
+    public CommentDTO(Comment comment) {
+        this.stuId = comment.getStuId();
+        this.mark = comment.getMark();
+        this.comment = comment.getComment();
+        this.interviewer = comment.getInterviewer();
+    }
 }
