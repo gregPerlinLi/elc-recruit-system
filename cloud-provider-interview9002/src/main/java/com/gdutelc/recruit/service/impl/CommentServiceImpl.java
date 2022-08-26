@@ -26,6 +26,10 @@ import java.util.List;
 @Service
 public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> implements ICommentService {
 
+    private final static Integer MAX_MARK = 5;
+
+    public static final Integer MIN_MARK = 0;
+
     @Resource
     private CommentMapper commentMapper;
 
@@ -34,7 +38,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         if(!GenericUtils.ofNullable(commentDTO)||!GenericUtils.allOfNullable(commentDTO)){
             return new ResultVO(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION,"参数有误");
         }
-        if ( comment.getMark() > 5 || comment.getMark() < 0 ) {
+        if ( commentDTO.getMark() > MAX_MARK || commentDTO.getMark() < MIN_MARK ) {
             return new ResultVO(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION, "评分应该在0~5之间");
         }
         Comment comment = new Comment(commentDTO);
