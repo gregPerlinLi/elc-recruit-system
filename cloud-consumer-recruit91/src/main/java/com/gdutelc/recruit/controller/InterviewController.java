@@ -32,7 +32,7 @@ public class InterviewController {
      * @return {@link ResultVO}，其中数据为该报名者的详细信息
      */
     @GetMapping(value = "/detailed_apply_query/{stu_id}")
-    @SentinelResource(value = "detailedApplyQuery", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "flowLimitException")
+    @SentinelResource(value = "detailedApplyQuery", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "detailedApplyQueryHandlerException")
     @ApiOperation(value = "获取报名者详细信息", tags = "query", response = ResultVO.class)
     public ResultVO<DetailedInfoDTO> detailedApplyQuery(@ApiParam(value = "报名者学号", required = true) @PathVariable("stu_id") String stuId) {
         return interviewService.detailedApplyQuery(stuId);
@@ -48,7 +48,7 @@ public class InterviewController {
      * @return {@link ResultVO}，其中数据为该报名者的简要信息集合
      */
     @GetMapping(value = "/brief_apply_query/{page}/{limit}/{department}/{stu_status_code}")
-    @SentinelResource(value = "briefApplyQuery", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "flowLimitException")
+    @SentinelResource(value = "briefApplyQuery", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "briefApplyQueryHandlerException")
     @ApiOperation(value = "获取报名者简要信息集合", tags = "query", response = ResultVO.class)
     public ResultVO<PageDTO<BriefInfoDTO>> briefApplyQuery(@ApiParam(value = "页数", required = true) @PathVariable("page") Integer page,
                                                            @ApiParam(value = "每页最大内容数", required = true) @PathVariable("limit") Integer limit,
@@ -65,7 +65,7 @@ public class InterviewController {
      * @return {@link ResultVO}，其中数据为该调剂报名者的简要信息集合
      */
     @GetMapping(value = "/brief_adjust_apply_query/{page}/{limit}")
-    @SentinelResource(value = "briefAdjustApplyQuery", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "flowLimitException")
+    @SentinelResource(value = "briefAdjustApplyQuery", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "briefAdjustApplyQueryHandlerException")
     @ApiOperation(value = "获取调剂报名者简要信息集合", tags = "query", response = ResultVO.class)
     public ResultVO<PageDTO<BriefAdjustInfoDTO>> briefAdjustApplyQuery(@ApiParam(value = "页数", required = true) @PathVariable("page") Integer page,
                                                                        @ApiParam(value = "每页最大内容数", required = true) @PathVariable("limit") Integer limit) {
@@ -79,7 +79,7 @@ public class InterviewController {
      * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
      */
     @PostMapping(value = "/publish_comment")
-    @SentinelResource(value = "publishComment", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "flowLimitException")
+    @SentinelResource(value = "publishComment", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "addCommentHandlerException")
     @ApiOperation(value = "面试官发布评价", tags = "comment", response = ResultVO.class)
     public ResultVO addComment(@ApiParam(value = "评价信息", required = true) CommentDTO commentDTO) {
         return interviewService.addComment(commentDTO);
@@ -92,7 +92,7 @@ public class InterviewController {
      * @return {@link ResultVO}，其中数据为该报名者的评价集合
      */
     @GetMapping(value = "/query_comments/{stu_id}")
-    @SentinelResource(value = "queryComments", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "flowLimitException")
+    @SentinelResource(value = "queryComments", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "queryCommentsHandlerException")
     @ApiOperation(value = "查询学生的所有评价", tags = "comment", response = ResultVO.class)
     public ResultVO<List<CommentDTO>> queryComments(@ApiParam(value = "需要查询的学生学号", required = true) @PathVariable("stu_id") String stuId) {
         return interviewService.queryComments(stuId);
