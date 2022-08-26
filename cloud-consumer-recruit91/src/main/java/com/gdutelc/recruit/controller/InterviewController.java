@@ -1,13 +1,7 @@
 package com.gdutelc.recruit.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
-import com.alibaba.csp.sentinel.slots.block.BlockException;
-import com.gdutelc.recruit.constant.ResultStatusCodeConstant;
-import com.gdutelc.recruit.domain.dto.BriefAdjustInfoDTO;
-import com.gdutelc.recruit.domain.dto.BriefInfoDTO;
-import com.gdutelc.recruit.domain.dto.DetailedInfoDTO;
-import com.gdutelc.recruit.domain.dto.PageDTO;
-import com.gdutelc.recruit.domain.entities.Comment;
+import com.gdutelc.recruit.domain.dto.*;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.service.interfaces.IInterviewService;
 import com.gdutelc.recruit.utils.SentinelBlockHandler;
@@ -70,7 +64,7 @@ public class InterviewController {
      * @param limit 每一页的列数限制
      * @return {@link ResultVO}，其中数据为该调剂报名者的简要信息集合
      */
-    @GetMapping(value = "/brief_apply_query/{page}/{limit}")
+    @GetMapping(value = "/brief_adjust_apply_query/{page}/{limit}")
     @SentinelResource(value = "briefAdjustApplyQuery", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "flowLimitException")
     @ApiOperation(value = "获取调剂报名者简要信息集合", tags = "query", response = ResultVO.class)
     public ResultVO<PageDTO<BriefAdjustInfoDTO>> briefAdjustApplyQuery(@ApiParam(value = "页数", required = true) @PathVariable("page") Integer page,
