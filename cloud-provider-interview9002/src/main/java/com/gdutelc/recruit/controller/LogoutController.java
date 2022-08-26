@@ -31,10 +31,9 @@ public class LogoutController {
      *
      * @param username 退出用户名
      * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
-     * @throws IllegalAccessException 非法访问异常
      */
     @GetMapping(value = "/interviewer_logout/{username}")
-    public ResultVO<Void> interviewerLogout(@PathVariable("username") String username) throws IllegalAccessException {
+    public ResultVO<Void> interviewerLogout(@PathVariable("username") String username) {
         return interviewerListService.logout(username);
     }
 
@@ -43,10 +42,9 @@ public class LogoutController {
      *
      * @param username 退出用户名
      * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
-     * @throws IllegalAccessException 非法访问异常
      */
     @GetMapping(value = "/admin_logout/{username}")
-    public ResultVO<Void> adminLogout(@PathVariable("username") String username) throws IllegalAccessException {
+    public ResultVO<Void> adminLogout(@PathVariable("username") String username) {
         return adminListService.logout(username);
     }
 }
