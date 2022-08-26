@@ -1,6 +1,7 @@
 package com.gdutelc.recruit.service.interfaces;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.gdutelc.recruit.domain.dto.CommentDTO;
 import com.gdutelc.recruit.domain.entities.Comment;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 
@@ -19,11 +20,11 @@ public interface ICommentService extends IService<Comment> {
     /**
      * 发布评论
      * @author TUFSolareyes
-     * @param comment 评价实体
+     * @param commentDTO 评价实体
      * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
      * @throws IllegalAccessException 非法访问异常
      */
-    ResultVO addComment(Comment comment) throws IllegalAccessException;
+    ResultVO addComment(CommentDTO commentDTO) throws IllegalAccessException;
 
     /**
      * 查询学生的所有评价
@@ -32,5 +33,5 @@ public interface ICommentService extends IService<Comment> {
      * @return {@link ResultVO}，其中数据为该报名者的评价集合
      * @author gregPerlinLi
      */
-    ResultVO<List<Comment>> queryComment(String stuId);
+    ResultVO<List<CommentDTO>> queryComment(String stuId);
 }

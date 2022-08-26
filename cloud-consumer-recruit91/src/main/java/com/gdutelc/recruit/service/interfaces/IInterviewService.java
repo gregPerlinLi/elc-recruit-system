@@ -1,9 +1,6 @@
 package com.gdutelc.recruit.service.interfaces;
 
-import com.gdutelc.recruit.domain.dto.BriefAdjustInfoDTO;
-import com.gdutelc.recruit.domain.dto.BriefInfoDTO;
-import com.gdutelc.recruit.domain.dto.DetailedInfoDTO;
-import com.gdutelc.recruit.domain.dto.PageDTO;
+import com.gdutelc.recruit.domain.dto.*;
 import com.gdutelc.recruit.domain.entities.Comment;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -136,11 +133,11 @@ public interface IInterviewService {
     /**
      * 生产者面试官评价接口
      *
-     * @param comment 评价实体类
+     * @param commentDTO 评价实体类
      * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
      */
     @PostMapping(value = "/pro/interview/elc_access/publish_comment")
-    ResultVO addComment(Comment comment);
+    ResultVO addComment(CommentDTO commentDTO);
 
     /**
      * 生产者查询学生的所有评价
@@ -149,7 +146,7 @@ public interface IInterviewService {
      * @return {@link ResultVO}，其中数据为该报名者的评价集合
      */
     @GetMapping(value = "/pro/interview/elc_access/query_comments/{stu_id}")
-    ResultVO<List<Comment>> queryComments(@PathVariable("stu_id") String stuId);
+    ResultVO<List<CommentDTO>> queryComments(@PathVariable("stu_id") String stuId);
 
     /* TODO:以下为面试进度相关接口 */
 

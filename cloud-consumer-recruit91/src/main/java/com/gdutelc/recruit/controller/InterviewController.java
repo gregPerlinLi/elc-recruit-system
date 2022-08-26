@@ -81,14 +81,14 @@ public class InterviewController {
     /**
      * 面试官评价接口
      *
-     * @param comment 评价实体类
+     * @param commentDTO 评价实体类
      * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
      */
     @PostMapping(value = "/publish_comment")
     @SentinelResource(value = "publishComment", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "flowLimitException")
     @ApiOperation(value = "面试官发布评价", tags = "comment", response = ResultVO.class)
-    public ResultVO addComment(@ApiParam(value = "评价信息", required = true) Comment comment) {
-        return interviewService.addComment(comment);
+    public ResultVO addComment(@ApiParam(value = "评价信息", required = true) CommentDTO commentDTO) {
+        return interviewService.addComment(commentDTO);
     }
 
     /**
@@ -100,7 +100,7 @@ public class InterviewController {
     @GetMapping(value = "/query_comments/{stu_id}")
     @SentinelResource(value = "queryComments", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "flowLimitException")
     @ApiOperation(value = "查询学生的所有评价", tags = "comment", response = ResultVO.class)
-    public ResultVO<List<Comment>> queryComments(@ApiParam(value = "需要查询的学生学号", required = true) @PathVariable("stu_id") String stuId) {
+    public ResultVO<List<CommentDTO>> queryComments(@ApiParam(value = "需要查询的学生学号", required = true) @PathVariable("stu_id") String stuId) {
         return interviewService.queryComments(stuId);
     }
 
