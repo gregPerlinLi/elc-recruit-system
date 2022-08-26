@@ -37,6 +37,9 @@ public class StuInfoServiceImpl extends ServiceImpl<StuInfoMapper, StuInfo> impl
         QueryWrapper<StuInfo> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("stu_id", stuId);
         StuInfo rawResult = getOne(queryWrapper);
+        if ( rawResult == null ) {
+            return null;
+        }
         return new DetailedInfoDTO(rawResult);
     }
 
@@ -48,7 +51,7 @@ public class StuInfoServiceImpl extends ServiceImpl<StuInfoMapper, StuInfo> impl
         StuInfo stuInfo = getOne(studentQueryWrapper);
         interviewerQueryWrapper.eq("username", interviewerUsername);
         InterviewerList interviewerList = interviewerListMapper.selectOne(interviewerQueryWrapper);
-        if ( stuInfo == null ) {
+        if ( stuInfo == null || interviewerList == null ) {
             return 0;
         } else if ( !stuInfo.getFirstDept().equals(interviewerList.getDept()) ) {
             return ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION;
@@ -74,7 +77,7 @@ public class StuInfoServiceImpl extends ServiceImpl<StuInfoMapper, StuInfo> impl
         StuInfo stuInfo = getOne(studentQueryWrapper);
         interviewerListQueryWrapper.eq("username", interviewerUsername);
         InterviewerList interviewerList = interviewerListMapper.selectOne(interviewerListQueryWrapper);
-        if ( stuInfo == null ) {
+        if ( stuInfo == null || interviewerList == null ) {
             return 0;
         } else if ( !stuInfo.getFirstDept().equals(interviewerList.getDept()) ) {
             return ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION;

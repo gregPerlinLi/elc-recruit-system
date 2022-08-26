@@ -43,7 +43,7 @@ public class StudentStatusController {
         if ( result == ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION ) {
             return new ResultVO<>(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION, "学生第一志愿部门和面试官所在部门不一致");
         } else if ( result == 0 ) {
-            return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND, "不存在此学生");
+            return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND, "不存在此学生或面试官");
         } else if ( result == ResultStatusCodeConstant.FAILED ) {
             return new ResultVO<>(ResultStatusCodeConstant.FAILED, "由于学生状态不符合要求，请求失败");
         } else {
@@ -65,7 +65,7 @@ public class StudentStatusController {
         if ( result == ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION ) {
             return new ResultVO<>(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION, "学生第一志愿部门和面试官所在部门不一致");
         } else if ( result == 0 ) {
-            return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND, "不存在此学生");
+            return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND, "不存在此学生或面试官");
         } else if ( result == ResultStatusCodeConstant.FAILED ) {
             return new ResultVO<>(ResultStatusCodeConstant.FAILED, "由于学生状态不符合要求，请求失败");
         } else {
@@ -89,7 +89,7 @@ public class StudentStatusController {
         if ( result == ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION ) {
             return new ResultVO<>(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION, "学生第一志愿部门和面试官所在部门不一致");
         } else if ( result == 0 ) {
-            return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND, "不存在此学生");
+            return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND, "不存在此学生或面试官");
         } else if ( result == ResultStatusCodeConstant.FAILED ) {
             return new ResultVO<>(ResultStatusCodeConstant.FAILED, "由于学生状态不符合要求，请求失败");
         } else {
@@ -111,7 +111,7 @@ public class StudentStatusController {
         if ( result == ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION ) {
             return new ResultVO<>(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION, "学生第一志愿部门和面试官所在部门不一致");
         } else if ( result == 0 ) {
-            return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND, "不存在此学生");
+            return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND, "不存在此学生或面试官");
         } else if ( result == ResultStatusCodeConstant.FAILED ) {
             return new ResultVO<>(ResultStatusCodeConstant.FAILED, "由于学生状态不符合要求，请求失败");
         } else {
@@ -137,7 +137,7 @@ public class StudentStatusController {
         if ( result == ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION ) {
             return new ResultVO<>(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION, "学生第一志愿部门和面试官所在部门不一致");
         } else if ( result == 0 ) {
-            return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND, "不存在此学生");
+            return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND, "不存在此学生或面试官");
         } else if ( result == ResultStatusCodeConstant.FAILED ) {
             return new ResultVO<>(ResultStatusCodeConstant.FAILED, "由于学生状态不符合要求，请求失败");
         } else {
