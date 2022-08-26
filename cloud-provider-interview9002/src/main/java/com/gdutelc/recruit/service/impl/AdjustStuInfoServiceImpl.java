@@ -40,11 +40,11 @@ public class AdjustStuInfoServiceImpl extends ServiceImpl<AdjustStuInfoMapper, A
     public Integer adjust(String stuId, Integer department, String interviewerUsername) {
         QueryWrapper<StuInfo> studentQueryWrapper = new QueryWrapper<>();
         QueryWrapper<InterviewerList> interviewerQueryWrapper = new QueryWrapper<>();
-        studentQueryWrapper.eq("stuId", stuId);
+        studentQueryWrapper.eq("stu_id", stuId);
         StuInfo stuInfo = stuInfoMapper.selectOne(studentQueryWrapper);
         interviewerQueryWrapper.eq("username", interviewerUsername);
         InterviewerList interviewerList = interviewerListMapper.selectOne(interviewerQueryWrapper);
-        if ( stuInfo == null ) {
+        if ( stuInfo == null || interviewerList == null ) {
             return 0;
         } else if ( !stuInfo.getFirstDept().equals(interviewerList.getDept()) ) {
             return ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION;
@@ -56,7 +56,7 @@ public class AdjustStuInfoServiceImpl extends ServiceImpl<AdjustStuInfoMapper, A
             adjustStuInfo.setStatus(StudentStatusConstant.CHECKED_IN);
             stuInfo.setStatus(StudentStatusConstant.CHECKED_IN);
             UpdateWrapper<StuInfo> studentUpdateWrapper = new UpdateWrapper<>();
-            studentUpdateWrapper.eq("stuId", stuId);
+            studentUpdateWrapper.eq("stu_id", stuId);
             studentUpdateWrapper.eq("status", StudentStatusConstant.INTERVIEWING);
             int insertAdjustStuInfo = adjustStuInfoMapper.insert(adjustStuInfo);
             int updateStuInfo = stuInfoMapper.update(stuInfo, studentUpdateWrapper);
@@ -83,7 +83,7 @@ public class AdjustStuInfoServiceImpl extends ServiceImpl<AdjustStuInfoMapper, A
             UpdateWrapper<StuInfo> studentUpdateWrapper = new UpdateWrapper<>();
             adjustStudentUpdateWrapper.eq("stu_id", stuId);
             adjustStudentUpdateWrapper.eq("status", StudentStatusConstant.CHECKED_IN);
-            studentUpdateWrapper.eq("stuId", stuId);
+            studentUpdateWrapper.eq("stu_id", stuId);
             studentUpdateWrapper.eq("status", StudentStatusConstant.CHECKED_IN);
             adjustStuInfo.setStatus(StudentStatusConstant.INTERVIEWING);
             stuInfo.setStatus(StudentStatusConstant.INTERVIEWING);
@@ -112,7 +112,7 @@ public class AdjustStuInfoServiceImpl extends ServiceImpl<AdjustStuInfoMapper, A
             UpdateWrapper<StuInfo> studentUpdateWrapper = new UpdateWrapper<>();
             adjustStudentUpdateWrapper.eq("stu_id", stuId);
             adjustStudentUpdateWrapper.eq("status", StudentStatusConstant.INTERVIEWING);
-            studentUpdateWrapper.eq("stuId", stuId);
+            studentUpdateWrapper.eq("stu_id", stuId);
             studentUpdateWrapper.eq("status", StudentStatusConstant.INTERVIEWING);
             adjustStuInfo.setStatus(StudentStatusConstant.PASS);
             stuInfo.setStatus(StudentStatusConstant.PASS);
