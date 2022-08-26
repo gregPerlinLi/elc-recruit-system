@@ -31,7 +31,7 @@ public class SuperAdminController {
     @PutMapping(value = "/process_advance")
     @SentinelResource(value = "processAdvance", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "processAdvanceBlockHandler")
     @ApiOperation(value = "面试进度推进", tags = "super_admin", response = ResultVO.class)
-    public ResultVO processAdvance() {
+    public ResultVO<Void> processAdvance() {
         return null;
     }
 
@@ -43,7 +43,7 @@ public class SuperAdminController {
     @GetMapping(value = "/first_interview_notify")
     @SentinelResource(value = "firstInterviewNotify", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "firstInterviewNotifyBlockHandler")
     @ApiOperation(value = "发送一面通知", tags = "super_admin", response = ResultVO.class)
-    public ResultVO firstInterviewNotify() {
+    public ResultVO<Void> firstInterviewNotify() {
         return null;
     }
 
@@ -55,7 +55,7 @@ public class SuperAdminController {
     @GetMapping(value = "/second_interview_notify")
     @SentinelResource(value = "secondInterviewNotify", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "secondInterviewNotifyBlockHandler")
     @ApiOperation(value = "发送二面通知", tags = "super_admin", response = ResultVO.class)
-    public ResultVO secondInterviewNotify() {
+    public ResultVO<Void> secondInterviewNotify() {
         return null;
     }
 
@@ -67,7 +67,7 @@ public class SuperAdminController {
     @GetMapping(value = "/written_test_notify")
     @SentinelResource(value = "writtenTestNotify", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "writtenTestNotifyBlockHandler")
     @ApiOperation(value = "发送笔试通知", tags = "super_admin", response = ResultVO.class)
-    public ResultVO writtenTestNotify() {
+    public ResultVO<Void> writtenTestNotify() {
         return null;
     }
 
@@ -79,7 +79,7 @@ public class SuperAdminController {
     @GetMapping(value = "/get_first_interview_pass_list")
     @SentinelResource(value = "getFirstInterviewPassList", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "getFirstInterviewPassListBlockHandler")
     @ApiOperation(value = "获取一面通过的学生列表", tags = "super_admin", response = ResultVO.class)
-    public ResultVO<List<StuInfo>> getFirstInterviewPassList() {
+    public ResultVO<List<DetailedInfoDTO>> getFirstInterviewPassList() {
         return null;
     }
 
@@ -91,7 +91,7 @@ public class SuperAdminController {
     @GetMapping(value = "/get_final_admission_list")
     @SentinelResource(value = "getFinalAdmissionList", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "getFinalAdmissionListBlockHandler")
     @ApiOperation(value = "获取电协最终录取的所有面试者名单", tags = "super_admin", response = ResultVO.class)
-    public ResultVO<List<StuInfo>> getFinalAdmissionList() {
+    public ResultVO<List<DetailedInfoDTO>> getFinalAdmissionList() {
         return null;
     }
 }
