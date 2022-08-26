@@ -2,6 +2,7 @@ package com.gdutelc.recruit.controller;
 
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.service.interfaces.IInterviewService;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +25,7 @@ public class ProcessStatusController {
      *
      * @return {@link ResultVO}，其中数据为当前面试总进度
      */
-    @RequestMapping(value = "/get_now_process")
+    @GetMapping(value = "/get_now_process")
     public ResultVO<Integer> getNowProcess() {
         return interviewService.getNowProcess();
     }
