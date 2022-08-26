@@ -49,7 +49,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
             return new ResultVO<>(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION, "参数有误");
         }
         QueryWrapper<Comment> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("stuId", stuId);
+        queryWrapper.eq("stu_id", stuId);
         List<Comment> comments = commentMapper.selectList(queryWrapper);
         if ( !GenericUtils.ofNullable(comments) || comments.size() == 0 ) {
             return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND, "没有关于此学生的评价");
