@@ -50,8 +50,8 @@ public class LogoutController {
     @SentinelResource(value = "adminLogout", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "adminLogoutHandlerException")
     @ApiOperation(value = "管理员退出", tags = "logout", response = ResultVO.class)
     public ResultVO<Void> adminLogout(HttpServletRequest request) {
-        String username = request.getSession().getAttribute("username").toString();
-        request.getSession().removeAttribute("username");
+        String username = request.getSession().getAttribute("admin_username").toString();
+        request.getSession().removeAttribute("admin_username");
         return interviewService.adminLogout(username);
     }
 
