@@ -167,12 +167,15 @@ public class StudentStatusController {
      * 二面调剂通过接口
      *
      * @param stuId 通过的学生学号
+     * @param interviewerUsername 面试官用户名
      * @return {@link ResultVO}，其中数据为当前学生的状态码
      */
-    @PutMapping(value = "/second_adjust_interview_pass/{stu_id}")
-    public ResultVO<Integer> secondInterviewAdjustPass(@PathVariable("stu_id") String stuId) {
-        Integer result = adjustStuInfoService.interviewPass(stuId);
-        if ( result == 0 ) {
+    @PutMapping(value = "/second_adjust_interview_pass/{stu_id}/{interviewer_username}")
+    public ResultVO<Integer> secondInterviewAdjustPass(@PathVariable("stu_id") String stuId, @PathVariable("interviewer_username") String interviewerUsername) {
+        Integer result = adjustStuInfoService.interviewPass(stuId, interviewerUsername);
+        if ( result == ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION ) {
+            return new ResultVO<>(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION, "该学生已被录取");
+        } else if ( result == 0 ) {
             return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND, "不存在此学生");
         } else if ( result == ResultStatusCodeConstant.FAILED ) {
             return new ResultVO<>(ResultStatusCodeConstant.FAILED, "由于学生状态不符合要求，请求失败");
