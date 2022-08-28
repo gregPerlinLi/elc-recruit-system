@@ -53,19 +53,19 @@ public class StuInfoServiceImpl extends ServiceImpl<StuInfoMapper, StuInfo> impl
         InterviewerList interviewerList = interviewerListMapper.selectOne(interviewerQueryWrapper);
         if ( stuInfo == null || interviewerList == null ) {
             return 0;
-        } else if ( !stuInfo.getFirstDept().equals(interviewerList.getDept()) ) {
+        }
+        if ( !stuInfo.getFirstDept().equals(interviewerList.getDept()) ) {
             return ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION;
+        }
+        UpdateWrapper<StuInfo> studentUpdateWrapper = new UpdateWrapper<>();
+        studentUpdateWrapper.eq("stu_id", stuId);
+        studentUpdateWrapper.eq("status", StudentStatusConstant.CHECKED_IN);
+        stuInfo.setStatus(StudentStatusConstant.INTERVIEWING);
+        int update = stuInfoMapper.update(stuInfo, studentUpdateWrapper);
+        if ( update == 1 ) {
+            return StudentStatusConstant.INTERVIEWING;
         } else {
-            UpdateWrapper<StuInfo> studentUpdateWrapper = new UpdateWrapper<>();
-            studentUpdateWrapper.eq("stu_id", stuId);
-            studentUpdateWrapper.eq("status", StudentStatusConstant.CHECKED_IN);
-            stuInfo.setStatus(StudentStatusConstant.INTERVIEWING);
-            int update = stuInfoMapper.update(stuInfo, studentUpdateWrapper);
-            if ( update == 1 ) {
-                return StudentStatusConstant.INTERVIEWING;
-            } else {
-                return ResultStatusCodeConstant.FAILED;
-            }
+            return ResultStatusCodeConstant.FAILED;
         }
     }
 
@@ -79,7 +79,8 @@ public class StuInfoServiceImpl extends ServiceImpl<StuInfoMapper, StuInfo> impl
         InterviewerList interviewerList = interviewerListMapper.selectOne(interviewerListQueryWrapper);
         if ( stuInfo == null || interviewerList == null ) {
             return 0;
-        } else if ( !stuInfo.getFirstDept().equals(interviewerList.getDept()) ) {
+        }
+        if ( !stuInfo.getFirstDept().equals(interviewerList.getDept()) ) {
             return ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION;
         } else {
             UpdateWrapper<StuInfo> studentUpdateWrapper = new UpdateWrapper<>();
