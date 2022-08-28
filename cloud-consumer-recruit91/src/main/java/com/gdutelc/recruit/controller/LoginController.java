@@ -89,7 +89,7 @@ public class LoginController {
                                        HttpServletRequest request) {
         ResultVO<String> result = interviewService.adminLogin(username, password, request.getSession().getId());
         if ( result.getCode() == ResultStatusCodeConstant.SUCCESS ) {
-            request.getSession().setAttribute("username", username);
+            request.getSession().setAttribute("admin_username", username);
         }
         return result;
     }
