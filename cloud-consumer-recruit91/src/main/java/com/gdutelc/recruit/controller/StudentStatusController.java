@@ -140,13 +140,15 @@ public class StudentStatusController {
      * 二面调剂通过接口
      *
      * @param stuId 通过的学生学号
+     * @param interviewerUsername 面试官用户名
      * @return {@link ResultVO}，其中数据为当前学生的状态码
      */
-    @PutMapping(value = "/second_adjust_interview_pass/{stu_id}")
+    @PutMapping(value = "/second_adjust_interview_pass/{stu_id}/{interviewer_username}")
     @SentinelResource(value = "secondInterviewAdjustPass", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "secondAdjustInterviewPassHandlerException")
     @ApiOperation(value = "二面调剂通过接口", tags = "studentStatus", response = ResultVO.class)
-    public ResultVO<Integer> secondInterviewAdjustPass(@ApiParam(value = "通过的学生学号", required = true) @PathVariable("stu_id") String stuId) {
-        return interviewService.secondAdjustInterviewPass(stuId);
+    public ResultVO<Integer> secondInterviewAdjustPass(@ApiParam(value = "通过的学生学号", required = true) @PathVariable("stu_id") String stuId,
+                                                       @ApiParam(value = "面试官用户名", required = true) @PathVariable("interviewer_username") String interviewerUsername) {
+        return interviewService.secondAdjustInterviewPass(stuId, interviewerUsername);
     }
 
 }

@@ -37,7 +37,7 @@ CREATE TABLE `adjust_stu_info` (
   UNIQUE KEY `adjust_stu_info_id_uindex` (`id`),
   KEY `adjust_stu_info_college_index` (`college`),
   KEY `adjust_stu_info_adjust_dept_index` (`adjust_dept`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='调剂学生名单';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='调剂学生名单';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -58,6 +58,29 @@ CREATE TABLE `admin_list` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `admission_stu`
+--
+
+DROP TABLE IF EXISTS `admission_stu`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `admission_stu` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `stu_id` char(10) NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `gender` int NOT NULL,
+  `college` int NOT NULL,
+  `major` varchar(50) NOT NULL,
+  `clazz` varchar(50) NOT NULL,
+  `phone` char(11) NOT NULL,
+  `admission_dept` int NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  UNIQUE KEY `stu_id` (`stu_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='录取学生列表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `comment`
 --
 
@@ -72,7 +95,7 @@ CREATE TABLE `comment` (
   `interviewer` char(50) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `comment_id_uindex` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='对学生的评价';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='对学生的评价';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,7 +113,7 @@ CREATE TABLE `interviewer_list` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `interviewer_list_username_uindex` (`username`),
   UNIQUE KEY `interviewer_list_id_uindex` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='面试官列表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='面试官列表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -139,7 +162,7 @@ CREATE TABLE `stu_info` (
   KEY `table_name_college_index` (`college`),
   KEY `table_name_first_dept_index` (`first_dept`),
   KEY `table_name_status_index` (`status`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='学生信息';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='学生信息';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -151,4 +174,4 @@ CREATE TABLE `stu_info` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-15 18:19:02
+-- Dump completed on 2022-08-28 18:19:25

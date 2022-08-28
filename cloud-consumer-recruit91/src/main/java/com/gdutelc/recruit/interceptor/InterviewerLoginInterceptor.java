@@ -13,14 +13,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * 登录Session检查
+ * 面试官登录验证拦截器
  *
  * @author gregPerlinLi
  * @date 2022-08-16
  */
 @Slf4j
 @Component
-public class LoginInterceptor implements HandlerInterceptor {
+public class InterviewerLoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
