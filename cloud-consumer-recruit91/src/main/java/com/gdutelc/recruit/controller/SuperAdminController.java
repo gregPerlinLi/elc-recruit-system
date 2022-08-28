@@ -2,15 +2,14 @@ package com.gdutelc.recruit.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.gdutelc.recruit.domain.dto.DetailedInfoDTO;
+import com.gdutelc.recruit.domain.entities.BriefPasserInfo;
 import com.gdutelc.recruit.domain.entities.StuInfo;
 import com.gdutelc.recruit.domain.vo.ResultVO;
+import com.gdutelc.recruit.service.interfaces.IMessageService;
 import com.gdutelc.recruit.utils.SentinelBlockHandler;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -23,6 +22,8 @@ import java.util.List;
 @RequestMapping(value = "/recruit/elc_access")
 public class SuperAdminController {
 
+    @Resource
+    IMessageService iMessageService;
     /**
      * 面试进度推进接口
      *
@@ -76,11 +77,11 @@ public class SuperAdminController {
      *
      * @return {@link ResultVO}，其中包含数据{@link List<StuInfo>}，和状态码和信息
      */
-    @GetMapping(value = "/get_first_interview_pass_list")
+    @GetMapping(value = "/get_first_interview_pass_list/{dept}")
     @SentinelResource(value = "getFirstInterviewPassList", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "getFirstInterviewPassListBlockHandler")
     @ApiOperation(value = "获取一面通过的学生列表", tags = "super_admin", response = ResultVO.class)
-    public ResultVO<List<DetailedInfoDTO>> getFirstInterviewPassList() {
-        return null;
+    public ResultVO<List<BriefPasserInfo>> getFirstInterviewPassList(@PathVariable("dept") Integer dept) {
+        return iMessageService.getFirstInterviewPassList(dept);
     }
 
     /**
@@ -88,10 +89,10 @@ public class SuperAdminController {
      *
      * @return {@link ResultVO}，其中包含数据{@link List<StuInfo>}，和状态码和信息
      */
-    @GetMapping(value = "/get_final_admission_list")
+    @GetMapping(value = "/get_final_admission_list/{dept}")
     @SentinelResource(value = "getFinalAdmissionList", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "getFinalAdmissionListBlockHandler")
     @ApiOperation(value = "获取电协最终录取的所有面试者名单", tags = "super_admin", response = ResultVO.class)
-    public ResultVO<List<DetailedInfoDTO>> getFinalAdmissionList() {
+    public ResultVO<List<DetailedInfoDTO>> getFinalAdmissionList(@PathVariable("dept") Integer dept) {
         return null;
     }
 }

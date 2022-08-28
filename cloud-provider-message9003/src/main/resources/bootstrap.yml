@@ -36,7 +36,7 @@ mybatis-plus:
 
 wx:
   applet:
-    appid: 123456
-    secret: 1rsbn1bg19gh9gsb198d1
+    appid: wx3fd923d8fdafde76
+    secret: 3281d335f1ef8ccbdd162cef84c882e3
   url:
     code2Session: https://api.weixin.qq.com/sns/jscode2session
