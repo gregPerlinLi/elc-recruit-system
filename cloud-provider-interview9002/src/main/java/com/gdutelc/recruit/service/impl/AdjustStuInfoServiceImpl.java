@@ -46,25 +46,28 @@ public class AdjustStuInfoServiceImpl extends ServiceImpl<AdjustStuInfoMapper, A
         InterviewerList interviewerList = interviewerListMapper.selectOne(interviewerQueryWrapper);
         if ( stuInfo == null || interviewerList == null ) {
             return 0;
-        } else if ( !stuInfo.getFirstDept().equals(interviewerList.getDept()) ) {
+        }
+        if ( stuInfo.getStatus() != StudentStatusConstant.INTERVIEWING ) {
+            return ResultStatusCodeConstant.FAILED;
+        }
+        if ( !stuInfo.getFirstDept().equals(interviewerList.getDept()) ) {
             return ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION;
+        }
+        AdjustStuInfo adjustStuInfo = new AdjustStuInfo(stuInfo);
+        if ( department != null ) {
+            adjustStuInfo.setAdjustDept(department);
+        }
+        adjustStuInfo.setStatus(StudentStatusConstant.CHECKED_IN);
+        stuInfo.setStatus(StudentStatusConstant.CHECKED_IN);
+        UpdateWrapper<StuInfo> studentUpdateWrapper = new UpdateWrapper<>();
+        studentUpdateWrapper.eq("stu_id", stuId);
+        studentUpdateWrapper.eq("status", StudentStatusConstant.INTERVIEWING);
+        int insertAdjustStuInfo = adjustStuInfoMapper.insert(adjustStuInfo);
+        int updateStuInfo = stuInfoMapper.update(stuInfo, studentUpdateWrapper);
+        if ( insertAdjustStuInfo == 1 || updateStuInfo == 1 ) {
+            return stuInfo.getSecondDept();
         } else {
-            AdjustStuInfo adjustStuInfo = new AdjustStuInfo(stuInfo);
-            if ( department != null ) {
-                adjustStuInfo.setAdjustDept(department);
-            }
-            adjustStuInfo.setStatus(StudentStatusConstant.CHECKED_IN);
-            stuInfo.setStatus(StudentStatusConstant.CHECKED_IN);
-            UpdateWrapper<StuInfo> studentUpdateWrapper = new UpdateWrapper<>();
-            studentUpdateWrapper.eq("stu_id", stuId);
-            studentUpdateWrapper.eq("status", StudentStatusConstant.INTERVIEWING);
-            int insertAdjustStuInfo = adjustStuInfoMapper.insert(adjustStuInfo);
-            int updateStuInfo = stuInfoMapper.update(stuInfo, studentUpdateWrapper);
-            if ( insertAdjustStuInfo == 1 || updateStuInfo == 1 ) {
-                return stuInfo.getSecondDept();
-            } else {
-                return ResultStatusCodeConstant.FAILED;
-            }
+            return ResultStatusCodeConstant.FAILED;
         }
     }
 
@@ -78,22 +81,21 @@ public class AdjustStuInfoServiceImpl extends ServiceImpl<AdjustStuInfoMapper, A
         StuInfo stuInfo = stuInfoMapper.selectOne(studentQueryWrapper);
         if ( adjustStuInfo == null || stuInfo == null ) {
             return 0;
+        }
+        UpdateWrapper<AdjustStuInfo> adjustStudentUpdateWrapper = new UpdateWrapper<>();
+        UpdateWrapper<StuInfo> studentUpdateWrapper = new UpdateWrapper<>();
+        adjustStudentUpdateWrapper.eq("stu_id", stuId);
+        adjustStudentUpdateWrapper.eq("status", StudentStatusConstant.CHECKED_IN);
+        studentUpdateWrapper.eq("stu_id", stuId);
+        studentUpdateWrapper.eq("status", StudentStatusConstant.CHECKED_IN);
+        adjustStuInfo.setStatus(StudentStatusConstant.INTERVIEWING);
+        stuInfo.setStatus(StudentStatusConstant.INTERVIEWING);
+        int updateAdjustStuInfo = adjustStuInfoMapper.update(adjustStuInfo, adjustStudentUpdateWrapper);
+        int updateStuInfo = stuInfoMapper.update(stuInfo, studentUpdateWrapper);
+        if ( updateAdjustStuInfo == 1 && updateStuInfo == 1 ) {
+            return StudentStatusConstant.INTERVIEWING;
         } else {
-            UpdateWrapper<AdjustStuInfo> adjustStudentUpdateWrapper = new UpdateWrapper<>();
-            UpdateWrapper<StuInfo> studentUpdateWrapper = new UpdateWrapper<>();
-            adjustStudentUpdateWrapper.eq("stu_id", stuId);
-            adjustStudentUpdateWrapper.eq("status", StudentStatusConstant.CHECKED_IN);
-            studentUpdateWrapper.eq("stu_id", stuId);
-            studentUpdateWrapper.eq("status", StudentStatusConstant.CHECKED_IN);
-            adjustStuInfo.setStatus(StudentStatusConstant.INTERVIEWING);
-            stuInfo.setStatus(StudentStatusConstant.INTERVIEWING);
-            int updateAdjustStuInfo = adjustStuInfoMapper.update(adjustStuInfo, adjustStudentUpdateWrapper);
-            int updateStuInfo = stuInfoMapper.update(stuInfo, studentUpdateWrapper);
-            if ( updateAdjustStuInfo == 1 && updateStuInfo == 1 ) {
-                return StudentStatusConstant.INTERVIEWING;
-            } else {
-                return ResultStatusCodeConstant.FAILED;
-            }
+            return ResultStatusCodeConstant.FAILED;
         }
     }
 
