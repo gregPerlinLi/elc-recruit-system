@@ -1,7 +1,6 @@
 package com.gdutelc.recruit.service.interfaces;
 
 import com.gdutelc.recruit.domain.dto.*;
-import com.gdutelc.recruit.domain.entities.Comment;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
@@ -220,10 +219,11 @@ public interface IInterviewService {
      * 二面调剂通过接口
      *
      * @param stuId 通过的学生学号
+     * @param interviewerUsername 面试官用户名
      * @return {@link ResultVO}，其中数据为当前学生的状态码
      */
-    @PutMapping(value = "/pro/interview/elc_access/stu_status_code/second_adjust_interview_pass/{stu_id}")
-    ResultVO<Integer> secondAdjustInterviewPass(@PathVariable("stu_id") String stuId);
+    @PutMapping(value = "/pro/interview/elc_access/stu_status_code/second_adjust_interview_pass/{stu_id}/{interviewer_username}")
+    ResultVO<Integer> secondAdjustInterviewPass(@PathVariable("stu_id") String stuId, @PathVariable("interviewer_username") String interviewerUsername);
 
     /* TODO: 以下为面试总进度相关接口 */
 
