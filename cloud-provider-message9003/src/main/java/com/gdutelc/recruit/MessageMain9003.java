@@ -1,6 +1,8 @@
 package com.gdutelc.recruit;
 
 import com.gdutelc.recruit.constant.RedisKeyConstant;
+import com.gdutelc.recruit.domain.wx.AccessTokenDTO;
+import com.gdutelc.recruit.service.interfaces.WeChatServerService;
 import com.gdutelc.recruit.utils.SpringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
+import javax.annotation.Resource;
 
 /**
  * @author gregPerlinLi
@@ -21,6 +24,8 @@ public class MessageMain9003 {
         SpringApplication.run(MessageMain9003.class, args);
         Init init = SpringUtils.getBeanByClazz(Init.class);
         init.checkProcessKey();
+
+        init.initAccessToken();
     }
 }
 
@@ -33,6 +38,18 @@ public class MessageMain9003 {
 @Component
 @Slf4j
 class Init {
+
+    @Resource
+    WeChatServerService weChatServerService;
+
+    public void initAccessToken(){
+        AccessTokenDTO accessTokenDTO = weChatServerService.refreshAccessToken();
+        if(accessTokenDTO == null || accessTokenDTO.getAccessToken() == null){
+            log.error("微信小程序全局唯一后台接口调用凭据AccessToken初始化失败!");
+        }else {
+            log.info("微信小程序全局唯一后台接口调用凭据AccessToken初始化成功");
+        }
+    }
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
