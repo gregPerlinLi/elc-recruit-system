@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.gdutelc.recruit.constant.StudentStatusConstant;
 import com.gdutelc.recruit.domain.entities.BriefPasserInfo;
 import com.gdutelc.recruit.mapper.BriefPasserInfoMapper;
-import com.gdutelc.recruit.service.interfaces.IPassList;
+import com.gdutelc.recruit.service.interfaces.IPassListService;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.List;
  * @date 2022/08/28 22:04
  */
 @Service
-public class IPassListImpl implements IPassList {
+public class IPassListServiceImpl implements IPassListService {
 
     @Resource
     BriefPasserInfoMapper briefPasserInfoMapper;

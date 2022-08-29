@@ -8,7 +8,7 @@ import java.util.List;
  * @author cherry_jerry
  * @date 2022/08/28 15:04
  */
-public interface IPassList {
+public interface IPassListService {
     /**
      * 获取一面通过者名单
      * @param department 部门

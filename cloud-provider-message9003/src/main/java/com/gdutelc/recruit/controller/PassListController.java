@@ -4,7 +4,7 @@ import com.gdutelc.recruit.constant.ResultStatusCodeConstant;
 import com.gdutelc.recruit.domain.dto.DetailedInfoDTO;
 import com.gdutelc.recruit.domain.entities.BriefPasserInfo;
 import com.gdutelc.recruit.domain.vo.ResultVO;
-import com.gdutelc.recruit.service.interfaces.IPassList;
+import com.gdutelc.recruit.service.interfaces.IPassListService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +21,7 @@ import java.util.List;
 public class PassListController {
 
     @Resource
-    private IPassList iPassList;
+    private IPassListService iPassListService;
     /**
      * 获取一面通过的学生列表
      *
@@ -29,7 +29,7 @@ public class PassListController {
      */
     @GetMapping(value = "/get_first_interview_pass_list/{dept}")
     public ResultVO<List<BriefPasserInfo>> getFirstInterviewPassList(@PathVariable("dept") Integer dept) {
-        List<BriefPasserInfo> passList = iPassList.getFirstInterviewPassList(dept);
+        List<BriefPasserInfo> passList = iPassListService.getFirstInterviewPassList(dept);
         if(passList == null || passList.isEmpty()){
             return  new ResultVO<>(ResultStatusCodeConstant.NOT_FIND,"无记录");
         }

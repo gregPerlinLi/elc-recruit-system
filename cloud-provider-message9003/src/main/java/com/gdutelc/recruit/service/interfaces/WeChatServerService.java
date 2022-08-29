@@ -11,7 +11,7 @@ import java.util.Map;
  * @date 2022/08/29 13:35
  */
 
-public interface WeChatServer {
+public interface WeChatServerService {
     /**
      * 向微信服务端发送请求，获取小程序全局唯一后台接口调用凭据
      * 该方法会导致旧的凭据失效，且缓存新的凭据
