@@ -26,7 +26,7 @@ public class InterviewerLoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         IInterviewService interviewService = WebApplicationContextUtils.getRequiredWebApplicationContext(request.getServletContext()).getBean(IInterviewService.class);
-        String username = (String) request.getSession().getAttribute("username");
+        String username = (String) request.getSession(false).getAttribute("username");
         String sessionId = request.getSession().getId();
         if ( username != null ) {
             ResultVO<String> result = interviewService.loginVerify(username, sessionId);
