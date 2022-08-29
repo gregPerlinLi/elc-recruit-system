@@ -33,12 +33,12 @@
     {
       "name": "wechat-server.tokenUrl",
       "type": "java.lang.String",
-      "description": "微信获取token地址."
+      "description": "获取小程序全局唯一后台接口调用凭据的请求地址."
     },
     {
       "name": "wechat-server.sendMessageUrl",
       "type": "java.lang.String",
-      "description": "微信消息推送URL."
+      "description": "小程序向用户推送信息请求地址."
     }
   ]
 }
