@@ -25,6 +25,7 @@ public class PassListController {
     /**
      * 获取一面通过的学生列表
      *
+     * @param dept 部门筛选（{@code 0}代表不筛选部门）
      * @return {@link ResultVO}，其中包含数据{@link List < StuInfo >}，和状态码和信息
      */
     @GetMapping(value = "/get_first_interview_pass_list/{dept}")
@@ -39,6 +40,7 @@ public class PassListController {
     /**
      * 获取最终录用学生列表
      *
+     * @param dept 部门筛选（{@code 0}代表不筛选部门）
      * @return {@link ResultVO}，其中包含数据{@link List < StuInfo >}，和状态码和信息
      */
     @GetMapping(value = "/get_final_admission_list/{dept}")
