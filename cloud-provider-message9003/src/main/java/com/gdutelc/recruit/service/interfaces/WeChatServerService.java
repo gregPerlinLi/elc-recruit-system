@@ -32,7 +32,7 @@ public interface WeChatServerService {
      * @param data 模板内容，格式为键值对
      * @return 请求返回信息
      */
-    SendMessageDTO sendSubscribeMessage(String toUser, String templateId, Map<String,String> data);
+    SendMessageDTO sendSubscribeMessage(String toUser, String templateId, Map<String,Object> data);
 
     /**
      * 向用户发送第一次面试提醒

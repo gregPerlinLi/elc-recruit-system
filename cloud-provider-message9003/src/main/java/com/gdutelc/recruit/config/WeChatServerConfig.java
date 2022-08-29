@@ -34,4 +34,17 @@ public class WeChatServerConfig {
      * 小程序向用户推送信息请求地址
      */
     private String sendMessageUrl;
+    /**
+     * 跳转小程序类型
+     * developer：开发版
+     * trial：体验版
+     * formal：正式版
+     */
+    private String miniProgramState;
+
+    /**
+     * 一面，二面，笔试提醒消息的内容模板id
+     * 该模板从微信小程序管理界面设置
+     */
+    private  String interviewNotifyModelId;
 }
