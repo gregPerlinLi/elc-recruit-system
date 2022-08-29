@@ -40,3 +40,11 @@ wx:
     secret: 3281d335f1ef8ccbdd162cef84c882e3
   url:
     code2Session: https://api.weixin.qq.com/sns/jscode2session
+
+
+wechat-server:
+  appid: wx3fd923d8fdafde76
+  secret: 3281d335f1ef8ccbdd162cef84c882e3
+  grantType: client_credential
+  tokenUrl: https://api.weixin.qq.com/cgi-bin/token
+  sendMessageUrl: https://api.weixin.qq.com/cgi-bin/message/subscribe/send
