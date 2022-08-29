@@ -14,6 +14,31 @@
       "name": "wx.applet.secret",
       "type": "java.lang.String",
       "description": "微信小程序Secret."
+    },
+    {
+      "name": "wechat-server.appid",
+      "type": "java.lang.String",
+      "description": "微信小程序AppID."
+    },
+    {
+      "name": "wechat-server.secret",
+      "type": "java.lang.String",
+      "description": "微信小程序Secret."
+    },
+    {
+      "name": "wechat-server.grantType",
+      "type": "java.lang.String",
+      "description": "微信登录授权类型."
+    },
+    {
+      "name": "wechat-server.tokenUrl",
+      "type": "java.lang.String",
+      "description": "微信获取token地址."
+    },
+    {
+      "name": "wechat-server.sendMessageUrl",
+      "type": "java.lang.String",
+      "description": "微信消息推送URL."
     }
   ]
 }
