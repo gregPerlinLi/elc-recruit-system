@@ -19,7 +19,7 @@ import java.util.List;
  * @date 2022/08/30 13:42
  */
 @RestController
-@RequestMapping("/pro/super_admin/elc_access/")
+@RequestMapping("/pro/super_admin/elc_access")
 public class WeChatMessageController {
 
     @Resource
@@ -64,7 +64,7 @@ public class WeChatMessageController {
         }
     }
 
-    @GetMapping(value = "/second_interview_notify")
+    @GetMapping(value = "/written_test_notify")
     public ResultVO<Void> writtenTestNotify(){
         List<StuInfo> firstInterviewList = iPassListService.getOpenIdList(StudentStatusConstant.PASS);
         List<String> successSendingList = new LinkedList<>();
