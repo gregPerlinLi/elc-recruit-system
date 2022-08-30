@@ -1,14 +1,19 @@
 package com.gdutelc.recruit.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.gdutelc.recruit.constant.DeptConstant;
 import com.gdutelc.recruit.constant.StudentStatusConstant;
+import com.gdutelc.recruit.domain.dto.AdmissionStuDTO;
+import com.gdutelc.recruit.domain.entities.AdmissionStu;
 import com.gdutelc.recruit.domain.entities.BriefPasserInfo;
 import com.gdutelc.recruit.domain.entities.StuInfo;
+import com.gdutelc.recruit.mapper.AdmissionStuMapper;
 import com.gdutelc.recruit.mapper.BriefPasserInfoMapper;
 import com.gdutelc.recruit.mapper.StuInfoMapper;
 import com.gdutelc.recruit.service.interfaces.IPassListService;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,6 +28,9 @@ public class IPassListServiceImpl implements IPassListService {
     @Resource
     StuInfoMapper stuInfoMapper;
 
+    @Resource
+    AdmissionStuMapper admissionStuMapper;
+
     @Override
     public List<BriefPasserInfo> getFirstInterviewPassList(Integer department) {
         QueryWrapper<BriefPasserInfo> wrapper = new QueryWrapper<>();
@@ -33,9 +41,25 @@ public class IPassListServiceImpl implements IPassListService {
     }
 
     @Override
-    public List<BriefPasserInfo> getFinalAdmissionList(Integer department) {
-        //@TODO 等待修改二面业务逻辑
-        return null;
+    public List<AdmissionStuDTO> getFinalAdmissionList(Integer department) {
+        QueryWrapper<AdmissionStu> queryWrapper = new QueryWrapper<>();
+        if ( department == DeptConstant.ALL ) {
+            List<AdmissionStu> admissionStuList = admissionStuMapper.selectList(null);
+            List<AdmissionStuDTO> admissionStuDTOList = new ArrayList<>(admissionStuList.size());
+            for ( AdmissionStu admissionStu : admissionStuList ) {
+                AdmissionStuDTO admissionStuDTO = new AdmissionStuDTO(admissionStu);
+                admissionStuDTOList.add(admissionStuDTO);
+            }
+            return admissionStuDTOList;
+        }
+        queryWrapper.eq("admission_dept", department);
+        List<AdmissionStu> admissionStuList = admissionStuMapper.selectList(queryWrapper);
+        List<AdmissionStuDTO> admissionStuDTOList = new ArrayList<>(admissionStuList.size());
+        for ( AdmissionStu admissionStu : admissionStuList ) {
+            AdmissionStuDTO admissionStuDTO = new AdmissionStuDTO(admissionStu);
+            admissionStuDTOList.add(admissionStuDTO);
+        }
+        return admissionStuDTOList;
     }
 
     @Override

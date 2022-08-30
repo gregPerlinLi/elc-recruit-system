@@ -1,5 +1,6 @@
 package com.gdutelc.recruit.service.interfaces;
 
+import com.gdutelc.recruit.domain.dto.AdmissionStuDTO;
 import com.gdutelc.recruit.domain.entities.BriefPasserInfo;
 import com.gdutelc.recruit.domain.entities.StuInfo;
 
@@ -20,9 +21,9 @@ public interface IPassListService {
     /**
      * 获取最终录取名单
      * @param department 部门
-     * @return {@link BriefPasserInfo} 通过面试者的重要信息：如姓名，学生id，联系电话
+     * @return {@link AdmissionStuDTO} 通过面试者的重要信息：如姓名，学生id，联系电话
      */
-    List<BriefPasserInfo> getFinalAdmissionList(Integer department);
+    List<AdmissionStuDTO> getFinalAdmissionList(Integer department);
 
     /**
      * 根据学生状态获取学生openid列表
