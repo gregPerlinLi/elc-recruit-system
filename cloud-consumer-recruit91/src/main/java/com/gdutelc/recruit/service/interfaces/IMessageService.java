@@ -1,5 +1,6 @@
 package com.gdutelc.recruit.service.interfaces;
 
+import com.gdutelc.recruit.domain.dto.AdmissionStuDTO;
 import com.gdutelc.recruit.domain.entities.BriefPasserInfo;
 import com.gdutelc.recruit.domain.entities.StuInfo;
 import com.gdutelc.recruit.domain.vo.ResultVO;
@@ -47,7 +48,7 @@ public interface IMessageService {
      * @param dept 社团部门
      */
     @GetMapping(value = "/pro/recruit/elc_access/get_final_admission_list/{dept}")
-    ResultVO<List<BriefPasserInfo>> getFinalAdmissionList(@PathVariable("dept") Integer dept);
+    ResultVO<List<AdmissionStuDTO>> getFinalAdmissionList(@PathVariable("dept") Integer dept);
 
     /**
      * 向用户发送第一次面试提醒
