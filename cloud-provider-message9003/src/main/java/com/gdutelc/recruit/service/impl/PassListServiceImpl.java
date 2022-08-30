@@ -21,7 +21,7 @@ import java.util.List;
  * @date 2022/08/28 22:04
  */
 @Service
-public class IPassListServiceImpl implements IPassListService {
+public class PassListServiceImpl implements IPassListService {
 
     @Resource
     BriefPasserInfoMapper briefPasserInfoMapper;
