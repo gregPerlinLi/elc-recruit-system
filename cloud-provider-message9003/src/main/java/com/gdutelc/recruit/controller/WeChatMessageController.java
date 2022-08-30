@@ -28,7 +28,7 @@ public class WeChatMessageController {
     WeChatServerService weChatServerService;
 
     @GetMapping(value = "/first_interview_notify")
-    public ResultVO<List<String>> firstInterviewNotify(){
+    public ResultVO<Void> firstInterviewNotify(){
         List<StuInfo> firstInterviewList = iPassListService.getOpenIdList(StudentStatusConstant.REGISTERED);
         List<String> successSendingList = new LinkedList<>();
         for (StuInfo stuInfo :
@@ -39,15 +39,15 @@ public class WeChatMessageController {
             }
         }
         if(successSendingList.size() == firstInterviewList.size()){
-            return new ResultVO<> (ResultStatusCodeConstant.SUCCESS,"所有一面提醒发送成功",successSendingList);
+            return new ResultVO<> (ResultStatusCodeConstant.SUCCESS,"所有一面提醒发送成功");
         }else {
-            return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND,"部分一面提醒发送成功",successSendingList);
+            return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND,"部分一面提醒发送成功");
         }
     }
 
 
     @GetMapping(value = "/second_interview_notify")
-    public ResultVO<List<String>> secondInterviewNotify(){
+    public ResultVO<Void> secondInterviewNotify(){
         List<StuInfo> firstInterviewList = iPassListService.getOpenIdList(StudentStatusConstant.PASS);
         List<String> successSendingList = new LinkedList<>();
         for (StuInfo stuInfo :
@@ -58,14 +58,14 @@ public class WeChatMessageController {
             }
         }
         if(successSendingList.size() == firstInterviewList.size()){
-            return new ResultVO<> (ResultStatusCodeConstant.SUCCESS,"所有二面提醒发送成功",successSendingList);
+            return new ResultVO<> (ResultStatusCodeConstant.SUCCESS,"所有二面提醒发送成功");
         }else {
-            return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND,"部分二面提醒发送成功",successSendingList);
+            return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND,"部分二面提醒发送成功");
         }
     }
 
     @GetMapping(value = "/second_interview_notify")
-    public ResultVO<List<String>> writtenTestNotify(){
+    public ResultVO<Void> writtenTestNotify(){
         List<StuInfo> firstInterviewList = iPassListService.getOpenIdList(StudentStatusConstant.PASS);
         List<String> successSendingList = new LinkedList<>();
         for (StuInfo stuInfo :
@@ -76,9 +76,9 @@ public class WeChatMessageController {
             }
         }
         if(successSendingList.size() == firstInterviewList.size()){
-            return new ResultVO<> (ResultStatusCodeConstant.SUCCESS,"所有笔试提醒发送成功",successSendingList);
+            return new ResultVO<> (ResultStatusCodeConstant.SUCCESS,"所有笔试提醒发送成功");
         }else {
-            return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND,"部分笔试提醒发送成功",successSendingList);
+            return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND,"部分笔试提醒发送成功");
         }
     }
 }

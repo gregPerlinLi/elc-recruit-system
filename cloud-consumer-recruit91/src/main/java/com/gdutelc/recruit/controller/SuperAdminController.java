@@ -46,7 +46,7 @@ public class SuperAdminController {
     @SentinelResource(value = "firstInterviewNotify", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "firstInterviewNotifyBlockHandler")
     @ApiOperation(value = "发送一面通知", tags = "super_admin", response = ResultVO.class)
     public ResultVO<Void> firstInterviewNotify() {
-        return null;
+        return iMessageService.firstInterviewNotify();
     }
 
     /**
@@ -58,7 +58,7 @@ public class SuperAdminController {
     @SentinelResource(value = "secondInterviewNotify", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "secondInterviewNotifyBlockHandler")
     @ApiOperation(value = "发送二面通知", tags = "super_admin", response = ResultVO.class)
     public ResultVO<Void> secondInterviewNotify() {
-        return null;
+        return iMessageService.secondInterviewNotify();
     }
 
     /**
@@ -70,7 +70,7 @@ public class SuperAdminController {
     @SentinelResource(value = "writtenTestNotify", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "writtenTestNotifyBlockHandler")
     @ApiOperation(value = "发送笔试通知", tags = "super_admin", response = ResultVO.class)
     public ResultVO<Void> writtenTestNotify() {
-        return null;
+        return iMessageService.writtenTestNotify();
     }
 
     /**

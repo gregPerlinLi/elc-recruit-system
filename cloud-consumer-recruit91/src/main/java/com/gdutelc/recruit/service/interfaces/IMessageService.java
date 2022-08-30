@@ -48,4 +48,25 @@ public interface IMessageService {
      */
     @GetMapping(value = "/pro/recruit/elc_access/get_final_admission_list/{dept}")
     ResultVO<List<BriefPasserInfo>> getFinalAdmissionList(@PathVariable("dept") Integer dept);
+
+    /**
+     * 向用户发送第一次面试提醒
+     * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
+     */
+    @GetMapping(value = "/pro/super_admin/elc_access/first_interview_notify")
+    ResultVO<Void> firstInterviewNotify();
+
+    /**
+     * 向用户发送第二次面试提醒
+     * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
+     */
+    @GetMapping(value = "/pro/super_admin/elc_access/second_interview_notify")
+    ResultVO<Void> secondInterviewNotify();
+
+    /**
+     * 向用户发送笔试提醒
+     * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
+     */
+    @GetMapping(value = "/pro/super_admin/elc_access/written_test_notify")
+    ResultVO<Void> writtenTestNotify();
 }
