@@ -33,7 +33,7 @@ public class WeChatMessageController {
         List<String> successSendingList = new LinkedList<>();
         for (StuInfo stuInfo :
                 firstInterviewList) {
-            SendMessageDTO sendMessageDTO = weChatServerService.sendSecondInterviewNotify(stuInfo.getOpenid());
+            SendMessageDTO sendMessageDTO = weChatServerService.sendFirstInterviewNotify(stuInfo.getOpenid());
             if(sendMessageDTO.getErrCode() == 0){
                 successSendingList.add(stuInfo.getName());
             }
@@ -52,7 +52,7 @@ public class WeChatMessageController {
         List<String> successSendingList = new LinkedList<>();
         for (StuInfo stuInfo :
                 firstInterviewList) {
-            SendMessageDTO sendMessageDTO = weChatServerService.sendFirstInterviewNotify(stuInfo.getOpenid());
+            SendMessageDTO sendMessageDTO = weChatServerService.sendSecondInterviewNotify(stuInfo.getOpenid());
             if(sendMessageDTO.getErrCode() == 0){
                 successSendingList.add(stuInfo.getName());
             }
