@@ -265,14 +265,16 @@ public class SentinelBlockHandler {
     /**
      * Sentinel 异常处理——获取一面通过的学生列表
      */
-    public ResultVO<List<DetailedInfoDTO>> getFirstInterviewPassListBlockHandler(BlockException exception) {
+    public ResultVO<List<DetailedInfoDTO>> getFirstInterviewPassListBlockHandler(Integer dept,
+                                                                                 BlockException exception) {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
 
     /**
      * Sentinel 异常处理——获取电协最终录取的所有面试者名单
      */
-    public ResultVO<List<DetailedInfoDTO>> getFinalAdmissionListBlockHandler(BlockException exception) {
+    public ResultVO<List<DetailedInfoDTO>> getFinalAdmissionListBlockHandler(Integer dept,
+                                                                             BlockException exception) {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
 
