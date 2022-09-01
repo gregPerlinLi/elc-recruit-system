@@ -7,6 +7,9 @@ import com.gdutelc.recruit.service.interfaces.WeChatServerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -79,7 +82,13 @@ public class WeChatServerServiceImpl implements WeChatServerService {
         uriVariable.add("data", JSONUtils.toJSONString(data));
         uriVariable.add("template_id",templateId);
         uriVariable.add("miniprogram_state",miniProgramState);
-        SendMessageDTO sendMessageDTO = restTemplate.postForObject(url, uriVariable, SendMessageDTO.class);
+        uriVariable.add("lang","zh_CN");
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Accept","application/json");
+        HttpEntity<Object> httpEntity = new HttpEntity<>(uriVariable,headers);
+        SendMessageDTO sendMessageDTO = restTemplate.postForObject(url, httpEntity, SendMessageDTO.class);
+
         if(sendMessageDTO == null){
             log.error("微信消息通知接口调用失败,sendMessageDTO=null");
         }else if( sendMessageDTO.getErrCode() != 0){
