@@ -20,7 +20,7 @@ import java.util.List;
  * @date 2022-08-10
  */
 @RestController
-@RequestMapping(value = "/recruit/elc_access")
+@RequestMapping(value = "/super_admin/elc_access")
 public class SuperAdminController {
 
     @Resource

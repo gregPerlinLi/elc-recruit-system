@@ -17,7 +17,7 @@ import java.util.List;
  * @date 2022/08/28 14:24
  */
 @RestController
-@RequestMapping("/pro/recruit/elc_access/")
+@RequestMapping("/pro/super_admin/elc_access/")
 public class PassListController {
 
     @Resource

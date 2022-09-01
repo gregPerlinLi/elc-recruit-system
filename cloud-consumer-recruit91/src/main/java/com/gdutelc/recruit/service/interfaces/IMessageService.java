@@ -36,7 +36,7 @@ public interface IMessageService {
      * @return {@link ResultVO}，其中包含数据{@link List<StuInfo>}，和状态码和信息
      * @param dept 社团部门
      */
-    @GetMapping(value = "/pro/recruit/elc_access/get_first_interview_pass_list/{dept}")
+    @GetMapping(value = "/pro/super_admin/elc_access/get_first_interview_pass_list/{dept}")
     ResultVO<List<BriefPasserInfo>> getFirstInterviewPassList(@PathVariable("dept") Integer dept);
 
 
@@ -46,7 +46,7 @@ public interface IMessageService {
      * @return {@link ResultVO}，其中包含数据{@link List<StuInfo>}，和状态码和信息
      * @param dept 社团部门
      */
-    @GetMapping(value = "/pro/recruit/elc_access/get_final_admission_list/{dept}")
+    @GetMapping(value = "/pro/super_admin/elc_access/get_final_admission_list/{dept}")
     ResultVO<List<BriefPasserInfo>> getFinalAdmissionList(@PathVariable("dept") Integer dept);
 
     /**
