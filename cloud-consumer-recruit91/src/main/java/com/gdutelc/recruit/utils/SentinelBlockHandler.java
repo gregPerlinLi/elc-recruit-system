@@ -3,6 +3,7 @@ package com.gdutelc.recruit.utils;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.gdutelc.recruit.constant.ResultStatusCodeConstant;
 import com.gdutelc.recruit.domain.dto.*;
+import com.gdutelc.recruit.domain.entities.BriefPasserInfo;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -265,7 +266,7 @@ public class SentinelBlockHandler {
     /**
      * Sentinel 异常处理——获取一面通过的学生列表
      */
-    public ResultVO<List<DetailedInfoDTO>> getFirstInterviewPassListBlockHandler(Integer dept,
+    public ResultVO<List<BriefPasserInfo>> getFirstInterviewPassListBlockHandler(Integer dept,
                                                                                  BlockException exception) {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
@@ -273,7 +274,7 @@ public class SentinelBlockHandler {
     /**
      * Sentinel 异常处理——获取电协最终录取的所有面试者名单
      */
-    public ResultVO<List<DetailedInfoDTO>> getFinalAdmissionListBlockHandler(Integer dept,
+    public ResultVO<List<AdmissionStuDTO>> getFinalAdmissionListBlockHandler(Integer dept,
                                                                              BlockException exception) {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }

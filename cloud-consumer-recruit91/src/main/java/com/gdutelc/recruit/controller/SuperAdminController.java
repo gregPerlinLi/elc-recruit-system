@@ -1,6 +1,7 @@
 package com.gdutelc.recruit.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.gdutelc.recruit.domain.dto.AdmissionStuDTO;
 import com.gdutelc.recruit.domain.dto.DetailedInfoDTO;
 import com.gdutelc.recruit.domain.entities.BriefPasserInfo;
 import com.gdutelc.recruit.domain.entities.StuInfo;
