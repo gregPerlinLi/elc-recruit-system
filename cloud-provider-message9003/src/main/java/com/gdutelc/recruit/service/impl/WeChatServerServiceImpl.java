@@ -11,8 +11,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -43,7 +41,7 @@ public class WeChatServerServiceImpl implements WeChatServerService {
     private String sendMessageUrl;
     @Value("${wechat-server.miniProgramState}")
     private String miniProgramState;
-    @Value("${wechat-server.miniProgramState}")
+    @Value("${wechat-server.interviewNotifyModelId}")
     private String interviewNotifyModelId;
 
     @Override
@@ -73,20 +71,20 @@ public class WeChatServerServiceImpl implements WeChatServerService {
     }
 
     @Override
-    public SendMessageDTO sendSubscribeMessage(String toUser, String templateId, Map<String,Object> data) {
+    public SendMessageDTO sendSubscribeMessage(String toUser, String templateId, Map<String, Object> data) {
         String accessToken = getAccessToken();
         String url = sendMessageUrl + "?access_token=" + accessToken;
-        MultiValueMap<String,Object> uriVariable = new LinkedMultiValueMap<>();
-        uriVariable.add("access_token",accessToken);
-        uriVariable.add("touser",toUser);
-        uriVariable.add("data", JSONUtils.toJSONString(data));
-        uriVariable.add("template_id",templateId);
-        uriVariable.add("miniprogram_state",miniProgramState);
-        uriVariable.add("lang","zh_CN");
+        Map<String,Object> uriVariable = new HashMap<>(16);
+        uriVariable.put("access_token",accessToken);
+        uriVariable.put("touser",toUser);
+        uriVariable.put("data", data);
+        uriVariable.put("template_id",templateId);
+        uriVariable.put("miniprogram_state",miniProgramState);
+        uriVariable.put("lang","zh_CN");
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set("Accept","application/json");
-        HttpEntity<Object> httpEntity = new HttpEntity<>(uriVariable,headers);
+        HttpEntity<Object> httpEntity = new HttpEntity<>(JSONUtils.toJSONString(uriVariable),headers);
         SendMessageDTO sendMessageDTO = restTemplate.postForObject(url, httpEntity, SendMessageDTO.class);
 
         if(sendMessageDTO == null){
@@ -103,30 +101,30 @@ public class WeChatServerServiceImpl implements WeChatServerService {
     @Override
     public SendMessageDTO sendFirstInterviewNotify(String toUser) {
         Map<String, Object> data = setNotifyData("电子科技协会", "实验-4 306",
-                "一面时间", "电协招新第一次面试即日开始，记得准时参加哦~");
+                "2022-10-10 20:00", "电协招新第一次面试即日开始~");
         return sendSubscribeMessage(toUser,interviewNotifyModelId,data);
     }
 
     @Override
     public SendMessageDTO sendSecondInterviewNotify(String toUser) {
         Map<String, Object> data = setNotifyData("电子科技协会", "实验-4 308",
-                "二面时间", "电协招新第二次面试即日开始，记得准时参加哦~");
+                "2022-10-30 20:00", "电协招新第二次面试即日开始~");
         return sendSubscribeMessage(toUser,interviewNotifyModelId,data);
     }
 
     @Override
     public SendMessageDTO sendWrittenTestNotify(String toUser) {
         Map<String, Object> data = setNotifyData("电子科技协会", "实验-4 208",
-                "笔试时间", "电协招新笔试即日开始，记得准时参加哦~");
+                "2022-10-20 20:00", "电协招新笔试即日开始~");
         return sendSubscribeMessage(toUser,interviewNotifyModelId,data);
     }
 
-    private Map<String,Object> setNotifyData(String sender, String place, String time, String matter){
-        Map<String,Object> data = new HashMap<>(6);
-        Map<String,Object> name1 = new HashMap<>(2);
-        Map<String,Object> thing4 = new HashMap<>(2);
-        Map<String,Object> time13 = new HashMap<>(2);
-        Map<String,Object> thing3 = new HashMap<>(2);
+    private Map<String, Object> setNotifyData(String sender, String place, String time, String matter){
+        Map<String, Object> data = new HashMap<>(6);
+        Map<String, Object> name1 = new HashMap<>(2);
+        Map<String, Object> thing4 = new HashMap<>(2);
+        Map<String, Object> time13 = new HashMap<>(2);
+        Map<String, Object> thing3 = new HashMap<>(2);
         name1.put("value",sender);
         thing4.put("value",place);
         time13.put("value",time);
@@ -135,6 +133,6 @@ public class WeChatServerServiceImpl implements WeChatServerService {
         data.put("thing4",thing4);
         data.put("time13",time13);
         data.put("thing3",thing3);
-        return  data;
+        return data;
     }
 }
