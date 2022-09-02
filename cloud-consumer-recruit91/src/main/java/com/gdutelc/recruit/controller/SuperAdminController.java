@@ -1,7 +1,7 @@
 package com.gdutelc.recruit.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
-import com.gdutelc.recruit.domain.dto.DetailedInfoDTO;
+import com.gdutelc.recruit.domain.dto.AdmissionStuDTO;
 import com.gdutelc.recruit.domain.entities.BriefPasserInfo;
 import com.gdutelc.recruit.domain.entities.StuInfo;
 import com.gdutelc.recruit.domain.vo.ResultVO;
@@ -24,7 +24,7 @@ import java.util.List;
 public class SuperAdminController {
 
     @Resource
-    IMessageService iMessageService;
+    IMessageService messageService;
     /**
      * 面试进度推进接口
      *
@@ -46,7 +46,7 @@ public class SuperAdminController {
     @SentinelResource(value = "firstInterviewNotify", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "firstInterviewNotifyBlockHandler")
     @ApiOperation(value = "发送一面通知", tags = "super_admin", response = ResultVO.class)
     public ResultVO<Void> firstInterviewNotify() {
-        return iMessageService.firstInterviewNotify();
+        return messageService.firstInterviewNotify();
     }
 
     /**
@@ -58,7 +58,7 @@ public class SuperAdminController {
     @SentinelResource(value = "secondInterviewNotify", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "secondInterviewNotifyBlockHandler")
     @ApiOperation(value = "发送二面通知", tags = "super_admin", response = ResultVO.class)
     public ResultVO<Void> secondInterviewNotify() {
-        return iMessageService.secondInterviewNotify();
+        return messageService.secondInterviewNotify();
     }
 
     /**
@@ -70,7 +70,7 @@ public class SuperAdminController {
     @SentinelResource(value = "writtenTestNotify", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "writtenTestNotifyBlockHandler")
     @ApiOperation(value = "发送笔试通知", tags = "super_admin", response = ResultVO.class)
     public ResultVO<Void> writtenTestNotify() {
-        return iMessageService.writtenTestNotify();
+        return messageService.writtenTestNotify();
     }
 
     /**
@@ -83,19 +83,19 @@ public class SuperAdminController {
     @SentinelResource(value = "getFirstInterviewPassList", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "getFirstInterviewPassListBlockHandler")
     @ApiOperation(value = "获取一面通过的学生列表", tags = "super_admin", response = ResultVO.class)
     public ResultVO<List<BriefPasserInfo>> getFirstInterviewPassList(@ApiParam(value = "筛选部门", required = true) @PathVariable("dept") Integer dept) {
-        return iMessageService.getFirstInterviewPassList(dept);
+        return messageService.getFirstInterviewPassList(dept);
     }
 
     /**
      * 获取电协最终录取的所有面试者名单
      *
      * @param dept 部门筛选（{@code 0}代表不筛选部门）
-     * @return {@link ResultVO}，其中包含数据{@link List<StuInfo>}，和状态码和信息
+     * @return {@link ResultVO}，其中包含数据{@link List<AdmissionStuDTO>}，和状态码和信息
      */
     @GetMapping(value = "/get_final_admission_list/{dept}")
     @SentinelResource(value = "getFinalAdmissionList", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "getFinalAdmissionListBlockHandler")
     @ApiOperation(value = "获取电协最终录取的所有面试者名单", tags = "super_admin", response = ResultVO.class)
-    public ResultVO<List<DetailedInfoDTO>> getFinalAdmissionList(@ApiParam(value = "部门筛选", required = true) @PathVariable("dept") Integer dept) {
-        return null;
+    public ResultVO<List<AdmissionStuDTO>> getFinalAdmissionList(@ApiParam(value = "部门筛选", required = true) @PathVariable("dept") Integer dept) {
+        return messageService.getFinalAdmissionList(dept);
     }
 }
