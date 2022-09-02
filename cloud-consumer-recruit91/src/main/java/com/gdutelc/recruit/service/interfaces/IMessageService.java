@@ -1,5 +1,6 @@
 package com.gdutelc.recruit.service.interfaces;
 
+import com.gdutelc.recruit.domain.dto.AdmissionStuDTO;
 import com.gdutelc.recruit.domain.entities.BriefPasserInfo;
 import com.gdutelc.recruit.domain.entities.StuInfo;
 import com.gdutelc.recruit.domain.vo.ResultVO;
@@ -43,11 +44,11 @@ public interface IMessageService {
     /**
      * 获取电协最终录取的所有面试者名单
      *
-     * @return {@link ResultVO}，其中包含数据{@link List<StuInfo>}，和状态码和信息
-     * @param dept 社团部门
+     * @param dept 社团部门，{@code 0}代表全选
+     * @return {@link ResultVO}，其中包含数据{@link List<AdmissionStuDTO>}，和状态码和信息
      */
     @GetMapping(value = "/pro/super_admin/elc_access/get_final_admission_list/{dept}")
-    ResultVO<List<BriefPasserInfo>> getFinalAdmissionList(@PathVariable("dept") Integer dept);
+    ResultVO<List<AdmissionStuDTO>> getFinalAdmissionList(@PathVariable("dept") Integer dept);
 
     /**
      * 向用户发送第一次面试提醒
