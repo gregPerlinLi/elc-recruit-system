@@ -48,6 +48,15 @@ public interface WeChatServerService {
      */
     SendMessageDTO sendSecondInterviewNotify(String toUser);
 
+
+    /**
+     * 向用户发送最终通过面试提醒
+     * @author TUFSolareyes
+     * @param toUser 接收者的openid
+     * @return 请求返回信息
+     */
+    SendMessageDTO sendFinallyPassedNotify(String toUser);
+
     /**
      * 向用户发送笔试提醒
      * @param toUser 接收者的openid

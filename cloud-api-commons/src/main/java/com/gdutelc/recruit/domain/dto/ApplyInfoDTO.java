@@ -135,4 +135,5 @@ public class ApplyInfoDTO {
     @Setter
     @ApiModelProperty(value = "状态，报名时默认为0")
     private Integer status;
+
 }

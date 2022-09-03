@@ -113,6 +113,13 @@ public class WeChatServerServiceImpl implements WeChatServerService {
     }
 
     @Override
+    public SendMessageDTO sendFinallyPassedNotify(String toUser) {
+        Map<String,Object> data = setNotifyData("电子科技协会","实验-4",
+                "2022-10-31 20:00","恭喜你通过电子科技协会的笔试和面试！");
+        return sendSubscribeMessage(toUser,interviewNotifyModelId,data);
+    }
+
+    @Override
     public SendMessageDTO sendWrittenTestNotify(String toUser) {
         Map<String, Object> data = setNotifyData("电子科技协会", "实验-4 208",
                 "2022-10-20 20:00", "电协招新笔试即日开始~");
