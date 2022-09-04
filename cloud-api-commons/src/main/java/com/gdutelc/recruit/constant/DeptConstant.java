@@ -43,4 +43,9 @@ public interface DeptConstant {
      */
     int ONLINE_PUBLICITY_DEPT = 6;
 
+    /**
+     * 网络组
+     */
+    int BELL_NETWORK_GROUP = 7;
+
 }
