@@ -30,15 +30,15 @@ public class StudentStatusController {
     /* 一二面开始面试接口 */
 
     /**
-     * 一面开始面试接口
+     * 开始面试接口
      *
      * @param stuId 开始面试的学生学号
      * @param interviewerUsername 面试官用户名
      * @return {@link ResultVO}，其中数据为当前学生的状态码
      */
-    @PutMapping(value = "/first_interview_start/{stu_id}/{interviewer_username}")
-    public ResultVO<Integer> firstInterviewStart(@PathVariable("stu_id") String stuId,
-                                                 @PathVariable("interviewer_username") String interviewerUsername) {
+    @PutMapping(value = "/interview_start/{stu_id}/{interviewer_username}")
+    public ResultVO<Integer> interviewStart(@PathVariable("stu_id") String stuId,
+                                            @PathVariable("interviewer_username") String interviewerUsername) {
         Integer result = stuInfoService.interviewStart(stuId, interviewerUsername);
         if ( result == ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION ) {
             return new ResultVO<>(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION, "学生第一志愿部门和面试官所在部门不一致");
@@ -54,10 +54,12 @@ public class StudentStatusController {
     /**
      * 二面开始面试接口
      *
+     * @deprecated 请使用统一的面试开始接口 {@link #interviewStart(String, String)}
      * @param stuId 开始面试的学生学号
      * @param interviewerUsername 面试官用户名
      * @return {@link ResultVO}，其中数据为当前学生的状态码
      */
+    @Deprecated
     @PutMapping(value = "/second_interview_start/{stu_id}/{interviewer_username}")
     public ResultVO<Integer> secondInterviewStart(@PathVariable("stu_id") String stuId,
                                                   @PathVariable("interviewer_username") String interviewerUsername) {
@@ -76,15 +78,15 @@ public class StudentStatusController {
     /* 一二面面试通过接口 */
 
     /**
-     * 一面通过接口
+     * 面试通过接口
      *
      * @param stuId 通过的学生学号
      * @param interviewerUsername 面试官用户名
      * @return {@link ResultVO}，其中数据为当前学生的状态码
      */
-    @PutMapping(value = "/first_interview_pass/{stu_id}/{interviewer_username}")
-    public ResultVO<Integer> firstInterviewPass(@PathVariable("stu_id") String stuId,
-                                                @PathVariable("interviewer_username") String interviewerUsername) {
+    @PutMapping(value = "/interview_pass/{stu_id}/{interviewer_username}")
+    public ResultVO<Integer> interviewPass(@PathVariable("stu_id") String stuId,
+                                           @PathVariable("interviewer_username") String interviewerUsername) {
         Integer result = stuInfoService.interviewPass(stuId, interviewerUsername);
         if ( result == ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION ) {
             return new ResultVO<>(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION, "学生第一志愿部门和面试官所在部门不一致");
@@ -100,10 +102,12 @@ public class StudentStatusController {
     /**
      * 二面通过接口
      *
+     * @deprecated 请使用统一的面试通过接口 {@link #interviewPass(String, String)}
      * @param stuId 通过的学生学号
      * @param interviewerUsername 面试官用户名
      * @return {@link ResultVO}，其中数据为当前学生的状态码
      */
+    @Deprecated
     @PutMapping(value = "/second_interview_pass/{stu_id}/{interviewer_username}")
     public ResultVO<Integer> secondInterviewPass(@PathVariable("stu_id") String stuId,
                                                  @PathVariable("interviewer_username") String interviewerUsername) {

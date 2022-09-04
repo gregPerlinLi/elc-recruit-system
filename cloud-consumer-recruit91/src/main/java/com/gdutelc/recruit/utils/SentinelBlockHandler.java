@@ -173,17 +173,20 @@ public class SentinelBlockHandler {
     /* StudentStatusController */
 
     /**
-     * Sentinel 异常处理——一面开始面试接口
+     * Sentinel 异常处理——面试开始面试接口
      */
-    public ResultVO<Integer> firstInterviewStartHandlerException(@PathVariable("stu_id") String stuId,
-                                                                 @PathVariable("interviewer_username") String interviewerUsername,
-                                                                 BlockException exception) {
+    public ResultVO<Integer> interviewStartHandlerException(@PathVariable("stu_id") String stuId,
+                                                            @PathVariable("interviewer_username") String interviewerUsername,
+                                                            BlockException exception) {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
 
     /**
      * Sentinel 异常处理——二面开始面试接口
+     *
+     * @deprecated 一二面开始接口已合并，请使用 {@link #interviewStartHandlerException(String, String, BlockException)}
      */
+    @Deprecated
     public ResultVO<Integer> secondInterviewStartHandlerException(@PathVariable("stu_id") String stuId,
                                                                   @PathVariable("interviewer_username") String interviewerUsername,
                                                                   BlockException exception) {
@@ -191,17 +194,20 @@ public class SentinelBlockHandler {
     }
 
     /**
-     * Sentinel 异常处理——一面通过接口
+     * Sentinel 异常处理——面试通过接口
      */
-    public ResultVO<Integer> firstInterviewPassHandlerException(@PathVariable("stu_id") String stuId,
-                                                                @PathVariable("interviewer_username") String interviewerUsername,
-                                                                BlockException exception) {
+    public ResultVO<Integer> interviewPassHandlerException(@PathVariable("stu_id") String stuId,
+                                                           @PathVariable("interviewer_username") String interviewerUsername,
+                                                           BlockException exception) {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
 
     /**
      * Sentinel 异常处理——二面通过接口
+     *
+     * @deprecated 一二面通过接口已合并，请使用 {@link #interviewPassHandlerException(String, String, BlockException)}
      */
+    @Deprecated
     public ResultVO<Integer> secondInterviewPassHandlerException(@PathVariable("stu_id") String stuId,
                                                                  @PathVariable("interviewer_username") String interviewerUsername,
                                                                  BlockException exception) {

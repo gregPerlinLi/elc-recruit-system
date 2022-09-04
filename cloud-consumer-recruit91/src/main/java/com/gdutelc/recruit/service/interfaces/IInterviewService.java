@@ -150,45 +150,49 @@ public interface IInterviewService {
     /* TODO:以下为面试进度相关接口 */
 
     /**
-     * 生产者一面开始面试接口
+     * 生产者面试开始面试接口
      *
      * @param stuId 开始面试的学生学号
      * @param interviewerUsername 面试官用户名
      * @return {@link ResultVO}，其中数据为当前学生的状态码
      */
-    @PutMapping(value = "/pro/interview/elc_access/stu_status_code/first_interview_start/{stu_id}/{interviewer_username}")
-    ResultVO<Integer> firstInterviewStart(@PathVariable("stu_id") String stuId,
-                                          @PathVariable("interviewer_username") String interviewerUsername);
+    @PutMapping(value = "/pro/interview/elc_access/stu_status_code/interview_start/{stu_id}/{interviewer_username}")
+    ResultVO<Integer> interviewStart(@PathVariable("stu_id") String stuId,
+                                     @PathVariable("interviewer_username") String interviewerUsername);
 
     /**
      * 生产者二面开始面试接口
      *
+     * @deprecated 该接口已废弃，二面开始面试接口与一面开始面试接口合并，请使用 {@link #interviewStart(String, String)} 接口
      * @param stuId 开始面试的学生学号
      * @param interviewerUsername 面试官用户名
      * @return {@link ResultVO}，其中数据为当前学生的状态码
      */
+    @Deprecated
     @PutMapping(value = "/pro/interview/elc_access/stu_status_code/second_interview_start/{stu_id}/{interviewer_username}")
     ResultVO<Integer> secondInterviewStart(@PathVariable("stu_id") String stuId,
                                            @PathVariable("interviewer_username") String interviewerUsername);
 
     /**
-     * 生产者一面通过接口
+     * 生产者面试通过接口
      *
      * @param stuId 通过的学生学号
      * @param interviewerUsername 面试官用户名
      * @return {@link ResultVO}，其中数据为当前学生的状态码
      */
-    @PutMapping(value = "/pro/interview/elc_access/stu_status_code/first_interview_pass/{stu_id}/{interviewer_username}")
-    ResultVO<Integer> firstInterviewPass(@PathVariable("stu_id") String stuId,
-                                         @PathVariable("interviewer_username") String interviewerUsername);
+    @PutMapping(value = "/pro/interview/elc_access/stu_status_code/interview_pass/{stu_id}/{interviewer_username}")
+    ResultVO<Integer> interviewPass(@PathVariable("stu_id") String stuId,
+                                    @PathVariable("interviewer_username") String interviewerUsername);
 
     /**
      * 生产者二面通过接口
      *
+     * @deprecated 该接口已废弃，二面通过接口与一面通过接口合并，请使用 {@link #interviewPass(String, String)} 接口
      * @param stuId 通过的学生学号
      * @param interviewerUsername 面试官用户名
      * @return {@link ResultVO}，其中数据为当前学生的状态码
      */
+    @Deprecated
     @PutMapping(value = "/pro/interview/elc_access/stu_status_code/second_interview_pass/{stu_id}/{interviewer_username}")
     ResultVO<Integer> secondInterviewPass(@PathVariable("stu_id") String stuId,
                                           @PathVariable("interviewer_username") String interviewerUsername);

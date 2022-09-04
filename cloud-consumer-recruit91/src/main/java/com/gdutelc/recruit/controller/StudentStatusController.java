@@ -30,18 +30,18 @@ public class StudentStatusController {
     /* 一二面开始面试接口 */
 
     /**
-     * 一面开始面试接口
+     * 面试开始面试接口
      *
      * @param stuId               开始面试的学生学号
      * @param interviewerUsername 面试官用户名
      * @return {@link ResultVO}，其中数据为当前学生的状态码
      */
-    @PutMapping(value = "/first_interview_start/{stu_id}/{interviewer_username}")
-    @SentinelResource(value = "firstInterviewStart", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "firstInterviewStartHandlerException")
-    @ApiOperation(value = "一面开始面试接口", tags = "studentStatus", response = ResultVO.class)
-    public ResultVO<Integer> firstInterviewStart(@ApiParam(value = "开始面试的学生学号", required = true) @PathVariable("stu_id") String stuId,
-                                                 @ApiParam(value = "面试官用户名", required = true) @PathVariable("interviewer_username") String interviewerUsername) {
-        ResultVO<Integer> result = interviewService.firstInterviewStart(stuId, interviewerUsername);
+    @PutMapping(value = "/interview_start/{stu_id}/{interviewer_username}")
+    @SentinelResource(value = "interviewStart", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "interviewStartHandlerException")
+    @ApiOperation(value = "面试开始面试接口", tags = "studentStatus", response = ResultVO.class)
+    public ResultVO<Integer> interviewStart(@ApiParam(value = "开始面试的学生学号", required = true) @PathVariable("stu_id") String stuId,
+                                            @ApiParam(value = "面试官用户名", required = true) @PathVariable("interviewer_username") String interviewerUsername) {
+        ResultVO<Integer> result = interviewService.interviewStart(stuId, interviewerUsername);
         if ( result.getCode() == ResultStatusCodeConstant.SUCCESS ) {
             // TODO: 微信推送开始面试消息
         }
@@ -51,10 +51,12 @@ public class StudentStatusController {
     /**
      * 二面开始面试接口
      *
+     * @deprecated                二面开始面试接口已废弃，二面开始面试接口与一面开始面试接口合并，请使用 {@link #interviewStart(String, String)} 接口
      * @param stuId               开始面试的学生学号
      * @param interviewerUsername 面试官用户名
      * @return {@link ResultVO}，其中数据为当前学生的状态码
      */
+    @Deprecated
     @PutMapping(value = "/second_interview_start/{stu_id}/{interviewer_username}")
     @SentinelResource(value = "secondInterviewStart", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "secondInterviewStartHandlerException")
     @ApiOperation(value = "二面开始面试接口", tags = "studentStatus", response = ResultVO.class)
@@ -70,28 +72,30 @@ public class StudentStatusController {
     /* 一二面面试通过接口 */
 
     /**
-     * 一面通过接口
+     * 面试通过接口
      *
      * @param stuId               通过的学生学号
      * @param interviewerUsername 面试官用户名
      * @return {@link ResultVO}，其中数据为当前学生的状态码
      */
-    @PutMapping(value = "/first_interview_pass/{stu_id}/{interviewer_username}")
-    @SentinelResource(value = "firstInterviewPass", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "firstInterviewPassHandlerException")
+    @PutMapping(value = "/interview_pass/{stu_id}/{interviewer_username}")
+    @SentinelResource(value = "interviewPass", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "interviewPassHandlerException")
     @ApiOperation(value = "一面面试通过接口", tags = "studentStatus", response = ResultVO.class)
-    public ResultVO<Integer> firstInterviewPass(@ApiParam(value = "通过的学生学号", required = true) @PathVariable("stu_id") String stuId,
-                                                @ApiParam(value = "面试官用户名", required = true) @PathVariable("interviewer_username") String interviewerUsername) {
-        return interviewService.firstInterviewPass(stuId, interviewerUsername);
+    public ResultVO<Integer> interviewPass(@ApiParam(value = "通过的学生学号", required = true) @PathVariable("stu_id") String stuId,
+                                           @ApiParam(value = "面试官用户名", required = true) @PathVariable("interviewer_username") String interviewerUsername) {
+        return interviewService.interviewPass(stuId, interviewerUsername);
     }
 
 
     /**
      * 二面通过接口
      *
+     * @deprecated                二面通过接口已废弃，二面通过接口与一面通过接口合并，请使用 {@link #interviewPass(String, String)} 接口
      * @param stuId               通过的学生学号
      * @param interviewerUsername 面试官用户名
      * @return {@link ResultVO}，其中数据为当前学生的状态码
      */
+    @Deprecated
     @PutMapping(value = "/second_interview_pass/{stu_id}/{interviewer_username}")
     @SentinelResource(value = "secondInterviewPass", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "secondInterviewPassHandlerException")
     @ApiOperation(value = "二面面试通过接口", tags = "studentStatus", response = ResultVO.class)
