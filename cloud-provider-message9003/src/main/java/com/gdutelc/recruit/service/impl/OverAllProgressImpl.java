@@ -48,6 +48,7 @@ public class OverAllProgressImpl implements OverAllProgress {
             updateWrapper.eq("status", StudentStatusConstant.PASS);
             stuInfoMapper.update(stuInfo,updateWrapper);
             stuInfo.setStatus(StudentStatusConstant.FAILED);
+            updateWrapper.clear();
             updateWrapper.eq("status",StudentStatusConstant.INTERVIEWING);
             stuInfoMapper.update(stuInfo,updateWrapper);
             stringRedisTemplate.opsForValue().set(RedisKeyConstant.PROCESS,currentProgress + 10 + "");
