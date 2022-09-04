@@ -7,11 +7,11 @@ import com.gdutelc.recruit.domain.vo.ResultVO;
  * @author TUFSolareyes
  * @date 22/09/03
  */
-public interface OverAllProgress {
+public interface IOverAllProgress {
 
     /**
      * 总进度推进
-     * @return
+     * @return {@link ResultVO}，不包含数据
      */
-    ResultVO overAllProgress();
+    ResultVO<Void> overAllProgress();
 }
