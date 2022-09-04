@@ -7,7 +7,7 @@ import com.gdutelc.recruit.constant.StudentStatusConstant;
 import com.gdutelc.recruit.domain.entities.StuInfo;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.mapper.StuInfoMapper;
-import com.gdutelc.recruit.service.interfaces.OverAllProgress;
+import com.gdutelc.recruit.service.interfaces.IOverAllProgress;
 import com.gdutelc.recruit.service.interfaces.WeChatServerService;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
@@ -20,7 +20,7 @@ import java.util.Map;
  * @author TUFSolareyes
  * @date 22/09/03
  */
-public class OverAllProgressImpl implements OverAllProgress {
+public class OverAllProgressImpl implements IOverAllProgress {
 
     @Resource
     private StringRedisTemplate stringRedisTemplate;
