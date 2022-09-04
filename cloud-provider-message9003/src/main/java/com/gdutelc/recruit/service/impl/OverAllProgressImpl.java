@@ -55,8 +55,8 @@ public class OverAllProgressImpl implements OverAllProgress {
 
             map.put("status",StudentStatusConstant.REGISTERED);
             List<StuInfo> stuInfos = stuInfoMapper.selectByMap(map);
-            for(int i=0;i<stuInfos.size();i++) {
-                weChatServerService.sendSecondInterviewNotify(stuInfos.get(i).getOpenid());
+            for ( StuInfo info : stuInfos ) {
+                weChatServerService.sendSecondInterviewNotify(info.getOpenid());
             }
         }else if(currentProgress == RecruitStatusConstant.SECOND_INTERVIEW) {
             //如果当前是二面，就将通过的状态置为10
@@ -71,16 +71,16 @@ public class OverAllProgressImpl implements OverAllProgress {
 
             map.put("status",StudentStatusConstant.EMPLOYMENT);
             List<StuInfo> stuInfos = stuInfoMapper.selectByMap(map);
-            for(int i=0;i<stuInfos.size();i++) {
-                weChatServerService.sendFinallyPassedNotify(stuInfos.get(i).getOpenid());
+            for ( StuInfo info : stuInfos ) {
+                weChatServerService.sendFinallyPassedNotify(info.getOpenid());
             }
         }else if(currentProgress == RecruitStatusConstant.APPLY) {
             //如果当前是报名，就推进到一面
             stringRedisTemplate.opsForValue().set(RedisKeyConstant.PROCESS,currentProgress + 10 + "");
             map.put("status",StudentStatusConstant.REGISTERED);
             List<StuInfo> stuInfos = stuInfoMapper.selectByMap(map);
-            for(int i=0;i<stuInfos.size();i++) {
-                weChatServerService.sendFirstInterviewNotify(stuInfos.get(i).getOpenid());
+            for ( StuInfo stuInfo : stuInfos ) {
+                weChatServerService.sendFirstInterviewNotify(stuInfo.getOpenid());
             }
         }
         return null;
