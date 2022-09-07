@@ -201,13 +201,13 @@ public interface IInterviewService {
      * 二面调剂接口
      *
      * @param stuId 调剂的学生学号
-     * @param dept 学生想要调剂的部门
+     * @param department 学生想要调剂的部门
      * @param interviewerUsername 面试官用户名
      * @return {@link ResultVO}，其中数据为当前学生的第二志愿部门代码
      */
-    @PutMapping(value = "/pro/interview/elc_access/stu_status_code/second_interview_adjust/{stu_id}/{dept}/{interviewer_username}")
+    @PutMapping(value = "/pro/interview/elc_access/stu_status_code/second_interview_adjust/{stu_id}/{department}/{interviewer_username}")
     ResultVO<Integer> secondInterviewAdjust(@PathVariable("stu_id") String stuId,
-                                            @PathVariable("dept") Integer dept,
+                                            @PathVariable("department") Integer department,
                                             @PathVariable("interviewer_username") String interviewerUsername);
 
     /**

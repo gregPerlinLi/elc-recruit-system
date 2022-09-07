@@ -129,15 +129,15 @@ public class StudentStatusController {
      * 二面调剂接口
      *
      * @param stuId 调剂的学生学号
-     * @param dept 学生想要调剂的部门
+     * @param department 学生想要调剂的部门
      * @param interviewerUsername 面试官用户名
      * @return {@link ResultVO}，其中数据为当前学生的第二志愿部门代码
      */
-    @PutMapping(value = "/second_interview_adjust/{stu_id}/{dept}/{interviewer_username}")
+    @PutMapping(value = "/second_interview_adjust/{stu_id}/{department}/{interviewer_username}")
     public ResultVO<Integer> secondInterviewAdjust(@PathVariable("stu_id") String stuId,
-                                                   @PathVariable("dept") Integer dept,
+                                                   @PathVariable("department") Integer department,
                                                    @PathVariable("interviewer_username") String interviewerUsername) {
-        Integer result = adjustStuInfoService.adjust(stuId, dept, interviewerUsername);
+        Integer result = adjustStuInfoService.adjust(stuId, department, interviewerUsername);
         if ( result == ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION ) {
             return new ResultVO<>(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION, "学生第一志愿部门和面试官所在部门不一致");
         } else if ( result == 0 ) {

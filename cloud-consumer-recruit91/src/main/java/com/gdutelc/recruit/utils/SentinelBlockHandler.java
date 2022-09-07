@@ -218,6 +218,7 @@ public class SentinelBlockHandler {
      * Sentinel 异常处理——二面调剂接口
      */
     public ResultVO<Integer> secondInterviewAdjustHandlerException(@PathVariable("stu_id") String stuId,
+                                                                   @PathVariable("department") Integer department,
                                                                    @PathVariable("interviewer_username") String interviewerUsername,
                                                                    BlockException exception) {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");

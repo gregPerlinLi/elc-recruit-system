@@ -110,17 +110,17 @@ public class StudentStatusController {
      * 二面调剂接口
      *
      * @param stuId               调剂的学生学号
-     * @param dept                学生想要调剂的部门
+     * @param department          学生想要调剂的部门
      * @param interviewerUsername 调剂的面试官用户名
      * @return {@link ResultVO}，其中数据为当前学生的第二志愿部门代码
      */
-    @PutMapping(value = "/second_interview_adjust/{stu_id}/{dept}/{interviewer_username}")
+    @PutMapping(value = "/second_interview_adjust/{stu_id}/{department}/{interviewer_username}")
     @SentinelResource(value = "secondInterviewAdjust", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "secondInterviewAdjustHandlerException")
     @ApiOperation(value = "二面调剂接口", tags = "studentStatus", response = ResultVO.class)
     public ResultVO<Integer> secondInterviewAdjust(@ApiParam(value = "调剂的学生学号", required = true) @PathVariable("stu_id") String stuId,
-                                                   @ApiParam(value = "学生想要调剂的部门", required = true) @PathVariable("dept") Integer dept,
+                                                   @ApiParam(value = "学生想要调剂的部门", required = true) @PathVariable("department") Integer department,
                                                    @ApiParam(value = "面试官用户名", required = true) @PathVariable("interviewer_username") String interviewerUsername) {
-        return interviewService.secondInterviewAdjust(stuId, dept, interviewerUsername);
+        return interviewService.secondInterviewAdjust(stuId, department, interviewerUsername);
     }
 
     /**
