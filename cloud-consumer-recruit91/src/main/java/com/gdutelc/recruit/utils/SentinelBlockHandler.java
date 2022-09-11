@@ -157,6 +157,16 @@ public class SentinelBlockHandler {
     }
 
     /**
+     * Sentinel 异常处理——根据姓名模糊查询调剂学生集合接口
+     */
+    public static ResultVO<PageDTO<BriefInfoDTO>> searchAdjustStuByNameHandlerException(@PathVariable("name") String name,
+                                                                                        @PathVariable("page") Integer page,
+                                                                                        @PathVariable("limit") Integer limit,
+                                                                                        BlockException exception) {
+        return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
+    }
+
+    /**
      * Sentinel 异常处理——面试官评价接口
      */
     public static ResultVO<DetailedInfoDTO> addCommentHandlerException(CommentDTO commentDTO, BlockException exception) {
