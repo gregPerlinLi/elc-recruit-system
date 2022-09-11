@@ -117,6 +117,19 @@ public interface IInterviewService {
                                                     @PathVariable("stu_status_code") Integer stuStatusCode);
 
     /**
+     * 生产者根据姓名<b>模糊</b>查询学生集合接口
+     *
+     * @param name 模糊查询的名字
+     * @param page 需要查询第几页
+     * @param limit 每一页的列数限制
+     * @return {@link ResultVO}，其中数据为查询出来的报名者的简要信息集合
+     */
+    @GetMapping(value = "/pro/interview/elc_access/search_stu_by_name/{name}/{page}/{limit}")
+    ResultVO<PageDTO<BriefInfoDTO>> searchStuByName(@PathVariable("name") String name,
+                                                    @PathVariable("page") Integer page,
+                                                    @PathVariable("limit") Integer limit);
+
+    /**
      * 生产者获取调剂报名者简要信息集合接口
      *
      * @param page 需要查询第几页
