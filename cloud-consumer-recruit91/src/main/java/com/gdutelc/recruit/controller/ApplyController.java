@@ -5,6 +5,7 @@ import com.gdutelc.recruit.domain.dto.ApplyInfoDTO;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.service.interfaces.IApplyService;
 import com.gdutelc.recruit.constant.ResultStatusCodeConstant;
+import com.gdutelc.recruit.service.interfaces.IMessageService;
 import com.gdutelc.recruit.utils.SentinelBlockHandler;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -25,6 +26,9 @@ public class ApplyController {
     @Resource
     private IApplyService applyService;
 
+    @Resource
+    private IMessageService messageService;
+
     /**
      * 报名接口
      *
@@ -39,6 +43,12 @@ public class ApplyController {
         ResultVO<String> result = applyService.apply(applyInfoDTO);
         if ( result.getCode()  == ResultStatusCodeConstant.SUCCESS ) {
             // TODO: 微信推送报名成功信息
+            String openid = applyInfoDTO.getOpenid();
+            ResultVO<Void> sendMessageResult = messageService.signInSuccessNotify(openid);
+            if (sendMessageResult.getCode() != ResultStatusCodeConstant.SUCCESS) {
+                log.warn("面试开始面试接口，微信推送开始面试消息失败，openid: {}, 失败原因: {}", openid, sendMessageResult.getMsg());
+
+            }
         }
         return result;
     }
@@ -95,6 +105,11 @@ public class ApplyController {
         ResultVO<Integer> result = applyService.signIn(openid);
         if ( result.getCode() == ResultStatusCodeConstant.SUCCESS ) {
             // TODO: 这里是微信发送签到成功消息的调用
+            ResultVO<Void> sendMessageResult = messageService.signInSuccessNotify(openid);
+            if ( sendMessageResult.getCode() != ResultStatusCodeConstant.SUCCESS ) {
+                log.warn("面试开始面试接口，微信推送开始面试消息失败，openid: {}, 失败原因: {}", openid, sendMessageResult.getMsg());
+                return new ResultVO<>(ResultStatusCodeConstant.FAILED, "面试开始面试接口成功，但是微信推送消息失败");
+            }
         }
         return result;
     }
