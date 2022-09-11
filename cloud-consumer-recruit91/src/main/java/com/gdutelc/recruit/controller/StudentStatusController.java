@@ -161,7 +161,7 @@ public class StudentStatusController {
         if ( !GenericUtils.ofNullable(interviewerUsername) ) {
             interviewerUsername = request.getSession().getAttribute("username").toString();
         }
-        ResultVO<Integer> result = interviewService.secondAdjustInterviewStart(stuId);
+        ResultVO<Integer> result = interviewService.secondAdjustInterviewStart(stuId, interviewerUsername);
         if ( result.getCode() == ResultStatusCodeConstant.SUCCESS ) {
             // TODO: 微信推送开始面试消息
         }
