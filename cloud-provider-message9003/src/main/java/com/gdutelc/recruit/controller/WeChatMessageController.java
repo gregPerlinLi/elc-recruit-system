@@ -6,8 +6,10 @@ import com.gdutelc.recruit.domain.entities.StuInfo;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.domain.wx.SendMessageDTO;
 import com.gdutelc.recruit.service.interfaces.IPassListService;
+import com.gdutelc.recruit.service.interfaces.IStuInfoService;
 import com.gdutelc.recruit.service.interfaces.WeChatServerService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
@@ -26,6 +28,9 @@ public class WeChatMessageController {
     IPassListService iPassListService;
     @Resource
     WeChatServerService weChatServerService;
+
+    @Resource
+    IStuInfoService stuInfoService;
 
     @GetMapping(value = "/first_interview_notify")
     public ResultVO<Void> firstInterviewNotify(){
@@ -79,6 +84,55 @@ public class WeChatMessageController {
             return new ResultVO<> (ResultStatusCodeConstant.SUCCESS,"所有笔试提醒发送成功");
         }else {
             return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND,"部分笔试提醒发送成功");
+        }
+    }
+
+    /**
+     * 发送报名成功消息
+     *
+     * @param openid 需要发送给的学生openid
+     * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
+     */
+    @GetMapping(value = "/apply_success_notify/{openid}")
+    public ResultVO<Void> applySuccessNotify(@PathVariable("openid") String openid) {
+        SendMessageDTO sendMessageDTO = weChatServerService.sendApplySuccessNotify(openid);
+        if ( sendMessageDTO.getErrCode() == 0 ) {
+            return new ResultVO<>(ResultStatusCodeConstant.SUCCESS, "消息发送成功");
+        } else {
+            return new ResultVO<>(ResultStatusCodeConstant.FAILED, "消息发送失败，原因: " + sendMessageDTO.getErrMsg());
+        }
+    }
+
+    /**
+     * 发送签到成功消息
+     *
+     * @param openid 需要发送给的学生openid
+     * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
+     */
+    @GetMapping(value = "/sign_in_success_notify/{openid}")
+    public ResultVO<Void> signInSuccessNotify(@PathVariable("openid") String openid) {
+        SendMessageDTO sendMessageDTO = weChatServerService.sendSignInSuccessNotify(openid);
+        if ( sendMessageDTO.getErrCode() == 0 ) {
+            return new ResultVO<>(ResultStatusCodeConstant.SUCCESS, "消息发送成功");
+        } else {
+            return new ResultVO<>(ResultStatusCodeConstant.FAILED, "消息发送失败，原因: " + sendMessageDTO.getErrMsg());
+        }
+    }
+
+    /**
+     * 发送开始面试消息
+     *
+     * @param stuId 需要发送给的学生学号
+     * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
+     */
+    @GetMapping(value = "/interview_start_notify/{stu_id}")
+    public ResultVO<Void> interviewStartNotify(@PathVariable("stu_id") String stuId) {
+        String openid = stuInfoService.getOpenidByStuId(stuId);
+        SendMessageDTO sendMessageDTO = weChatServerService.sendInterviewStartNotify(openid);
+        if ( sendMessageDTO.getErrCode() == 0 ) {
+            return new ResultVO<>(ResultStatusCodeConstant.SUCCESS, "消息发送成功");
+        } else {
+            return new ResultVO<>(ResultStatusCodeConstant.FAILED, "消息发送失败，原因: " + sendMessageDTO.getErrMsg());
         }
     }
 }
