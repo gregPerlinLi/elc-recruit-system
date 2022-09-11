@@ -72,6 +72,27 @@ public class StudentQueryController {
     }
 
     /**
+     * 根据姓名<b>模糊</b>查询学生集合接口
+     *
+     * @param name 模糊查询的名字
+     * @param page 需要查询第几页
+     * @param limit 每一页的列数限制
+     * @return {@link ResultVO}，其中数据为查询出来的报名者的简要信息集合
+     */
+    @GetMapping(value = "/search_stu_by_name/{name}/{page}/{limit}")
+    public ResultVO<PageDTO<BriefInfoDTO>> searchStuByName(@PathVariable("name") String name,
+                                                           @PathVariable("page") Integer page,
+                                                           @PathVariable("limit") Integer limit) {
+        PageDTO<BriefInfoDTO> pages = briefInfoService.searchStuByName(name, page, limit);
+        if ( pages.getTotal() == 0 ) {
+            return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND, "无数据");
+        }
+        return new ResultVO<>(ResultStatusCodeConstant.SUCCESS,
+                "查询成功, 共有" + pages.getTotal() + "条数据, 当前页面有" + pages.getList().size() + "条数据",
+                pages);
+    }
+
+    /**
      * 获取调剂报名者简要信息集合接口
      *
      * @param page 需要查询第几页
@@ -86,12 +107,5 @@ public class StudentQueryController {
                             "查询成功, 共有" + pages.getTotal() + "条数据, 当前页面有" + pages.getList().size() + "条数据",
                                 pages);
     }
-
-
-    @GetMapping(value = "/select_stu_byName/{name}")
-    public ResultVO<BriefInfoDTO> selectStuByName(@PathVariable("name") String name) {
-        return briefInfoService.selectStuByName(name);
-    }
-
 
 }
