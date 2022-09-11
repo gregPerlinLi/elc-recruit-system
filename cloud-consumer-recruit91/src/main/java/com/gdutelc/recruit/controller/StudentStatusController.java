@@ -4,10 +4,12 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.gdutelc.recruit.constant.ResultStatusCodeConstant;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.service.interfaces.IInterviewService;
+import com.gdutelc.recruit.service.interfaces.IMessageService;
 import com.gdutelc.recruit.utils.GenericUtils;
 import com.gdutelc.recruit.utils.SentinelBlockHandler;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,12 +24,16 @@ import javax.servlet.http.HttpServletRequest;
  * @author gregPerlinLi
  * @date 2022-08-25
  */
+@Slf4j
 @RestController
 @RequestMapping("/interview/elc_access/stu_status_code")
 public class StudentStatusController {
 
     @Resource
     IInterviewService interviewService;
+
+    @Resource
+    IMessageService messageService;
 
     /* 一二面开始面试接口 */
 
@@ -51,6 +57,11 @@ public class StudentStatusController {
         ResultVO<Integer> result = interviewService.interviewStart(stuId, interviewerUsername);
         if ( result.getCode() == ResultStatusCodeConstant.SUCCESS ) {
             // TODO: 微信推送开始面试消息
+            ResultVO<Void> sendMessageResult = messageService.interviewStartNotify(stuId);
+            if ( sendMessageResult.getCode() != ResultStatusCodeConstant.SUCCESS ) {
+                log.warn("面试开始面试接口，微信推送开始面试消息失败，学号: {}, 失败原因: {}", stuId, sendMessageResult.getMsg());
+                return new ResultVO<>(ResultStatusCodeConstant.FAILED, "面试开始面试接口成功，但是微信推送消息失败");
+            }
         }
         return result;
     }
@@ -77,6 +88,11 @@ public class StudentStatusController {
         ResultVO<Integer> result = interviewService.secondInterviewStart(stuId, interviewerUsername);
         if ( result.getCode() == ResultStatusCodeConstant.SUCCESS ) {
             // TODO: 微信推送开始面试消息
+            ResultVO<Void> sendMessageResult = messageService.interviewStartNotify(stuId);
+            if ( sendMessageResult.getCode() != ResultStatusCodeConstant.SUCCESS ) {
+                log.warn("面试开始面试接口，微信推送开始面试消息失败，学号: {}, 失败原因: {}", stuId, sendMessageResult.getMsg());
+                return new ResultVO<>(ResultStatusCodeConstant.FAILED, "面试开始面试接口成功，但是微信推送消息失败");
+            }
         }
         return result;
     }
@@ -164,6 +180,11 @@ public class StudentStatusController {
         ResultVO<Integer> result = interviewService.secondAdjustInterviewStart(stuId, interviewerUsername);
         if ( result.getCode() == ResultStatusCodeConstant.SUCCESS ) {
             // TODO: 微信推送开始面试消息
+            ResultVO<Void> sendMessageResult = messageService.interviewStartNotify(stuId);
+            if ( sendMessageResult.getCode() != ResultStatusCodeConstant.SUCCESS ) {
+                log.warn("面试开始面试接口，微信推送开始面试消息失败，学号: {}, 失败原因: {}", stuId, sendMessageResult.getMsg());
+                return new ResultVO<>(ResultStatusCodeConstant.FAILED, "面试开始面试接口成功，但是微信推送消息失败");
+            }
         }
         return result;
     }
