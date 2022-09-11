@@ -40,7 +40,6 @@ public interface IMessageService {
     @GetMapping(value = "/pro/super_admin/elc_access/get_first_interview_pass_list/{dept}")
     ResultVO<List<BriefPasserInfo>> getFirstInterviewPassList(@PathVariable("dept") Integer dept);
 
-
     /**
      * 获取电协最终录取的所有面试者名单
      *
@@ -70,4 +69,31 @@ public interface IMessageService {
      */
     @GetMapping(value = "/pro/super_admin/elc_access/written_test_notify")
     ResultVO<Void> writtenTestNotify();
+
+    /**
+     * 向用户发送报名成功通知
+     *
+     * @param openid 需要发送给的学生的openid
+     * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
+     */
+    @GetMapping(value = "/pro/super_admin/elc_access_apply_success_notify/{openid}")
+    ResultVO<Void> applySuccessNotify(@PathVariable("openid") String openid);
+
+    /**
+     * 向用户发送签到成功通知
+     *
+     * @param openid 需要发送给的学生的openid
+     * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
+     */
+    @GetMapping(value = "/pro/super_admin/elc_access/sign_in_success_notify/{openid}")
+    ResultVO<Void> signInSuccessNotify(@PathVariable("openid") String openid);
+
+    /**
+     * 向用户发送开始面试通知
+     *
+     * @param stuId 需要发送给的学生的学号
+     * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
+     */
+    @GetMapping(value = "/pro/super_admin/elc_access/interview_start_notify/{stu_id}")
+    ResultVO<Void> interviewStartNotify(@PathVariable("stu_id") String stuId);
 }
