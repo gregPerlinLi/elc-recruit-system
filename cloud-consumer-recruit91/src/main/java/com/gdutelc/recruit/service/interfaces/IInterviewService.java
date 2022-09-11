@@ -149,7 +149,7 @@ public interface IInterviewService {
      * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
      */
     @PostMapping(value = "/pro/interview/elc_access/publish_comment")
-    ResultVO addComment(CommentDTO commentDTO);
+    ResultVO<Void> addComment(CommentDTO commentDTO);
 
     /**
      * 生产者查询学生的所有评价

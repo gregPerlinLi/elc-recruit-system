@@ -34,19 +34,19 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     private CommentMapper commentMapper;
 
     @Override
-    public ResultVO addComment(CommentDTO commentDTO) throws IllegalAccessException {
+    public ResultVO<Void> addComment(CommentDTO commentDTO) throws IllegalAccessException {
         if(!GenericUtils.ofNullable(commentDTO)||!GenericUtils.allOfNullable(commentDTO)){
-            return new ResultVO(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION,"参数有误");
+            return new ResultVO<>(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION,"参数有误");
         }
         if ( commentDTO.getMark() > MAX_MARK || commentDTO.getMark() < MIN_MARK ) {
-            return new ResultVO(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION, "评分应该在0~5之间");
+            return new ResultVO<>(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION, "评分应该在0~5之间");
         }
         Comment comment = new Comment(commentDTO);
         int insert = commentMapper.insert(comment);
         if(insert == 1){
-            return new ResultVO(ResultStatusCodeConstant.SUCCESS,"发布成功");
+            return new ResultVO<>(ResultStatusCodeConstant.SUCCESS,"发布成功");
         }
-        return new ResultVO(ResultStatusCodeConstant.NOT_FIND,"插入失败");
+        return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND,"插入失败");
 
     }
 

@@ -98,7 +98,7 @@ public class InterviewController {
     @PostMapping(value = "/publish_comment")
     @SentinelResource(value = "publishComment", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "addCommentHandlerException")
     @ApiOperation(value = "面试官发布评价", tags = "comment", response = ResultVO.class)
-    public ResultVO addComment(@ApiParam(value = "评价信息", required = true) @RequestBody CommentDTO commentDTO) {
+    public ResultVO<Void> addComment(@ApiParam(value = "评价信息", required = true) @RequestBody CommentDTO commentDTO) {
         return interviewService.addComment(commentDTO);
     }
 

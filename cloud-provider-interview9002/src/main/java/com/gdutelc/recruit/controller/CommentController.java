@@ -1,7 +1,6 @@
 package com.gdutelc.recruit.controller;
 
 import com.gdutelc.recruit.domain.dto.CommentDTO;
-import com.gdutelc.recruit.domain.entities.Comment;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.service.interfaces.ICommentService;
 import lombok.extern.slf4j.Slf4j;
@@ -11,8 +10,8 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * @author TUFSolareyes
- * @date 22/08/18
+ * @author gregPerlinLi
+ * @date 2022-8-18
  */
 @Slf4j
 @RestController
@@ -30,7 +29,7 @@ public class CommentController {
      * @throws IllegalAccessException 非法访问异常
      */
     @PostMapping(value = "/publish_comment")
-    public ResultVO addComment(@RequestBody CommentDTO commentDTO) throws IllegalAccessException {
+    public ResultVO<Void> addComment(@RequestBody CommentDTO commentDTO) throws IllegalAccessException {
         return commentService.addComment(commentDTO);
     }
 
