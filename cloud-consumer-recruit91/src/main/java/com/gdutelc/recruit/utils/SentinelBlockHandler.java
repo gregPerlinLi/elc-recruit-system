@@ -196,7 +196,8 @@ public class SentinelBlockHandler {
      * Sentinel 异常处理——面试开始面试接口
      */
     public ResultVO<Integer> interviewStartHandlerException(@PathVariable("stu_id") String stuId,
-                                                            @PathVariable("interviewer_username") String interviewerUsername,
+                                                            @PathVariable(value = "interviewer_username", required = false) String interviewerUsername,
+                                                            HttpServletRequest request,
                                                             BlockException exception) {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
@@ -204,11 +205,12 @@ public class SentinelBlockHandler {
     /**
      * Sentinel 异常处理——二面开始面试接口
      *
-     * @deprecated 一二面开始接口已合并，请使用 {@link #interviewStartHandlerException(String, String, BlockException)}
+     * @deprecated 一二面开始接口已合并，请使用 {@link #interviewStartHandlerException(String, String, HttpServletRequest, BlockException)}
      */
     @Deprecated
     public ResultVO<Integer> secondInterviewStartHandlerException(@PathVariable("stu_id") String stuId,
-                                                                  @PathVariable("interviewer_username") String interviewerUsername,
+                                                                  @PathVariable(value = "interviewer_username", required = false) String interviewerUsername,
+                                                                  HttpServletRequest request,
                                                                   BlockException exception) {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
@@ -217,7 +219,8 @@ public class SentinelBlockHandler {
      * Sentinel 异常处理——面试通过接口
      */
     public ResultVO<Integer> interviewPassHandlerException(@PathVariable("stu_id") String stuId,
-                                                           @PathVariable("interviewer_username") String interviewerUsername,
+                                                           @PathVariable(value = "interviewer_username", required = false) String interviewerUsername,
+                                                           HttpServletRequest request,
                                                            BlockException exception) {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
@@ -225,11 +228,12 @@ public class SentinelBlockHandler {
     /**
      * Sentinel 异常处理——二面通过接口
      *
-     * @deprecated 一二面通过接口已合并，请使用 {@link #interviewPassHandlerException(String, String, BlockException)}
+     * @deprecated 一二面通过接口已合并，请使用 {@link #interviewPassHandlerException(String, String, HttpServletRequest, BlockException)}
      */
     @Deprecated
     public ResultVO<Integer> secondInterviewPassHandlerException(@PathVariable("stu_id") String stuId,
-                                                                 @PathVariable("interviewer_username") String interviewerUsername,
+                                                                 @PathVariable(value = "interviewer_username", required = false) String interviewerUsername,
+                                                                 HttpServletRequest request,
                                                                  BlockException exception) {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
@@ -239,7 +243,8 @@ public class SentinelBlockHandler {
      */
     public ResultVO<Integer> secondInterviewAdjustHandlerException(@PathVariable("stu_id") String stuId,
                                                                    @PathVariable("department") Integer department,
-                                                                   @PathVariable("interviewer_username") String interviewerUsername,
+                                                                   @PathVariable(value = "interviewer_username", required = false) String interviewerUsername,
+                                                                   HttpServletRequest request,
                                                                    BlockException exception) {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
@@ -248,6 +253,8 @@ public class SentinelBlockHandler {
      * Sentinel 异常处理——二面调剂开始面试接口
      */
     public ResultVO<Integer> secondAdjustInterviewStartHandlerException(@PathVariable("stu_id") String stuId,
+                                                                        @PathVariable(value = "interviewer_username", required = false) String interviewerUsername,
+                                                                        HttpServletRequest request,
                                                                         BlockException exception) {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
@@ -255,7 +262,9 @@ public class SentinelBlockHandler {
     /**
      * Sentinel 异常处理——二面调剂面试通过接口
      */
-    public ResultVO<Integer> secondAdjustInterviewPassHandlerException(@PathVariable("stu_id") String stuId, @PathVariable("interviewer_username") String interviewerUsername,
+    public ResultVO<Integer> secondAdjustInterviewPassHandlerException(@PathVariable("stu_id") String stuId,
+                                                                       @PathVariable(value = "interviewer_username", required = false) String interviewerUsername,
+                                                                       HttpServletRequest request,
                                                                        BlockException exception) {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
