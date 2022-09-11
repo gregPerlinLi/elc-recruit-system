@@ -108,4 +108,25 @@ public class StudentQueryController {
                                 pages);
     }
 
+    /**
+     * 根据姓名<b>模糊</b>查询调剂学生集合接口
+     *
+     * @param name 模糊查询的名字
+     * @param page 需要查询第几页
+     * @param limit 每一页的列数限制
+     * @return {@link ResultVO}，其中数据为查询出来的调剂报名者的简要信息集合
+     */
+    @GetMapping(value = "/search_adjust_stu_by_name/{name}/{page}/{limit}")
+    public ResultVO<PageDTO<BriefAdjustInfoDTO>> searchAdjustStuByName(@PathVariable("name") String name,
+                                                                 @PathVariable("page") Integer page,
+                                                                 @PathVariable("limit") Integer limit) {
+        PageDTO<BriefAdjustInfoDTO> pages = briefAdjustInfoService.searchAdjustStuByName(name, page, limit);
+        if ( pages.getTotal() == 0 ) {
+            return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND, "无数据");
+        }
+        return new ResultVO<>(ResultStatusCodeConstant.SUCCESS,
+                            "查询成功, 共有" + pages.getTotal() + "条数据, 当前页面有" + pages.getList().size() + "条数据",
+                                pages);
+    }
+
 }
