@@ -56,7 +56,7 @@ public class Code2SessionImpl implements ICode2Session {
         url = GenericUtils.splicingUrlStr(url,params);
         ResponseEntity<String> entity = restTemplate.getForEntity(url, String.class);
         if(entity.getStatusCodeValue() != SUCCESS){
-            return new ResultVO<>(ResultStatusCodeConstant.FORBIDDEN,"微信服务器忙碌",null);
+            return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST,"微信服务器忙碌",null);
         }
         String body = entity.getBody();
         System.out.println(body);
