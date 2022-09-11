@@ -43,7 +43,7 @@ public interface IInterviewService {
      * @return {@link ResultVO}，其中数据为该面试官所在的部门
      */
     @GetMapping(value = "/pro/interview/elc_public/interviewer_login/{username}/{password}/{session_id}")
-    ResultVO<Integer> interviewerLogin(@PathVariable("username") String username,
+    ResultVO<String> interviewerLogin(@PathVariable("username") String username,
                                        @PathVariable("password") String password,
                                        @PathVariable("session_id") String sessionId);
 

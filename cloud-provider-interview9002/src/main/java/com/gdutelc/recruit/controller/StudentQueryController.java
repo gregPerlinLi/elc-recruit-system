@@ -88,4 +88,10 @@ public class StudentQueryController {
     }
 
 
+    @GetMapping(value = "/select_stu_byName/{name}")
+    public ResultVO<BriefInfoDTO> selectStuByName(@PathVariable("name") String name) {
+        return briefInfoService.selectStuByName(name);
+    }
+
+
 }

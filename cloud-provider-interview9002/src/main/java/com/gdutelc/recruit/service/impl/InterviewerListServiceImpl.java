@@ -34,7 +34,7 @@ public class InterviewerListServiceImpl extends ServiceImpl<InterviewerListMappe
     StringRedisTemplate stringRedisTemplate;
 
     @Override
-    public ResultVO<Integer> login(String username, String password, String sessionId) {
+    public ResultVO<String> login(String username, String password, String sessionId) {
         if ( !GenericUtils.allOfNullable(username, password, sessionId) ) {
             return new ResultVO<>(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION, "参数有误");
         }
@@ -46,7 +46,7 @@ public class InterviewerListServiceImpl extends ServiceImpl<InterviewerListMappe
         InterviewerList interviewerList = interviewerListMapper.selectOne(queryWrapper);
         if ( interviewerList != null ) {
             stringRedisTemplate.opsForValue().set(RedisKeyConstant.loginUserWith(username), sessionId, 30, TimeUnit.MINUTES);
-            return new ResultVO<>(ResultStatusCodeConstant.SUCCESS, "登录成功", interviewerList.getDept());
+            return new ResultVO<String>(ResultStatusCodeConstant.SUCCESS, "登录成功", sessionId);
         } else {
             return new ResultVO<>(ResultStatusCodeConstant.FAILED, "用户名或密码错误");
         }

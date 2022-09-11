@@ -49,6 +49,38 @@ public class CommentDTO {
     @ApiModelProperty(value = "面试官")
     private String interviewer;
 
+    public String getStuId() {
+        return stuId;
+    }
+
+    public void setStuId(String stuId) {
+        this.stuId = stuId;
+    }
+
+    public Integer getMark() {
+        return mark;
+    }
+
+    public void setMark(Integer mark) {
+        this.mark = mark;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public String getInterviewer() {
+        return interviewer;
+    }
+
+    public void setInterviewer(String interviewer) {
+        this.interviewer = interviewer;
+    }
+
     /**
      * {@link Comment} 转 {@link CommentDTO}
      *

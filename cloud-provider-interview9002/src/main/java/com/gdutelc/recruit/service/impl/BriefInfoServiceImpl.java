@@ -7,6 +7,7 @@ import com.gdutelc.recruit.constant.DeptConstant;
 import com.gdutelc.recruit.constant.StudentStatusConstant;
 import com.gdutelc.recruit.domain.dto.BriefInfoDTO;
 import com.gdutelc.recruit.domain.dto.PageDTO;
+import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.mapper.BriefInfoMapper;
 import com.gdutelc.recruit.service.interfaces.IBriefInfoService;
 import org.springframework.stereotype.Service;
@@ -45,5 +46,10 @@ public class BriefInfoServiceImpl extends ServiceImpl<BriefInfoMapper, BriefInfo
         objectPageDTO.setTotal(resultPage.getTotal());
         objectPageDTO.setList(resultPage.getRecords());
         return objectPageDTO;
+    }
+
+    @Override
+    public ResultVO<BriefInfoDTO> selectStuByName(String name) {
+        return null;
     }
 }
