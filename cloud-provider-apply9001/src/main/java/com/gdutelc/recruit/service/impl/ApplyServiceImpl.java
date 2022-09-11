@@ -44,7 +44,7 @@ public class ApplyServiceImpl implements IApplyService {
         }
         // 判断是否已经到了开始面试的进度
         if ( !Objects.equals(stringRedisTemplate.opsForValue().get(RedisKeyConstant.PROCESS), Integer.toString(RecruitStatusConstant.APPLY))) {
-            return new ResultVO<>(ResultStatusCodeConstant.FORBIDDEN,"不在报名阶段",null);
+            return new ResultVO<>(ResultStatusCodeConstant.STATUS_EXCEPTION,"不在报名阶段",null);
         }
         applyMapper.insert(applyInfoDTO);
         stringRedisTemplate.opsForSet().remove(RedisKeyConstant.STU_OPENID, openid);
@@ -86,7 +86,7 @@ public class ApplyServiceImpl implements IApplyService {
         }
         // 判断是否已经到了开始面试的进度
         if ( !Objects.equals(stringRedisTemplate.opsForValue().get(RedisKeyConstant.PROCESS), Integer.toString(RecruitStatusConstant.APPLY))) {
-            return new ResultVO<>(ResultStatusCodeConstant.FORBIDDEN,"不在报名阶段",null);
+            return new ResultVO<>(ResultStatusCodeConstant.STATUS_EXCEPTION,"不在报名阶段",null);
         }
         UpdateWrapper<ApplyInfoDTO> wrapper = new UpdateWrapper<>();
         wrapper.eq("openid",applyInfoDTO.getOpenid());
