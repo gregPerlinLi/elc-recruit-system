@@ -118,8 +118,8 @@ public class StudentQueryController {
      */
     @GetMapping(value = "/search_adjust_stu_by_name/{name}/{page}/{limit}")
     public ResultVO<PageDTO<BriefAdjustInfoDTO>> searchAdjustStuByName(@PathVariable("name") String name,
-                                                                 @PathVariable("page") Integer page,
-                                                                 @PathVariable("limit") Integer limit) {
+                                                                       @PathVariable("page") Integer page,
+                                                                       @PathVariable("limit") Integer limit) {
         PageDTO<BriefAdjustInfoDTO> pages = briefAdjustInfoService.searchAdjustStuByName(name, page, limit);
         if ( pages.getTotal() == 0 ) {
             return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND, "无数据");
