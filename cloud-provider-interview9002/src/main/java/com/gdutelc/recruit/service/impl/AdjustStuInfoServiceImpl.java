@@ -73,7 +73,7 @@ public class AdjustStuInfoServiceImpl extends ServiceImpl<AdjustStuInfoMapper, A
             adjustStuInfo.setAdjustDept(department);
         }
         adjustStuInfo.setStatus(StudentStatusConstant.CHECKED_IN);
-        stuInfo.setStatus(StudentStatusConstant.CHECKED_IN);
+        stuInfo.setStatus(StudentStatusConstant.ADJUSTED);
         UpdateWrapper<StuInfo> studentUpdateWrapper = new UpdateWrapper<>();
         studentUpdateWrapper.eq("stu_id", stuId);
         studentUpdateWrapper.eq("status", StudentStatusConstant.INTERVIEWING);
