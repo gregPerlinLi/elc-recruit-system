@@ -155,11 +155,14 @@ public class StudentStatusController {
      * @param stuId 开始面试的学生学号
      * @return {@link ResultVO}，其中数据为当前学生的状态码
      */
-    @PutMapping(value = "/second_adjust_interview_start/{stu_id}")
-    public ResultVO<Integer> secondAdjustInterviewStart(@PathVariable("stu_id") String stuId) {
-        Integer result = adjustStuInfoService.interviewStart(stuId);
-        if ( result == 0 ) {
-            return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND, "不存在此学生");
+    @PutMapping(value = "/second_adjust_interview_start/{stu_id}/{interviewer_username}")
+    public ResultVO<Integer> secondAdjustInterviewStart(@PathVariable("stu_id") String stuId,
+                                                        @PathVariable("interviewer_username") String interviewerUsername) {
+        Integer result = adjustStuInfoService.interviewStart(stuId, interviewerUsername);
+        if ( result == ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION ) {
+            return new ResultVO<>(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION, "学生第调剂部门和面试官所在部门不一致");
+        } else if ( result == 0 ) {
+            return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND, "不存在此学生或面试官");
         } else if ( result == ResultStatusCodeConstant.FAILED ) {
             return new ResultVO<>(ResultStatusCodeConstant.FAILED, "由于学生状态不符合要求，请求失败");
         } else {
@@ -177,10 +180,12 @@ public class StudentStatusController {
     @PutMapping(value = "/second_adjust_interview_pass/{stu_id}/{interviewer_username}")
     public ResultVO<Integer> secondInterviewAdjustPass(@PathVariable("stu_id") String stuId, @PathVariable("interviewer_username") String interviewerUsername) {
         Integer result = adjustStuInfoService.interviewPass(stuId, interviewerUsername);
-        if ( result == ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION ) {
-            return new ResultVO<>(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION, "该学生已被录取");
+        if ( result == ResultStatusCodeConstant.STATUS_EXCEPTION) {
+            return new ResultVO<>(ResultStatusCodeConstant.STATUS_EXCEPTION, "该学生已被录取");
+        } else if ( result == ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION ) {
+            return new ResultVO<>(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION, "学生第调剂部门和面试官所在部门不一致");
         } else if ( result == 0 ) {
-            return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND, "不存在此学生");
+            return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND, "不存在此学生或面试官");
         } else if ( result == ResultStatusCodeConstant.FAILED ) {
             return new ResultVO<>(ResultStatusCodeConstant.FAILED, "由于学生状态不符合要求，请求失败");
         } else {
