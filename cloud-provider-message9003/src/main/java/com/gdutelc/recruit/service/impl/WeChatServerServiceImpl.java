@@ -126,6 +126,21 @@ public class WeChatServerServiceImpl implements WeChatServerService {
         return sendSubscribeMessage(toUser,interviewNotifyModelId,data);
     }
 
+    @Override
+    public SendMessageDTO sendApplySuccessNotify(String toUser) {
+        return null;
+    }
+
+    @Override
+    public SendMessageDTO sendSignInSuccessNotify(String toUser) {
+        return null;
+    }
+
+    @Override
+    public SendMessageDTO sendInterviewStartNotify(String toUser) {
+        return null;
+    }
+
     private Map<String, Object> setNotifyData(String sender, String place, String time, String matter){
         Map<String, Object> data = new HashMap<>(6);
         Map<String, Object> name1 = new HashMap<>(2);

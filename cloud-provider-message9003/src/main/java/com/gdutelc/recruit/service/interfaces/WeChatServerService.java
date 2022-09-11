@@ -48,7 +48,6 @@ public interface WeChatServerService {
      */
     SendMessageDTO sendSecondInterviewNotify(String toUser);
 
-
     /**
      * 向用户发送最终通过面试提醒
      * @author TUFSolareyes
@@ -63,4 +62,28 @@ public interface WeChatServerService {
      * @return 请求返回信息
      */
     SendMessageDTO sendWrittenTestNotify(String toUser);
+
+    /**
+     * 向用户发送报名成功消息
+     *
+     * @param toUser 接收者的openid
+     * @return 请求返回信息
+     */
+    SendMessageDTO sendApplySuccessNotify(String toUser);
+
+    /**
+     * 向用户发送签到成功消息
+     *
+     * @param toUser 接收者的openid
+     * @return 请求返回信息
+     */
+    SendMessageDTO sendSignInSuccessNotify(String toUser);
+
+    /**
+     * 向用户发送面试开始通知
+     *
+     * @param toUser 接收者的openid
+     * @return 请求返回信息
+     */
+    SendMessageDTO sendInterviewStartNotify(String toUser);
 }
