@@ -3,7 +3,6 @@ package com.gdutelc.recruit.service.interfaces;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gdutelc.recruit.domain.dto.BriefInfoDTO;
 import com.gdutelc.recruit.domain.dto.PageDTO;
-import com.gdutelc.recruit.domain.vo.ResultVO;
 
 /**
  * 学生简要信息 服务类
@@ -25,10 +24,12 @@ public interface IBriefInfoService {
     PageDTO<BriefInfoDTO> briefApplyQuery(Integer page, Integer limit, Integer department, Integer stuStatusCode);
 
     /**
-     * 根据姓名查询学生
-     * @author TUFSolareyes
-     * @param name
-     * @return {@link ResultVO} 报名者的简要信息
+     * 根据姓名<b>模糊</b>查询学生集合
+     *
+     * @param name 模糊查询的名字
+     * @param page 需要查询第几页
+     * @param limit 每一页的列数限制
+     * @return {@link Page} 要查询的报名者简要信息分页集合
      */
-    ResultVO<BriefInfoDTO> selectStuByName(String name);
+    PageDTO<BriefInfoDTO> searchStuByName(String name, Integer page, Integer limit);
 }
