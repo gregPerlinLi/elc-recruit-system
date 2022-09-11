@@ -240,10 +240,12 @@ public interface IInterviewService {
      * 二面调剂开始面试接口
      *
      * @param stuId 开始面试的学生学号
+     * @param interviewerUsername 面试官用户名
      * @return {@link ResultVO}，其中数据为当前学生的状态码
      */
-    @PutMapping(value = "/pro/interview/elc_access/stu_status_code/second_adjust_interview_start/{stu_id}")
-    ResultVO<Integer> secondAdjustInterviewStart(@PathVariable("stu_id") String stuId);
+    @PutMapping(value = "/pro/interview/elc_access/stu_status_code/second_adjust_interview_start/{stu_id}/{interviewer_username}")
+    ResultVO<Integer> secondAdjustInterviewStart(@PathVariable("stu_id") String stuId,
+                                                 @PathVariable("interviewer_username") String interviewerUsername);
 
     /**
      * 二面调剂通过接口
