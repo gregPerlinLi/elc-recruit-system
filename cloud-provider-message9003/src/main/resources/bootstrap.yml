@@ -7,7 +7,7 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/recruit_system?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://localhost:3306/recruit_system?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     username: recruit
     password: recruit
   redis:
@@ -28,6 +28,13 @@ spring:
         server-addr: 127.0.0.1:8848
         file-extension: yaml
 
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.gdutelc.recruit.domain.entities
@@ -43,8 +50,8 @@ wx:
 
 
 wechat-server:
-  appid: wx3fd923d8fdafde76
-  secret: 3281d335f1ef8ccbdd162cef84c882e3
+  appid: wxb30cee030fca9a84
+  secret: 0440484004475c7feda98c1a64b56a08
   grantType: client_credential
   tokenUrl: https://api.weixin.qq.com/cgi-bin/token
   sendMessageUrl: https://api.weixin.qq.com/cgi-bin/message/subscribe/send

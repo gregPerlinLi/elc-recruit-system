@@ -63,10 +63,10 @@ public class LoginController {
     @GetMapping(value = "/interviewer_login/{username}/{password}")
     @SentinelResource(value = "interviewerLogin", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "interviewerLoginHandlerException")
     @ApiOperation(value = "面试官登录", tags = "login", response = ResultVO.class)
-    public ResultVO<Integer> interviewerLogin(@ApiParam(value = "用户名", required = true) @PathVariable("username") String username,
+    public ResultVO<String> interviewerLogin(@ApiParam(value = "用户名", required = true) @PathVariable("username") String username,
                                               @ApiParam(value = "密码（加密后的）", required = true) @PathVariable("password") String password,
                                               HttpServletRequest request) {
-        ResultVO<Integer> result = interviewService.interviewerLogin(username, password, request.getSession().getId());
+        ResultVO<String> result = interviewService.interviewerLogin(username, password, request.getSession().getId());
         if ( result.getCode() == ResultStatusCodeConstant.SUCCESS ) {
             request.getSession().setAttribute("username", username);
         }

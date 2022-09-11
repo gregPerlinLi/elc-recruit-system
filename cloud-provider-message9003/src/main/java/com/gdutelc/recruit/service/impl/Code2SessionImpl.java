@@ -47,18 +47,19 @@ public class Code2SessionImpl implements ICode2Session {
 
     @Override
     public ResultVO<LoginInfo> code2Session(String js_code, String grant_type) throws JsonProcessingException {
-        Map<String,String> params = new HashMap<>(5);
-        params.put("appid",appid);
-        params.put("secret",secret);
+        Map<String,String> params = new HashMap<>();
+        params.put("appid","wxb30cee030fca9a84");
+        params.put("secret","8bbb02d9bd8d48f105f26cf4cbcd0e48");
         params.put("js_code",js_code);
         params.put("grant_type",grant_type);
 
         url = GenericUtils.splicingUrlStr(url,params);
         ResponseEntity<String> entity = restTemplate.getForEntity(url, String.class);
         if(entity.getStatusCodeValue() != SUCCESS){
-            return new ResultVO<>(ResultStatusCodeConstant.FORBIDDEN,"微信服务器忙碌",null);
+            return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST,"微信服务器忙碌",null);
         }
         String body = entity.getBody();
+        System.out.println(body);
         LoginInfo loginInfo = objectMapper.readValue(body, LoginInfo.class);
         if(loginInfo != null&&loginInfo.getOpenid() != null){
             stringRedisTemplate.opsForSet().add(RedisKeyConstant.STU_OPENID, loginInfo.getOpenid());

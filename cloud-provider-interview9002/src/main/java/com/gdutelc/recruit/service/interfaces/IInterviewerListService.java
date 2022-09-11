@@ -22,7 +22,7 @@ public interface IInterviewerListService extends IService<InterviewerList> {
      * @param sessionId 请求Session ID
      * @return {@link ResultVO}，其中数据为该面试官所在的部门
      */
-    ResultVO<Integer> login(String username, String password, String sessionId);
+    ResultVO<String> login(String username, String password, String sessionId);
 
     /**
      * 面试官退出业务

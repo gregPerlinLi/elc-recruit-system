@@ -87,15 +87,21 @@ public class AdjustStuInfoServiceImpl extends ServiceImpl<AdjustStuInfoMapper, A
     }
 
     @Override
-    public Integer interviewStart(String stuId) {
+    public Integer interviewStart(String stuId, String interviewerUsername) {
         QueryWrapper<AdjustStuInfo> adjustStudentQueryWrapper = new QueryWrapper<>();
         QueryWrapper<StuInfo> studentQueryWrapper = new QueryWrapper<>();
+        QueryWrapper<InterviewerList> interviewerQueryWrapper = new QueryWrapper<>();
         adjustStudentQueryWrapper.eq("stu_id", stuId);
         studentQueryWrapper.eq("stu_id", stuId);
+        interviewerQueryWrapper.eq("username", interviewerUsername);
         AdjustStuInfo adjustStuInfo = getOne(adjustStudentQueryWrapper);
         StuInfo stuInfo = stuInfoMapper.selectOne(studentQueryWrapper);
-        if ( adjustStuInfo == null || stuInfo == null ) {
+        InterviewerList interviewerList = interviewerListMapper.selectOne(interviewerQueryWrapper);
+        if ( adjustStuInfo == null || stuInfo == null || interviewerList == null ) {
             return 0;
+        }
+        if ( !adjustStuInfo.getAdjustDept().equals(interviewerList.getDept()) ) {
+            return ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION;
         }
         UpdateWrapper<AdjustStuInfo> adjustStudentUpdateWrapper = new UpdateWrapper<>();
         UpdateWrapper<StuInfo> studentUpdateWrapper = new UpdateWrapper<>();
@@ -128,11 +134,14 @@ public class AdjustStuInfoServiceImpl extends ServiceImpl<AdjustStuInfoMapper, A
         if ( adjustStuInfo == null || stuInfo == null || interviewerList == null ) {
             return 0;
         }
+        if ( !adjustStuInfo.getAdjustDept().equals(interviewerList.getDept()) ) {
+            return ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION;
+        }
         QueryWrapper<AdmissionStu> admissionStuQueryWrapper = new QueryWrapper<>();
         admissionStuQueryWrapper.eq("stu_id", stuId);
         if ( admissionStuMapper.exists(admissionStuQueryWrapper) ) {
             // 查看是否已有录取记录，如果已存在录取记录则代表该学生已被主部门录取，此时返回异常
-            return ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION;
+            return ResultStatusCodeConstant.STATUS_EXCEPTION;
         }
         UpdateWrapper<AdjustStuInfo> adjustStudentUpdateWrapper = new UpdateWrapper<>();
         UpdateWrapper<StuInfo> studentUpdateWrapper = new UpdateWrapper<>();

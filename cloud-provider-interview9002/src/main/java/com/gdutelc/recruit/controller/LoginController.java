@@ -36,9 +36,9 @@ public class LoginController {
      * @return {@link ResultVO}，其中数据为该面试官所在的部门
      */
     @GetMapping(value = "/interviewer_login/{username}/{password}/{session_id}")
-    public ResultVO<Integer> interviewerLogin(@PathVariable("username") String username,
-                                              @PathVariable("password") String password,
-                                              @PathVariable("session_id") String sessionId) {
+    public ResultVO<String> interviewerLogin(@PathVariable("username") String username,
+                                             @PathVariable("password") String password,
+                                             @PathVariable("session_id") String sessionId) {
         return interviewerListService.login(username, password, sessionId);
     }
 

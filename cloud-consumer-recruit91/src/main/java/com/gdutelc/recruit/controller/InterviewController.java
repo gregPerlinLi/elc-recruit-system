@@ -58,6 +58,23 @@ public class InterviewController {
     }
 
     /**
+     * 根据姓名<b>模糊</b>查询学生集合接口
+     *
+     * @param name 模糊查询的名字
+     * @param page 需要查询第几页
+     * @param limit 每一页的列数限制
+     * @return {@link ResultVO}，其中数据为查询出来的报名者的简要信息集合
+     */
+    @GetMapping(value = "/search_stu_by_name/{name}/{page}/{limit}")
+    @SentinelResource(value = "searchStuByName", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "searchStuByNameHandlerException")
+    @ApiOperation(value = "根据姓名<b>模糊</b>查询学生集合接口", tags = "search", response = ResultVO.class)
+    public ResultVO<PageDTO<BriefInfoDTO>> searchStuByName(@ApiParam(value = "模糊查询的名字", required = true) @PathVariable("name") String name,
+                                                           @ApiParam(value = "页数", required = true) @PathVariable("page") Integer page,
+                                                           @ApiParam(value = "每页最大内容数", required = true) @PathVariable("limit") Integer limit) {
+        return interviewService.searchStuByName(name, page, limit);
+    }
+
+    /**
      * 获取调剂报名者简要信息集合接口
      *
      * @param page 需要查询第几页
@@ -73,6 +90,23 @@ public class InterviewController {
     }
 
     /**
+     * 根据姓名<b>模糊</b>查询调剂学生集合接口
+     *
+     * @param name 模糊查询的名字
+     * @param page 需要查询第几页
+     * @param limit 每一页的列数限制
+     * @return {@link ResultVO}，其中数据为查询出来的调剂报名者的简要信息集合
+     */
+    @GetMapping(value = "/search_adjust_stu_by_name/{name}/{page}/{limit}")
+    @SentinelResource(value = "searchAdjustStuByName", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "searchAdjustStuByNameHandlerException")
+    @ApiOperation(value = "根据姓名<b>模糊</b>查询调剂学生集合接口", tags = "search", response = ResultVO.class)
+    public ResultVO<PageDTO<BriefInfoDTO>> searchAdjustStuByName(@ApiParam(value = "模糊查询的名字", required = true) @PathVariable("name") String name,
+                                                                 @ApiParam(value = "页数", required = true) @PathVariable("page") Integer page,
+                                                                 @ApiParam(value = "每页最大内容数", required = true) @PathVariable("limit") Integer limit) {
+        return interviewService.searchAdjustStuByName(name, page, limit);
+    }
+
+    /**
      * 面试官评价接口
      *
      * @param commentDTO 评价实体类
@@ -81,7 +115,7 @@ public class InterviewController {
     @PostMapping(value = "/publish_comment")
     @SentinelResource(value = "publishComment", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "addCommentHandlerException")
     @ApiOperation(value = "面试官发布评价", tags = "comment", response = ResultVO.class)
-    public ResultVO addComment(@ApiParam(value = "评价信息", required = true) CommentDTO commentDTO) {
+    public ResultVO<Void> addComment(@ApiParam(value = "评价信息", required = true) @RequestBody CommentDTO commentDTO) {
         return interviewService.addComment(commentDTO);
     }
 

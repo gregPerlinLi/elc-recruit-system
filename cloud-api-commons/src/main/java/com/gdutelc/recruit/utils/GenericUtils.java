@@ -130,8 +130,7 @@ public class GenericUtils {
             if(!ofNullable(key)&&ofNullable(params.get(key))){
                 return sourceUrl;
             }
-            key = key + "=";
-            url.append(key).append(params.get(key)).append("&");
+            url.append(key).append("=").append(params.get(key)).append("&");
         }
         url.deleteCharAt(url.length()-1);
         return url.toString();

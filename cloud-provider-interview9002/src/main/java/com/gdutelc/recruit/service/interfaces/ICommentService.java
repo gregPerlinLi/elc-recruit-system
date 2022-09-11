@@ -24,7 +24,7 @@ public interface ICommentService extends IService<Comment> {
      * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
      * @throws IllegalAccessException 非法访问异常
      */
-    ResultVO addComment(CommentDTO commentDTO) throws IllegalAccessException;
+    ResultVO<Void> addComment(CommentDTO commentDTO) throws IllegalAccessException;
 
     /**
      * 查询学生的所有评价

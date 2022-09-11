@@ -25,6 +25,11 @@ public interface ResultStatusCodeConstant {
     int FORBIDDEN = 403;
 
     /**
+     * 状态异常
+     */
+    int STATUS_EXCEPTION = 417;
+
+    /**
      * 请求过多，被限流
      */
     int TO_MANY_REQUEST = 429;

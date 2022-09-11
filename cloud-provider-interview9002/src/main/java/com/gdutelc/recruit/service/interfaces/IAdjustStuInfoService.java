@@ -27,16 +27,17 @@ public interface IAdjustStuInfoService extends IService<AdjustStuInfo> {
      * 开始调剂面试
      *
      * @param stuId 开始面试的学生学号
-     * @return 学生当前状态码（{@code 0}代表不存在此学生，{@code 444}代表由于学生状态不符合要求，请求失败）
+     * @param interviewerUsername 面试官用户名
+     * @return 学生当前状态码（{@code 450}代表学生调剂部门和面试官所在部门不一致，{@code 0}代表不存在此学生，{@code 444}代表由于学生状态不符合要求，请求失败）
      */
-    Integer interviewStart(String stuId);
+    Integer interviewStart(String stuId, String interviewerUsername);
 
     /**
      * 通过调剂面试
      *
      * @param stuId 通过面试的学生学号
      * @param interviewerUsername 面试官用户名
-     * @return 学生当前状态码（{@code 450}代表该学生已被录取，{@code 0}代表不存在此学生，{@code 444}代表由于学生状态不符合要求，请求失败）
+     * @return 学生当前状态码（{@code 417}代表该学生已被录取，{@code 450}代表学生调剂部门和面试官所在部门不一致，{@code 0}代表不存在此学生，{@code 444}代表由于学生状态不符合要求，请求失败）
      */
     Integer interviewPass(String stuId, String interviewerUsername);
 }
