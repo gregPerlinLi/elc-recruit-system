@@ -23,7 +23,7 @@ public class BriefAdjustInfoServiceImpl extends ServiceImpl<BriefAdjustInfoMappe
         Page<BriefAdjustInfoDTO> resultPage;
         resultPage = page(briefAdjustInfoPage);
         PageDTO<BriefAdjustInfoDTO> objectPageDTO = new PageDTO<>();
-        objectPageDTO.setTotal(resultPage.getTotal());
+        objectPageDTO.setTotal(count());
         objectPageDTO.setList(resultPage.getRecords());
         return objectPageDTO;
     }
@@ -36,7 +36,7 @@ public class BriefAdjustInfoServiceImpl extends ServiceImpl<BriefAdjustInfoMappe
         queryWrapper.like("name", name);
         resultPage = page(briefAdjustInfoPage, queryWrapper);
         PageDTO<BriefAdjustInfoDTO> objectPageDTO = new PageDTO<>();
-        objectPageDTO.setTotal(resultPage.getTotal());
+        objectPageDTO.setTotal(count());
         objectPageDTO.setList(resultPage.getRecords());
         return objectPageDTO;
     }
