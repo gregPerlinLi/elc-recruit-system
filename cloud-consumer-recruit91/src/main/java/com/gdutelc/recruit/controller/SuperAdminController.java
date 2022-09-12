@@ -33,8 +33,8 @@ public class SuperAdminController {
     @PutMapping(value = "/process_advance")
     @SentinelResource(value = "processAdvance", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "processAdvanceBlockHandler")
     @ApiOperation(value = "面试进度推进", tags = "super_admin", response = ResultVO.class)
-    public ResultVO<Void> processAdvance() {
-        return null;
+    public ResultVO<Integer> processAdvance() {
+        return messageService.overAllProgress();
     }
 
     /**
@@ -98,4 +98,6 @@ public class SuperAdminController {
     public ResultVO<List<AdmissionStuDTO>> getFinalAdmissionList(@ApiParam(value = "部门筛选", required = true) @PathVariable("dept") Integer dept) {
         return messageService.getFinalAdmissionList(dept);
     }
+
+
 }

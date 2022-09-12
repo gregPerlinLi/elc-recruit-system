@@ -5,6 +5,7 @@ import com.gdutelc.recruit.constant.StudentStatusConstant;
 import com.gdutelc.recruit.domain.entities.StuInfo;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.domain.wx.SendMessageDTO;
+import com.gdutelc.recruit.service.interfaces.IOverAllProgress;
 import com.gdutelc.recruit.service.interfaces.IPassListService;
 import com.gdutelc.recruit.service.interfaces.IStuInfoService;
 import com.gdutelc.recruit.service.interfaces.WeChatServerService;
@@ -28,6 +29,8 @@ public class WeChatMessageController {
     IPassListService iPassListService;
     @Resource
     WeChatServerService weChatServerService;
+    @Resource
+    IOverAllProgress iOverAllProgress;
 
     @Resource
     IStuInfoService stuInfoService;
@@ -134,5 +137,11 @@ public class WeChatMessageController {
         } else {
             return new ResultVO<>(ResultStatusCodeConstant.FAILED, "消息发送失败，原因: " + sendMessageDTO.getErrMsg());
         }
+    }
+
+
+    @GetMapping(value = "/over_all_progress")
+    public ResultVO<Integer> overAllProgress() {
+        return iOverAllProgress.overAllProgress();
     }
 }

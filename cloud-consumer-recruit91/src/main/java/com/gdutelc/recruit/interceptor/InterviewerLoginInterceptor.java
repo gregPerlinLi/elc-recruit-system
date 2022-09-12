@@ -30,7 +30,6 @@ public class InterviewerLoginInterceptor implements HandlerInterceptor {
         }
         String username = (String) request.getSession(true).getAttribute("username");
         String sessionId = request.getSession().getId();
-        System.out.println(username + " " + sessionId);
         if ( username != null ) {
             ResultVO<String> result = interviewService.loginVerify(username, sessionId);
             if ( result.getCode() == ResultStatusCodeConstant.SUCCESS ) {
@@ -40,6 +39,18 @@ public class InterviewerLoginInterceptor implements HandlerInterceptor {
             log.info("登录校验失败，Redis中没有记录此用户的Session");
             throw new LoginException(ResultStatusCodeConstant.FAILED, "登录校验失败，Redis中没有记录此用户的Session");
         }
+
+        username = (String) request.getSession(true).getAttribute("admin_username");
+        if(username != null) {
+            ResultVO<String> result = interviewService.loginVerify(username, sessionId);
+            if ( result.getCode() == ResultStatusCodeConstant.SUCCESS ) {
+                log.info("登录校验成功");
+                return true;
+            }
+            log.info("登录校验失败，Redis中没有记录此用户的Session");
+            throw new LoginException(ResultStatusCodeConstant.FAILED, "登录校验失败，Redis中没有记录此用户的Session");
+        }
+
         log.info("登录校验失败，Session中没有用户");
         throw new LoginException(ResultStatusCodeConstant.FAILED, "登录校验失败，Session中没有用户");
     }

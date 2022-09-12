@@ -101,7 +101,7 @@ public class ApplyController {
     @PutMapping(value = "sign_in/{openid}")
     @SentinelResource(value = "singIn", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "signInHandlerException")
     @ApiOperation(value = "学生签到接口", tags = "apply", response = ResultVO.class)
-    public ResultVO<Integer> signIn(@ApiParam(value = "要签到的学生微信openid", required = true) @PathVariable("openid") String openid) {
+    public ResultVO<Integer> signIn(@ApiParam(value = "要签到的学生微信openid", required = true) @PathVariable("openid") String openid,@PathVariable("lyb") String lyb) {
         ResultVO<Integer> result = applyService.signIn(openid);
         if ( result.getCode() == ResultStatusCodeConstant.SUCCESS ) {
             // TODO: 这里是微信发送签到成功消息的调用

@@ -2,7 +2,7 @@ server:
   port: 91
   servlet:
     session:
-      timeout: 30m
+      timeout: 1h
 
 spring:
   main:
@@ -61,3 +61,8 @@ service-url:
   cloud-provider-apply: http://cloud-provider-apply
   cloud-provider-interview: http://cloud-provider-interview
   cloud-provider-message: http://cloud-providere-message
+
+
+checkin:
+  first: $+)#a4PquJ7H1PUyTJw~~bDsVeQSbxUrSLRFG7
+  second: 03+brjjQLrn)5kKc!Y8eoS5X#QCH3)#

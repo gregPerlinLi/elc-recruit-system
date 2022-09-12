@@ -22,6 +22,14 @@ import java.util.List;
 public interface IMessageService {
 
     /**
+     * 推进总进度
+     * @author TUFSolareyes
+     * @return {@link ResultVO} 推进后的进度
+     */
+    @GetMapping(value = "/pro/super_admin/elc_access/over_all_progress")
+    ResultVO<Integer> overAllProgress();
+
+    /**
      * 生产者微信登录接口
      *
      * @param jsCode 微信登录code
