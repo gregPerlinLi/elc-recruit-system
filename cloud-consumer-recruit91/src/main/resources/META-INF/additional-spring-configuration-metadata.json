@@ -14,6 +14,16 @@
       "name": "service-url.cloud-provider-message",
       "type": "java.lang.String",
       "description": "消息推送服务生产者."
+    },
+    {
+      "name": "checkin.first",
+      "type": "java.lang.String",
+      "description": "一面签到密钥，用于生成一面签到二维码."
+    },
+    {
+      "name": "checkin.second",
+      "type": "java.lang.String",
+      "description": "二面签到密钥，用于生成二面签到二维码."
     }
   ]
 }
