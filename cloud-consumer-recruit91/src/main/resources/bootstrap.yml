@@ -55,7 +55,7 @@ feign:
 logging:
   level:
     # At what level does feign log monitor which interface
-    com.gregperlinli.springcloud.service.PaymentFeignService: debug
+    com.gdutelc.recruit.service.interfaces.IInterviewService: debug
 
 service-url:
   cloud-provider-apply: http://cloud-provider-apply
