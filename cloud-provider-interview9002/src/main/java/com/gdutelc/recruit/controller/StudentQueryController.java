@@ -93,6 +93,27 @@ public class StudentQueryController {
     }
 
     /**
+     * 根据学号<b>模糊</b>查询学生集合接口
+     *
+     * @param stuId 模糊查询的学号
+     * @param page 需要查询第几页
+     * @param limit 每一页的列数限制
+     * @return {@link ResultVO}，其中数据为查询出来的报名者的简要信息集合
+     */
+    @GetMapping(value = "/search_stu_by_stu_id/{stu_id}/{page}/{limit}")
+    public ResultVO<PageDTO<BriefInfoDTO>> searchStuByStuId(@PathVariable("stu_id") String stuId,
+                                                            @PathVariable("page") Integer page,
+                                                            @PathVariable("limit") Integer limit) {
+        PageDTO<BriefInfoDTO> pages = briefInfoService.searchStuByStuId(stuId, page, limit);
+        if ( pages.getTotal() == 0 ) {
+            return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND, "无数据");
+        }
+        return new ResultVO<>(ResultStatusCodeConstant.SUCCESS,
+                "查询成功, 共有" + pages.getTotal() + "条数据, 当前页面有" + pages.getList().size() + "条数据",
+                pages);
+    }
+
+    /**
      * 获取调剂报名者简要信息集合接口
      *
      * @param page 需要查询第几页
@@ -127,6 +148,27 @@ public class StudentQueryController {
         return new ResultVO<>(ResultStatusCodeConstant.SUCCESS,
                             "查询成功, 共有" + pages.getTotal() + "条数据, 当前页面有" + pages.getList().size() + "条数据",
                                 pages);
+    }
+
+    /**
+     * 根据学号<b>模糊</b>查询调剂学生集合接口
+     *
+     * @param stuId 模糊查询的学号
+     * @param page 需要查询第几页
+     * @param limit 每一页的列数限制
+     * @return {@link ResultVO}，其中数据为查询出来的调剂报名者的简要信息集合
+     */
+    @GetMapping(value = "/search_adjust_stu_by_stu_id/{stu_id}/{page}/{limit}")
+    public ResultVO<PageDTO<BriefAdjustInfoDTO>> searchAdjustStuByStuId(@PathVariable("stu_id") String stuId,
+                                                                        @PathVariable("page") Integer page,
+                                                                        @PathVariable("limit") Integer limit) {
+        PageDTO<BriefAdjustInfoDTO> pages = briefAdjustInfoService.searchAdjustStuByStuId(stuId, page, limit);
+        if ( pages.getTotal() == 0 ) {
+            return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND, "无数据");
+        }
+        return new ResultVO<>(ResultStatusCodeConstant.SUCCESS,
+                "查询成功, 共有" + pages.getTotal() + "条数据, 当前页面有" + pages.getList().size() + "条数据",
+                pages);
     }
 
 }
