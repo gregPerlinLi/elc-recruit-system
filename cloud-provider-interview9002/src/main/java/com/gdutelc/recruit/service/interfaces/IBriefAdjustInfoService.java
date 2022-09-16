@@ -31,4 +31,14 @@ public interface IBriefAdjustInfoService {
      */
     PageDTO<BriefAdjustInfoDTO> searchAdjustStuByName(String name, Integer page, Integer limit);
 
+    /**
+     * 根据学号<b>模糊</b>查询调剂学生集合
+     *
+     * @param stuId 模糊查询的学号
+     * @param page 需要查询第几页
+     * @param limit 每一页的列数限制
+     * @return {@link Page} 要查询的调剂报名者简要信息分页集合
+     */
+    PageDTO<BriefAdjustInfoDTO> searchAdjustStuByStuId(String stuId, Integer page, Integer limit);
+
 }

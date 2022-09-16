@@ -40,4 +40,17 @@ public class BriefAdjustInfoServiceImpl extends ServiceImpl<BriefAdjustInfoMappe
         objectPageDTO.setList(resultPage.getRecords());
         return objectPageDTO;
     }
+
+    @Override
+    public PageDTO<BriefAdjustInfoDTO> searchAdjustStuByStuId(String stuId, Integer page, Integer limit) {
+        Page<BriefAdjustInfoDTO> briefAdjustInfoPage = new Page<>(page, limit);
+        Page<BriefAdjustInfoDTO> resultPage;
+        QueryWrapper<BriefAdjustInfoDTO> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like("stu_id", stuId);
+        resultPage = page(briefAdjustInfoPage, queryWrapper);
+        PageDTO<BriefAdjustInfoDTO> objectPageDTO = new PageDTO<>();
+        objectPageDTO.setTotal(count());
+        objectPageDTO.setList(resultPage.getRecords());
+        return objectPageDTO;
+    }
 }
