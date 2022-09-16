@@ -148,6 +148,16 @@ public class SentinelBlockHandler {
     }
 
     /**
+     * Sentinel 异常处理——根据学号模糊查询学生集合接口
+     */
+    public static ResultVO<PageDTO<BriefInfoDTO>> searchStuByStuIdHandlerException(@PathVariable("stu_id") String stuId,
+                                                                                   @PathVariable("page") Integer page,
+                                                                                   @PathVariable("limit") Integer limit,
+                                                                                   BlockException exception) {
+        return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
+    }
+
+    /**
      * Sentinel 异常处理——获取调剂报名者简要信息集合接口
      */
     public static ResultVO<PageDTO<BriefInfoDTO>> briefAdjustApplyQueryHandlerException(@PathVariable("page") Integer page,
@@ -163,6 +173,16 @@ public class SentinelBlockHandler {
                                                                                         @PathVariable("page") Integer page,
                                                                                         @PathVariable("limit") Integer limit,
                                                                                         BlockException exception) {
+        return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
+    }
+
+    /**
+     * Sentinel 异常处理——根据学号模糊查询调剂学生集合接口
+     */
+    public static ResultVO<PageDTO<BriefInfoDTO>> searchAdjustStuByStuIdHandlerException(@PathVariable("stu_id") String stuId,
+                                                                                         @PathVariable("page") Integer page,
+                                                                                         @PathVariable("limit") Integer limit,
+                                                                                         BlockException exception) {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
 
