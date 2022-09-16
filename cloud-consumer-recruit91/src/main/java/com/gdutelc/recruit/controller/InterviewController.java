@@ -75,6 +75,23 @@ public class InterviewController {
     }
 
     /**
+     * 根据学号<b>模糊</b>查询学生集合接口
+     *
+     * @param stuId 模糊查询的学号
+     * @param page 需要查询第几页
+     * @param limit 每一页的列数限制
+     * @return {@link ResultVO}，其中数据为查询出来的报名者的简要信息集合
+     */
+    @GetMapping(value = "/search_stu_by_stu_id/{stu_id}/{page}/{limit}")
+    @SentinelResource(value = "searchStuByStuId", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "searchStuByStuIdHandlerException")
+    @ApiOperation(value = "根据学号<b>模糊</b>查询学生集合接口", tags = "search", response = ResultVO.class)
+    public ResultVO<PageDTO<BriefInfoDTO>> searchStuByStuId(@ApiParam(value = "模糊查询的学号", required = true) @PathVariable("stu_id") String stuId,
+                                                            @ApiParam(value = "页数", required = true) @PathVariable("page") Integer page,
+                                                            @ApiParam(value = "每页最大内容数", required = true) @PathVariable("limit") Integer limit) {
+        return interviewService.searchStuByStuId(stuId, page, limit);
+    }
+
+    /**
      * 获取调剂报名者简要信息集合接口
      *
      * @param page 需要查询第几页
@@ -100,10 +117,27 @@ public class InterviewController {
     @GetMapping(value = "/search_adjust_stu_by_name/{name}/{page}/{limit}")
     @SentinelResource(value = "searchAdjustStuByName", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "searchAdjustStuByNameHandlerException")
     @ApiOperation(value = "根据姓名<b>模糊</b>查询调剂学生集合接口", tags = "search", response = ResultVO.class)
-    public ResultVO<PageDTO<BriefInfoDTO>> searchAdjustStuByName(@ApiParam(value = "模糊查询的名字", required = true) @PathVariable("name") String name,
-                                                                 @ApiParam(value = "页数", required = true) @PathVariable("page") Integer page,
-                                                                 @ApiParam(value = "每页最大内容数", required = true) @PathVariable("limit") Integer limit) {
+    public ResultVO<PageDTO<BriefAdjustInfoDTO>> searchAdjustStuByName(@ApiParam(value = "模糊查询的名字", required = true) @PathVariable("name") String name,
+                                                                       @ApiParam(value = "页数", required = true) @PathVariable("page") Integer page,
+                                                                       @ApiParam(value = "每页最大内容数", required = true) @PathVariable("limit") Integer limit) {
         return interviewService.searchAdjustStuByName(name, page, limit);
+    }
+
+    /**
+     * 根据学号<b>模糊</b>查询调剂学生集合接口
+     *
+     * @param stuId 模糊查询的学号
+     * @param page 需要查询第几页
+     * @param limit 每一页的列数限制
+     * @return {@link ResultVO}，其中数据为查询出来的调剂报名者的简要信息集合
+     */
+    @GetMapping(value = "/search_adjust_stu_by_stu_id/{stu_id}/{page}/{limit}")
+    @SentinelResource(value = "searchAdjustStuByStuId", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "searchAdjustStuByStuIdHandlerException")
+    @ApiOperation(value = "根据学号<b>模糊</b>查询调剂学生集合接口", tags = "search", response = ResultVO.class)
+    public ResultVO<PageDTO<BriefAdjustInfoDTO>> searchAdjustStuByStuId(@ApiParam(value = "模糊查询的学号", required = true) @PathVariable("stu_id") String stuId,
+                                                                        @ApiParam(value = "页数", required = true) @PathVariable("page") Integer page,
+                                                                        @ApiParam(value = "每页最大内容数", required = true) @PathVariable("limit") Integer limit) {
+        return interviewService.searchAdjustStuByStuId(stuId, page, limit);
     }
 
     /**
