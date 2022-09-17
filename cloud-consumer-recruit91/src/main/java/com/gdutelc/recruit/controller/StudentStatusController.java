@@ -56,7 +56,6 @@ public class StudentStatusController {
         }
         ResultVO<Integer> result = interviewService.interviewStart(stuId, interviewerUsername);
         if ( result.getCode() == ResultStatusCodeConstant.SUCCESS ) {
-            // TODO: 微信推送开始面试消息
             ResultVO<Void> sendMessageResult = messageService.interviewStartNotify(stuId);
             if ( sendMessageResult.getCode() != ResultStatusCodeConstant.SUCCESS ) {
                 log.warn("面试开始面试接口，微信推送开始面试消息失败，学号: {}, 失败原因: {}", stuId, sendMessageResult.getMsg());
@@ -87,7 +86,6 @@ public class StudentStatusController {
         }
         ResultVO<Integer> result = interviewService.secondInterviewStart(stuId, interviewerUsername);
         if ( result.getCode() == ResultStatusCodeConstant.SUCCESS ) {
-            // TODO: 微信推送开始面试消息
             ResultVO<Void> sendMessageResult = messageService.interviewStartNotify(stuId);
             if ( sendMessageResult.getCode() != ResultStatusCodeConstant.SUCCESS ) {
                 log.warn("面试开始面试接口，微信推送开始面试消息失败，学号: {}, 失败原因: {}", stuId, sendMessageResult.getMsg());
@@ -179,7 +177,6 @@ public class StudentStatusController {
         }
         ResultVO<Integer> result = interviewService.secondAdjustInterviewStart(stuId, interviewerUsername);
         if ( result.getCode() == ResultStatusCodeConstant.SUCCESS ) {
-            // TODO: 微信推送开始面试消息
             ResultVO<Void> sendMessageResult = messageService.interviewStartNotify(stuId);
             if ( sendMessageResult.getCode() != ResultStatusCodeConstant.SUCCESS ) {
                 log.warn("面试开始面试接口，微信推送开始面试消息失败，学号: {}, 失败原因: {}", stuId, sendMessageResult.getMsg());

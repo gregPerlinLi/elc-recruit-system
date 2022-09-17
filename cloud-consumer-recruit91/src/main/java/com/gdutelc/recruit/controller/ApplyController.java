@@ -42,7 +42,6 @@ public class ApplyController {
         log.warn(applyInfoDTO.toString());
         ResultVO<String> result = applyService.apply(applyInfoDTO);
         if ( result.getCode()  == ResultStatusCodeConstant.SUCCESS ) {
-            // TODO: 微信推送报名成功信息
             String openid = applyInfoDTO.getOpenid();
             ResultVO<Void> sendMessageResult = messageService.signInSuccessNotify(openid);
             if (sendMessageResult.getCode() != ResultStatusCodeConstant.SUCCESS) {
@@ -104,7 +103,6 @@ public class ApplyController {
     public ResultVO<Integer> signIn(@ApiParam(value = "要签到的学生微信openid", required = true) @PathVariable("openid") String openid,@PathVariable("lyb") String lyb) {
         ResultVO<Integer> result = applyService.signIn(openid);
         if ( result.getCode() == ResultStatusCodeConstant.SUCCESS ) {
-            // TODO: 这里是微信发送签到成功消息的调用
             ResultVO<Void> sendMessageResult = messageService.signInSuccessNotify(openid);
             if ( sendMessageResult.getCode() != ResultStatusCodeConstant.SUCCESS ) {
                 log.warn("面试开始面试接口，微信推送开始面试消息失败，openid: {}, 失败原因: {}", openid, sendMessageResult.getMsg());

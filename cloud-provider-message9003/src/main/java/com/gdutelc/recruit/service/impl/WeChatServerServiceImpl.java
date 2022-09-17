@@ -128,16 +128,19 @@ public class WeChatServerServiceImpl implements WeChatServerService {
 
     @Override
     public SendMessageDTO sendApplySuccessNotify(String toUser) {
+        // TODO: 微信推送报名成功信息
         return null;
     }
 
     @Override
     public SendMessageDTO sendSignInSuccessNotify(String toUser) {
+        // TODO: 这里是微信发送签到成功消息的调用
         return null;
     }
 
     @Override
     public SendMessageDTO sendInterviewStartNotify(String toUser) {
+        // TODO: 微信推送开始面试消息
         return null;
     }
 

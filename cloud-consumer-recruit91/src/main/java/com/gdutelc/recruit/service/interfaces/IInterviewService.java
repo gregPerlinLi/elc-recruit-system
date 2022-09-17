@@ -21,7 +21,7 @@ import java.util.List;
 @FeignClient(name = "cloud-provider-interview", contextId = "InterviewServiceApi")
 public interface IInterviewService {
 
-    /* TODO:以下为示例接口 */
+    /* 以下为示例接口 */
 
     /**
      * 示例接口
@@ -32,7 +32,7 @@ public interface IInterviewService {
     @GetMapping(value = "/pro/demo/test/{text}")
     ResultVO<String> test(@PathVariable("text") String text);
 
-    /* TODO:以下为登录相关接口 */
+    /* 以下为登录相关接口 */
 
     /**
      * 生产者面试官登录接口
@@ -78,7 +78,7 @@ public interface IInterviewService {
     @GetMapping(value = "/pro/interview/elc_access/admin_logout/{username}")
     ResultVO<Void> adminLogout(@PathVariable("username") String username);
 
-    /* TODO: 以下为学生查询相关接口 */
+    /*  以下为学生查询相关接口 */
 
     /**
      * 生产者面试官和管理员登录校验接口
@@ -179,7 +179,7 @@ public interface IInterviewService {
                                                                  @PathVariable("page") Integer page,
                                                                  @PathVariable("limit") Integer limit);
 
-    /* TODO:以下为评价相关接口 */
+    /* 以下为评价相关接口 */
 
     /**
      * 生产者面试官评价接口
@@ -199,7 +199,7 @@ public interface IInterviewService {
     @GetMapping(value = "/pro/interview/elc_access/query_comments/{stu_id}")
     ResultVO<List<CommentDTO>> queryComments(@PathVariable("stu_id") String stuId);
 
-    /* TODO:以下为面试进度相关接口 */
+    /* 以下为面试进度相关接口 */
 
     /**
      * 生产者面试开始面试接口
@@ -283,7 +283,7 @@ public interface IInterviewService {
     @PutMapping(value = "/pro/interview/elc_access/stu_status_code/second_adjust_interview_pass/{stu_id}/{interviewer_username}")
     ResultVO<Integer> secondAdjustInterviewPass(@PathVariable("stu_id") String stuId, @PathVariable("interviewer_username") String interviewerUsername);
 
-    /* TODO: 以下为面试总进度相关接口 */
+    /* 以下为面试总进度相关接口 */
 
     /**
      * 生产者获取当前面试总进度
