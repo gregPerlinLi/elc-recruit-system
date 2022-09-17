@@ -1,0 +1,57 @@
+version: '3'
+services:
+  cloud-consumer-recruit-01:
+    image: harbor.gdutnic.com/elc-recruit-system/cloud-consumer-recruit91:latest
+    container_name: cloud-consumer-recruit-01
+    ports:
+      - "91:91"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      NACOS_DISCOVERY_SERVER: 127.0.0.1:8848
+      NACOS_CONFIG_SERVER: 127.0.0.1:8848
+      JAVA_OPT_EXT: "-XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xms1024m -Xmx1024m -Xmn1024m -XX:-UseAdaptiveSizePolicy -XX:SurvivorRatio=4 -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:-CMSConcurrentMTEnabled -XX:CMSInitiatingOccupancyFraction=70 -XX:+CMSParallelRemarkEnabled -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m"
+    networks:
+      - elc_recruit_system_network
+    restart: always
+  cloud-provider-apply-01:
+    image: harbor.gdutnic.com/elc-recruit-system/cloud-provider-apply9001:latest
+    container_name: cloud-provider-apply-01
+    ports:
+      - "9001:9001"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      NACOS_DISCOVERY_SERVER: 127.0.0.1:8848
+      NACOS_CONFIG_SERVER: 127.0.0.1:8848
+      JAVA_OPT_EXT: "-XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xms1024m -Xmx1024m -Xmn1024m -XX:-UseAdaptiveSizePolicy -XX:SurvivorRatio=4 -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:-CMSConcurrentMTEnabled -XX:CMSInitiatingOccupancyFraction=70 -XX:+CMSParallelRemarkEnabled -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m"
+    networks:
+      - elc_recruit_system_network
+    restart: always
+  cloud-provider-interview-01:
+    image: harbor.gdutnic.com/elc-recruit-system/cloud-provider-interview9002:latest
+    container_name: cloud-provider-interview-01
+    ports:
+      - "9002:9002"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      NACOS_DISCOVERY_SERVER: 127.0.0.1:8848
+      NACOS_CONFIG_SERVER: 127.0.0.1:8848
+      JAVA_OPT_EXT: "-XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xms1024m -Xmx1024m -Xmn1024m -XX:-UseAdaptiveSizePolicy -XX:SurvivorRatio=4 -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:-CMSConcurrentMTEnabled -XX:CMSInitiatingOccupancyFraction=70 -XX:+CMSParallelRemarkEnabled -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m"
+    networks:
+      - elc_recruit_system_network
+    restart: always
+  cloud-provider-message-01:
+    image: harbor.gdutnic.com/elc-recruit-system/cloud-provider-message9003:latest
+    container_name: cloud-provider-message-01
+    ports:
+      - "9003:9003"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      NACOS_DISCOVERY_SERVER: 127.0.0.1:8848
+      NACOS_CONFIG_SERVER: 127.0.0.1:8848
+      JAVA_OPT_EXT: "-XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xms1024m -Xmx1024m -Xmn1024m -XX:-UseAdaptiveSizePolicy -XX:SurvivorRatio=4 -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:-CMSConcurrentMTEnabled -XX:CMSInitiatingOccupancyFraction=70 -XX:+CMSParallelRemarkEnabled -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m"
+    networks:
+      - elc_recruit_system_network
+    restart: always
+networks:
+  elc_recruit_system_network:
+    external: true
