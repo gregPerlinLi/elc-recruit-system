@@ -5,6 +5,12 @@ ARG JAR_FILE
 #设置环境变量
 ENV TIME_ZONE=Asia/Shanghai
 ENV LANG=C.UTF-8
+ENV SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE} \
+    NACOS_DISCOVERY_SERVER=${NACOS_DISCOVERY_SERVER} \
+    NACOS_CONFIG_SERVER=${NACOS_CONFIG_SERVER} \
+    SENTINEL_DASHBOARD_SERVER=${SENTINEL_DASHBOARD_SERVER} \
+    SENTINEL_CLIENT_IP=${SENTINEL_CLIENT_IP} \
+    JAVA_OPT_EXT=${JAVA_OPT_EXT}
 #在容器构建过程中执行的命令
 RUN echo "https://mirrors.aliyun.com/alpine/v3.6/main" > /etc/apk/repositories \
     && echo "https://mirrors.aliyun.com/alpine/v3.6/community" >> /etc/apk/repositories \
@@ -23,4 +29,13 @@ EXPOSE 91
 #将当前目录下的jar包复制到docker容器的/目录下
 ADD ${JAR_FILE} /app.jar
 #指定docker容器启动时执行的命令
-ENTRYPOINT ["java","-jar","-Duser.timezone=Asia/Shanghai","/app.jar"]
+ENTRYPOINT ["java", \
+            "-jar", \
+            "-Duser.timezone=Asia/Shanghai", \
+            "-Dspring.profiles=${SPRING_PROFILES_ACTIVE}", \
+            "-Dspring.cloud.nacos.discovery.server-addr=${NACOS_DISCOVERY_SERVER}", \
+            "-Dspring.cloud.nacos.config.server-addr=${NACOS_CONFIG_SERVER}", \
+            "-Dspring.cloud.sentinel.transport.dashboard=${SENTINEL_DASHBOARD_SERVER}", \
+            "-Dspring.cloud.sentinel.transport.client-ip=${SENTINEL_CLIENT_IP}", \
+            "${JAVA_OPT_EXT}", \
+            "/app.jar"]
