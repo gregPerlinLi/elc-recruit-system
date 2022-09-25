@@ -9,8 +9,8 @@ ENV SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE} \
     NACOS_DISCOVERY_SERVER=${NACOS_DISCOVERY_SERVER} \
     NACOS_CONFIG_SERVER=${NACOS_CONFIG_SERVER} \
     SENTINEL_DASHBOARD_SERVER=${SENTINEL_DASHBOARD_SERVER} \
-    SENTINEL_CLIENT_IP=${SENTINEL_CLIENT_IP} \
-    JAVA_OPT_EXT=${JAVA_OPT_EXT}
+    SENTINEL_CLIENT_IP=${SENTINEL_CLIENT_IP}
+    # JAVA_OPT_EXT=${JAVA_OPT_EXT}
 #在容器构建过程中执行的命令
 RUN echo "https://mirrors.aliyun.com/alpine/v3.6/main" > /etc/apk/repositories \
     && echo "https://mirrors.aliyun.com/alpine/v3.6/community" >> /etc/apk/repositories \
@@ -37,5 +37,5 @@ ENTRYPOINT ["java", \
             "-Dspring.cloud.nacos.config.server-addr=${NACOS_CONFIG_SERVER}", \
             "-Dspring.cloud.sentinel.transport.dashboard=${SENTINEL_DASHBOARD_SERVER}", \
             "-Dspring.cloud.sentinel.transport.client-ip=${SENTINEL_CLIENT_IP}", \
-            "${JAVA_OPT_EXT}", \
+            # "${JAVA_OPT_EXT}", \
             "/app.jar"]

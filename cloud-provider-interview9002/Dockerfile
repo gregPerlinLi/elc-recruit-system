@@ -7,8 +7,8 @@ ENV TIME_ZONE=Asia/Shanghai
 ENV LANG=C.UTF-8
 ENV SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE} \
     NACOS_DISCOVERY_SERVER=${NACOS_DISCOVERY_SERVER} \
-    NACOS_CONFIG_SERVER=${NACOS_CONFIG_SERVER} \
-    JAVA_OPT_EXT=${JAVA_OPT_EXT}
+    NACOS_CONFIG_SERVER=${NACOS_CONFIG_SERVER}
+    # JAVA_OPT_EXT=${JAVA_OPT_EXT}
 #在容器构建过程中执行的命令
 RUN echo "https://mirrors.aliyun.com/alpine/v3.6/main" > /etc/apk/repositories \
     && echo "https://mirrors.aliyun.com/alpine/v3.6/community" >> /etc/apk/repositories \
@@ -33,5 +33,5 @@ ENTRYPOINT ["java", \
             "-Dspring.profiles=${SPRING_PROFILES_ACTIVE}", \
             "-Dspring.cloud.nacos.discovery.server-addr=${NACOS_DISCOVERY_SERVER}", \
             "-Dspring.cloud.nacos.config.server-addr=${NACOS_CONFIG_SERVER}", \
-            "${JAVA_OPT_EXT}", \
+            # "${JAVA_OPT_EXT}", \
             "/app.jar"]
