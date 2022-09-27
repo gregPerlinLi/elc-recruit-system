@@ -3,7 +3,7 @@ package com.gdutelc.recruit.service.interfaces;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.gdutelc.recruit.domain.dto.DetailedInfoDTO;
-import com.gdutelc.recruit.domain.dto.SignInDto;
+import com.gdutelc.recruit.domain.dto.SignInDTO;
 import com.gdutelc.recruit.domain.entities.StuInfo;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 
@@ -45,7 +45,13 @@ public interface IStuInfoService extends IService<StuInfo> {
      */
     Integer interviewPass(String stuId, String interviewerUsername);
 
-
-    ResultVO<List<SignInDto>> getSignInList(int deptId) throws JsonProcessingException;
+    /**
+     * 获取已签到的学生集合
+     *
+     * @param deptId 筛选的部门代码
+     * @return {@link ResultVO}，其中数据为当前的所有以前到学生的集合
+     * @throws JsonProcessingException JSON处理异常
+     */
+    ResultVO<List<SignInDTO>> getSignInList(int deptId) throws JsonProcessingException;
 
 }

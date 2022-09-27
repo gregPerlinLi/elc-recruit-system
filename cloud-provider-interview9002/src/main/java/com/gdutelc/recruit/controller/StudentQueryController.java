@@ -173,8 +173,8 @@ public class StudentQueryController {
 
     /**
      * 获取签到列表
-     * @param deptId
-     * @return
+     * @param deptId 筛选部门代码
+     * @return {@link ResultVO}，其中数据为当前已签到的学生集合
      */
     @GetMapping(value = "/getSignInList/{deptId}")
     public ResultVO<List<SignInDto>> getSignInList(@PathVariable("deptId") Integer deptId) throws JsonProcessingException {

@@ -170,7 +170,8 @@ public class InterviewController {
 
     /**
      * 获取学生签到列表
-     * @return
+     * @param deptId 要筛选的部门代码
+     * @return {@link ResultVO}，其中数据为已签到的学生列表
      */
     @GetMapping(value = "/get_signIn_list/{deptId}")
     @SentinelResource(value = "getSignInList",blockHandlerClass = SentinelBlockHandler.class)

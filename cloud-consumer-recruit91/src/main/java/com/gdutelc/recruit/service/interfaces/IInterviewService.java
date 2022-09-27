@@ -286,14 +286,20 @@ public interface IInterviewService {
     /* 以下为面试总进度相关接口 */
 
     /**
-     * 生产者获取当前面试总进度
+     * 生产者获取当前面试总进度接口
      *
      * @return {@link ResultVO}，其中数据为当前面试总进度
      */
     @GetMapping(value = "/pro/interview/elc_access/process_status_code/get_now_process")
     ResultVO<Integer> getNowProcess();
 
+    /**
+     * 生产者获取当前以前到的学生集合接口
+     *
+     * @param deptId 筛选的部门代码
+     * @return {@link ResultVO}，其中数据为已签到的学生集合
+     */
     @GetMapping(value = "/pro/interview/elc_access/getSignInList/{deptId}")
-    ResultVO<List<SignInDto>> getSignInList(@PathVariable("deptId") Integer deptId);
+    ResultVO<List<SignInDTO>> getSignInList(@PathVariable("deptId") Integer deptId);
 
 }
