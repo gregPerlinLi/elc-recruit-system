@@ -1,5 +1,6 @@
 package com.gdutelc.recruit;
 
+import com.gdutelc.recruit.constant.DeptConstant;
 import com.gdutelc.recruit.constant.RedisKeyConstant;
 import com.gdutelc.recruit.utils.SpringUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -44,4 +45,6 @@ class Init {
             log.warn("Redis数据库中不存在面试总体进度值，已自动添加...");
         }
     }
+
+
 }

@@ -54,6 +54,11 @@ public class BriefInfoDTO {
     @ApiModelProperty(value = "第一志愿部门")
     private Integer firstDept;
 
+    @Getter
+    @Setter
+    @ApiModelProperty(value = "第二志愿部门")
+    private Integer secondDept;
+
     /**
      * 学院
      */

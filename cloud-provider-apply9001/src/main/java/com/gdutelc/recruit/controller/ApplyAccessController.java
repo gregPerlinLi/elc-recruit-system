@@ -1,5 +1,6 @@
 package com.gdutelc.recruit.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.gdutelc.recruit.domain.dto.ApplyInfoDTO;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.service.interfaces.IApplyService;
@@ -47,10 +48,17 @@ public class ApplyAccessController {
      * @param openid 微信 openid
      * @return 面试状态号
      */
-    @GetMapping(value = "/get_status/{openid}")
-    public ResultVO<Integer> getStatus(@PathVariable("openid") String openid){
-        return applyService.getStatus(openid);
+    @GetMapping(value = "/get_allStatus/{openid}")
+    public ResultVO<Integer> getAllStatus(@PathVariable("openid") String openid){
+        return applyService.getAllStatus(openid);
     }
+
+    @GetMapping(value = "/get_signInStatus/{openid}")
+    public ResultVO<Integer> getSignInStatus(@PathVariable("openid") String openid) {
+        System.out.println(openid);
+        return applyService.getSignInStatus(openid);
+    }
+
 
     /**
      * 修改学生面试信息接口
@@ -70,8 +78,9 @@ public class ApplyAccessController {
      * @param openid 学生微信openid
      * @return {@link ResultVO}，其中数据为当前面试总进度代码
      */
-    @PutMapping(value = "/sign_in/{openid}")
-    public ResultVO<Integer> signIn(@RequestBody @PathVariable("openid") String openid) {
-        return applyService.signIn(openid);
+    @PutMapping(value = "/sign_in/{openid}/{key}")
+    public ResultVO<Integer> signIn(@PathVariable("openid") String openid,@PathVariable("key") String key) throws JsonProcessingException {
+        return applyService.signIn(openid,key);
     }
+
 }

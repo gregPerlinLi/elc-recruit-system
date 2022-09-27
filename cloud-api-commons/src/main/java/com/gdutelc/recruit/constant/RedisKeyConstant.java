@@ -24,6 +24,12 @@ public interface RedisKeyConstant {
     String LOGIN_USER = "login-user:";
 
     /**
+     * @author TUFSolareyes
+     * 存放已经签到的学生的信息的key值
+     */
+    String SIGN_IN = "sign-in:";
+
+    /**
      * 拼接已登录面试官和管理员的key值
      *
      * @param username 需要拼接的用户名

@@ -293,4 +293,7 @@ public interface IInterviewService {
     @GetMapping(value = "/pro/interview/elc_access/process_status_code/get_now_process")
     ResultVO<Integer> getNowProcess();
 
+    @GetMapping(value = "/pro/interview/elc_access/getSignInList/{deptId}")
+    ResultVO<List<SignInDto>> getSignInList(@PathVariable("deptId") Integer deptId);
+
 }

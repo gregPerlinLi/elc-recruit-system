@@ -5,6 +5,7 @@ import com.gdutelc.recruit.domain.dto.*;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.service.interfaces.IInterviewService;
 import com.gdutelc.recruit.utils.SentinelBlockHandler;
+import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
@@ -164,6 +165,18 @@ public class InterviewController {
     @ApiOperation(value = "查询学生的所有评价", tags = "comment", response = ResultVO.class)
     public ResultVO<List<CommentDTO>> queryComments(@ApiParam(value = "需要查询的学生学号", required = true) @PathVariable("stu_id") String stuId) {
         return interviewService.queryComments(stuId);
+    }
+
+
+    /**
+     * 获取学生签到列表
+     * @return
+     */
+    @GetMapping(value = "/get_signIn_list/{deptId}")
+    @SentinelResource(value = "getSignInList",blockHandlerClass = SentinelBlockHandler.class)
+    @ApiOperation(value = "获取学生签到列表", tags = "signInList", response = ResultVO.class)
+    public ResultVO<List<SignInDto>> getSignInList(@PathVariable("deptId") Integer deptId) {
+        return interviewService.getSignInList(deptId);
     }
 
 }

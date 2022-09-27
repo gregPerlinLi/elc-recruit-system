@@ -1,8 +1,13 @@
 package com.gdutelc.recruit.service.interfaces;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.gdutelc.recruit.domain.dto.DetailedInfoDTO;
+import com.gdutelc.recruit.domain.dto.SignInDto;
 import com.gdutelc.recruit.domain.entities.StuInfo;
+import com.gdutelc.recruit.domain.vo.ResultVO;
+
+import java.util.List;
 
 /**
  * <p>
@@ -39,5 +44,8 @@ public interface IStuInfoService extends IService<StuInfo> {
      * @return 学生当前状态码（{@code 450}代表学生第一志愿部门和面试官所在部门不一致，{@code 0}代表不存在此学生，{@code 444}代表由于学生状态不符合要求，请求失败）
      */
     Integer interviewPass(String stuId, String interviewerUsername);
+
+
+    ResultVO<List<SignInDto>> getSignInList(int deptId) throws JsonProcessingException;
 
 }

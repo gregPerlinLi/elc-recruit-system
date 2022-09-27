@@ -29,7 +29,7 @@ public interface StudentStatusConstant {
     int INTERVIEWING = 2;
 
     /**
-     * 调剂
+     * 正在被调剂
      */
     int ADJUSTED = 3;
 

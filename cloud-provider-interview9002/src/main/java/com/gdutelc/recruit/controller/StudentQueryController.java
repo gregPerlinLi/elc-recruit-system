@@ -1,10 +1,8 @@
 package com.gdutelc.recruit.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.gdutelc.recruit.constant.ResultStatusCodeConstant;
-import com.gdutelc.recruit.domain.dto.BriefAdjustInfoDTO;
-import com.gdutelc.recruit.domain.dto.BriefInfoDTO;
-import com.gdutelc.recruit.domain.dto.DetailedInfoDTO;
-import com.gdutelc.recruit.domain.dto.PageDTO;
+import com.gdutelc.recruit.domain.dto.*;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.service.interfaces.IBriefAdjustInfoService;
 import com.gdutelc.recruit.service.interfaces.IBriefInfoService;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 面试官查询学生接口
@@ -170,5 +169,17 @@ public class StudentQueryController {
                 "查询成功, 共有" + pages.getTotal() + "条数据, 当前页面有" + pages.getList().size() + "条数据",
                 pages);
     }
+
+
+    /**
+     * 获取签到列表
+     * @param deptId
+     * @return
+     */
+    @GetMapping(value = "/getSignInList/{deptId}")
+    public ResultVO<List<SignInDto>> getSignInList(@PathVariable("deptId") Integer deptId) throws JsonProcessingException {
+        return stuInfoService.getSignInList(deptId);
+    }
+
 
 }
