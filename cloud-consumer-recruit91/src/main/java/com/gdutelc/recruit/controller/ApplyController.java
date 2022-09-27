@@ -110,6 +110,7 @@ public class ApplyController {
      * 学生签到接口
      *
      * @param openid 要签到的学生微信openid
+     * @param key 签到用的二维码
      * @return {@link ResultVO}，其中数据为当前面试总进度代码
      */
     @PutMapping(value = "sign_in/{openid}/{key}")
