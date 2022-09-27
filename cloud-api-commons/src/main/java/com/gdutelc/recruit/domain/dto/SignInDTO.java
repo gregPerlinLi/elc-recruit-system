@@ -9,7 +9,7 @@ import lombok.Setter;
  * @date 22/09/17
  */
 @Data
-public class SignInDto {
+public class SignInDTO {
 
     @Getter
     @Setter
@@ -19,10 +19,10 @@ public class SignInDto {
     @Setter
     private String stuId;
 
-    public SignInDto() {
+    public SignInDTO() {
     }
 
-    public SignInDto(String stuName, String stuId) {
+    public SignInDTO(String stuName, String stuId) {
         this.stuName = stuName;
         this.stuId = stuId;
     }

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gdutelc.recruit.constant.*;
 import com.gdutelc.recruit.domain.dto.ApplyInfoDTO;
-import com.gdutelc.recruit.domain.dto.SignInDto;
+import com.gdutelc.recruit.domain.dto.SignInDTO;
 import com.gdutelc.recruit.domain.entities.StuInfo;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.mapper.ApplyMapper;
@@ -207,7 +207,7 @@ public class ApplyServiceImpl implements IApplyService {
             return;
         }
         Integer firstDept = applyInfoDTO.getFirstDept();
-        SignInDto signInDto = new SignInDto(stuName,stuId);
+        SignInDTO signInDto = new SignInDTO(stuName,stuId);
         String jsonStr = objectMapper.writeValueAsString(signInDto);
         stringRedisTemplate.opsForList().rightPush(RedisKeyConstant.SIGN_IN + firstDept,jsonStr);
     }

@@ -10,7 +10,7 @@ import com.gdutelc.recruit.constant.RedisKeyConstant;
 import com.gdutelc.recruit.constant.ResultStatusCodeConstant;
 import com.gdutelc.recruit.constant.StudentStatusConstant;
 import com.gdutelc.recruit.domain.dto.DetailedInfoDTO;
-import com.gdutelc.recruit.domain.dto.SignInDto;
+import com.gdutelc.recruit.domain.dto.SignInDTO;
 import com.gdutelc.recruit.domain.entities.AdmissionStu;
 import com.gdutelc.recruit.domain.entities.InterviewerList;
 import com.gdutelc.recruit.domain.entities.StuInfo;
@@ -141,12 +141,12 @@ public class StuInfoServiceImpl extends ServiceImpl<StuInfoMapper, StuInfo> impl
     }
 
     @Override
-    public ResultVO<List<SignInDto>> getSignInList(int deptId) throws NumberFormatException, JsonProcessingException {
+    public ResultVO<List<SignInDTO>> getSignInList(int deptId) throws NumberFormatException, JsonProcessingException {
         Long size = stringRedisTemplate.opsForList().size(RedisKeyConstant.SIGN_IN + deptId);
         List<String> range = stringRedisTemplate.opsForList().range(RedisKeyConstant.SIGN_IN + deptId, 0, size - 1);
-        List<SignInDto> ans = new ArrayList<>();
+        List<SignInDTO> ans = new ArrayList<>();
         for(String jsonStr : range) {
-            SignInDto signInDto = objectMapper.readValue(jsonStr, SignInDto.class);
+            SignInDTO signInDto = objectMapper.readValue(jsonStr, SignInDTO.class);
             ans.add(signInDto);
         }
         return new ResultVO<>(ResultStatusCodeConstant.SUCCESS,"获取成功",ans);

@@ -5,7 +5,6 @@ import com.gdutelc.recruit.domain.dto.*;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.service.interfaces.IInterviewService;
 import com.gdutelc.recruit.utils.SentinelBlockHandler;
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
@@ -176,7 +175,7 @@ public class InterviewController {
     @GetMapping(value = "/get_signIn_list/{deptId}")
     @SentinelResource(value = "getSignInList", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "getSignInListHandlerException")
     @ApiOperation(value = "获取学生签到列表", tags = "signInList", response = ResultVO.class)
-    public ResultVO<List<SignInDto>> getSignInList(@PathVariable("deptId") Integer deptId) {
+    public ResultVO<List<SignInDTO>> getSignInList(@PathVariable("deptId") Integer deptId) {
         return interviewService.getSignInList(deptId);
     }
 
