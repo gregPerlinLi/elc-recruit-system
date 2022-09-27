@@ -174,7 +174,7 @@ public class InterviewController {
      * @return {@link ResultVO}，其中数据为已签到的学生列表
      */
     @GetMapping(value = "/get_signIn_list/{deptId}")
-    @SentinelResource(value = "getSignInList",blockHandlerClass = SentinelBlockHandler.class)
+    @SentinelResource(value = "getSignInList", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "getSignInListHandlerException")
     @ApiOperation(value = "获取学生签到列表", tags = "signInList", response = ResultVO.class)
     public ResultVO<List<SignInDto>> getSignInList(@PathVariable("deptId") Integer deptId) {
         return interviewService.getSignInList(deptId);
