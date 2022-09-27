@@ -112,6 +112,7 @@ public class SentinelBlockHandler {
      * Sentinel 异常处理——学生签到接口
      */
     public static ResultVO<Integer> signInHandlerException(@PathVariable("openid") String openid,
+                                                           @PathVariable("key") String key,
                                                            BlockException exception) {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
@@ -197,6 +198,14 @@ public class SentinelBlockHandler {
      * Sentinel 异常处理——查询学生的所有评价
      */
     public static ResultVO<List<CommentDTO>> queryCommentsHandlerException(@PathVariable("stu_id") String stuId,
+                                                                           BlockException exception) {
+        return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
+    }
+
+    /**
+     * Sentinel 异常处理——获取学生签到列表
+     */
+    public static ResultVO<List<CommentDTO>> getSignInListHandlerException(@PathVariable("deptId") Integer deptId,
                                                                            BlockException exception) {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
