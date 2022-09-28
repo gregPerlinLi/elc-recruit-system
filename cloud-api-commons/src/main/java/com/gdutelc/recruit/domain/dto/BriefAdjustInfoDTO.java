@@ -62,6 +62,7 @@ public class BriefAdjustInfoDTO {
     @ApiModelProperty(value = "当前面试状态")
     private Integer status;
 
+
     /**
      * {@link StuInfo}类与{@link BriefAdjustInfoDTO}的转换构造方法
      * @param adjustStuInfo 需要转换的实体类

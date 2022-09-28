@@ -58,4 +58,16 @@ public class BriefInfoServiceImpl extends ServiceImpl<BriefInfoMapper, BriefInfo
         objectPageDTO.setList(resultPage.getRecords());
         return objectPageDTO;
     }
+
+    @Override
+    public PageDTO<BriefInfoDTO> searchStuByStuId(String stuId, Integer page, Integer limit) {
+        Page<BriefInfoDTO> briefInfoPage = new Page<>(page, limit);
+        QueryWrapper<BriefInfoDTO> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like("stu_id", stuId);
+        Page<BriefInfoDTO> resultPage = page(briefInfoPage, queryWrapper);
+        PageDTO<BriefInfoDTO> objectPageDTO = new PageDTO<>();
+        objectPageDTO.setTotal(resultPage.getTotal());
+        objectPageDTO.setList(resultPage.getRecords());
+        return objectPageDTO;
+    }
 }

@@ -32,4 +32,6 @@ mybatis-plus:
   type-aliases-package: com.gdutelc.recruit.domain.entities
   configuration:
     map-underscore-to-camel-case: true
-
+checkin:
+  first: 123
+  second: 03+brjjQLrn)5kKc!Y8eoS5X#QCH3)#

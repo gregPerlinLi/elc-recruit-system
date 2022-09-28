@@ -29,9 +29,14 @@ public interface StudentStatusConstant {
     int INTERVIEWING = 2;
 
     /**
+     * 正在被调剂
+     */
+    int ADJUSTED = 3;
+
+    /**
      * 通过
      */
-    int PASS = 3;
+    int PASS = 4;
 
     /**
      * 录用

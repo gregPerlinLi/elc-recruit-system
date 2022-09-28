@@ -4,6 +4,7 @@ import com.alibaba.druid.support.json.JSONUtils;
 import com.gdutelc.recruit.domain.wx.AccessTokenDTO;
 import com.gdutelc.recruit.domain.wx.SendMessageDTO;
 import com.gdutelc.recruit.service.interfaces.WeChatServerService;
+import com.gdutelc.recruit.utils.GenericUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -123,6 +124,26 @@ public class WeChatServerServiceImpl implements WeChatServerService {
     public SendMessageDTO sendWrittenTestNotify(String toUser) {
         Map<String, Object> data = setNotifyData("电子科技协会", "实验-4 208",
                 "2022-10-20 20:00", "电协招新笔试即日开始~");
+        return sendSubscribeMessage(toUser,interviewNotifyModelId,data);
+    }
+
+    @Override
+    public SendMessageDTO sendApplySuccessNotify(String toUser) {
+        Map<String, Object> data = setNotifyData("电子科技协会", "实验4", GenericUtils.getFullTimeStr()
+                , "电协招新报名成功~");
+        return sendSubscribeMessage(toUser,interviewNotifyModelId,data);
+    }
+
+    @Override
+    public SendMessageDTO sendSignInSuccessNotify(String toUser) {
+        Map<String, Object> data = setNotifyData("电子科技协会", "实验4", GenericUtils.getFullTimeStr()
+                , "面试签到成功~");
+        return sendSubscribeMessage(toUser,interviewNotifyModelId,data);
+    }
+
+    @Override
+    public SendMessageDTO sendInterviewStartNotify(String toUser) {
+        Map<String, Object> data = setNotifyData("电子科技协会", "实验4", GenericUtils.getFullTimeStr(), "轮到您去面试啦~");
         return sendSubscribeMessage(toUser,interviewNotifyModelId,data);
     }
 

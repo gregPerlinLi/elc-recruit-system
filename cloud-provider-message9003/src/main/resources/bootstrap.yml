@@ -43,15 +43,15 @@ mybatis-plus:
 
 wx:
   applet:
-    appid: wx3fd923d8fdafde76
-    secret: 3281d335f1ef8ccbdd162cef84c882e3
+    appid: wxb30cee030fca9a84
+    secret: c6c38320958d0c74f8e97f4b6c894a92
   url:
     code2Session: https://api.weixin.qq.com/sns/jscode2session
 
 
 wechat-server:
   appid: wxb30cee030fca9a84
-  secret: 0440484004475c7feda98c1a64b56a08
+  secret: c6c38320958d0c74f8e97f4b6c894a92
   grantType: client_credential
   tokenUrl: https://api.weixin.qq.com/cgi-bin/token
   sendMessageUrl: https://api.weixin.qq.com/cgi-bin/message/subscribe/send

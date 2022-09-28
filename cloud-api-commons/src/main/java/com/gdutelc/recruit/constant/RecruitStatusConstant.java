@@ -26,4 +26,9 @@ public interface RecruitStatusConstant {
      * 结束
      */
     int END = 40;
+
+    /**
+     * 递增值
+     */
+    int STEP = 10;
 }

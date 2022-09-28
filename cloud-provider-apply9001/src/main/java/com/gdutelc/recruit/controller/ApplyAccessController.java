@@ -1,5 +1,6 @@
 package com.gdutelc.recruit.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.gdutelc.recruit.domain.dto.ApplyInfoDTO;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.service.interfaces.IApplyService;
@@ -34,7 +35,7 @@ public class ApplyAccessController {
     /**
      * 获取个人完整报名信息接口
      * @param openid 微信openid
-     * @return ResultVO，其中数据为个人报名信息实体类
+     * @return {@link ResultVO}，其中数据为个人报名信息实体类
      */
     @GetMapping(value = "/get_apply_info/{openid}")
     public ResultVO<ApplyInfoDTO> getApplyInfo(@PathVariable("openid") String openid){
@@ -45,12 +46,25 @@ public class ApplyAccessController {
      * 获取当前学生的面试状态接口
      *
      * @param openid 微信 openid
-     * @return 面试状态号
+     * @return {@link ResultVO}，其中数据为面试状态号
      */
-    @GetMapping(value = "/get_status/{openid}")
-    public ResultVO<Integer> getStatus(@PathVariable("openid") String openid){
-        return applyService.getStatus(openid);
+    @GetMapping(value = "/get_allStatus/{openid}")
+    public ResultVO<Integer> getAllStatus(@PathVariable("openid") String openid){
+        return applyService.getAllStatus(openid);
     }
+
+    /**
+     * 获取当前学生的签到状态接口
+     *
+     * @param openid 微信openid
+     * @return {@link ResultVO}，其中数据为当前签到状态
+     */
+    @GetMapping(value = "/get_signInStatus/{openid}")
+    public ResultVO<Integer> getSignInStatus(@PathVariable("openid") String openid) {
+        System.out.println(openid);
+        return applyService.getSignInStatus(openid);
+    }
+
 
     /**
      * 修改学生面试信息接口
@@ -68,10 +82,12 @@ public class ApplyAccessController {
      * 学生签到接口
      *
      * @param openid 学生微信openid
+     * @param key 签到二维码
      * @return {@link ResultVO}，其中数据为当前面试总进度代码
      */
-    @PutMapping(value = "/sign_in/{openid}")
-    public ResultVO<Integer> signIn(@RequestBody @PathVariable("openid") String openid) {
-        return applyService.signIn(openid);
+    @PutMapping(value = "/sign_in/{openid}/{key}")
+    public ResultVO<Integer> signIn(@PathVariable("openid") String openid,@PathVariable("key") String key) throws JsonProcessingException {
+        return applyService.signIn(openid,key);
     }
+
 }

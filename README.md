@@ -20,7 +20,7 @@
     <mysql.version>8.0.28</mysql.version>
     <druid.version>1.2.8</druid.version>
     <mybatis.spring.boot.version>2.2.2</mybatis.spring.boot.version>
-  </properties>
+</properties>
 ```
 
 ## 关于数据库：

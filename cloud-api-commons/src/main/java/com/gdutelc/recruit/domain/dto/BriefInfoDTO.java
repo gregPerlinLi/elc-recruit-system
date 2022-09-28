@@ -2,6 +2,7 @@ package com.gdutelc.recruit.domain.dto;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.gdutelc.recruit.domain.entities.StuInfo;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -53,6 +54,11 @@ public class BriefInfoDTO {
     @ApiModelProperty(value = "第一志愿部门")
     private Integer firstDept;
 
+    @Getter
+    @Setter
+    @ApiModelProperty(value = "第二志愿部门")
+    private Integer secondDept;
+
     /**
      * 学院
      */
@@ -68,6 +74,7 @@ public class BriefInfoDTO {
     @Setter
     @ApiModelProperty(value = "当前面试状态")
     private Integer status;
+
 
     /**
      * {@link StuInfo}类与{@link BriefInfoDTO}的转换构造方法

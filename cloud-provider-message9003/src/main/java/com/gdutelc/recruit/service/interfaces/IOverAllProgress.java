@@ -13,5 +13,5 @@ public interface IOverAllProgress {
      * 总进度推进
      * @return {@link ResultVO}，不包含数据
      */
-    ResultVO<Void> overAllProgress();
+    ResultVO<Integer> overAllProgress();
 }

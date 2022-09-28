@@ -26,7 +26,7 @@ import java.util.List;
 @Service
 public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> implements ICommentService {
 
-    private final static Integer MAX_MARK = 5;
+    private final static Integer MAX_MARK = 10;
 
     public static final Integer MIN_MARK = 0;
 

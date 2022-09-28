@@ -73,12 +73,13 @@ public class AdjustStuInfoServiceImpl extends ServiceImpl<AdjustStuInfoMapper, A
             adjustStuInfo.setAdjustDept(department);
         }
         adjustStuInfo.setStatus(StudentStatusConstant.CHECKED_IN);
-        stuInfo.setStatus(StudentStatusConstant.CHECKED_IN);
+        stuInfo.setStatus(StudentStatusConstant.ADJUSTED);
         UpdateWrapper<StuInfo> studentUpdateWrapper = new UpdateWrapper<>();
         studentUpdateWrapper.eq("stu_id", stuId);
         studentUpdateWrapper.eq("status", StudentStatusConstant.INTERVIEWING);
         int insertAdjustStuInfo = adjustStuInfoMapper.insert(adjustStuInfo);
         int updateStuInfo = stuInfoMapper.update(stuInfo, studentUpdateWrapper);
+        System.out.println(insertAdjustStuInfo + " asdfasdf " + updateStuInfo);
         if ( insertAdjustStuInfo == 1 || updateStuInfo == 1 ) {
             return stuInfo.getSecondDept();
         } else {
@@ -108,11 +109,12 @@ public class AdjustStuInfoServiceImpl extends ServiceImpl<AdjustStuInfoMapper, A
         adjustStudentUpdateWrapper.eq("stu_id", stuId);
         adjustStudentUpdateWrapper.eq("status", StudentStatusConstant.CHECKED_IN);
         studentUpdateWrapper.eq("stu_id", stuId);
-        studentUpdateWrapper.eq("status", StudentStatusConstant.CHECKED_IN);
+        studentUpdateWrapper.eq("status", StudentStatusConstant.ADJUSTED);
         adjustStuInfo.setStatus(StudentStatusConstant.INTERVIEWING);
         stuInfo.setStatus(StudentStatusConstant.INTERVIEWING);
         int updateAdjustStuInfo = adjustStuInfoMapper.update(adjustStuInfo, adjustStudentUpdateWrapper);
         int updateStuInfo = stuInfoMapper.update(stuInfo, studentUpdateWrapper);
+        System.out.println(updateAdjustStuInfo + " " + updateStuInfo);
         if ( updateAdjustStuInfo == 1 && updateStuInfo == 1 ) {
             return StudentStatusConstant.INTERVIEWING;
         } else {

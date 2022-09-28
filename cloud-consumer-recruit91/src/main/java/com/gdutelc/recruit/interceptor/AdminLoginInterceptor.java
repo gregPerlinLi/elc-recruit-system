@@ -5,6 +5,7 @@ import com.gdutelc.recruit.domain.exception.LoginException;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.service.interfaces.IInterviewService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -22,6 +23,9 @@ public class AdminLoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         IInterviewService interviewService = WebApplicationContextUtils.getRequiredWebApplicationContext(request.getServletContext()).getBean(IInterviewService.class);
+        if( HttpMethod.OPTIONS.matches(request.getMethod().toUpperCase()) ) {
+            return true;
+        }
         String username = (String) request.getSession(false).getAttribute("admin_username");
         String sessionId = request.getSession().getId();
         if ( username != null ) {

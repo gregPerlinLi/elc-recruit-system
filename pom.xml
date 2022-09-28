@@ -4,14 +4,14 @@
   <groupId>com.gdutelc.recruit</groupId>
   <artifactId>elc-recruit-system</artifactId>
   <packaging>pom</packaging>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0.0</version>
   <modules>
     <module>cloud-consumer-recruit91</module>
     <module>cloud-provider-apply9001</module>
     <module>cloud-provider-interview9002</module>
     <module>cloud-provider-message9003</module>
-      <module>cloud-api-commons</module>
-      <module>mybatis-plus-generator</module>
+    <module>cloud-api-commons</module>
+    <!--<module>mybatis-plus-generator</module>-->
   </modules>
   <name>Archetype - elc-recruit-system</name>
   <url>http://maven.apache.org</url>
@@ -27,6 +27,12 @@
     <mysql.version>8.0.28</mysql.version>
     <druid.version>1.2.8</druid.version>
     <mybatis.spring.boot.version>2.2.2</mybatis.spring.boot.version>
+    <!-- Docker 部署选项 -->
+    <dockerfile.maven.plugin.version>1.4.13</dockerfile.maven.plugin.version>
+    <docker.repository>reg.gdutelc.com</docker.repository>
+    <docker.repository.project>elc-recruit-system</docker.repository.project>
+    <!--默认全局跳过dockerfile-->
+    <dockerfile.skip>true</dockerfile.skip>
   </properties>
 
   <!-- After the function of submodule is inherited: Lock version & the submodule needn't require groupId and version -->
@@ -92,6 +98,30 @@
         <configuration>
           <fork>true</fork>
           <addResources>true</addResources>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.spotify</groupId>
+        <artifactId>dockerfile-maven-plugin</artifactId>
+        <version>${dockerfile.maven.plugin.version}</version>
+        <!--不需打包推送镜像到仓库时将此处executions屏蔽即可-->
+        <executions>
+          <execution>
+            <id>default</id>
+            <goals>
+              <goal>build</goal>
+              <goal>push</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <repository>${docker.repository}/${docker.repository.project}/${docker.image.name}</repository>
+          <tag>${project.version}</tag>
+          <buildArgs>
+            <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+          </buildArgs>
+          <!--使用maven的setting.xml文件中harbor的登录信息-->
+          <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
         </configuration>
       </plugin>
     </plugins>

@@ -178,7 +178,8 @@ public class StudentStatusController {
      * @return {@link ResultVO}，其中数据为当前学生的状态码
      */
     @PutMapping(value = "/second_adjust_interview_pass/{stu_id}/{interviewer_username}")
-    public ResultVO<Integer> secondInterviewAdjustPass(@PathVariable("stu_id") String stuId, @PathVariable("interviewer_username") String interviewerUsername) {
+    public ResultVO<Integer> secondInterviewAdjustPass(@PathVariable("stu_id") String stuId,
+                                                       @PathVariable("interviewer_username") String interviewerUsername) {
         Integer result = adjustStuInfoService.interviewPass(stuId, interviewerUsername);
         if ( result == ResultStatusCodeConstant.STATUS_EXCEPTION) {
             return new ResultVO<>(ResultStatusCodeConstant.STATUS_EXCEPTION, "该学生已被录取");

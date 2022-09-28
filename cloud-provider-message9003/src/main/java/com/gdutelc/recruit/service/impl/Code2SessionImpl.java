@@ -48,8 +48,8 @@ public class Code2SessionImpl implements ICode2Session {
     @Override
     public ResultVO<LoginInfo> code2Session(String js_code, String grant_type) throws JsonProcessingException {
         Map<String,String> params = new HashMap<>();
-        params.put("appid","wxb30cee030fca9a84");
-        params.put("secret","8bbb02d9bd8d48f105f26cf4cbcd0e48");
+        params.put("appid",appid);
+        params.put("secret",secret);
         params.put("js_code",js_code);
         params.put("grant_type",grant_type);
 

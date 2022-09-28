@@ -3,22 +3,29 @@ package com.gdutelc.recruit.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gdutelc.recruit.constant.RecruitStatusConstant;
 import com.gdutelc.recruit.constant.RedisKeyConstant;
 import com.gdutelc.recruit.constant.ResultStatusCodeConstant;
 import com.gdutelc.recruit.constant.StudentStatusConstant;
 import com.gdutelc.recruit.domain.dto.DetailedInfoDTO;
+import com.gdutelc.recruit.domain.dto.SignInDTO;
 import com.gdutelc.recruit.domain.entities.AdmissionStu;
 import com.gdutelc.recruit.domain.entities.InterviewerList;
 import com.gdutelc.recruit.domain.entities.StuInfo;
+import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.mapper.AdmissionStuMapper;
 import com.gdutelc.recruit.mapper.InterviewerListMapper;
 import com.gdutelc.recruit.mapper.StuInfoMapper;
 import com.gdutelc.recruit.service.interfaces.IStuInfoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -43,6 +50,9 @@ public class StuInfoServiceImpl extends ServiceImpl<StuInfoMapper, StuInfo> impl
 
     @Resource
     AdmissionStuMapper admissionStuMapper;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @Override
     public DetailedInfoDTO detailedApplyQuery(String stuId) {
@@ -128,5 +138,17 @@ public class StuInfoServiceImpl extends ServiceImpl<StuInfoMapper, StuInfo> impl
         } else {
             return ResultStatusCodeConstant.FAILED;
         }
+    }
+
+    @Override
+    public ResultVO<List<SignInDTO>> getSignInList(int deptId) throws NumberFormatException, JsonProcessingException {
+        Long size = stringRedisTemplate.opsForList().size(RedisKeyConstant.SIGN_IN + deptId);
+        List<String> range = stringRedisTemplate.opsForList().range(RedisKeyConstant.SIGN_IN + deptId, 0, size - 1);
+        List<SignInDTO> ans = new ArrayList<>();
+        for(String jsonStr : range) {
+            SignInDTO signInDto = objectMapper.readValue(jsonStr, SignInDTO.class);
+            ans.add(signInDto);
+        }
+        return new ResultVO<>(ResultStatusCodeConstant.SUCCESS,"获取成功",ans);
     }
 }
