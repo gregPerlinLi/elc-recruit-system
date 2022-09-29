@@ -4,7 +4,7 @@
   <groupId>com.gdutelc.recruit</groupId>
   <artifactId>elc-recruit-system</artifactId>
   <packaging>pom</packaging>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <modules>
     <module>cloud-consumer-recruit91</module>
     <module>cloud-provider-apply9001</module>
