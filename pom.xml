@@ -32,7 +32,7 @@
     <mybatis.spring.boot.version>2.2.2</mybatis.spring.boot.version>
     <!-- Docker 部署选项 -->
     <dockerfile.maven.plugin.version>1.4.13</dockerfile.maven.plugin.version>
-    <docker.repository>reg.gdutelc.com</docker.repository>
+    <docker.repository>harbor.gdutelc.com</docker.repository>
     <docker.repository.project>elc-recruit-system</docker.repository.project>
     <!--默认全局跳过dockerfile-->
     <dockerfile.skip>true</dockerfile.skip>
