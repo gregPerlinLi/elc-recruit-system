@@ -20,16 +20,16 @@ spring:
       pool:
         max-active: 10
         min-idle: 5
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 127.0.0.1:8848
-      config:
-        server-addr: 127.0.0.1:8848
-        file-extension: yaml
-
-mybatis-plus:
-  mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.gdutelc.recruit.domain.entities
-  configuration:
-    map-underscore-to-camel-case: true
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: 127.0.0.1:8848
+#      config:
+#        server-addr: 127.0.0.1:8848
+#        file-extension: yaml
+#
+#mybatis-plus:
+#  mapper-locations: classpath:mapper/*.xml
+#  type-aliases-package: com.gdutelc.recruit.domain.entities
+#  configuration:
+#    map-underscore-to-camel-case: true
