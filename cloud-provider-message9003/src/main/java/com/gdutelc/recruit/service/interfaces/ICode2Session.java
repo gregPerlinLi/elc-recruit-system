@@ -19,4 +19,6 @@ public interface ICode2Session {
      * @throws JsonProcessingException
      */
     ResultVO<LoginInfo> code2Session(String js_code, String grant_type) throws JsonProcessingException ;
+
+
 }
