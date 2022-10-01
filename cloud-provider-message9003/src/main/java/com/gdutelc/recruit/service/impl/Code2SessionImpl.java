@@ -36,9 +36,6 @@ public class Code2SessionImpl implements ICode2Session {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @Value(value = "${wx.url.code2Session}")
-    private String url;
-
     @Value(value = "${wx.applet.appid}")
     private String appid;
 
@@ -53,6 +50,7 @@ public class Code2SessionImpl implements ICode2Session {
         params.put("js_code",js_code);
         params.put("grant_type",grant_type);
 
+        String url = "https://api.weixin.qq.com/sns/jscode2session";
         url = GenericUtils.splicingUrlStr(url,params);
         ResponseEntity<String> entity = restTemplate.getForEntity(url, String.class);
         if(entity.getStatusCodeValue() != SUCCESS){
