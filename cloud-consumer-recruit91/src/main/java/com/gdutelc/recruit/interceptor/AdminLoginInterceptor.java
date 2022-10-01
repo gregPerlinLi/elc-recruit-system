@@ -31,7 +31,7 @@ public class AdminLoginInterceptor implements HandlerInterceptor {
         if ( username != null ) {
             ResultVO<String> result = interviewService.loginVerify(username, sessionId);
             if ( result.getCode() == ResultStatusCodeConstant.SUCCESS ) {
-                log.info("登录校验成功");
+                // log.info("登录校验成功");
                 return true;
             }
             log.info("登录校验失败，Redis中没有记录此用户的Session");
