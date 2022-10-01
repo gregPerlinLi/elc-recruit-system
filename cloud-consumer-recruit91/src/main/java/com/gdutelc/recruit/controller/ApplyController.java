@@ -39,7 +39,7 @@ public class ApplyController {
     @SentinelResource(value = "apply", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "applyHandlerException")
     @ApiOperation(value = "报名", tags = "apply", response = ResultVO.class)
     public ResultVO<String> apply (@RequestBody @ApiParam(value = "报名信息", required = true) ApplyInfoDTO applyInfoDTO) {
-        log.warn(applyInfoDTO.toString());
+        //log.warn(applyInfoDTO.toString());
         ResultVO<String> result = applyService.apply(applyInfoDTO);
         if ( result.getCode()  == ResultStatusCodeConstant.SUCCESS ) {
             String openid = applyInfoDTO.getOpenid();
