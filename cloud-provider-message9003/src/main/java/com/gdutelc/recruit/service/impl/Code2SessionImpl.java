@@ -58,8 +58,9 @@ public class Code2SessionImpl implements ICode2Session {
         if(entity.getStatusCodeValue() != SUCCESS){
             return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST,"微信服务器忙碌",null);
         }
+        System.out.println(GenericUtils.getFullTimeStr() + " " + "请求了微信: " + url);
         String body = entity.getBody();
-        System.out.println(body);
+        System.out.println(GenericUtils.getFullTimeStr() + " " + "微信服务器返回: " + body);
         LoginInfo loginInfo = objectMapper.readValue(body, LoginInfo.class);
         if(loginInfo != null&&loginInfo.getOpenid() != null){
             stringRedisTemplate.opsForSet().add(RedisKeyConstant.STU_OPENID, loginInfo.getOpenid());
