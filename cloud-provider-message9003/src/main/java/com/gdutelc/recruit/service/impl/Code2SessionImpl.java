@@ -64,7 +64,7 @@ public class Code2SessionImpl implements ICode2Session {
             stringRedisTemplate.opsForSet().add(RedisKeyConstant.STU_OPENID, loginInfo.getOpenid());
             return new ResultVO<>(SUCCESS,"登录成功",loginInfo);
         }else{
-            return new ResultVO<>(ResultStatusCodeConstant.SERVER_ERROR,"处理失败",null);
+            return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND,"处理失败",null);
         }
 
     }
