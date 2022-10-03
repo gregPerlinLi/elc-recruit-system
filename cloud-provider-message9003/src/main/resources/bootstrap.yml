@@ -57,3 +57,35 @@ wechat-server:
   sendMessageUrl: https://api.weixin.qq.com/cgi-bin/message/subscribe/send
   miniProgramState: developer
   interviewNotifyModelId: m5YFo3j5_P6OMSR2tG8l7OhCU7xAOVtYBcY1EGfcqug
+
+
+wechat-notify:
+  model:
+    first-interview:
+      id: 1
+      fields: ["1","2"]
+      contents: ["3","4"]
+    written-test:
+      id:
+      fields:
+      contents:
+    second-interview:
+      id:
+      fields:
+      contents:
+    finally-passed:
+      id:
+      fields:
+      contents:
+    apply-success:
+      id:
+      fields:
+      contents:
+    sign-in-success:
+      id:
+      fields:
+      contents:
+    interview-start:
+      id:
+      fields:
+      contents:
