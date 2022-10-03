@@ -12,11 +12,11 @@ import java.util.Map;
 public interface ContentManageService {
 
     /**
-     * 获取完整消息模型
+     * 返回消息推送数据
      * @param usage 消息推送的使用场景
-     * @return 消息模型，包括模板ID、字段字符串数组和内容字符串数组
+     * @return 获取
      */
-    Map<String,Object> getPackedModel(Usage usage);
+    Map<String,Object> getPackedNotifyData(Usage usage);
 
     /**
      * 获取模板id

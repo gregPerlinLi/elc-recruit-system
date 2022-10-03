@@ -3,6 +3,8 @@ package com.gdutelc.recruit.service.impl;
 import com.alibaba.druid.support.json.JSONUtils;
 import com.gdutelc.recruit.domain.wx.AccessTokenDTO;
 import com.gdutelc.recruit.domain.wx.SendMessageDTO;
+import com.gdutelc.recruit.enums.Usage;
+import com.gdutelc.recruit.service.interfaces.ContentManageService;
 import com.gdutelc.recruit.service.interfaces.WeChatServerService;
 import com.gdutelc.recruit.utils.GenericUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +33,8 @@ public class WeChatServerServiceImpl implements WeChatServerService {
     private  RestTemplate restTemplate;
     @Resource
     StringRedisTemplate stringRedisTemplate;
+    @Resource
+    private ContentManageService contentManageService;
     @Value("${wechat-server.appid}")
     private String appId;
     @Value("${wechat-server.secret}")
@@ -102,10 +106,9 @@ public class WeChatServerServiceImpl implements WeChatServerService {
 
     @Override
     public SendMessageDTO sendFirstInterviewNotify(String toUser) {
-        String[] fields = {"name1","thing4","time13","thing3"};
-        String[] contents = {"电子科技协会","实验-4 306","2022-10-10 20:00","电协招新第一次面试即日开始~"};
-        Map<String, Object> data = setNotifyData(fields,contents);
-        return sendSubscribeMessage(toUser,interviewNotifyModelId,data);
+        String modelId = contentManageService.getNotifyModelId(Usage.FIRST_INTERVIEW);
+        Map<String, Object> data = contentManageService.getPackedNotifyData(Usage.FIRST_INTERVIEW);
+        return sendSubscribeMessage(toUser,modelId,data);
     }
 
     @Override
@@ -157,21 +160,7 @@ public class WeChatServerServiceImpl implements WeChatServerService {
     }
 
     private Map<String, Object> setNotifyData(String[] fields, String[] contents){
-        Map<String, Object> data = new HashMap<>(16);
-        LinkedList<Map<String, Object>> contentList = new LinkedList<>();
-
-       Map<String, Object> entry;
-        for(String content : contents){
-            entry = new HashMap<>(2);
-            entry.put("value",content);
-            contentList.add(entry);
-        }
-
-        for(String field :fields){
-            data.put(field,contentList.removeFirst());
-        }
-
-        return  data;
+        return null;
     }
 
     private Map<String, Object> setNotifyData(String sender, String place, String time, String matter){
