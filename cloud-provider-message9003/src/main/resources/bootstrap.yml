@@ -62,30 +62,30 @@ wechat-server:
 wechat-notify:
   model:
     first-interview:
-      id: 1
-      fields: ["1","2"]
-      contents: ["3","4"]
+      id: i5rbTJ70IEajfuWmYG7jCeE4fsh3c9fZ1aqkQY3Cqos
+      fields: thing7,thing3,time2,thing9
+      contents: 电子科技协会,实验-4 306,2022-10-10 20:00,电协招新第一次面试即日开始~
     written-test:
-      id:
-      fields:
-      contents:
+      id: i5rbTJ70IEajfuWmYG7jCeE4fsh3c9fZ1aqkQY3Cqos
+      fields: thing7,thing3,time2,thing9
+      contents: 电子科技协会,实验-4 308,2022-10-11 20:00,电协招新笔试即日开始~
     second-interview:
-      id:
-      fields:
-      contents:
+      id: i5rbTJ70IEajfuWmYG7jCeE4fsh3c9fZ1aqkQY3Cqos
+      fields: thing7,thing3,time2,thing9
+      contents: 电子科技协会,实验-4 208,2022-10-12 20:00,电协招新第二次面试即日开始~
     finally-passed:
-      id:
-      fields:
-      contents:
+      id: i5rbTJ70IEajfuWmYG7jCeE4fsh3c9fZ1aqkQY3Cqos
+      fields: thing7,thing3,time2,thing9
+      contents: 电子科技协会,实验-4 ,2022-10-16 20:00,恭喜你通过电子科技协会的笔试和面试！~
     apply-success:
-      id:
-      fields:
-      contents:
+      id: i5rbTJ70IEajfuWmYG7jCeE4fsh3c9fZ1aqkQY3Cqos
+      fields: thing7,thing3,time2,thing9
+      contents: 电子科技协会,实验4,{nowTime},电协招新报名成功~
     sign-in-success:
-      id:
-      fields:
-      contents:
+      id: i5rbTJ70IEajfuWmYG7jCeE4fsh3c9fZ1aqkQY3Cqos
+      fields: thing7,thing3,time2,thing9
+      contents: 电子科技协会,实验4,{nowTime},面试签到成功~
     interview-start:
-      id:
-      fields:
-      contents:
+      id: i5rbTJ70IEajfuWmYG7jCeE4fsh3c9fZ1aqkQY3Cqos
+      fields: thing7,thing3,time2,thing9
+      contents: 电子科技协会,实验4,{nowTime},面试签到成功~
