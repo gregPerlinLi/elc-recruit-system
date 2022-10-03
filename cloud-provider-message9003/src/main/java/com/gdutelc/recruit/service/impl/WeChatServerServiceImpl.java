@@ -102,49 +102,57 @@ public class WeChatServerServiceImpl implements WeChatServerService {
 
     @Override
     public SendMessageDTO sendFirstInterviewNotify(String toUser) {
-        Map<String, Object> data = setNotifyData("电子科技协会", "实验-4 306",
-                "2022-10-10 20:00", "电协招新第一次面试即日开始~");
+        String[] fields = {"name1","thing4","time13","thing3"};
+        String[] contents = {"电子科技协会","实验-4 306","2022-10-10 20:00","电协招新第一次面试即日开始~"};
+        Map<String, Object> data = setNotifyData(fields,contents);
         return sendSubscribeMessage(toUser,interviewNotifyModelId,data);
     }
 
     @Override
     public SendMessageDTO sendSecondInterviewNotify(String toUser) {
-        Map<String, Object> data = setNotifyData("电子科技协会", "实验-4 308",
-                "2022-10-30 20:00", "电协招新第二次面试即日开始~");
+        String[] fields = {"name1","thing4","time13","thing3"};
+        String[] contents = {"电子科技协会", "实验-4 308","2022-10-30 20:00", "电协招新第二次面试即日开始~"};
+        Map<String, Object> data = setNotifyData(fields,contents);
         return sendSubscribeMessage(toUser,interviewNotifyModelId,data);
     }
 
     @Override
     public SendMessageDTO sendFinallyPassedNotify(String toUser) {
-        Map<String,Object> data = setNotifyData("电子科技协会","实验-4",
-                "2022-10-31 20:00","恭喜你通过电子科技协会的笔试和面试！");
+        String[] fields = {"name1","thing4","time13","thing3"};
+        String[] contents = {"电子科技协会","实验-4", "2022-10-31 20:00","恭喜你通过电子科技协会的笔试和面试！"};
+        Map<String,Object> data = setNotifyData(fields,contents);
         return sendSubscribeMessage(toUser,interviewNotifyModelId,data);
     }
 
     @Override
     public SendMessageDTO sendWrittenTestNotify(String toUser) {
-        Map<String, Object> data = setNotifyData("电子科技协会", "实验-4 208",
-                "2022-10-20 20:00", "电协招新笔试即日开始~");
+        String[] fields = {"name1","thing4","time13","thing3"};
+        String[] contents = {"电子科技协会", "实验-4 208","2022-10-20 20:00","电协招新笔试即日开始~"};
+        Map<String, Object> data = setNotifyData(fields,contents);
         return sendSubscribeMessage(toUser,interviewNotifyModelId,data);
     }
 
     @Override
     public SendMessageDTO sendApplySuccessNotify(String toUser) {
-        Map<String, Object> data = setNotifyData("电子科技协会", "实验4", GenericUtils.getFullTimeStr()
-                , "电协招新报名成功~");
+        String[] fields = {"name1","thing4","time13","thing3"};
+        String[] contents = {"电子科技协会", "实验4", GenericUtils.getFullTimeStr(),"电协招新报名成功~"};
+        Map<String, Object> data = setNotifyData(fields,contents);
         return sendSubscribeMessage(toUser,interviewNotifyModelId,data);
     }
 
     @Override
     public SendMessageDTO sendSignInSuccessNotify(String toUser) {
-        Map<String, Object> data = setNotifyData("电子科技协会", "实验4", GenericUtils.getFullTimeStr()
-                , "面试签到成功~");
+        String[] fields = {"name1","thing4","time13","thing3"};
+        String[] contents = {"电子科技协会", "实验4", GenericUtils.getFullTimeStr(),"面试签到成功~"};
+        Map<String, Object> data = setNotifyData(fields,contents);
         return sendSubscribeMessage(toUser,interviewNotifyModelId,data);
     }
 
     @Override
     public SendMessageDTO sendInterviewStartNotify(String toUser) {
-        Map<String, Object> data = setNotifyData("电子科技协会", "实验4", GenericUtils.getFullTimeStr(), "轮到您去面试啦~");
+        String[] fields = {"name1","thing4","time13","thing3"};
+        String[] contents = {"电子科技协会", "实验4", GenericUtils.getFullTimeStr(),"轮到您去面试啦~"};
+        Map<String, Object> data = setNotifyData(fields,contents);
         return sendSubscribeMessage(toUser,interviewNotifyModelId,data);
     }
 
