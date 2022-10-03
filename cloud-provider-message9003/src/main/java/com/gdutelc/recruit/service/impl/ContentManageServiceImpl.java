@@ -2,6 +2,7 @@ package com.gdutelc.recruit.service.impl;
 
 import com.gdutelc.recruit.enums.Usage;
 import com.gdutelc.recruit.service.interfaces.ContentManageService;
+import com.gdutelc.recruit.utils.GenericUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import java.util.HashMap;
@@ -90,14 +91,17 @@ public class ContentManageServiceImpl implements ContentManageService {
             case APPLY_SUCCESS -> {
                 fields = applySuccessModelFields;
                 contents = applySuccessModelContents;
+                contents[2] = GenericUtils.getFullTimeStr();
             }
             case SIGN_IN_SUCCESS -> {
                 fields = signInSuccessModelFields;
                 contents = signInSuccessModelContents;
+                contents[2] = GenericUtils.getFullTimeStr();
             }
             case INTERVIEW_START -> {
                 fields = interviewStartModelFields;
                 contents = interviewStartModelContents;
+                contents[2] = GenericUtils.getFullTimeStr();
             }
             default -> {
                 // ?_?
