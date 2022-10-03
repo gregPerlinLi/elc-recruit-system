@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -147,8 +148,26 @@ public class WeChatServerServiceImpl implements WeChatServerService {
         return sendSubscribeMessage(toUser,interviewNotifyModelId,data);
     }
 
+    private Map<String, Object> setNotifyData(String[] fields, String[] contents){
+        Map<String, Object> data = new HashMap<>(16);
+        LinkedList<Map<String, Object>> contentList = new LinkedList<>();
+
+       Map<String, Object> entry;
+        for(String content : contents){
+            entry = new HashMap<>(2);
+            entry.put("value",content);
+            contentList.add(entry);
+        }
+
+        for(String field :fields){
+            data.put(field,contentList.removeFirst());
+        }
+
+        return  data;
+    }
+
     private Map<String, Object> setNotifyData(String sender, String place, String time, String matter){
-        Map<String, Object> data = new HashMap<>(6);
+        Map<String, Object> data = new HashMap<>(16);
         Map<String, Object> name1 = new HashMap<>(2);
         Map<String, Object> thing4 = new HashMap<>(2);
         Map<String, Object> time13 = new HashMap<>(2);
