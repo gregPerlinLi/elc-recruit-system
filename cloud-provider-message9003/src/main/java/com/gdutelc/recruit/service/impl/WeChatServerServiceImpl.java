@@ -153,24 +153,4 @@ public class WeChatServerServiceImpl implements WeChatServerService {
         return sendSubscribeMessage(toUser,modelId,data);
     }
 
-    private Map<String, Object> setNotifyData(String[] fields, String[] contents){
-        return null;
-    }
-
-    private Map<String, Object> setNotifyData(String sender, String place, String time, String matter){
-        Map<String, Object> data = new HashMap<>(16);
-        Map<String, Object> name1 = new HashMap<>(2);
-        Map<String, Object> thing4 = new HashMap<>(2);
-        Map<String, Object> time13 = new HashMap<>(2);
-        Map<String, Object> thing3 = new HashMap<>(2);
-        name1.put("value",sender);
-        thing4.put("value",place);
-        time13.put("value",time);
-        thing3.put("value",matter);
-        data.put("name1",name1);
-        data.put("thing4",thing4);
-        data.put("time13",time13);
-        data.put("thing3",thing3);
-        return data;
-    }
 }
