@@ -113,50 +113,44 @@ public class WeChatServerServiceImpl implements WeChatServerService {
 
     @Override
     public SendMessageDTO sendSecondInterviewNotify(String toUser) {
-        String[] fields = {"name1","thing4","time13","thing3"};
-        String[] contents = {"电子科技协会", "实验-4 308","2022-10-30 20:00", "电协招新第二次面试即日开始~"};
-        Map<String, Object> data = setNotifyData(fields,contents);
-        return sendSubscribeMessage(toUser,interviewNotifyModelId,data);
+        String modelId = contentManageService.getNotifyModelId(Usage.SECOND_INTERVIEW);
+        Map<String, Object> data = contentManageService.getPackedNotifyData(Usage.SECOND_INTERVIEW);
+        return sendSubscribeMessage(toUser,modelId,data);
     }
 
     @Override
     public SendMessageDTO sendFinallyPassedNotify(String toUser) {
-        String[] fields = {"name1","thing4","time13","thing3"};
-        String[] contents = {"电子科技协会","实验-4", "2022-10-31 20:00","恭喜你通过电子科技协会的笔试和面试！"};
-        Map<String,Object> data = setNotifyData(fields,contents);
-        return sendSubscribeMessage(toUser,interviewNotifyModelId,data);
+        String modelId = contentManageService.getNotifyModelId(Usage.FINALLY_PASSED);
+        Map<String, Object> data = contentManageService.getPackedNotifyData(Usage.FINALLY_PASSED);
+        return sendSubscribeMessage(toUser,modelId,data);
     }
 
     @Override
     public SendMessageDTO sendWrittenTestNotify(String toUser) {
-        String[] fields = {"name1","thing4","time13","thing3"};
-        String[] contents = {"电子科技协会", "实验-4 208","2022-10-20 20:00","电协招新笔试即日开始~"};
-        Map<String, Object> data = setNotifyData(fields,contents);
-        return sendSubscribeMessage(toUser,interviewNotifyModelId,data);
+        String modelId = contentManageService.getNotifyModelId(Usage.WRITTEN_TEST);
+        Map<String, Object> data = contentManageService.getPackedNotifyData(Usage.WRITTEN_TEST);
+        return sendSubscribeMessage(toUser,modelId,data);
     }
 
     @Override
     public SendMessageDTO sendApplySuccessNotify(String toUser) {
-        String[] fields = {"name1","thing4","time13","thing3"};
-        String[] contents = {"电子科技协会", "实验4", GenericUtils.getFullTimeStr(),"电协招新报名成功~"};
-        Map<String, Object> data = setNotifyData(fields,contents);
-        return sendSubscribeMessage(toUser,interviewNotifyModelId,data);
+        String modelId = contentManageService.getNotifyModelId(Usage.APPLY_SUCCESS);
+        Map<String, Object> data = contentManageService.getPackedNotifyData(Usage.APPLY_SUCCESS);
+        return sendSubscribeMessage(toUser,modelId,data);
     }
 
     @Override
     public SendMessageDTO sendSignInSuccessNotify(String toUser) {
-        String[] fields = {"name1","thing4","time13","thing3"};
-        String[] contents = {"电子科技协会", "实验4", GenericUtils.getFullTimeStr(),"面试签到成功~"};
-        Map<String, Object> data = setNotifyData(fields,contents);
-        return sendSubscribeMessage(toUser,interviewNotifyModelId,data);
+        String modelId = contentManageService.getNotifyModelId(Usage.SIGN_IN_SUCCESS);
+        Map<String, Object> data = contentManageService.getPackedNotifyData(Usage.SIGN_IN_SUCCESS);
+        return sendSubscribeMessage(toUser,modelId,data);
     }
 
     @Override
     public SendMessageDTO sendInterviewStartNotify(String toUser) {
-        String[] fields = {"name1","thing4","time13","thing3"};
-        String[] contents = {"电子科技协会", "实验4", GenericUtils.getFullTimeStr(),"轮到您去面试啦~"};
-        Map<String, Object> data = setNotifyData(fields,contents);
-        return sendSubscribeMessage(toUser,interviewNotifyModelId,data);
+        String modelId = contentManageService.getNotifyModelId(Usage.INTERVIEW_START);
+        Map<String, Object> data = contentManageService.getPackedNotifyData(Usage.INTERVIEW_START);
+        return sendSubscribeMessage(toUser,modelId,data);
     }
 
     private Map<String, Object> setNotifyData(String[] fields, String[] contents){
