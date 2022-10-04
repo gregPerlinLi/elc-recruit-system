@@ -6,7 +6,6 @@ import com.gdutelc.recruit.domain.entities.StuInfo;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.domain.wx.LoginInfo;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -106,15 +105,40 @@ public interface IMessageService {
     @GetMapping(value = "/pro/super_admin/elc_access/interview_start_notify/{stu_id}")
     ResultVO<Void> interviewStartNotify(@PathVariable("stu_id") String stuId);
 
+    /**
+     * 获取报名名单
+     *
+     * @param deptId 部门ID
+     * @return {@link ResultVO}，其中数据为字节流
+     */
     @GetMapping(value = "/pro/super_admin/elc_access/getApply/{deptId}")
     ResultVO<byte[]> getApplyList(@PathVariable("deptId") Integer deptId);
 
+    /**
+     * 获取第一次面试通过名单
+     *
+     * @param deptId 部门ID
+     * @return {@link ResultVO}，其中数据为字节流
+     */
     @GetMapping(value = "/pro/super_admin/elc_access/getFirst/{deptId}")
     ResultVO<byte[]> getFirstList(@PathVariable("deptId") Integer deptId);
 
+    /**
+     * 获取第二次面试通过名单
+     *
+     * @param deptId 部门ID
+     * @return {@link ResultVO}，其中数据为字节流
+     */
     @GetMapping(value = "/pro/super_admin/elc_access/getSecond/{deptId}")
     ResultVO<byte[]> getSecondList(@PathVariable("deptId") Integer deptId);
 
+    /**
+     * 获取第二次面试调剂名单
+     *
+     * @param deptId 部门ID
+     * @return {@link ResultVO}，其中数据为字节流
+     */
     @GetMapping(value = "/pro/super_admin/elc_access/getSecondAdjust/{deptId}")
     ResultVO<byte[]> getSecondAdjustList(@PathVariable("deptId") Integer deptId);
+
 }
