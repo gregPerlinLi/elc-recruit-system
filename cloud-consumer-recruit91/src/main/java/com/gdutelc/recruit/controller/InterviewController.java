@@ -10,7 +10,6 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.xml.transform.Result;
 import java.util.List;
 
 /**
@@ -180,9 +179,14 @@ public class InterviewController {
         return interviewService.getSignInList(deptId);
     }
 
-
+    /**
+     * 获取各个部门的人数情况
+     *
+     * @return {@link ResultVO}，其中数据为当前各部门人数情况集合
+     */
     @GetMapping(value = "/getDeptPeopleCount")
-    @SentinelResource(value = "getDeptPeopleCount",blockHandlerClass = SentinelBlockHandler.class,blockHandler = "getDeptPeopleCountException")
+    @SentinelResource(value = "getDeptPeopleCount",blockHandlerClass = SentinelBlockHandler.class,blockHandler = "getDeptPeopleCountHandlerException")
+    @ApiOperation(value = "获取各个部门的人数情况", tags = "deptPeopleCount", response = ResultVO.class)
     public ResultVO<List<Integer>> getDeptPeopleCount() {
         return interviewService.getDeptPeopleCount();
     }
