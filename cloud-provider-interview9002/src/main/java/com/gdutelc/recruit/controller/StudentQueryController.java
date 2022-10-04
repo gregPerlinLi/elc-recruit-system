@@ -23,7 +23,7 @@ import java.util.List;
  * @date 2022-08-17
  */
 @RestController
-@RequestMapping("/pro/interview/elc_access/")
+@RequestMapping("/pro/interview/elc_access")
 public class StudentQueryController {
 
     @Resource
