@@ -5,12 +5,10 @@ import com.gdutelc.recruit.domain.dto.AdmissionStuDTO;
 import com.gdutelc.recruit.domain.entities.BriefPasserInfo;
 import com.gdutelc.recruit.domain.entities.StuInfo;
 import com.gdutelc.recruit.domain.vo.ResultVO;
-import com.gdutelc.recruit.service.interfaces.IInterviewService;
 import com.gdutelc.recruit.service.interfaces.IMessageService;
 import com.gdutelc.recruit.utils.SentinelBlockHandler;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.List;
@@ -27,9 +25,6 @@ public class SuperAdminController {
 
     @Resource
     IMessageService messageService;
-
-    @Resource
-    IInterviewService iInterviewService;
 
     /**
      * 面试进度推进接口
@@ -108,9 +103,13 @@ public class SuperAdminController {
 
     /**
      * 获取报名列表
-     * @return
+     *
+     * @param deptId 部门ID
+     * @return 字节流
      */
     @GetMapping(value = "/getApply/{deptId}")
+    @SentinelResource(value = "getApplyList", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "getApplyListBlockHandler")
+    @ApiOperation(value = "获取报名列表", tags = "downloadForms", response = Byte.class)
     public byte[] getApplyList(@PathVariable("deptId") Integer deptId) {
         System.out.println(deptId);
         return messageService.getApplyList(deptId).getData();
@@ -118,11 +117,14 @@ public class SuperAdminController {
 
 
     /**
-     * 获取一面通过名单et
-     * @param deptId
-     * @return
+     * 获取一面通过名单
+     *
+     * @param deptId 部门ID
+     * @return 字节流
      */
     @GetMapping(value = "/getFirst/{deptId}")
+    @SentinelResource(value = "getFirstList", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "getFirstListBlockHandler")
+    @ApiOperation(value = "获取一面通过名单", tags = "downloadForms", response = Byte.class)
     public byte[] getFirstList(@PathVariable("deptId") Integer deptId) {
         System.out.println(deptId);
         return messageService.getFirstList(deptId).getData();
@@ -131,10 +133,13 @@ public class SuperAdminController {
 
     /**
      * 获取二面通过名单
-     * @param deptId
-     * @return
+     *
+     * @param deptId 部门ID
+     * @return 字节流
      */
     @GetMapping(value = "/getSecond/{deptId}")
+    @SentinelResource(value = "getSecondList", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "getSecondListBlockHandler")
+    @ApiOperation(value = "获取二面通过名单", tags = "downloadForms", response = Byte.class)
     public byte[] getSecondList(@PathVariable("deptId") Integer deptId) {
         return messageService.getSecondList(deptId).getData();
     }
@@ -142,10 +147,13 @@ public class SuperAdminController {
 
     /**
      * 获取二面调剂通过名单
-     * @param deptId
-     * @return
+     *
+     * @param deptId 部门ID
+     * @return 字节流
      */
     @GetMapping(value = "/getSecondAdjustList/{deptId}")
+    @SentinelResource(value = "getSecondAdjustList", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "getSecondAdjustListBlockHandler")
+    @ApiOperation(value = "获取二面调剂通过名单", tags = "downloadForms", response = Byte.class)
     public byte[] getSecondAdjustList(@PathVariable("deptId") Integer deptId) {
         return messageService.getSecondAdjustList(deptId).getData();
     }
