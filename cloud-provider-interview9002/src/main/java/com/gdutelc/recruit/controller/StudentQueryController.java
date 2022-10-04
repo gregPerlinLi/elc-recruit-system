@@ -7,6 +7,7 @@ import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.service.interfaces.IBriefAdjustInfoService;
 import com.gdutelc.recruit.service.interfaces.IBriefInfoService;
 import com.gdutelc.recruit.service.interfaces.IStuInfoService;
+import lombok.Getter;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -179,6 +180,12 @@ public class StudentQueryController {
     @GetMapping(value = "/getSignInList/{deptId}")
     public ResultVO<List<SignInDTO>> getSignInList(@PathVariable("deptId") Integer deptId) throws JsonProcessingException {
         return stuInfoService.getSignInList(deptId);
+    }
+
+
+    @GetMapping(value = "/getDeptPeopleCount")
+    public ResultVO<List<Integer>> getDeptPeopleCount() {
+        return stuInfoService.getDeptPeopleCount();
     }
 
 

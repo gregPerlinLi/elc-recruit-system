@@ -5,10 +5,12 @@ import com.gdutelc.recruit.domain.dto.AdmissionStuDTO;
 import com.gdutelc.recruit.domain.entities.BriefPasserInfo;
 import com.gdutelc.recruit.domain.entities.StuInfo;
 import com.gdutelc.recruit.domain.vo.ResultVO;
+import com.gdutelc.recruit.service.interfaces.IInterviewService;
 import com.gdutelc.recruit.service.interfaces.IMessageService;
 import com.gdutelc.recruit.utils.SentinelBlockHandler;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.List;
@@ -25,6 +27,10 @@ public class SuperAdminController {
 
     @Resource
     IMessageService messageService;
+
+    @Resource
+    IInterviewService iInterviewService;
+
     /**
      * 面试进度推进接口
      *
@@ -99,5 +105,49 @@ public class SuperAdminController {
         return messageService.getFinalAdmissionList(dept);
     }
 
+
+    /**
+     * 获取报名列表
+     * @return
+     */
+    @GetMapping(value = "/getApply/{deptId}")
+    public byte[] getApplyList(@PathVariable("deptId") Integer deptId) {
+        System.out.println(deptId);
+        return messageService.getApplyList(deptId).getData();
+    }
+
+
+    /**
+     * 获取一面通过名单et
+     * @param deptId
+     * @return
+     */
+    @GetMapping(value = "/getFirst/{deptId}")
+    public byte[] getFirstList(@PathVariable("deptId") Integer deptId) {
+        System.out.println(deptId);
+        return messageService.getFirstList(deptId).getData();
+    }
+
+
+    /**
+     * 获取二面通过名单
+     * @param deptId
+     * @return
+     */
+    @GetMapping(value = "/getSecond/{deptId}")
+    public byte[] getSecondList(@PathVariable("deptId") Integer deptId) {
+        return messageService.getSecondList(deptId).getData();
+    }
+
+
+    /**
+     * 获取二面调剂通过名单
+     * @param deptId
+     * @return
+     */
+    @GetMapping(value = "/getSecondAdjustList/{deptId}")
+    public byte[] getSecondAdjustList(@PathVariable("deptId") Integer deptId) {
+        return messageService.getSecondAdjustList(deptId).getData();
+    }
 
 }

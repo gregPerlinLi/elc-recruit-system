@@ -6,6 +6,7 @@ import com.gdutelc.recruit.domain.entities.StuInfo;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.domain.wx.LoginInfo;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -104,4 +105,16 @@ public interface IMessageService {
      */
     @GetMapping(value = "/pro/super_admin/elc_access/interview_start_notify/{stu_id}")
     ResultVO<Void> interviewStartNotify(@PathVariable("stu_id") String stuId);
+
+    @GetMapping(value = "/pro/super_admin/elc_access/getApply/{deptId}")
+    ResultVO<byte[]> getApplyList(@PathVariable("deptId") Integer deptId);
+
+    @GetMapping(value = "/pro/super_admin/elc_access/getFirst/{deptId}")
+    ResultVO<byte[]> getFirstList(@PathVariable("deptId") Integer deptId);
+
+    @GetMapping(value = "/pro/super_admin/elc_access/getSecond/{deptId}")
+    ResultVO<byte[]> getSecondList(@PathVariable("deptId") Integer deptId);
+
+    @GetMapping(value = "/pro/super_admin/elc_access/getSecondAdjust/{deptId}")
+    ResultVO<byte[]> getSecondAdjustList(@PathVariable("deptId") Integer deptId);
 }

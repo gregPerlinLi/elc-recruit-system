@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.xml.transform.Result;
 import java.util.List;
 
 /**
@@ -177,6 +178,13 @@ public class InterviewController {
     @ApiOperation(value = "获取学生签到列表", tags = "signInList", response = ResultVO.class)
     public ResultVO<List<SignInDTO>> getSignInList(@PathVariable("deptId") Integer deptId) {
         return interviewService.getSignInList(deptId);
+    }
+
+
+    @GetMapping(value = "/getDeptPeopleCount")
+    @SentinelResource(value = "getDeptPeopleCount",blockHandlerClass = SentinelBlockHandler.class,blockHandler = "getDeptPeopleCountException")
+    public ResultVO<List<Integer>> getDeptPeopleCount() {
+        return interviewService.getDeptPeopleCount();
     }
 
 }

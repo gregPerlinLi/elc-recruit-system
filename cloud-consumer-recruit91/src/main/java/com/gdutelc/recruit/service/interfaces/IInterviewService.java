@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  * 面试模块生产者服务调用接口
@@ -301,5 +302,11 @@ public interface IInterviewService {
      */
     @GetMapping(value = "/pro/interview/elc_access/getSignInList/{deptId}")
     ResultVO<List<SignInDTO>> getSignInList(@PathVariable("deptId") Integer deptId);
+
+
+    @GetMapping(value = "/pro/interview/elc_access/getDeptPeopleCount")
+    ResultVO<List<Integer>> getDeptPeopleCount();
+
+
 
 }

@@ -1,5 +1,7 @@
 package com.gdutelc.recruit.constant;
 
+import java.util.HashMap;
+
 /**
  * 部门代号
  *
@@ -7,6 +9,7 @@ package com.gdutelc.recruit.constant;
  * @date 2022-08-07
  */
 public interface DeptConstant {
+
 
     /**
      * 全选

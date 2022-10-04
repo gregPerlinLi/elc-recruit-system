@@ -11,6 +11,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * 管理员登录验证拦截器
@@ -26,11 +27,16 @@ public class AdminLoginInterceptor implements HandlerInterceptor {
         if( HttpMethod.OPTIONS.matches(request.getMethod().toUpperCase()) ) {
             return true;
         }
-        String username = (String) request.getSession(false).getAttribute("admin_username");
-        String sessionId = request.getSession().getId();
+        HttpSession httpSession = request.getSession(false);
+        if(httpSession == null) {
+            throw new LoginException(ResultStatusCodeConstant.FAILED, "登录校验失败，Redis中没有记录此用户的Session");
+        }
+        String username = (String) httpSession.getAttribute("admin_username");
+        String sessionId = httpSession.getId();
         if ( username != null ) {
             ResultVO<String> result = interviewService.loginVerify(username, sessionId);
             if ( result.getCode() == ResultStatusCodeConstant.SUCCESS ) {
+                System.out.println(httpSession);
                 // log.info("登录校验成功");
                 return true;
             }
