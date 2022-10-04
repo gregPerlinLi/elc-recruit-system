@@ -7,7 +7,6 @@ import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.service.interfaces.IBriefAdjustInfoService;
 import com.gdutelc.recruit.service.interfaces.IBriefInfoService;
 import com.gdutelc.recruit.service.interfaces.IStuInfoService;
-import lombok.Getter;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -171,7 +170,6 @@ public class StudentQueryController {
                 pages);
     }
 
-
     /**
      * 获取签到列表
      * @param deptId 筛选部门代码
@@ -182,7 +180,11 @@ public class StudentQueryController {
         return stuInfoService.getSignInList(deptId);
     }
 
-
+    /**
+     * 获取各个部门的人数情况
+     *
+     * @return {@link ResultVO}，其中数据为当前各部门人数情况集合
+     */
     @GetMapping(value = "/getDeptPeopleCount")
     public ResultVO<List<Integer>> getDeptPeopleCount() {
         return stuInfoService.getDeptPeopleCount();
