@@ -56,7 +56,8 @@ public interface IStuInfoService extends IService<StuInfo> {
 
     /**
      * 获取各个部门的人数情况
-     * @return
+     *
+     * @return {@link ResultVO}，其中数据为各部门的人数情况
      */
     ResultVO<List<Integer>> getDeptPeopleCount();
 
