@@ -47,8 +47,6 @@ public class WeChatServerServiceImpl implements WeChatServerService {
     private String sendMessageUrl;
     @Value("${wechat-server.miniProgramState}")
     private String miniProgramState;
-    @Value("${wechat-server.interviewNotifyModelId}")
-    private String interviewNotifyModelId;
 
     @Override
     public AccessTokenDTO refreshAccessToken() {

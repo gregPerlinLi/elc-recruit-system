@@ -56,7 +56,6 @@ wechat-server:
   tokenUrl: https://api.weixin.qq.com/cgi-bin/token
   sendMessageUrl: https://api.weixin.qq.com/cgi-bin/message/subscribe/send
   miniProgramState: developer
-  interviewNotifyModelId: m5YFo3j5_P6OMSR2tG8l7OhCU7xAOVtYBcY1EGfcqug
 
 
 wechat-notify:
@@ -88,4 +87,4 @@ wechat-notify:
     interview-start:
       id: i5rbTJ70IEajfuWmYG7jCeE4fsh3c9fZ1aqkQY3Cqos
       fields: thing7,thing3,time2,thing9
-      contents: 电子科技协会,实验4,{nowTime},面试签到成功~
+      contents: 电子科技协会,实验4,{nowTime},轮到你面试啦~
