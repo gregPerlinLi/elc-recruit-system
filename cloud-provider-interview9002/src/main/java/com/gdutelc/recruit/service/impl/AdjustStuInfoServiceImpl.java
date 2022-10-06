@@ -3,10 +3,7 @@ package com.gdutelc.recruit.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.gdutelc.recruit.constant.RecruitStatusConstant;
-import com.gdutelc.recruit.constant.RedisKeyConstant;
-import com.gdutelc.recruit.constant.ResultStatusCodeConstant;
-import com.gdutelc.recruit.constant.StudentStatusConstant;
+import com.gdutelc.recruit.constant.*;
 import com.gdutelc.recruit.domain.entities.AdjustStuInfo;
 import com.gdutelc.recruit.domain.entities.AdmissionStu;
 import com.gdutelc.recruit.domain.entities.InterviewerList;
@@ -65,7 +62,7 @@ public class AdjustStuInfoServiceImpl extends ServiceImpl<AdjustStuInfoMapper, A
         if ( stuInfo.getStatus() != StudentStatusConstant.INTERVIEWING ) {
             return ResultStatusCodeConstant.FAILED;
         }
-        if ( !stuInfo.getFirstDept().equals(interviewerList.getDept()) ) {
+        if ( !stuInfo.getFirstDept().equals(interviewerList.getDept()) && !Objects.equals(DeptConstant.ALL, interviewerList.getDept()) ) {
             return ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION;
         }
         AdjustStuInfo adjustStuInfo = new AdjustStuInfo(stuInfo);
@@ -101,7 +98,7 @@ public class AdjustStuInfoServiceImpl extends ServiceImpl<AdjustStuInfoMapper, A
         if ( adjustStuInfo == null || stuInfo == null || interviewerList == null ) {
             return 0;
         }
-        if ( !adjustStuInfo.getAdjustDept().equals(interviewerList.getDept()) ) {
+        if ( !adjustStuInfo.getAdjustDept().equals(interviewerList.getDept()) && !Objects.equals(DeptConstant.ALL, interviewerList.getDept()) ) {
             return ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION;
         }
         UpdateWrapper<AdjustStuInfo> adjustStudentUpdateWrapper = new UpdateWrapper<>();
@@ -136,7 +133,7 @@ public class AdjustStuInfoServiceImpl extends ServiceImpl<AdjustStuInfoMapper, A
         if ( adjustStuInfo == null || stuInfo == null || interviewerList == null ) {
             return 0;
         }
-        if ( !adjustStuInfo.getAdjustDept().equals(interviewerList.getDept()) ) {
+        if ( !adjustStuInfo.getAdjustDept().equals(interviewerList.getDept()) && !Objects.equals(DeptConstant.ALL, interviewerList.getDept()) ) {
             return ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION;
         }
         QueryWrapper<AdmissionStu> admissionStuQueryWrapper = new QueryWrapper<>();

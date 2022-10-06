@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -73,7 +74,7 @@ public class StuInfoServiceImpl extends ServiceImpl<StuInfoMapper, StuInfo> impl
         if ( stuInfo == null || interviewerList == null ) {
             return 0;
         }
-        if ( !stuInfo.getFirstDept().equals(interviewerList.getDept()) ) {
+        if ( !stuInfo.getFirstDept().equals(interviewerList.getDept()) && !Objects.equals(DeptConstant.ALL, interviewerList.getDept()) ) {
             return ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION;
         }
         UpdateWrapper<StuInfo> studentUpdateWrapper = new UpdateWrapper<>();
@@ -99,7 +100,7 @@ public class StuInfoServiceImpl extends ServiceImpl<StuInfoMapper, StuInfo> impl
         if ( stuInfo == null || interviewerList == null ) {
             return 0;
         }
-        if ( !stuInfo.getFirstDept().equals(interviewerList.getDept()) ) {
+        if ( !stuInfo.getFirstDept().equals(interviewerList.getDept()) && !Objects.equals(DeptConstant.ALL, interviewerList.getDept()) ) {
             return ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION;
         }
         UpdateWrapper<StuInfo> studentUpdateWrapper = new UpdateWrapper<>();
@@ -164,9 +165,7 @@ public class StuInfoServiceImpl extends ServiceImpl<StuInfoMapper, StuInfo> impl
         }
         anss[0] = sum;
         List<Integer> ans = new ArrayList<>();
-        for(int i=0;i<anss.length;i++) {
-            ans.add(anss[i]);
-        }
+        Collections.addAll(ans, anss);
         return new ResultVO<>(ResultStatusCodeConstant.SUCCESS,"获取成功",ans);
     }
 }
