@@ -56,7 +56,6 @@ wechat-server:
   tokenUrl: https://api.weixin.qq.com/cgi-bin/token
   sendMessageUrl: https://api.weixin.qq.com/cgi-bin/message/subscribe/send
   miniProgramState: developer
-  interviewNotifyModelId: m5YFo3j5_P6OMSR2tG8l7OhCU7xAOVtYBcY1EGfcqug
 
 
 wechat-notify:
