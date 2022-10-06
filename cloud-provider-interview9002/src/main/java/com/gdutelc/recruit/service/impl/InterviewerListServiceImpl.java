@@ -45,7 +45,7 @@ public class InterviewerListServiceImpl extends ServiceImpl<InterviewerListMappe
         queryWrapper.allEq(params);
         InterviewerList interviewerList = interviewerListMapper.selectOne(queryWrapper);
         if ( interviewerList != null ) {
-            stringRedisTemplate.opsForValue().set(RedisKeyConstant.loginUserWith(username), sessionId, 60, TimeUnit.MINUTES);
+            stringRedisTemplate.opsForValue().set(sessionId, RedisKeyConstant.loginUserWith(username),300, TimeUnit.MINUTES);
             return new ResultVO<>(ResultStatusCodeConstant.SUCCESS, "登录成功", sessionId);
         } else {
             return new ResultVO<>(ResultStatusCodeConstant.FAILED, "用户名或密码错误");
