@@ -21,7 +21,7 @@ public class LoginVerifyServiceImpl implements ILoginVerifyService {
 
     @Override
     public ResultVO<String> loginVerify(String username, String sessionId) {
-        return loginVerify2(sessionId);
+        return loginVerify2(username,sessionId);
 //        String loginSessionId = stringRedisTemplate.opsForValue().get(RedisKeyConstant.LOGIN_USER + username);
 //        if ( sessionId.equals(loginSessionId) ) {
 //            return new ResultVO<>(ResultStatusCodeConstant.SUCCESS, "登录校验成功", loginSessionId);
@@ -30,9 +30,10 @@ public class LoginVerifyServiceImpl implements ILoginVerifyService {
     }
 
 
-    public ResultVO<String> loginVerify2(String sessionId) {
+    public ResultVO<String> loginVerify2(String username,String sessionId) {
         Boolean aBoolean = stringRedisTemplate.hasKey(sessionId);
-        if(aBoolean != null && aBoolean) {
+        String ausername = stringRedisTemplate.opsForValue().get(sessionId);
+        if(aBoolean != null && aBoolean && ausername != null && ausername.equals(username)) {
             return new ResultVO<>(ResultStatusCodeConstant.SUCCESS, "登录校验成功", sessionId);
         }else {
             return new ResultVO<>(ResultStatusCodeConstant.SUCCESS, "登录校验失败");
