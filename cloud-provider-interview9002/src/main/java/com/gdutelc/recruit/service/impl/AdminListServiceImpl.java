@@ -52,11 +52,11 @@ public class AdminListServiceImpl extends ServiceImpl<AdminListMapper, AdminList
     }
 
     @Override
-    public ResultVO<Void> logout(String username) {
-        if ( !GenericUtils.ofNullable(username) ) {
+    public ResultVO<Void> logout(String sessionId) {
+        if ( !GenericUtils.ofNullable(sessionId) ) {
             return new ResultVO<>(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION, "参数有误");
         }
-        stringRedisTemplate.delete(RedisKeyConstant.loginUserWith(username));
+        stringRedisTemplate.delete(RedisKeyConstant.loginUserWith(sessionId));
         return new ResultVO<>(ResultStatusCodeConstant.SUCCESS, "退出成功");
     }
 }

@@ -33,9 +33,9 @@ public class LogoutController {
     @SentinelResource(value = "interviewerLogout", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "interviewerLogoutHandlerException")
     @ApiOperation(value = "面试官退出", tags = "logout", response = ResultVO.class)
     public ResultVO<Void> interviewerLogout(HttpServletRequest request) {
-        String username = request.getSession().getAttribute("username").toString();
+        String sessionId = request.getSession().getId();
         request.getSession().removeAttribute("username");
-        return interviewService.interviewerLogout(username);
+        return interviewService.interviewerLogout(sessionId);
     }
 
     /**
@@ -48,9 +48,9 @@ public class LogoutController {
     @SentinelResource(value = "adminLogout", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "adminLogoutHandlerException")
     @ApiOperation(value = "管理员退出", tags = "logout", response = ResultVO.class)
     public ResultVO<Void> adminLogout(HttpServletRequest request) {
-        String username = request.getSession().getAttribute("admin_username").toString();
+        String sessionId = request.getSession().getId();
         request.getSession().removeAttribute("admin_username");
-        return interviewService.adminLogout(username);
+        return interviewService.adminLogout(sessionId);
     }
 
 }
