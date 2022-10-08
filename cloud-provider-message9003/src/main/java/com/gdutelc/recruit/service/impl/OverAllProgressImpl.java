@@ -7,6 +7,7 @@ import com.gdutelc.recruit.domain.entities.StuInfo;
 import com.gdutelc.recruit.domain.vo.ResultVO;
 import com.gdutelc.recruit.mapper.AdjustStuInfoMapper;
 import com.gdutelc.recruit.mapper.StuInfoMapper;
+import com.gdutelc.recruit.service.interfaces.IExPeopleList;
 import com.gdutelc.recruit.service.interfaces.IOverAllProgress;
 import com.gdutelc.recruit.service.interfaces.WeChatServerService;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -36,6 +37,9 @@ public class OverAllProgressImpl implements IOverAllProgress {
     @Resource
     private WeChatServerService weChatServerService;
 
+    @Resource
+    private IExPeopleList iExPeopleList;
+
     @Override
     public ResultVO<Integer> overAllProgress() throws NumberFormatException{
         //获取当前总进度
@@ -43,10 +47,11 @@ public class OverAllProgressImpl implements IOverAllProgress {
         Integer currentProgress = Integer.parseInt(currentProgressStr);
         Map<String,Object> map = new HashMap<>(1);
         if(currentProgress == RecruitStatusConstant.FIRST_INTERVIEW) {
-            //如果当前是一面，就将通过的状态重置为1
+            //如果当前是一面，就将通过的状态重置为0
             updateFirstFailed();
             updateFirstPass();
             stringRedisTemplate.opsForValue().set(RedisKeyConstant.PROCESS,currentProgress + RecruitStatusConstant.STEP + "");
+            iExPeopleList.exportFirstPassList();
 
             map.put("status",StudentStatusConstant.REGISTERED);
             List<StuInfo> stuInfos = stuInfoMapper.selectByMap(map);
@@ -68,6 +73,8 @@ public class OverAllProgressImpl implements IOverAllProgress {
             updateAdjustFailed();
             updateAdjustPass();
             stringRedisTemplate.opsForValue().set(RedisKeyConstant.PROCESS,currentProgress + RecruitStatusConstant.STEP + "");
+            iExPeopleList.exportAdmissionList();
+            iExPeopleList.exportSecondAdjustPassList();
 
             map.put("status",StudentStatusConstant.EMPLOYMENT);
             List<StuInfo> stuInfos = stuInfoMapper.selectByMap(map);
@@ -79,6 +86,7 @@ public class OverAllProgressImpl implements IOverAllProgress {
         }else if(currentProgress == RecruitStatusConstant.APPLY) {
             //如果当前是报名，就推进到一面
             stringRedisTemplate.opsForValue().set(RedisKeyConstant.PROCESS,currentProgress + RecruitStatusConstant.STEP + "");
+            iExPeopleList.exportApplyList();
             map.put("status",StudentStatusConstant.REGISTERED);
             List<StuInfo> stuInfos = stuInfoMapper.selectByMap(map);
             try {

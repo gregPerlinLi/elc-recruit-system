@@ -29,22 +29,22 @@ public class LogoutController {
     /**
      * 面试官退出接口
      *
-     * @param username 退出用户名
+     * @param sessionId 请求SessionID
      * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
      */
-    @GetMapping(value = "/interviewer_logout/{username}")
-    public ResultVO<Void> interviewerLogout(@PathVariable("username") String username) {
-        return interviewerListService.logout(username);
+    @GetMapping(value = "/interviewer_logout/{session_id}")
+    public ResultVO<Void> interviewerLogout(@PathVariable("session_id") String sessionId) {
+        return interviewerListService.logout(sessionId);
     }
 
     /**
      * 管理员退出接口
      *
-     * @param username 退出用户名
+     * @param sessionId 请求SessionID
      * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
      */
-    @GetMapping(value = "/admin_logout/{username}")
-    public ResultVO<Void> adminLogout(@PathVariable("username") String username) {
-        return adminListService.logout(username);
+    @GetMapping(value = "/admin_logout/{session_id}")
+    public ResultVO<Void> adminLogout(@PathVariable("session_id") String sessionId) {
+        return adminListService.logout(sessionId);
     }
 }

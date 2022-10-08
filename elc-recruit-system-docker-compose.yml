@@ -6,7 +6,7 @@ services:
     ports:
       - "91:91"
     environment:
-      SPRING_PROFILES_ACTIVE: dev
+      SPRING_PROFILES_ACTIVE: prod
       NACOS_DISCOVERY_SERVER: 127.0.0.1:8848
       NACOS_CONFIG_SERVER: 127.0.0.1:8848
       SENTINEL_DASHBOARD_SERVER: 127.0.0.1:8080
@@ -22,7 +22,7 @@ services:
     ports:
       - "9001:9001"
     environment:
-      SPRING_PROFILES_ACTIVE: dev
+      SPRING_PROFILES_ACTIVE: prod
       NACOS_DISCOVERY_SERVER: 127.0.0.1:8848
       NACOS_CONFIG_SERVER: 127.0.0.1:8848
       # JAVA_OPT_EXT: "-XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xms1024m -Xmx1024m -Xmn1024m -XX:-UseAdaptiveSizePolicy -XX:SurvivorRatio=4 -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:-CMSConcurrentMTEnabled -XX:CMSInitiatingOccupancyFraction=70 -XX:+CMSParallelRemarkEnabled -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m"
@@ -36,7 +36,7 @@ services:
     ports:
       - "9002:9002"
     environment:
-      SPRING_PROFILES_ACTIVE: dev
+      SPRING_PROFILES_ACTIVE: prod
       NACOS_DISCOVERY_SERVER: 127.0.0.1:8848
       NACOS_CONFIG_SERVER: 127.0.0.1:8848
       # JAVA_OPT_EXT: "-XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xms1024m -Xmx1024m -Xmn1024m -XX:-UseAdaptiveSizePolicy -XX:SurvivorRatio=4 -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:-CMSConcurrentMTEnabled -XX:CMSInitiatingOccupancyFraction=70 -XX:+CMSParallelRemarkEnabled -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m"
@@ -50,7 +50,7 @@ services:
     ports:
       - "9003:9003"
     environment:
-      SPRING_PROFILES_ACTIVE: dev
+      SPRING_PROFILES_ACTIVE: prod
       NACOS_DISCOVERY_SERVER: 127.0.0.1:8848
       NACOS_CONFIG_SERVER: 127.0.0.1:8848
       # JAVA_OPT_EXT: "-XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xms1024m -Xmx1024m -Xmn1024m -XX:-UseAdaptiveSizePolicy -XX:SurvivorRatio=4 -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:-CMSConcurrentMTEnabled -XX:CMSInitiatingOccupancyFraction=70 -XX:+CMSParallelRemarkEnabled -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m"

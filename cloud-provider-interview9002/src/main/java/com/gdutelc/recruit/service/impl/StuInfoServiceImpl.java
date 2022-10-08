@@ -5,10 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gdutelc.recruit.constant.RecruitStatusConstant;
-import com.gdutelc.recruit.constant.RedisKeyConstant;
-import com.gdutelc.recruit.constant.ResultStatusCodeConstant;
-import com.gdutelc.recruit.constant.StudentStatusConstant;
+import com.gdutelc.recruit.constant.*;
 import com.gdutelc.recruit.domain.dto.DetailedInfoDTO;
 import com.gdutelc.recruit.domain.dto.SignInDTO;
 import com.gdutelc.recruit.domain.entities.AdmissionStu;
@@ -25,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -76,7 +74,7 @@ public class StuInfoServiceImpl extends ServiceImpl<StuInfoMapper, StuInfo> impl
         if ( stuInfo == null || interviewerList == null ) {
             return 0;
         }
-        if ( !stuInfo.getFirstDept().equals(interviewerList.getDept()) ) {
+        if ( !stuInfo.getFirstDept().equals(interviewerList.getDept()) && !Objects.equals(DeptConstant.ALL, interviewerList.getDept()) ) {
             return ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION;
         }
         UpdateWrapper<StuInfo> studentUpdateWrapper = new UpdateWrapper<>();
@@ -102,7 +100,7 @@ public class StuInfoServiceImpl extends ServiceImpl<StuInfoMapper, StuInfo> impl
         if ( stuInfo == null || interviewerList == null ) {
             return 0;
         }
-        if ( !stuInfo.getFirstDept().equals(interviewerList.getDept()) ) {
+        if ( !stuInfo.getFirstDept().equals(interviewerList.getDept()) && !Objects.equals(DeptConstant.ALL, interviewerList.getDept()) ) {
             return ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION;
         }
         UpdateWrapper<StuInfo> studentUpdateWrapper = new UpdateWrapper<>();
@@ -149,6 +147,25 @@ public class StuInfoServiceImpl extends ServiceImpl<StuInfoMapper, StuInfo> impl
             SignInDTO signInDto = objectMapper.readValue(jsonStr, SignInDTO.class);
             ans.add(signInDto);
         }
+        return new ResultVO<>(ResultStatusCodeConstant.SUCCESS,"获取成功",ans);
+    }
+
+    @Override
+    public ResultVO<List<Integer>> getDeptPeopleCount() {
+        Integer[] anss = new Integer[8];
+        //查询维修部
+        QueryWrapper<StuInfo> queryWrapper = new QueryWrapper<>();
+        Integer sum = 0;
+        for(int i = DeptConstant.MAINTENANCE_DEPT; i<=DeptConstant.BELL_NETWORK_GROUP;i++) {
+            queryWrapper.eq("first_dept",i);
+            List<StuInfo> stuInfos = stuInfoMapper.selectList(queryWrapper);
+            anss[i] = stuInfos.size();
+            queryWrapper.clear();
+            sum += stuInfos.size();
+        }
+        anss[0] = sum;
+        List<Integer> ans = new ArrayList<>();
+        Collections.addAll(ans, anss);
         return new ResultVO<>(ResultStatusCodeConstant.SUCCESS,"获取成功",ans);
     }
 }

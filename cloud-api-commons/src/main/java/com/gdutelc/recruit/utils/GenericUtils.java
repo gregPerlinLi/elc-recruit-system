@@ -18,6 +18,74 @@ import java.util.Set;
 @Slf4j
 public class GenericUtils {
 
+    public static final HashMap<Integer,String> deptEngToChinese = new HashMap<>();
+
+    public static final HashMap<Integer,String> collegeEngToChinese = new HashMap<>();
+
+    public static final HashMap<Integer,String> genderEngToChinese = new HashMap<>();
+
+    public static final HashMap<String,String> titleEngToChinese = new HashMap<>();
+
+    static {
+        titleEngToChinese.put("id","编号");
+        //titleEngToChinese.put("openid","编号");
+        titleEngToChinese.put("stuId","学号");
+        titleEngToChinese.put("name","姓名");
+        titleEngToChinese.put("gender","性别");
+        titleEngToChinese.put("profile","个人简介");
+        titleEngToChinese.put("hasJoin","已加入的社团");
+        titleEngToChinese.put("firstDept","第一志愿");
+        titleEngToChinese.put("secondDept","第二志愿");
+        titleEngToChinese.put("major","专业");
+        titleEngToChinese.put("college","学院");
+        titleEngToChinese.put("clazz","班级");
+        titleEngToChinese.put("phone","手机号码");
+        titleEngToChinese.put("whereFind","哪里了解的电协");
+        titleEngToChinese.put("skill","个人技能");
+        titleEngToChinese.put("status","当前状态");
+    }
+
+    static {
+        collegeEngToChinese.put(1,"机电工程学院");
+        collegeEngToChinese.put(2,"自动化学院");
+        collegeEngToChinese.put(3,"轻工化工学院");
+        collegeEngToChinese.put(4,"信息工程学院");
+        collegeEngToChinese.put(5,"土木交通工程学院");
+        collegeEngToChinese.put(6,"管理学院");
+        collegeEngToChinese.put(7,"计算机学院");
+        collegeEngToChinese.put(8,"材料与能源学院");
+        collegeEngToChinese.put(9,"环境科学与工程学院");
+        collegeEngToChinese.put(10,"外国语学院");
+        collegeEngToChinese.put(11,"数学与统计学院");
+        collegeEngToChinese.put(12,"物理与光电工程学院");
+        collegeEngToChinese.put(13,"艺术与设计学院");
+        collegeEngToChinese.put(14,"法学院");
+        collegeEngToChinese.put(15,"建筑与城市规划学院");
+        collegeEngToChinese.put(16,"经济与贸易学院");
+        collegeEngToChinese.put(17,"生物医药学院");
+        collegeEngToChinese.put(18,"先进制造学院");
+        collegeEngToChinese.put(19,"生态环境与资源学院");
+        collegeEngToChinese.put(20,"集成电路学院");
+        collegeEngToChinese.put(21,"商学院学院");
+        collegeEngToChinese.put(22,"国际教育学院");
+    }
+
+    static {
+        deptEngToChinese.put(0,"总列表");
+        deptEngToChinese.put(1,"维修部");
+        deptEngToChinese.put(2,"秘书部");
+        deptEngToChinese.put(3,"项目部");
+        deptEngToChinese.put(4,"实践部");
+        deptEngToChinese.put(5,"外联部");
+        deptEngToChinese.put(6,"网宣部");
+        deptEngToChinese.put(7,"网络组");
+    }
+
+    static {
+        genderEngToChinese.put(1,"男");
+        genderEngToChinese.put(2,"女");
+    }
+
     /**
      * 标准时间模式串
      */

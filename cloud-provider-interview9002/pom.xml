@@ -5,7 +5,7 @@
     <parent>
         <artifactId>elc-recruit-system</artifactId>
         <groupId>com.gdutelc.recruit</groupId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </parent>
 
     <properties>
@@ -21,7 +21,7 @@
         <dependency>
             <groupId>com.gdutelc.recruit</groupId>
             <artifactId>cloud-api-commons</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
         </dependency>
 
         <dependency>
@@ -105,7 +105,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.6.4</version>
+                <version>${springboot.version}</version>
                 <configuration>
                     <mainClass>com.gdutelc.recruit.InterviewMain9002</mainClass>
                 </configuration>

@@ -44,7 +44,7 @@ public class AdminListServiceImpl extends ServiceImpl<AdminListMapper, AdminList
         queryWrapper.allEq(params);
         AdminList adminList = adminListMapper.selectOne(queryWrapper);
         if ( adminList != null ) {
-            stringRedisTemplate.opsForValue().set(RedisKeyConstant.loginUserWith(username), sessionId, 60, TimeUnit.MINUTES);
+            stringRedisTemplate.opsForValue().set(RedisKeyConstant.loginUserWith(sessionId), username, 60, TimeUnit.MINUTES);
             return new ResultVO<>(ResultStatusCodeConstant.SUCCESS, "登录成功", adminList.getUsername());
         } else {
             return new ResultVO<>(ResultStatusCodeConstant.FAILED, "用户名或密码错误");
@@ -52,11 +52,11 @@ public class AdminListServiceImpl extends ServiceImpl<AdminListMapper, AdminList
     }
 
     @Override
-    public ResultVO<Void> logout(String username) {
-        if ( !GenericUtils.ofNullable(username) ) {
+    public ResultVO<Void> logout(String sessionId) {
+        if ( !GenericUtils.ofNullable(sessionId) ) {
             return new ResultVO<>(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION, "参数有误");
         }
-        stringRedisTemplate.delete(RedisKeyConstant.loginUserWith(username));
+        stringRedisTemplate.delete(RedisKeyConstant.loginUserWith(sessionId));
         return new ResultVO<>(ResultStatusCodeConstant.SUCCESS, "退出成功");
     }
 }

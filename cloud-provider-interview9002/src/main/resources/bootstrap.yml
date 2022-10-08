@@ -2,6 +2,9 @@ server:
   port: 9002
 
 spring:
+#  config:
+#    activate:
+#      on-profile: prod
   application:
     name: cloud-provider-interview
   datasource:
@@ -26,7 +29,7 @@ spring:
         server-addr: 127.0.0.1:8848
       config:
         server-addr: 127.0.0.1:8848
-        file-extension: yaml
+        file-extension: yml
 
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml

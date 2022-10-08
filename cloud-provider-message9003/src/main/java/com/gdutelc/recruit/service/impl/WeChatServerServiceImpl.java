@@ -3,6 +3,8 @@ package com.gdutelc.recruit.service.impl;
 import com.alibaba.druid.support.json.JSONUtils;
 import com.gdutelc.recruit.domain.wx.AccessTokenDTO;
 import com.gdutelc.recruit.domain.wx.SendMessageDTO;
+import com.gdutelc.recruit.enums.Usage;
+import com.gdutelc.recruit.service.interfaces.ContentManageService;
 import com.gdutelc.recruit.service.interfaces.WeChatServerService;
 import com.gdutelc.recruit.utils.GenericUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -30,6 +33,8 @@ public class WeChatServerServiceImpl implements WeChatServerService {
     private  RestTemplate restTemplate;
     @Resource
     StringRedisTemplate stringRedisTemplate;
+    @Resource
+    private ContentManageService contentManageService;
     @Value("${wechat-server.appid}")
     private String appId;
     @Value("${wechat-server.secret}")
@@ -42,8 +47,6 @@ public class WeChatServerServiceImpl implements WeChatServerService {
     private String sendMessageUrl;
     @Value("${wechat-server.miniProgramState}")
     private String miniProgramState;
-    @Value("${wechat-server.interviewNotifyModelId}")
-    private String interviewNotifyModelId;
 
     @Override
     public AccessTokenDTO refreshAccessToken() {
@@ -101,66 +104,51 @@ public class WeChatServerServiceImpl implements WeChatServerService {
 
     @Override
     public SendMessageDTO sendFirstInterviewNotify(String toUser) {
-        Map<String, Object> data = setNotifyData("电子科技协会", "实验-4 306",
-                "2022-10-10 20:00", "电协招新第一次面试即日开始~");
-        return sendSubscribeMessage(toUser,interviewNotifyModelId,data);
+        String modelId = contentManageService.getNotifyModelId(Usage.FIRST_INTERVIEW);
+        Map<String, Object> data = contentManageService.getPackedNotifyData(Usage.FIRST_INTERVIEW);
+        return sendSubscribeMessage(toUser,modelId,data);
     }
 
     @Override
     public SendMessageDTO sendSecondInterviewNotify(String toUser) {
-        Map<String, Object> data = setNotifyData("电子科技协会", "实验-4 308",
-                "2022-10-30 20:00", "电协招新第二次面试即日开始~");
-        return sendSubscribeMessage(toUser,interviewNotifyModelId,data);
+        String modelId = contentManageService.getNotifyModelId(Usage.SECOND_INTERVIEW);
+        Map<String, Object> data = contentManageService.getPackedNotifyData(Usage.SECOND_INTERVIEW);
+        return sendSubscribeMessage(toUser,modelId,data);
     }
 
     @Override
     public SendMessageDTO sendFinallyPassedNotify(String toUser) {
-        Map<String,Object> data = setNotifyData("电子科技协会","实验-4",
-                "2022-10-31 20:00","恭喜你通过电子科技协会的笔试和面试！");
-        return sendSubscribeMessage(toUser,interviewNotifyModelId,data);
+        String modelId = contentManageService.getNotifyModelId(Usage.FINALLY_PASSED);
+        Map<String, Object> data = contentManageService.getPackedNotifyData(Usage.FINALLY_PASSED);
+        return sendSubscribeMessage(toUser,modelId,data);
     }
 
     @Override
     public SendMessageDTO sendWrittenTestNotify(String toUser) {
-        Map<String, Object> data = setNotifyData("电子科技协会", "实验-4 208",
-                "2022-10-20 20:00", "电协招新笔试即日开始~");
-        return sendSubscribeMessage(toUser,interviewNotifyModelId,data);
+        String modelId = contentManageService.getNotifyModelId(Usage.WRITTEN_TEST);
+        Map<String, Object> data = contentManageService.getPackedNotifyData(Usage.WRITTEN_TEST);
+        return sendSubscribeMessage(toUser,modelId,data);
     }
 
     @Override
     public SendMessageDTO sendApplySuccessNotify(String toUser) {
-        Map<String, Object> data = setNotifyData("电子科技协会", "实验4", GenericUtils.getFullTimeStr()
-                , "电协招新报名成功~");
-        return sendSubscribeMessage(toUser,interviewNotifyModelId,data);
+        String modelId = contentManageService.getNotifyModelId(Usage.APPLY_SUCCESS);
+        Map<String, Object> data = contentManageService.getPackedNotifyData(Usage.APPLY_SUCCESS);
+        return sendSubscribeMessage(toUser,modelId,data);
     }
 
     @Override
     public SendMessageDTO sendSignInSuccessNotify(String toUser) {
-        Map<String, Object> data = setNotifyData("电子科技协会", "实验4", GenericUtils.getFullTimeStr()
-                , "面试签到成功~");
-        return sendSubscribeMessage(toUser,interviewNotifyModelId,data);
+        String modelId = contentManageService.getNotifyModelId(Usage.SIGN_IN_SUCCESS);
+        Map<String, Object> data = contentManageService.getPackedNotifyData(Usage.SIGN_IN_SUCCESS);
+        return sendSubscribeMessage(toUser,modelId,data);
     }
 
     @Override
     public SendMessageDTO sendInterviewStartNotify(String toUser) {
-        Map<String, Object> data = setNotifyData("电子科技协会", "实验4", GenericUtils.getFullTimeStr(), "轮到您去面试啦~");
-        return sendSubscribeMessage(toUser,interviewNotifyModelId,data);
+        String modelId = contentManageService.getNotifyModelId(Usage.INTERVIEW_START);
+        Map<String, Object> data = contentManageService.getPackedNotifyData(Usage.INTERVIEW_START);
+        return sendSubscribeMessage(toUser,modelId,data);
     }
 
-    private Map<String, Object> setNotifyData(String sender, String place, String time, String matter){
-        Map<String, Object> data = new HashMap<>(6);
-        Map<String, Object> name1 = new HashMap<>(2);
-        Map<String, Object> thing4 = new HashMap<>(2);
-        Map<String, Object> time13 = new HashMap<>(2);
-        Map<String, Object> thing3 = new HashMap<>(2);
-        name1.put("value",sender);
-        thing4.put("value",place);
-        time13.put("value",time);
-        thing3.put("value",matter);
-        data.put("name1",name1);
-        data.put("thing4",thing4);
-        data.put("time13",time13);
-        data.put("thing3",thing3);
-        return data;
-    }
 }

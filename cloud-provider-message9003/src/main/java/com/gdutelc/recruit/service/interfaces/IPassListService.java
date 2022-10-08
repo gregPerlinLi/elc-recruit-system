@@ -31,5 +31,4 @@ public interface IPassListService {
      * @return openid和学生姓名
      */
     List<StuInfo> getOpenIdList(Integer studentStatus);
-
 }

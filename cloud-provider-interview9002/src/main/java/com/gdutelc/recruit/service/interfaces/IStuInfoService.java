@@ -54,4 +54,11 @@ public interface IStuInfoService extends IService<StuInfo> {
      */
     ResultVO<List<SignInDTO>> getSignInList(int deptId) throws JsonProcessingException;
 
+    /**
+     * 获取各个部门的人数情况
+     *
+     * @return {@link ResultVO}，其中数据为各部门的人数情况
+     */
+    ResultVO<List<Integer>> getDeptPeopleCount();
+
 }

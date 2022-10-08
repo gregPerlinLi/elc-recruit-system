@@ -4,7 +4,7 @@
   <groupId>com.gdutelc.recruit</groupId>
   <artifactId>elc-recruit-system</artifactId>
   <packaging>pom</packaging>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <modules>
     <module>cloud-consumer-recruit91</module>
     <module>cloud-provider-apply9001</module>
@@ -21,6 +21,9 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
+    <springboot.version>2.6.6</springboot.version>
+    <springcloud.version>2021.0.1</springcloud.version>
+    <springcloud.alibaba.version>2021.1</springcloud.alibaba.version>
     <junit.version>4.13.2</junit.version>
     <log4j.version>2.17.2</log4j.version>
     <lombok.version>1.18.24</lombok.version>
@@ -29,7 +32,7 @@
     <mybatis.spring.boot.version>2.2.2</mybatis.spring.boot.version>
     <!-- Docker 部署选项 -->
     <dockerfile.maven.plugin.version>1.4.13</dockerfile.maven.plugin.version>
-    <docker.repository>reg.gdutelc.com</docker.repository>
+    <docker.repository>harbor.gdutelc.com</docker.repository>
     <docker.repository.project>elc-recruit-system</docker.repository.project>
     <!--默认全局跳过dockerfile-->
     <dockerfile.skip>true</dockerfile.skip>
@@ -42,7 +45,7 @@
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
-        <version>2.6.4</version>
+        <version>${springboot.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -50,7 +53,7 @@
       <dependency>
         <groupId>org.springframework.cloud</groupId>
         <artifactId>spring-cloud-dependencies</artifactId>
-        <version>2021.0.1</version>
+        <version>${springcloud.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -58,7 +61,7 @@
       <dependency>
         <groupId>com.alibaba.cloud</groupId>
         <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-        <version>2021.1</version>
+        <version>${springcloud.alibaba.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -94,7 +97,7 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>2.6.4</version>
+        <version>${springboot.version}</version>
         <configuration>
           <fork>true</fork>
           <addResources>true</addResources>
@@ -115,6 +118,7 @@
           </execution>
         </executions>
         <configuration>
+          <!--suppress UnresolvedMavenProperty -->
           <repository>${docker.repository}/${docker.repository.project}/${docker.image.name}</repository>
           <tag>${project.version}</tag>
           <buildArgs>

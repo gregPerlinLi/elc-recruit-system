@@ -63,20 +63,20 @@ public interface IInterviewService {
     /**
      * 生产者面试官注销登录接口
      *
-     * @param username 登录用户名
+     * @param sessionId 请求SessionID
      * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
      */
-    @GetMapping(value = "/pro/interview/elc_access/interviewer_logout/{username}")
-    ResultVO<Void> interviewerLogout(@PathVariable("username") String username);
+    @GetMapping(value = "/pro/interview/elc_access/interviewer_logout/{session_id}")
+    ResultVO<Void> interviewerLogout(@PathVariable("session_id") String sessionId);
 
     /**
      * 生产者管理员注销登录接口
      *
-     * @param username 登录用户名
+     * @param sessionId 请求SessionID
      * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
      */
-    @GetMapping(value = "/pro/interview/elc_access/admin_logout/{username}")
-    ResultVO<Void> adminLogout(@PathVariable("username") String username);
+    @GetMapping(value = "/pro/interview/elc_access/admin_logout/{session_id}")
+    ResultVO<Void> adminLogout(@PathVariable("session_id") String sessionId);
 
     /*  以下为学生查询相关接口 */
 
@@ -301,5 +301,13 @@ public interface IInterviewService {
      */
     @GetMapping(value = "/pro/interview/elc_access/getSignInList/{deptId}")
     ResultVO<List<SignInDTO>> getSignInList(@PathVariable("deptId") Integer deptId);
+
+    /**
+     * 生产者获取各个部门的人数情况接口
+     *
+     * @return {@link ResultVO}，其中数据为当前各部门人数情况集合
+     */
+    @GetMapping(value = "/pro/interview/elc_access/getDeptPeopleCount")
+    ResultVO<List<Integer>> getDeptPeopleCount();
 
 }

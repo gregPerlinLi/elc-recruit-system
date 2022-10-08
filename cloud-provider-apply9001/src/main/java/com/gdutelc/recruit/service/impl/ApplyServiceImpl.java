@@ -165,7 +165,7 @@ public class ApplyServiceImpl implements IApplyService {
         }else if(curProcess == RecruitStatusConstant.FIRST_INTERVIEW) {
             //如果不是一面阶段则不能签到
             if(!firstKey.equals(key)) {
-                System.out.println(firstKey + " " + key);
+//                System.out.println(firstKey + " " + key);
                 return new ResultVO<>(ResultStatusCodeConstant.FORBIDDEN,"签到码有问题",null);
             }
         }else if(curProcess == RecruitStatusConstant.SECOND_INTERVIEW) {

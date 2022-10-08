@@ -36,9 +36,6 @@ public class Code2SessionImpl implements ICode2Session {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @Value(value = "${wx.url.code2Session}")
-    private String url;
-
     @Value(value = "${wx.applet.appid}")
     private String appid;
 
@@ -53,19 +50,21 @@ public class Code2SessionImpl implements ICode2Session {
         params.put("js_code",js_code);
         params.put("grant_type",grant_type);
 
+        String url = "https://api.weixin.qq.com/sns/jscode2session";
         url = GenericUtils.splicingUrlStr(url,params);
         ResponseEntity<String> entity = restTemplate.getForEntity(url, String.class);
         if(entity.getStatusCodeValue() != SUCCESS){
             return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST,"微信服务器忙碌",null);
         }
+        System.out.println(GenericUtils.getFullTimeStr() + " " + "请求了微信: " + url);
         String body = entity.getBody();
-        System.out.println(body);
+        System.out.println(GenericUtils.getFullTimeStr() + " " + "微信服务器返回: " + body);
         LoginInfo loginInfo = objectMapper.readValue(body, LoginInfo.class);
         if(loginInfo != null&&loginInfo.getOpenid() != null){
             stringRedisTemplate.opsForSet().add(RedisKeyConstant.STU_OPENID, loginInfo.getOpenid());
             return new ResultVO<>(SUCCESS,"登录成功",loginInfo);
         }else{
-            return new ResultVO<>(ResultStatusCodeConstant.SERVER_ERROR,"处理失败",null);
+            return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND,"处理失败",null);
         }
 
     }

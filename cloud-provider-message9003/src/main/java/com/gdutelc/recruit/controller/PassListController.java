@@ -18,7 +18,7 @@ import java.util.List;
  * @date 2022/08/28 14:24
  */
 @RestController
-@RequestMapping("/pro/super_admin/elc_access/")
+@RequestMapping("/pro/super_admin/elc_access")
 public class PassListController {
 
     @Resource
@@ -52,5 +52,4 @@ public class PassListController {
         }
         return new ResultVO<>(ResultStatusCodeConstant.SUCCESS, "获取成功", result);
     }
-
 }

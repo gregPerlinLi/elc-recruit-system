@@ -219,15 +219,22 @@ public class SentinelBlockHandler {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
 
+    /**
+     * Sentinel异常处理——获取当前各部门学生数量
+     */
+    public static ResultVO<List<Integer>> getDeptPeopleCountHandlerException(BlockException exception) {
+        return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
+    }
+
     /* StudentStatusController */
 
     /**
      * Sentinel 异常处理——面试开始面试接口
      */
-    public ResultVO<Integer> interviewStartHandlerException(@PathVariable("stu_id") String stuId,
-                                                            @PathVariable(value = "interviewer_username", required = false) String interviewerUsername,
-                                                            HttpServletRequest request,
-                                                            BlockException exception) {
+    public static ResultVO<Integer> interviewStartHandlerException(@PathVariable("stu_id") String stuId,
+                                                                   @PathVariable(value = "interviewer_username", required = false) String interviewerUsername,
+                                                                   HttpServletRequest request,
+                                                                   BlockException exception) {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
 
@@ -237,20 +244,20 @@ public class SentinelBlockHandler {
      * @deprecated 一二面开始接口已合并，请使用 {@link #interviewStartHandlerException(String, String, HttpServletRequest, BlockException)}
      */
     @Deprecated
-    public ResultVO<Integer> secondInterviewStartHandlerException(@PathVariable("stu_id") String stuId,
-                                                                  @PathVariable(value = "interviewer_username", required = false) String interviewerUsername,
-                                                                  HttpServletRequest request,
-                                                                  BlockException exception) {
+    public static ResultVO<Integer> secondInterviewStartHandlerException(@PathVariable("stu_id") String stuId,
+                                                                         @PathVariable(value = "interviewer_username", required = false) String interviewerUsername,
+                                                                         HttpServletRequest request,
+                                                                         BlockException exception) {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
 
     /**
      * Sentinel 异常处理——面试通过接口
      */
-    public ResultVO<Integer> interviewPassHandlerException(@PathVariable("stu_id") String stuId,
-                                                           @PathVariable(value = "interviewer_username", required = false) String interviewerUsername,
-                                                           HttpServletRequest request,
-                                                           BlockException exception) {
+    public static ResultVO<Integer> interviewPassHandlerException(@PathVariable("stu_id") String stuId,
+                                                                  @PathVariable(value = "interviewer_username", required = false) String interviewerUsername,
+                                                                  HttpServletRequest request,
+                                                                  BlockException exception) {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
 
@@ -260,28 +267,7 @@ public class SentinelBlockHandler {
      * @deprecated 一二面通过接口已合并，请使用 {@link #interviewPassHandlerException(String, String, HttpServletRequest, BlockException)}
      */
     @Deprecated
-    public ResultVO<Integer> secondInterviewPassHandlerException(@PathVariable("stu_id") String stuId,
-                                                                 @PathVariable(value = "interviewer_username", required = false) String interviewerUsername,
-                                                                 HttpServletRequest request,
-                                                                 BlockException exception) {
-        return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
-    }
-
-    /**
-     * Sentinel 异常处理——二面调剂接口
-     */
-    public ResultVO<Integer> secondInterviewAdjustHandlerException(@PathVariable("stu_id") String stuId,
-                                                                   @PathVariable("department") Integer department,
-                                                                   @PathVariable(value = "interviewer_username", required = false) String interviewerUsername,
-                                                                   HttpServletRequest request,
-                                                                   BlockException exception) {
-        return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
-    }
-
-    /**
-     * Sentinel 异常处理——二面调剂开始面试接口
-     */
-    public ResultVO<Integer> secondAdjustInterviewStartHandlerException(@PathVariable("stu_id") String stuId,
+    public static ResultVO<Integer> secondInterviewPassHandlerException(@PathVariable("stu_id") String stuId,
                                                                         @PathVariable(value = "interviewer_username", required = false) String interviewerUsername,
                                                                         HttpServletRequest request,
                                                                         BlockException exception) {
@@ -289,12 +275,33 @@ public class SentinelBlockHandler {
     }
 
     /**
+     * Sentinel 异常处理——二面调剂接口
+     */
+    public static ResultVO<Integer> secondInterviewAdjustHandlerException(@PathVariable("stu_id") String stuId,
+                                                                          @PathVariable("department") Integer department,
+                                                                          @PathVariable(value = "interviewer_username", required = false) String interviewerUsername,
+                                                                          HttpServletRequest request,
+                                                                          BlockException exception) {
+        return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
+    }
+
+    /**
+     * Sentinel 异常处理——二面调剂开始面试接口
+     */
+    public static ResultVO<Integer> secondAdjustInterviewStartHandlerException(@PathVariable("stu_id") String stuId,
+                                                                               @PathVariable(value = "interviewer_username", required = false) String interviewerUsername,
+                                                                               HttpServletRequest request,
+                                                                               BlockException exception) {
+        return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
+    }
+
+    /**
      * Sentinel 异常处理——二面调剂面试通过接口
      */
-    public ResultVO<Integer> secondAdjustInterviewPassHandlerException(@PathVariable("stu_id") String stuId,
-                                                                       @PathVariable(value = "interviewer_username", required = false) String interviewerUsername,
-                                                                       HttpServletRequest request,
-                                                                       BlockException exception) {
+    public static ResultVO<Integer> secondAdjustInterviewPassHandlerException(@PathVariable("stu_id") String stuId,
+                                                                              @PathVariable(value = "interviewer_username", required = false) String interviewerUsername,
+                                                                              HttpServletRequest request,
+                                                                              BlockException exception) {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
 
@@ -303,45 +310,77 @@ public class SentinelBlockHandler {
     /**
      * Sentinel 异常处理——面试进度推进接口
      */
-    public ResultVO<Void> processAdvanceBlockHandler(BlockException exception) {
+    public static ResultVO<Void> processAdvanceBlockHandler(BlockException exception) {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
 
     /**
      * Sentinel 异常处理——发送一面通知接口
      */
-    public ResultVO<Void> firstInterviewNotifyBlockHandler(BlockException exception) {
+    public static ResultVO<Void> firstInterviewNotifyBlockHandler(BlockException exception) {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
 
     /**
      * Sentinel 异常处理——发送二面通知接口
      */
-    public ResultVO<Void> secondInterviewNotifyBlockHandler(BlockException exception) {
+    public static ResultVO<Void> secondInterviewNotifyBlockHandler(BlockException exception) {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
 
     /**
      * Sentinel 异常处理——发送笔试通知接口
      */
-    public ResultVO<Void> writtenTestNotifyBlockHandler(BlockException exception) {
+    public static ResultVO<Void> writtenTestNotifyBlockHandler(BlockException exception) {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
 
     /**
      * Sentinel 异常处理——获取一面通过的学生列表
      */
-    public ResultVO<List<BriefPasserInfo>> getFirstInterviewPassListBlockHandler(Integer dept,
-                                                                                 BlockException exception) {
+    public static ResultVO<List<BriefPasserInfo>> getFirstInterviewPassListBlockHandler(Integer dept,
+                                                                                        BlockException exception) {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
 
     /**
      * Sentinel 异常处理——获取电协最终录取的所有面试者名单
      */
-    public ResultVO<List<AdmissionStuDTO>> getFinalAdmissionListBlockHandler(Integer dept,
-                                                                             BlockException exception) {
+    public static ResultVO<List<AdmissionStuDTO>> getFinalAdmissionListBlockHandler(Integer dept,
+                                                                                    BlockException exception) {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
+    }
+
+    /**
+     * Sentinel 异常处理——获取报名列表
+     */
+    public static byte[] getApplyListBlockHandler(Integer deptId,
+                                                  BlockException exception) {
+        return null;
+    }
+
+    /**
+     * Sentinel 异常处理——获取一面通过名单
+     */
+    public static byte[] getFirstListBlockHandler(Integer deptId,
+                                                  BlockException exception) {
+        return null;
+    }
+
+    /**
+     * Sentinel 异常处理——获取二面通过名单
+     */
+    public static byte[] getSecondListBlockHandler(Integer deptId,
+                                                   BlockException exception) {
+        return null;
+    }
+
+    /**
+     * Sentinel 异常处理——获取二面调剂通过名单
+     */
+    public static byte[] getSecondAdjustListBlockHandler(Integer deptId,
+                                                         BlockException exception) {
+        return null;
     }
 
 }

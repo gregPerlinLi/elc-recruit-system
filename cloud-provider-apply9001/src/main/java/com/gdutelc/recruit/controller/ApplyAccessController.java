@@ -61,7 +61,7 @@ public class ApplyAccessController {
      */
     @GetMapping(value = "/get_signInStatus/{openid}")
     public ResultVO<Integer> getSignInStatus(@PathVariable("openid") String openid) {
-        System.out.println(openid);
+        //System.out.println(openid);
         return applyService.getSignInStatus(openid);
     }
 
@@ -74,7 +74,7 @@ public class ApplyAccessController {
      */
     @PutMapping(value = "/update_apply_info")
     public ResultVO<String> updateApplyInfo(@RequestBody ApplyInfoDTO applyInfoDTO){
-        log.info(applyInfoDTO.toString());
+        //log.info(applyInfoDTO.toString());
         return applyService.updateApplyInfo(applyInfoDTO);
     }
 

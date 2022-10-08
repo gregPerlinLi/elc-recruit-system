@@ -39,7 +39,7 @@ public class ApplyController {
     @SentinelResource(value = "apply", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "applyHandlerException")
     @ApiOperation(value = "报名", tags = "apply", response = ResultVO.class)
     public ResultVO<String> apply (@RequestBody @ApiParam(value = "报名信息", required = true) ApplyInfoDTO applyInfoDTO) {
-        log.warn(applyInfoDTO.toString());
+        //log.warn(applyInfoDTO.toString());
         ResultVO<String> result = applyService.apply(applyInfoDTO);
         if ( result.getCode()  == ResultStatusCodeConstant.SUCCESS ) {
             String openid = applyInfoDTO.getOpenid();
@@ -75,7 +75,7 @@ public class ApplyController {
     @SentinelResource(value = "getAllStatus", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "getStatusHandlerException")
     @ApiOperation(value = "获取当前学生面试状态接口", tags = "apply", response = ResultVO.class)
     public ResultVO<Integer> getAllStatus(@RequestBody @ApiParam(value = "微信openid", required = true) @PathVariable("openid") String openid) {
-        System.out.println(openid);
+//        System.out.println(openid);
         return applyService.getAllStatus(openid);
     }
 
@@ -102,7 +102,7 @@ public class ApplyController {
     @SentinelResource(value = "updateApplyInfo", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "updateApplyInfoHandlerException")
     @ApiOperation(value = "修改学生面试信息接口", tags = "apply", response = ResultVO.class)
     public ResultVO<String> updateApplyInfo(@RequestBody @ApiParam(value = "要更新的学生报名信息", required = true) ApplyInfoDTO applyInfoDTO) {
-        System.out.println(applyInfoDTO);
+//        System.out.println(applyInfoDTO);
         return applyService.updateApplyInfo(applyInfoDTO);
     }
 

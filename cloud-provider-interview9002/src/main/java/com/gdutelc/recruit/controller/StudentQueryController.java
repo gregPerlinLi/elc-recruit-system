@@ -22,7 +22,7 @@ import java.util.List;
  * @date 2022-08-17
  */
 @RestController
-@RequestMapping("/pro/interview/elc_access/")
+@RequestMapping("/pro/interview/elc_access")
 public class StudentQueryController {
 
     @Resource
@@ -170,7 +170,6 @@ public class StudentQueryController {
                 pages);
     }
 
-
     /**
      * 获取签到列表
      * @param deptId 筛选部门代码
@@ -179,6 +178,16 @@ public class StudentQueryController {
     @GetMapping(value = "/getSignInList/{deptId}")
     public ResultVO<List<SignInDTO>> getSignInList(@PathVariable("deptId") Integer deptId) throws JsonProcessingException {
         return stuInfoService.getSignInList(deptId);
+    }
+
+    /**
+     * 获取各个部门的人数情况
+     *
+     * @return {@link ResultVO}，其中数据为当前各部门人数情况集合
+     */
+    @GetMapping(value = "/getDeptPeopleCount")
+    public ResultVO<List<Integer>> getDeptPeopleCount() {
+        return stuInfoService.getDeptPeopleCount();
     }
 
 

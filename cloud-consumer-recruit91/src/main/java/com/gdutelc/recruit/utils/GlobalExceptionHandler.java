@@ -25,23 +25,23 @@ public class GlobalExceptionHandler {
     public ResultVO<Void> exceptionHandler(HttpServletResponse response, Exception e){
         String msg = e.getMessage();
         if ( e instanceof LoginException ) {
-            response.setStatus(ResultStatusCodeConstant.FORBIDDEN);
+            // response.setStatus(ResultStatusCodeConstant.FORBIDDEN);
             return new ResultVO<>(ResultStatusCodeConstant.FORBIDDEN, msg);
         }
         if ( e instanceof ParamValidateException ) {
-            response.setStatus(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION);
+            // response.setStatus(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION);
             return new ResultVO<>(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION, msg);
         }
         if ( e instanceof BusinessException ) {
-            response.setStatus(ResultStatusCodeConstant.BUSINESS_EXCEPTION);
+            // response.setStatus(ResultStatusCodeConstant.BUSINESS_EXCEPTION);
             return new ResultVO<>(ResultStatusCodeConstant.BUSINESS_EXCEPTION, msg);
         }
         if ( e instanceof ServerException ) {
-            response.setStatus(ResultStatusCodeConstant.SERVER_ERROR);
+            // response.setStatus(ResultStatusCodeConstant.SERVER_ERROR);
             return new ResultVO<>(ResultStatusCodeConstant.SERVER_ERROR, msg);
         }
         if (e instanceof RetryableException) {
-            response.setStatus(ResultStatusCodeConstant.SERVER_TIME_OUT);
+            // response.setStatus(ResultStatusCodeConstant.SERVER_TIME_OUT);
             return new ResultVO<>(ResultStatusCodeConstant.SERVER_TIME_OUT, msg);
         }
         response.setStatus(ResultStatusCodeConstant.SERVER_ERROR);
