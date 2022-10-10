@@ -190,5 +190,15 @@ public class StudentQueryController {
         return stuInfoService.getDeptPeopleCount();
     }
 
+    /**
+     * 获取学生的状态统计情况
+     *
+     * @return {@link ResultVO}，其中数据为当前学生的状态统计
+     */
+    @GetMapping(value = "/get_status_people_count")
+    public ResultVO<List<Long>> getStatusPeopleCount() {
+        return stuInfoService.getStatusPeopleCount();
+    }
+
 
 }
