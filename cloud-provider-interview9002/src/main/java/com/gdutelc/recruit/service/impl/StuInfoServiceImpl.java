@@ -168,4 +168,26 @@ public class StuInfoServiceImpl extends ServiceImpl<StuInfoMapper, StuInfo> impl
         Collections.addAll(ans, anss);
         return new ResultVO<>(ResultStatusCodeConstant.SUCCESS,"获取成功",ans);
     }
+
+    @Override
+    public ResultVO<List<Long>> getStatusPeopleCount() {
+        Long[] longs = new Long[8];
+        QueryWrapper<StuInfo> queryWrapper = new QueryWrapper<>();
+        Long sum = 0L;
+        for (int i = StudentStatusConstant.FAILED; i <= StudentStatusConstant.PASS; i++) {
+            queryWrapper.eq("status", i);
+            Long statusCount = stuInfoMapper.selectCount(queryWrapper);
+            longs[i + 2] = statusCount;
+            queryWrapper.clear();
+            sum += statusCount;
+        }
+        queryWrapper.eq("status", StudentStatusConstant.EMPLOYMENT);
+        Long statusCount = stuInfoMapper.selectCount(queryWrapper);
+        longs[7] = statusCount;
+        sum += statusCount;
+        longs[0] = sum;
+        ArrayList<Long> statusCounts = new ArrayList<>();
+        Collections.addAll(statusCounts, longs);
+        return new ResultVO<>(ResultStatusCodeConstant.SUCCESS, "获取成功", statusCounts);
+    }
 }
