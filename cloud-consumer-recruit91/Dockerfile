@@ -1,6 +1,6 @@
 FROM openjdk:17-jdk-alpine
 #维护者
-MAINTAINER gregPerlinLi
+LABEL maintainer="lihaolin13@outlook.com"
 ARG JAR_FILE
 #设置环境变量
 ENV TIME_ZONE=Asia/Shanghai
