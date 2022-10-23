@@ -10,26 +10,47 @@ public enum Usage {
      * 第一次面试提醒
      */
     FIRST_INTERVIEW,
+
+    /**
+     * 一面通过提醒
+     */
+    FIRST_PASSED,
+
+    /**
+     * 一面未通过提醒
+     */
+    FIRST_FAILED,
+
     /**
      * 笔试提醒
      */
     WRITTEN_TEST,
+
     /**
      * 第二次面试提醒
      */
     SECOND_INTERVIEW,
+
     /**
      * 最终通过提醒
      */
     FINALLY_PASSED,
+
+    /**
+     * 最终通过提醒
+     */
+    FINALLY_FAILED,
+
     /**
      * 报名成功
      */
     APPLY_SUCCESS,
+
     /**
      * 签到成功
      */
     SIGN_IN_SUCCESS,
+
     /**
      * 开始面试
      */

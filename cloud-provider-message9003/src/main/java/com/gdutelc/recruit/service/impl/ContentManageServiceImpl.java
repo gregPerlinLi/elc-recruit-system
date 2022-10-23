@@ -23,6 +23,20 @@ public class ContentManageServiceImpl implements ContentManageService {
     @Value("${wechat-notify.model.first-interview.contents}")
     private String[] firstInterViewModelContents;
 
+    @Value("${wechat-notify.model.first-interview-passed.id}")
+    private String firstInterViewPassedModelId;
+    @Value("${wechat-notify.model.first-interview-passed.fields}")
+    private String[] firstInterViewPassedModelFields;
+    @Value("${wechat-notify.model.first-interview-passed.contents}")
+    private String[] firstInterViewPassedModelContents;
+
+    @Value("${wechat-notify.model.first-interview-failed.id}")
+    private String firstInterViewFailedModelId;
+    @Value("${wechat-notify.model.first-interview-failed.fields}")
+    private String[] firstInterViewFailedModelFields;
+    @Value("${wechat-notify.model.first-interview-failed.contents}")
+    private String[] firstInterViewFailedModelContents;
+
     @Value("${wechat-notify.model.written-test.id}")
     private String writtenTestModelId;
     @Value("${wechat-notify.model.written-test.fields}")
@@ -44,6 +58,12 @@ public class ContentManageServiceImpl implements ContentManageService {
     @Value("${wechat-notify.model.finally-passed.contents}")
     private String[] finallyPassedModelContents;
 
+    @Value("${wechat-notify.model.finally-failed.id}")
+    private String finallyFailedModelId;
+    @Value("${wechat-notify.model.finally-failed.fields}")
+    private String[] finallyFailedModelFields;
+    @Value("${wechat-notify.model.finally-failed.contents}")
+    private String[] finallyFailedModelContents;
 
     @Value("${wechat-notify.model.apply-success.id}")
     private String applySuccessModelId;
@@ -76,6 +96,16 @@ public class ContentManageServiceImpl implements ContentManageService {
                 fields = firstInterViewModelFields;
                 contents = firstInterViewModelContents;
             }
+            case FIRST_PASSED -> {
+                fields = firstInterViewPassedModelFields;
+                contents = firstInterViewPassedModelContents;
+                contents[2] = GenericUtils.getFullTimeStr();
+            }
+            case FIRST_FAILED -> {
+                fields = firstInterViewFailedModelFields;
+                contents = firstInterViewFailedModelContents;
+                contents[2] = GenericUtils.getFullTimeStr();
+            }
             case WRITTEN_TEST -> {
                 fields = writtenTestModelFields;
                 contents = writtenTestModelContents;
@@ -87,6 +117,12 @@ public class ContentManageServiceImpl implements ContentManageService {
             case FINALLY_PASSED -> {
                 fields = finallyPassedModelFields;
                 contents = finallyPassedModelContents;
+                contents[2] = GenericUtils.getFullTimeStr();
+            }
+            case FINALLY_FAILED -> {
+                fields = finallyFailedModelFields;
+                contents = finallyFailedModelContents;
+                contents[2] = GenericUtils.getFullTimeStr();
             }
             case APPLY_SUCCESS -> {
                 fields = applySuccessModelFields;
@@ -116,9 +152,12 @@ public class ContentManageServiceImpl implements ContentManageService {
     public String getNotifyModelId(Usage usage) {
         return switch (usage) {
             case FIRST_INTERVIEW -> firstInterViewModelId;
+            case FIRST_PASSED -> firstInterViewPassedModelId;
+            case FIRST_FAILED -> firstInterViewFailedModelId;
             case WRITTEN_TEST -> writtenTestModelId;
             case SECOND_INTERVIEW -> secondInterviewModelId;
             case FINALLY_PASSED -> finallyPassedModelId;
+            case FINALLY_FAILED -> finallyFailedModelId;
             case APPLY_SUCCESS -> applySuccessModelId;
             case SIGN_IN_SUCCESS -> signInSuccessModelId;
             case INTERVIEW_START -> interviewStartModelId;
