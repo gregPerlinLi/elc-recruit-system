@@ -18,14 +18,19 @@ public interface RecruitStatusConstant {
     int FIRST_INTERVIEW = 20;
 
     /**
+     * 笔试
+     */
+    int WRITTEN_EXAM = 30;
+
+    /**
      * 二面
      */
-    int SECOND_INTERVIEW = 30;
+    int SECOND_INTERVIEW = 40;
 
     /**
      * 结束
      */
-    int END = 40;
+    int END = 50;
 
     /**
      * 递增值
