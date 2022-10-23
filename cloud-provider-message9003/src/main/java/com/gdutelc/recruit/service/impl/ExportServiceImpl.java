@@ -59,7 +59,7 @@ public class ExportServiceImpl implements IExPeopleList {
     public ResultVO exportApplyList() {
         String s = stringRedisTemplate.opsForValue().get(RedisKeyConstant.PROCESS);
         Integer process = Integer.parseInt(s);
-        if(process != RecruitStatusConstant.FIRST_INTERVIEW) {
+        if(process != RecruitStatusConstant.FIRST_INTERVIEW && process != RecruitStatusConstant.WRITTEN_EXAM) {
             return new ResultVO(ResultStatusCodeConstant.FAILED,"当前状态不符合");
         }
         QueryWrapper<StuInfo> wrapper = new QueryWrapper<>();
