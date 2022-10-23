@@ -9,7 +9,7 @@
     </parent>
 
     <properties>
-        <docker.image.name>${artifactId}</docker.image.name>
+        <docker.image.name>${project.artifactId}</docker.image.name>
         <dockerfile.skip>false</dockerfile.skip>
     </properties>
 
