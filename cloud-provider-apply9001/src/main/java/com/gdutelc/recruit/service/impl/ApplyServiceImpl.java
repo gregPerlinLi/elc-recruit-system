@@ -104,7 +104,7 @@ public class ApplyServiceImpl implements IApplyService {
         int ans = -2;
         switch (cur) {
             case RecruitStatusConstant.APPLY:
-                ans = TaroStudentStatusConstant.INAPPLY;
+                ans = TaroStudentStatusConstant.IN_APPLY;
                 break;
             case RecruitStatusConstant.FIRST_INTERVIEW:
                 ans = TaroStudentStatusConstant.FIRST_INTERVIEW;
