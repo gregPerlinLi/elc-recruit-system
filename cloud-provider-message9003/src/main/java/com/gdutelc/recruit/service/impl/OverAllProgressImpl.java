@@ -46,8 +46,8 @@ public class OverAllProgressImpl implements IOverAllProgress {
         String currentProgressStr = stringRedisTemplate.opsForValue().get(RedisKeyConstant.PROCESS);
         Integer currentProgress = Integer.parseInt(currentProgressStr);
         Map<String,Object> map = new HashMap<>(1);
-        if(currentProgress == RecruitStatusConstant.FIRST_INTERVIEW) {
-            //如果当前是一面，就将通过的状态重置为0
+        if(currentProgress == RecruitStatusConstant.WRITTEN_EXAM) {
+            //如果当前是笔试，代表着一面完全结束，就将通过的状态重置为0
             updateFirstFailed();
             updateFirstPass();
             stringRedisTemplate.opsForValue().set(RedisKeyConstant.PROCESS,currentProgress + RecruitStatusConstant.STEP + "");

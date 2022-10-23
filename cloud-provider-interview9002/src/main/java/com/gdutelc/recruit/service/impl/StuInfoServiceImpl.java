@@ -105,7 +105,7 @@ public class StuInfoServiceImpl extends ServiceImpl<StuInfoMapper, StuInfo> impl
         }
         UpdateWrapper<StuInfo> studentUpdateWrapper = new UpdateWrapper<>();
         studentUpdateWrapper.eq("stu_id", stuId);
-        studentUpdateWrapper.eq("status", StudentStatusConstant.INTERVIEWING);
+        studentUpdateWrapper.eq("status", StudentStatusConstant.INTERVIEWING).or().eq("status",StudentStatusConstant.ADJUSTED);
         stuInfo.setStatus(StudentStatusConstant.PASS);
         int update = stuInfoMapper.update(stuInfo, studentUpdateWrapper);
         if ( update == 1 ) {

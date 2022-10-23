@@ -103,18 +103,21 @@ public class ApplyServiceImpl implements IApplyService {
 
         int ans = -2;
         switch (cur) {
-            case RecruitStatusConstant.APPLY:
-                ans = TaroStudentStatusConstant.INAPPLY;
-                break;
-            case RecruitStatusConstant.FIRST_INTERVIEW:
+            case RecruitStatusConstant.APPLY -> {
+                ans = TaroStudentStatusConstant.IN_APPLY;
+            }
+            case RecruitStatusConstant.FIRST_INTERVIEW -> {
                 ans = TaroStudentStatusConstant.FIRST_INTERVIEW;
-                break;
-            case RecruitStatusConstant.SECOND_INTERVIEW:
+            }
+            case RecruitStatusConstant.WRITTEN_EXAM -> {
+                ans = TaroStudentStatusConstant.WRITTEN_EXAM;
+            }
+            case RecruitStatusConstant.SECOND_INTERVIEW -> {
                 ans = TaroStudentStatusConstant.SECOND_INTERVIEW;
-                break;
-            case RecruitStatusConstant.END:
+            }
+            case RecruitStatusConstant.END -> {
                 ans = TaroStudentStatusConstant.END;
-                break;
+            }
         }
         return new ResultVO<>(ResultStatusCodeConstant.SUCCESS,"获取信息成功",ans);
     }
@@ -162,8 +165,8 @@ public class ApplyServiceImpl implements IApplyService {
         Integer curProcess = Integer.parseInt(curProcessStr);
         if(curProcess == RecruitStatusConstant.APPLY) {
             return new ResultVO<>(ResultStatusCodeConstant.FORBIDDEN,"签到失败，当前状态不符合",null);
-        }else if(curProcess == RecruitStatusConstant.FIRST_INTERVIEW) {
-            //如果不是一面阶段则不能签到
+        }else if(curProcess == RecruitStatusConstant.FIRST_INTERVIEW || curProcess == RecruitStatusConstant.WRITTEN_EXAM) {
+            //如果不是一面/笔试阶段则不能签到
             if(!firstKey.equals(key)) {
 //                System.out.println(firstKey + " " + key);
                 return new ResultVO<>(ResultStatusCodeConstant.FORBIDDEN,"签到码有问题",null);
