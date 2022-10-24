@@ -90,6 +90,7 @@ public class ExportServiceImpl implements IExPeopleList {
                 fw.write(titleStr + "\n");
                 for(int i=0;i<stuInfos.size();i++) {
                     String parse = CsvUtil.getCsvStr(stuInfos.get(i));
+                    parse = parse.replaceAll("\n","");
                     fw.write(parse + "\n");
                 }
                 fw.close();
@@ -145,6 +146,7 @@ public class ExportServiceImpl implements IExPeopleList {
                 fw.write(titleStr + "\n");
                 for(int i=0;i<stuInfos.size();i++) {
                     String parse = CsvUtil.getCsvStr(stuInfos.get(i));
+                    parse = parse.replaceAll("\n","");
                     fw.write(parse + "\n");
                 }
                 fw.close();
@@ -198,6 +200,7 @@ public class ExportServiceImpl implements IExPeopleList {
                 fw.write(titleStr + "\n");
                 for(int i=0;i<stuInfos.size();i++) {
                     String parse = CsvUtil.getCsvStr(stuInfos.get(i));
+                    parse = parse.replaceAll("\n","");
                     fw.write(parse + "\n");
                 }
             } catch (IOException e) {
@@ -251,6 +254,7 @@ public class ExportServiceImpl implements IExPeopleList {
                 fw.write(titleStr + "\n");
                 for(int i=0;i<stuInfos.size();i++) {
                     String parse = CsvUtil.getCsvStr(stuInfos.get(i));
+                    parse = parse.replaceAll("\n","");
                     fw.write(parse + "\n");
                 }
                 fw.close();
@@ -295,6 +299,7 @@ public class ExportServiceImpl implements IExPeopleList {
                 fw.write(titleStr + "\n");
                 for(int k=0;k<admissionStus.size();k++) {
                     String str = CsvUtil.getCsvStr(admissionStus.get(k));
+                    str = str.replaceAll("\n","");
                     fw.write(str + "\n");
                 }
                 queryWrapper.clear();
