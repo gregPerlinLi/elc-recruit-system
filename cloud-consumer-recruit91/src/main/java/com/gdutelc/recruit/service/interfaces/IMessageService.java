@@ -65,11 +65,25 @@ public interface IMessageService {
     ResultVO<Void> firstInterviewNotify();
 
     /**
+     * 向用户发送第一次面试结果提醒
+     * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
+     */
+    @GetMapping(value = "/pro/super_admin/elc_access/first_interview_result_notify")
+    ResultVO<Void> firstInterviewResultNotify();
+
+    /**
      * 向用户发送第二次面试提醒
      * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
      */
     @GetMapping(value = "/pro/super_admin/elc_access/second_interview_notify")
     ResultVO<Void> secondInterviewNotify();
+
+    /**
+     * 向用户发送第二次面试结果提醒
+     * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
+     */
+    @GetMapping(value = "/pro/super_admin/elc_access/second_interview_result_notify")
+    ResultVO<Void> secondInterviewResultNotify();
 
     /**
      * 向用户发送笔试提醒
