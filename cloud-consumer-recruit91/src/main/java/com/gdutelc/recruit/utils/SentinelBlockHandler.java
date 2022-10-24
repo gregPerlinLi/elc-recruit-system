@@ -329,9 +329,23 @@ public class SentinelBlockHandler {
     }
 
     /**
+     * Sentinel 异常处理——发送一面结果通知接口
+     */
+    public static ResultVO<Void> firstInterviewResultNotifyBlockHandler(BlockException exception) {
+        return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
+    }
+
+    /**
      * Sentinel 异常处理——发送二面通知接口
      */
     public static ResultVO<Void> secondInterviewNotifyBlockHandler(BlockException exception) {
+        return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
+    }
+
+    /**
+     * Sentinel 异常处理——发送二面结果通知接口
+     */
+    public static ResultVO<Void> secondInterviewResultNotifyBlockHandler(BlockException exception) {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
 
