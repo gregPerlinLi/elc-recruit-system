@@ -45,9 +45,21 @@ public class SuperAdminController {
      */
     @GetMapping(value = "/first_interview_notify")
     @SentinelResource(value = "firstInterviewNotify", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "firstInterviewNotifyBlockHandler")
-    @ApiOperation(value = "发送一面通知", tags = "super_admin", response = ResultVO.class)
+    @ApiOperation(value = "发送一面通知", tags = "notify", response = ResultVO.class)
     public ResultVO<Void> firstInterviewNotify() {
         return messageService.firstInterviewNotify();
+    }
+
+    /**
+     * 发送一面结果通知接口
+     *
+     * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
+     */
+    @GetMapping(value = "/first_interview_result_notify")
+    @SentinelResource(value = "firstInterviewResultNotify", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "firstInterviewResultNotifyBlockHandler")
+    @ApiOperation(value = "发送一面结果通知", tags = "notify", response = ResultVO.class)
+    public ResultVO<Void> firstInterviewResultNotify() {
+        return messageService.firstInterviewResultNotify();
     }
 
     /**
@@ -57,9 +69,21 @@ public class SuperAdminController {
      */
     @GetMapping(value = "/second_interview_notify")
     @SentinelResource(value = "secondInterviewNotify", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "secondInterviewNotifyBlockHandler")
-    @ApiOperation(value = "发送二面通知", tags = "super_admin", response = ResultVO.class)
+    @ApiOperation(value = "发送二面通知", tags = "notify", response = ResultVO.class)
     public ResultVO<Void> secondInterviewNotify() {
         return messageService.secondInterviewNotify();
+    }
+
+    /**
+     * 发送二面结果通知接口
+     *
+     * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
+     */
+    @GetMapping(value = "/second_interview_result_notify")
+    @SentinelResource(value = "secondInterviewResultNotify", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "secondInterviewResultNotifyBlockHandler")
+    @ApiOperation(value = "发送二面结果通知", tags = "notify", response = ResultVO.class)
+    public ResultVO<Void> secondInterviewResultNotify() {
+        return messageService.secondInterviewResultNotify();
     }
 
     /**
@@ -69,7 +93,7 @@ public class SuperAdminController {
      */
     @GetMapping(value = "/written_test_notify")
     @SentinelResource(value = "writtenTestNotify", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "writtenTestNotifyBlockHandler")
-    @ApiOperation(value = "发送笔试通知", tags = "super_admin", response = ResultVO.class)
+    @ApiOperation(value = "发送笔试通知", tags = "notify", response = ResultVO.class)
     public ResultVO<Void> writtenTestNotify() {
         return messageService.writtenTestNotify();
     }
