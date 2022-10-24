@@ -41,12 +41,15 @@ public class OverAllProgressImpl implements IOverAllProgress {
     private IExPeopleList iExPeopleList;
 
     @Override
-    public ResultVO<Integer> overAllProgress() throws NumberFormatException{
+    public ResultVO<Integer> overAllProgress() throws NumberFormatException {
         //获取当前总进度
         String currentProgressStr = stringRedisTemplate.opsForValue().get(RedisKeyConstant.PROCESS);
         Integer currentProgress = Integer.parseInt(currentProgressStr);
-        Map<String,Object> map = new HashMap<>(1);
-        if(currentProgress == RecruitStatusConstant.WRITTEN_EXAM) {
+        Map<String, Object> map = new HashMap<>(1);
+        if ( currentProgress == RecruitStatusConstant.FIRST_INTERVIEW ) {
+            // 一面推进到笔试只需要推进状态码即可
+            stringRedisTemplate.opsForValue().set(RedisKeyConstant.PROCESS,currentProgress + RecruitStatusConstant.STEP + "");
+        } else if ( currentProgress == RecruitStatusConstant.WRITTEN_EXAM ) {
             //如果当前是笔试，代表着一面完全结束，就将通过的状态重置为0
             updateFirstFailed();
             updateFirstPass();
@@ -66,7 +69,7 @@ public class OverAllProgressImpl implements IOverAllProgress {
                     weChatServerService.sendSecondInterviewNotify(info.getOpenid());
                 }
             }catch (Exception e){}
-        }else if(currentProgress == RecruitStatusConstant.SECOND_INTERVIEW) {
+        } else if ( currentProgress == RecruitStatusConstant.SECOND_INTERVIEW ) {
             //如果当前是二面，就将通过的状态置为10
             updateSecondFailed();
             updateSecondPass();
@@ -83,7 +86,7 @@ public class OverAllProgressImpl implements IOverAllProgress {
                     weChatServerService.sendFinallyPassedNotify(info.getOpenid());
                 }
             }catch (Exception e){}
-        }else if(currentProgress == RecruitStatusConstant.APPLY) {
+        } else if ( currentProgress == RecruitStatusConstant.APPLY ) {
             //如果当前是报名，就推进到一面
             stringRedisTemplate.opsForValue().set(RedisKeyConstant.PROCESS,currentProgress + RecruitStatusConstant.STEP + "");
             iExPeopleList.exportApplyList();
