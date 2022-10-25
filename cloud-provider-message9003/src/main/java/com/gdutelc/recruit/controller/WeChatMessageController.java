@@ -112,7 +112,7 @@ public class WeChatMessageController {
 
     @GetMapping(value = "/written_test_notify")
     public ResultVO<Void> writtenTestNotify(){
-        List<StuInfo> firstInterviewList = iPassListService.getOpenIdList(StudentStatusConstant.PASS);
+        List<StuInfo> firstInterviewList = iPassListService.getOpenIdList(StudentStatusConstant.REGISTERED);
         List<String> successSendingList = new LinkedList<>();
         for (StuInfo stuInfo :
                 firstInterviewList) {
