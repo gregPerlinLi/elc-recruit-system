@@ -5,7 +5,8 @@ ARG JAR_FILE
 #设置环境变量
 ENV TIME_ZONE=Asia/Shanghai
 ENV LANG=C.UTF-8
-ENV SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE} \
+ENV SERVER_PORT=${SERVER_PORT} \
+    SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE} \
     NACOS_DISCOVERY_SERVER=${NACOS_DISCOVERY_SERVER} \
     NACOS_CONFIG_SERVER=${NACOS_CONFIG_SERVER}
     # JAVA_OPT_EXT=${JAVA_OPT_EXT}
@@ -29,6 +30,7 @@ ADD ${JAR_FILE} /app.jar
 #指定docker容器启动时执行的命令
 ENTRYPOINT ["java", \
             "-jar", \
+            "-Dserver.port=${SERVER_PORT}", \
             "-Duser.timezone=Asia/Shanghai", \
             "-Dspring.profiles=${SPRING_PROFILES_ACTIVE}", \
             "-Dspring.cloud.nacos.discovery.server-addr=${NACOS_DISCOVERY_SERVER}", \
