@@ -41,7 +41,7 @@ public class OverAllProgressImpl implements IOverAllProgress {
     private IExPeopleList iExPeopleList;
 
     @Override
-    public ResultVO<Integer> overAllProgress() throws NumberFormatException{
+    public ResultVO<Integer> overAllProgress() throws NumberFormatException {
         //获取当前总进度
         String currentProgressStr = stringRedisTemplate.opsForValue().get(RedisKeyConstant.PROCESS);
         Integer currentProgress = Integer.parseInt(currentProgressStr);
@@ -49,9 +49,8 @@ public class OverAllProgressImpl implements IOverAllProgress {
         if ( currentProgress == RecruitStatusConstant.WRITTEN_EXAM ) {
             // 笔试推进到笔试只需要推进状态码即可
             stringRedisTemplate.opsForValue().set(RedisKeyConstant.PROCESS,currentProgress + RecruitStatusConstant.STEP + "");
-
         } else if ( currentProgress == RecruitStatusConstant.FIRST_INTERVIEW ) {
-            //如果当前是笔试，代表着一面完全结束，就将通过的状态重置为0
+            // 一面结束，就将通过的状态重置为0
             updateFirstFailed();
             updateFirstPass();
             stringRedisTemplate.opsForValue().set(RedisKeyConstant.PROCESS,currentProgress + RecruitStatusConstant.STEP + "");
