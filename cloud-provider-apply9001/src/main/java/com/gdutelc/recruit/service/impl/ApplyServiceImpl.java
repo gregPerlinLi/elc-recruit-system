@@ -97,6 +97,8 @@ public class ApplyServiceImpl implements IApplyService {
         if(!GenericUtils.ofNullable(applyInfoDTO) || !GenericUtils.ofNullable(applyInfoDTO.getStatus())) {
             return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND,"搜索无果",null);
         }
+
+        System.out.println(applyInfoDTO.getStatus());
         if(applyInfoDTO.getStatus() < 0) {
             return new ResultVO<>(ResultStatusCodeConstant.SUCCESS,"获取信息成功",TaroStudentStatusConstant.FAILED);
         }
@@ -132,7 +134,7 @@ public class ApplyServiceImpl implements IApplyService {
         wrapper.eq("openid",openid);
         StuInfo stuInfo = stuInfoMapper.selectOne(wrapper);
         Integer status = stuInfo.getStatus();
-        if(status != StudentStatusConstant.REGISTERED) {
+        if(status > 0) {
             return new ResultVO<>(ResultStatusCodeConstant.SUCCESS,"签到成功",TaroStudentStatusConstant.SIGNIN_SUCCESS);
         }
         return new ResultVO<>(ResultStatusCodeConstant.FAILED,"签到失败",TaroStudentStatusConstant.SIGNIN_FAILED);
@@ -166,8 +168,8 @@ public class ApplyServiceImpl implements IApplyService {
         Integer curProcess = Integer.parseInt(curProcessStr);
         if(curProcess == RecruitStatusConstant.APPLY) {
             return new ResultVO<>(ResultStatusCodeConstant.FORBIDDEN,"签到失败，当前状态不符合",null);
-        }else if(curProcess == RecruitStatusConstant.FIRST_INTERVIEW || curProcess == RecruitStatusConstant.WRITTEN_EXAM) {
-            //如果不是一面/笔试阶段则不能签到
+        }else if(curProcess == RecruitStatusConstant.FIRST_INTERVIEW ) {
+            //如果不是一面阶段则不能签到
             if(!firstKey.equals(key)) {
 //                System.out.println(firstKey + " " + key);
                 return new ResultVO<>(ResultStatusCodeConstant.FORBIDDEN,"签到码有问题",null);
