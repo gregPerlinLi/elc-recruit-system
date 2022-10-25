@@ -136,7 +136,7 @@ public class WeChatMessageController {
         if(currentProgress == RecruitStatusConstant.SECOND_INTERVIEW) {
             return new ResultVO<>(ResultStatusCodeConstant.FAILED,"当前状态不符合");
         }
-        List<StuInfo> secondInterviewPassedList = iPassListService.getOpenIdList(StudentStatusConstant.EMPLOYMENT);
+        List<StuInfo> secondInterviewPassedList = iPassListService.getOpenIdList(StudentStatusConstant.PASS);
         List<StuInfo> secondInterviewFailedList = iPassListService.getOpenIdList(StudentStatusConstant.FAILED);
         List<String> successSendingList = new LinkedList<>();
         for (StuInfo stuInfo :
