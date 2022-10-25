@@ -1,5 +1,7 @@
 package com.gdutelc.recruit.controller;
 
+import com.gdutelc.recruit.constant.RecruitStatusConstant;
+import com.gdutelc.recruit.constant.RedisKeyConstant;
 import com.gdutelc.recruit.constant.ResultStatusCodeConstant;
 import com.gdutelc.recruit.constant.StudentStatusConstant;
 import com.gdutelc.recruit.domain.entities.StuInfo;
@@ -9,6 +11,8 @@ import com.gdutelc.recruit.service.interfaces.IOverAllProgress;
 import com.gdutelc.recruit.service.interfaces.IPassListService;
 import com.gdutelc.recruit.service.interfaces.IStuInfoService;
 import com.gdutelc.recruit.service.interfaces.WeChatServerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +37,8 @@ public class WeChatMessageController {
     IOverAllProgress iOverAllProgress;
     @Resource
     IStuInfoService stuInfoService;
+    @Autowired
+    StringRedisTemplate stringRedisTemplate;
 
     @GetMapping(value = "/first_interview_notify")
     public ResultVO<Void> firstInterviewNotify(){
@@ -55,7 +61,12 @@ public class WeChatMessageController {
 
     @GetMapping(value = "/first_interview_result_notify")
     public ResultVO<Void> firstInterviewResultNotify(){
-        List<StuInfo> firstInterviewPassedList = iPassListService.getOpenIdList(StudentStatusConstant.PASS);
+        String currentProgressStr = stringRedisTemplate.opsForValue().get(RedisKeyConstant.PROCESS);
+        Integer currentProgress = Integer.parseInt(currentProgressStr);
+        if(currentProgress == RecruitStatusConstant.FIRST_INTERVIEW) {
+            return new ResultVO<>(ResultStatusCodeConstant.FAILED,"当前状态不符合");
+        }
+        List<StuInfo> firstInterviewPassedList = iPassListService.getOpenIdList(StudentStatusConstant.REGISTERED);
         List<StuInfo> firstInterviewFailedList = iPassListService.getOpenIdList(StudentStatusConstant.FAILED);
         List<String> successSendingList = new LinkedList<>();
         for (StuInfo stuInfo :
@@ -120,7 +131,12 @@ public class WeChatMessageController {
 
     @GetMapping(value = "/second_interview_result_notify")
     public ResultVO<Void> secondInterviewResultNotify(){
-        List<StuInfo> secondInterviewPassedList = iPassListService.getOpenIdList(StudentStatusConstant.PASS);
+        String currentProgressStr = stringRedisTemplate.opsForValue().get(RedisKeyConstant.PROCESS);
+        Integer currentProgress = Integer.parseInt(currentProgressStr);
+        if(currentProgress == RecruitStatusConstant.SECOND_INTERVIEW) {
+            return new ResultVO<>(ResultStatusCodeConstant.FAILED,"当前状态不符合");
+        }
+        List<StuInfo> secondInterviewPassedList = iPassListService.getOpenIdList(StudentStatusConstant.EMPLOYMENT);
         List<StuInfo> secondInterviewFailedList = iPassListService.getOpenIdList(StudentStatusConstant.FAILED);
         List<String> successSendingList = new LinkedList<>();
         for (StuInfo stuInfo :

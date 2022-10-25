@@ -41,17 +41,17 @@ public class OverAllProgressImpl implements IOverAllProgress {
     private IExPeopleList iExPeopleList;
 
     @Override
-    public ResultVO<Integer> overAllProgress() throws NumberFormatException {
+    public ResultVO<Integer> overAllProgress() throws NumberFormatException{
         //获取当前总进度
         String currentProgressStr = stringRedisTemplate.opsForValue().get(RedisKeyConstant.PROCESS);
         Integer currentProgress = Integer.parseInt(currentProgressStr);
-        Map<String, Object> map = new HashMap<>(1);
+        Map<String,Object> map = new HashMap<>(1);
         if ( currentProgress == RecruitStatusConstant.WRITTEN_EXAM ) {
             // 笔试推进到笔试只需要推进状态码即可
             stringRedisTemplate.opsForValue().set(RedisKeyConstant.PROCESS,currentProgress + RecruitStatusConstant.STEP + "");
 
         } else if ( currentProgress == RecruitStatusConstant.FIRST_INTERVIEW ) {
-            // 一面结束，就将通过的状态重置为0
+            //如果当前是笔试，代表着一面完全结束，就将通过的状态重置为0
             updateFirstFailed();
             updateFirstPass();
             stringRedisTemplate.opsForValue().set(RedisKeyConstant.PROCESS,currentProgress + RecruitStatusConstant.STEP + "");
@@ -60,17 +60,17 @@ public class OverAllProgressImpl implements IOverAllProgress {
             map.put("status",StudentStatusConstant.REGISTERED);
             List<StuInfo> stuInfos = stuInfoMapper.selectByMap(map);
 
-            // 清除签到列表
+            //清除签到列表
             for(int i = DeptConstant.BELL_NETWORK_GROUP;i>DeptConstant.ALL;i--) {
                 stringRedisTemplate.delete(RedisKeyConstant.SIGN_IN + i);
             }
 
-            try {
-                for ( StuInfo info : stuInfos ) {
-                    weChatServerService.sendSecondInterviewNotify(info.getOpenid());
-                }
-            }catch (Exception e){}
-        } else if ( currentProgress == RecruitStatusConstant.SECOND_INTERVIEW ) {
+//            try {
+//                for ( StuInfo info : stuInfos ) {
+//                    weChatServerService.sendSecondInterviewNotify(info.getOpenid());
+//                }
+//            }catch (Exception e){}
+        }else if(currentProgress == RecruitStatusConstant.SECOND_INTERVIEW) {
             //如果当前是二面，就将通过的状态置为10
             updateSecondFailed();
             updateSecondPass();
@@ -82,22 +82,22 @@ public class OverAllProgressImpl implements IOverAllProgress {
 
             map.put("status",StudentStatusConstant.EMPLOYMENT);
             List<StuInfo> stuInfos = stuInfoMapper.selectByMap(map);
-            try{
-                for ( StuInfo info : stuInfos ) {
-                    weChatServerService.sendFinallyPassedNotify(info.getOpenid());
-                }
-            }catch (Exception e){}
-        } else if ( currentProgress == RecruitStatusConstant.APPLY ) {
+//            try{
+//                for ( StuInfo info : stuInfos ) {
+//                    weChatServerService.sendFinallyPassedNotify(info.getOpenid());
+//                }
+//            }catch (Exception e){}
+        }else if(currentProgress == RecruitStatusConstant.APPLY) {
             //如果当前是报名，就推进到一面
             stringRedisTemplate.opsForValue().set(RedisKeyConstant.PROCESS,currentProgress + RecruitStatusConstant.STEP + "");
             iExPeopleList.exportApplyList();
             map.put("status",StudentStatusConstant.REGISTERED);
             List<StuInfo> stuInfos = stuInfoMapper.selectByMap(map);
-            try {
-                for ( StuInfo stuInfo : stuInfos ) {
-                    weChatServerService.sendFirstInterviewNotify(stuInfo.getOpenid());
-                }
-            }catch (Exception e){}
+//            try {
+//                for ( StuInfo stuInfo : stuInfos ) {
+//                    weChatServerService.sendFirstInterviewNotify(stuInfo.getOpenid());
+//                }
+//            }catch (Exception e){}
         }
         int current = Integer.parseInt(stringRedisTemplate.opsForValue().get(RedisKeyConstant.PROCESS));
         return new ResultVO<>(ResultStatusCodeConstant.SUCCESS,"进度已成功推进",current);
