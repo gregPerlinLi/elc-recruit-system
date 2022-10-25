@@ -42,11 +42,11 @@ public class ApplyController {
         //log.warn(applyInfoDTO.toString());
         ResultVO<String> result = applyService.apply(applyInfoDTO);
         if ( result.getCode()  == ResultStatusCodeConstant.SUCCESS ) {
-//            String openid = applyInfoDTO.getOpenid();
-//            ResultVO<Void> sendMessageResult = messageService.applySuccessNotify(openid);
-//            if (sendMessageResult.getCode() != ResultStatusCodeConstant.SUCCESS) {
-//                log.warn("面试开始面试接口，微信推送开始面试消息失败，openid: {}, 失败原因: {}", openid, sendMessageResult.getMsg());
-//            }
+           String openid = applyInfoDTO.getOpenid();
+           ResultVO<Void> sendMessageResult = messageService.applySuccessNotify(openid);
+           if (sendMessageResult.getCode() != ResultStatusCodeConstant.SUCCESS) {
+               log.warn("面试开始面试接口，微信推送开始面试消息失败，openid: {}, 失败原因: {}", openid, sendMessageResult.getMsg());
+           }
         }
         return result;
     }
