@@ -97,9 +97,10 @@ public class ApplyServiceImpl implements IApplyService {
         if(!GenericUtils.ofNullable(applyInfoDTO) || !GenericUtils.ofNullable(applyInfoDTO.getStatus())) {
             return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND,"搜索无果",null);
         }
-        if(applyInfoDTO.getStatus() == -1) {
+        if(applyInfoDTO.getStatus() < 0) {
             return new ResultVO<>(ResultStatusCodeConstant.SUCCESS,"获取信息成功",TaroStudentStatusConstant.FAILED);
         }
+
 
         int ans = -2;
         switch (cur) {
