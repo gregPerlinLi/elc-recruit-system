@@ -37,7 +37,7 @@ public class WeChatMessageController {
     IOverAllProgress iOverAllProgress;
     @Resource
     IStuInfoService stuInfoService;
-    @Autowired
+    @Resource
     StringRedisTemplate stringRedisTemplate;
 
     @GetMapping(value = "/first_interview_notify")
@@ -94,7 +94,7 @@ public class WeChatMessageController {
 
     @GetMapping(value = "/second_interview_notify")
     public ResultVO<Void> secondInterviewNotify(){
-        List<StuInfo> firstInterviewList = iPassListService.getOpenIdList(StudentStatusConstant.PASS);
+        List<StuInfo> firstInterviewList = iPassListService.getOpenIdList(StudentStatusConstant.REGISTERED);
         List<String> successSendingList = new LinkedList<>();
         for (StuInfo stuInfo :
                 firstInterviewList) {
@@ -112,7 +112,7 @@ public class WeChatMessageController {
 
     @GetMapping(value = "/written_test_notify")
     public ResultVO<Void> writtenTestNotify(){
-        List<StuInfo> firstInterviewList = iPassListService.getOpenIdList(StudentStatusConstant.PASS);
+        List<StuInfo> firstInterviewList = iPassListService.getOpenIdList(StudentStatusConstant.REGISTERED);
         List<String> successSendingList = new LinkedList<>();
         for (StuInfo stuInfo :
                 firstInterviewList) {
