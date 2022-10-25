@@ -6,6 +6,7 @@ services:
     ports:
       - "91:91"
     environment:
+      SERVER_PORT: 91
       SPRING_PROFILES_ACTIVE: prod
       NACOS_DISCOVERY_SERVER: 127.0.0.1:8848
       NACOS_CONFIG_SERVER: 127.0.0.1:8848
@@ -22,6 +23,7 @@ services:
     ports:
       - "9001:9001"
     environment:
+      SERVER_PORT: 9001
       SPRING_PROFILES_ACTIVE: prod
       NACOS_DISCOVERY_SERVER: 127.0.0.1:8848
       NACOS_CONFIG_SERVER: 127.0.0.1:8848
@@ -36,6 +38,7 @@ services:
     ports:
       - "9002:9002"
     environment:
+      SERVER_PORT: 9002
       SPRING_PROFILES_ACTIVE: prod
       NACOS_DISCOVERY_SERVER: 127.0.0.1:8848
       NACOS_CONFIG_SERVER: 127.0.0.1:8848
@@ -50,6 +53,7 @@ services:
     ports:
       - "9003:9003"
     environment:
+      SERVER_PORT: 9003
       SPRING_PROFILES_ACTIVE: prod
       NACOS_DISCOVERY_SERVER: 127.0.0.1:8848
       NACOS_CONFIG_SERVER: 127.0.0.1:8848
