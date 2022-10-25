@@ -46,11 +46,12 @@ public class OverAllProgressImpl implements IOverAllProgress {
         String currentProgressStr = stringRedisTemplate.opsForValue().get(RedisKeyConstant.PROCESS);
         Integer currentProgress = Integer.parseInt(currentProgressStr);
         Map<String, Object> map = new HashMap<>(1);
-        if ( currentProgress == RecruitStatusConstant.FIRST_INTERVIEW ) {
-            // 一面推进到笔试只需要推进状态码即可
+        if ( currentProgress == RecruitStatusConstant.WRITTEN_EXAM ) {
+            // 笔试推进到笔试只需要推进状态码即可
             stringRedisTemplate.opsForValue().set(RedisKeyConstant.PROCESS,currentProgress + RecruitStatusConstant.STEP + "");
-        } else if ( currentProgress == RecruitStatusConstant.WRITTEN_EXAM ) {
-            //如果当前是笔试，代表着一面完全结束，就将通过的状态重置为0
+
+        } else if ( currentProgress == RecruitStatusConstant.FIRST_INTERVIEW ) {
+            // 一面结束，就将通过的状态重置为0
             updateFirstFailed();
             updateFirstPass();
             stringRedisTemplate.opsForValue().set(RedisKeyConstant.PROCESS,currentProgress + RecruitStatusConstant.STEP + "");
@@ -59,7 +60,7 @@ public class OverAllProgressImpl implements IOverAllProgress {
             map.put("status",StudentStatusConstant.REGISTERED);
             List<StuInfo> stuInfos = stuInfoMapper.selectByMap(map);
 
-            //清除签到列表
+            // 清除签到列表
             for(int i = DeptConstant.BELL_NETWORK_GROUP;i>DeptConstant.ALL;i--) {
                 stringRedisTemplate.delete(RedisKeyConstant.SIGN_IN + i);
             }
