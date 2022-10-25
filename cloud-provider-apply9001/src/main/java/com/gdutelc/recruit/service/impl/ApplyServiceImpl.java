@@ -131,7 +131,7 @@ public class ApplyServiceImpl implements IApplyService {
         wrapper.eq("openid",openid);
         StuInfo stuInfo = stuInfoMapper.selectOne(wrapper);
         Integer status = stuInfo.getStatus();
-        if(status == StudentStatusConstant.CHECKED_IN) {
+        if(status != StudentStatusConstant.REGISTERED) {
             return new ResultVO<>(ResultStatusCodeConstant.SUCCESS,"签到成功",TaroStudentStatusConstant.SIGNIN_SUCCESS);
         }
         return new ResultVO<>(ResultStatusCodeConstant.FAILED,"签到失败",TaroStudentStatusConstant.SIGNIN_FAILED);
