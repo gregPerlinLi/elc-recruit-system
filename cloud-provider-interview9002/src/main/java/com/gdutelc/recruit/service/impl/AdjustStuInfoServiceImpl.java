@@ -152,11 +152,12 @@ public class AdjustStuInfoServiceImpl extends ServiceImpl<AdjustStuInfoMapper, A
         stuInfo.setStatus(StudentStatusConstant.PASS);
         int updateAdjustStuInfo = adjustStuInfoMapper.update(adjustStuInfo, adjustStudentUpdateWrapper);
         int updateStuInfo = stuInfoMapper.update(stuInfo, studentUpdateWrapper);
-        int insertAdmissionStu = admissionStuMapper.insert(new AdmissionStu(stuInfo, adjustStuInfo.getAdjustDept()));
-        if ( updateAdjustStuInfo == 1 && updateStuInfo == 1 && insertAdmissionStu == 1 ) {
-            return StudentStatusConstant.PASS;
-        } else {
-            return ResultStatusCodeConstant.FAILED;
+        if ( updateAdjustStuInfo == 1 && updateStuInfo == 1 ) {
+            int insertAdmissionStu = admissionStuMapper.insert(new AdmissionStu(stuInfo, adjustStuInfo.getAdjustDept()));
+            if ( insertAdmissionStu == 1 ) {
+                return StudentStatusConstant.PASS;
+            }
         }
+        return ResultStatusCodeConstant.FAILED;
     }
 }
