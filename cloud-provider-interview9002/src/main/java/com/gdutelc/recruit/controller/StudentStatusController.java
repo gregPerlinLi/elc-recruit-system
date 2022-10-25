@@ -181,7 +181,7 @@ public class StudentStatusController {
     public ResultVO<Integer> secondInterviewAdjustPass(@PathVariable("stu_id") String stuId,
                                                        @PathVariable("interviewer_username") String interviewerUsername) {
         Integer result = adjustStuInfoService.interviewPass(stuId, interviewerUsername);
-        if ( result == ResultStatusCodeConstant.STATUS_EXCEPTION) {
+        if ( result == ResultStatusCodeConstant.STATUS_EXCEPTION ) {
             return new ResultVO<>(ResultStatusCodeConstant.STATUS_EXCEPTION, "该学生已被录取");
         } else if ( result == ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION ) {
             return new ResultVO<>(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION, "学生第调剂部门和面试官所在部门不一致");
