@@ -95,6 +95,7 @@ public class StuInfoServiceImpl extends ServiceImpl<StuInfoMapper, StuInfo> impl
         QueryWrapper<InterviewerList> interviewerListQueryWrapper = new QueryWrapper<>();
         studentQueryWrapper.eq("stu_id", stuId);
         StuInfo stuInfo = getOne(studentQueryWrapper);
+        Integer currentStatus = stuInfo.getStatus();
         interviewerListQueryWrapper.eq("username", interviewerUsername);
         InterviewerList interviewerList = interviewerListMapper.selectOne(interviewerListQueryWrapper);
         if ( stuInfo == null || interviewerList == null ) {
@@ -107,7 +108,12 @@ public class StuInfoServiceImpl extends ServiceImpl<StuInfoMapper, StuInfo> impl
         studentUpdateWrapper.eq("stu_id", stuId);
         studentUpdateWrapper.eq("status", StudentStatusConstant.INTERVIEWING).or().eq("status",StudentStatusConstant.ADJUSTED).or().eq("status", StudentStatusConstant.PASS);
         stuInfo.setStatus(StudentStatusConstant.PASS);
-        int update = stuInfoMapper.update(stuInfo, studentUpdateWrapper);
+        int update = 0;
+        if ( currentStatus != StudentStatusConstant.PASS ) {
+            update = stuInfoMapper.update(stuInfo, studentUpdateWrapper);
+        } else {
+            update = 1;
+        }
         if ( update == 1 ) {
             if ( Integer.parseInt(Objects.requireNonNull(stringRedisTemplate.opsForValue().get(RedisKeyConstant.PROCESS))) == RecruitStatusConstant.SECOND_INTERVIEW ) {
                 // 此为二面最终录取
