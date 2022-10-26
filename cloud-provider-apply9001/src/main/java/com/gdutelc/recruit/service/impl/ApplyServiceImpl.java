@@ -53,6 +53,9 @@ public class ApplyServiceImpl implements IApplyService {
         if ( !GenericUtils.allOfNullable(applyInfoDTO) ) {
             return new ResultVO<>(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION,"参数有误",null);
         }
+        if(applyInfoDTO.getName().length() >= 45) {
+            return new ResultVO<>(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION,"参数有误",null);
+        }
         String openid = applyInfoDTO.getOpenid();
         //判断openid
         if ( Boolean.FALSE.equals(stringRedisTemplate.opsForSet().isMember(RedisKeyConstant.STU_OPENID, openid)) ) {
