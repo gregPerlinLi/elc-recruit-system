@@ -98,7 +98,7 @@ public interface IMessageService {
      * @param openid 需要发送给的学生的openid
      * @return {@link ResultVO}，其中不包含数据，只包含状态码和信息
      */
-    @GetMapping(value = "/pro/super_admin/elc_access_apply_success_notify/{openid}")
+    @GetMapping(value = "/pro/super_admin/elc_access/apply_success_notify/{openid}")
     ResultVO<Void> applySuccessNotify(@PathVariable("openid") String openid);
 
     /**
