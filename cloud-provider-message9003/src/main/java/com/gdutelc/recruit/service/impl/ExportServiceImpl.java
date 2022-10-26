@@ -115,7 +115,7 @@ public class ExportServiceImpl implements IExPeopleList {
     public ResultVO exportFirstPassList() {
         String s = stringRedisTemplate.opsForValue().get(RedisKeyConstant.PROCESS);
         Integer process = Integer.parseInt(s);
-        if(process != RecruitStatusConstant.SECOND_INTERVIEW) {
+        if(process != RecruitStatusConstant.WRITTEN_EXAM) {
             return new ResultVO(ResultStatusCodeConstant.FAILED,"当前状态不符合");
         }
 

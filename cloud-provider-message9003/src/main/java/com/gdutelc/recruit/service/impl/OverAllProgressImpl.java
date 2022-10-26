@@ -56,8 +56,8 @@ public class OverAllProgressImpl implements IOverAllProgress {
             stringRedisTemplate.opsForValue().set(RedisKeyConstant.PROCESS,currentProgress + RecruitStatusConstant.STEP + "");
             iExPeopleList.exportFirstPassList();
 
-            map.put("status",StudentStatusConstant.REGISTERED);
-            List<StuInfo> stuInfos = stuInfoMapper.selectByMap(map);
+            //map.put("status",StudentStatusConstant.REGISTERED);
+            //List<StuInfo> stuInfos = stuInfoMapper.selectByMap(map);
 
             //清除签到列表
             for(int i = DeptConstant.BELL_NETWORK_GROUP;i>DeptConstant.ALL;i--) {
@@ -79,8 +79,8 @@ public class OverAllProgressImpl implements IOverAllProgress {
             iExPeopleList.exportAdmissionList();
             iExPeopleList.exportSecondAdjustPassList();
 
-            map.put("status",StudentStatusConstant.EMPLOYMENT);
-            List<StuInfo> stuInfos = stuInfoMapper.selectByMap(map);
+            //map.put("status",StudentStatusConstant.EMPLOYMENT);
+            //List<StuInfo> stuInfos = stuInfoMapper.selectByMap(map);
 //            try{
 //                for ( StuInfo info : stuInfos ) {
 //                    weChatServerService.sendFinallyPassedNotify(info.getOpenid());
@@ -90,8 +90,8 @@ public class OverAllProgressImpl implements IOverAllProgress {
             //如果当前是报名，就推进到一面
             stringRedisTemplate.opsForValue().set(RedisKeyConstant.PROCESS,currentProgress + RecruitStatusConstant.STEP + "");
             iExPeopleList.exportApplyList();
-            map.put("status",StudentStatusConstant.REGISTERED);
-            List<StuInfo> stuInfos = stuInfoMapper.selectByMap(map);
+            //map.put("status",StudentStatusConstant.REGISTERED);
+            //List<StuInfo> stuInfos = stuInfoMapper.selectByMap(map);
 //            try {
 //                for ( StuInfo stuInfo : stuInfos ) {
 //                    weChatServerService.sendFirstInterviewNotify(stuInfo.getOpenid());
