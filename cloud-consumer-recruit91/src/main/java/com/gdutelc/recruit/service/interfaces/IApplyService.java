@@ -26,7 +26,7 @@ public interface IApplyService {
      * @return {@link ResultVO}，其中数据为报名者姓名
      */
     @PostMapping(value = "/pro/recruit/elc_access/apply")
-    ResultVO<String> apply(ApplyInfoDTO applyInfoDTO);
+    ResultVO<String> apply(ApplyInfoDTO applyInfoDTO) throws IllegalArgumentException;
 
     /**
      * 生产者获取个人完整报名信息接口
