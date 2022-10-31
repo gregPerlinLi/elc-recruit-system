@@ -48,7 +48,6 @@ maven-build:
       </settings>
       ' > $CI_PROJECT_DIR/.m2/settings.xml
     #- cd $CI_PROJECT_DIR/ && mvn package -B -Dmaven.test.skip=true && mvn dockerfile:push
-    - mvn package -B -Dmaven.test.skip=true && mvn dockerfile:push
   artifacts:
     paths: 
       - target/$jar_name
