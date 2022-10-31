@@ -1,112 +1,68 @@
-# #添加docker服务并指定私服地址
-# services:
-#   - name: docker:dind
-#     #command: ["--insecure-registry=reg.gdutelc.com --registry-mirrors=reg.gdutelc.com"]
-# #docker服务启动参数
-# variables:
-#   DOCKER_HOST: tcp://docker:2375/
-#   DOCKER_DRIVER: overlay2 
-#   DOCKER_TLS_CERTDIR: ""
-#   MAVEN_OPTS: "-Dmaven.repo.local=/root/.m2/repository"
-# #流水线阶段
-# stages:
-#   - maven-build
-#   #- docker-build
-# #maven 打包
-# maven-build:
-#   stage: maven-build
-#   image: maven:3.5.0-jdk-8
-#   script:
-#     - export DOCKER_HOST=tcp://docker:2375/
-#     - mkdir $CI_PROJECT_DIR/.m2/
-#     - echo '<settings xmlns="https://maven.apache.org/SETTINGS/1.2.0"
-#       xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
-#       xsi:schemaLocation="https://maven.apache.org/SETTINGS/1.2.0/ https://maven.apache.org/xsd/settings-1.2.0.xsd">
-#       <mirrors>
-#       <mirror>
-#       <id>aliyun</id>
-#       <mirrorOf>central</mirrorOf>
-#       <name>aliyun</name>
-#       <url>https://maven.aliyun.com/nexus/content/groups/public</url>
-#       </mirror>
-#       <mirror>
-#       <id>aliyun2</id>
-#       <mirrorOf>jitpack.io</mirrorOf>
-#       <name>aliyun2</name>
-#       <url>https://maven.aliyun.com/nexus/content/groups/public</url>
-#       </mirror>
-#       </mirrors>
-#       <servers>
-#       <server>
-#       <id>${HARBOR_ID}</id>
-#       <username>HARBOR_USERNAME</username>
-#       <password>${HARBOR_PASSWORD}</password>
-#       <configuration>
-#       <email>${HARBOR_EMAIL}</email>
-#       </configuration>
-#       </server>
-#       </settings>
-#       ' > $CI_PROJECT_DIR/.m2/settings.xml
-#     - cd $CI_PROJECT_DIR/ && mvn package -B -Dmaven.test.skip=true && mvn dockerfile:push
-#   artifacts:
-#     paths: 
-#       - target/$jar_name
-# #打包成docker镜像并上传
-# # job_build:
-# #   stage: docker-build
-# #   before_script:
-# #      #设置登录认证
-# #     - mkdir -p $HOME/.docker
-# #     - echo $DOCKER_AUTH_CONFIG > $HOME/.docker/config.json
-# #   script:
-# #     # 通过Dockerfile生成镜像1
-# #     - docker build -t cicdtest .
-# #     # 以流水线id给镜像打tag
-# #     - docker tag cicdtest $NEXUS_IP/cicdtest:$CI_PIPELINE_ID
-# #     #上传镜像
-# #     #- docker login -u $NEXUS_USER -p $NEXUS_PWD $NEXUS_IP
-# #     - docker push $NEXUS_IP/cicdtest:$CI_PIPELINE_ID
-image: docker:stable
+#添加docker服务并指定私服地址
+services:
+  - name: docker:dind
+    #command: ["--insecure-registry=reg.gdutelc.com --registry-mirrors=reg.gdutelc.com"]
+#docker服务启动参数
 variables:
-  TAG: root/app:v0.1
+  DOCKER_HOST: tcp://docker:2375/
+  DOCKER_DRIVER: overlay2 
+  DOCKER_TLS_CERTDIR: ""
   MAVEN_OPTS: "-Dmaven.repo.local=/root/.m2/repository"
-cache:
-  key: dockerlayer-ci-cache
-  paths:
-    - .m2/repository
-    - /dafeng-official/target/*.jar
-
-
+#流水线阶段
 stages:
-  - package
-  - deploy
-maven-package:
-  image: maven:3.5-jdk-8-alpine
-  stage: package
-  tags:
-    - build_docker
+  - maven-build
+  #- docker-build
+#maven 打包
+maven-build:
+  stage: maven-build
+  image: maven:3.5.0-jdk-8
   script:
-    - mvn clean package -Dmaven.test.skip=true $MAVEN_OPTS --settings=/root/.m2/settings.xml
-  cache:
-    key: dockerlayer-ci-cache
-    paths:
-      - dafeng-official/target/official.jar
-
-  only:
-    - main
-build-master:
-  stage: deploy
-  tags:
-    - deploy_docker
-  cache:
-    key: dockerlayer-ci-cache
-    paths:
-      - .m2/repository/
-      - dafeng-official/target/*.jar
-  script:
-    - cd dafeng-official
-    - docker build -t $TAG .
-    - docker rm -f ohmy || true
-    - docker run -d --name ohmy -p 2200:2200 $TAG
-  only:
-    - main
+    - export DOCKER_HOST=tcp://docker:2375/
+    - mkdir $CI_PROJECT_DIR/.m2/
+    - echo '<settings xmlns="https://maven.apache.org/SETTINGS/1.2.0"
+      xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="https://maven.apache.org/SETTINGS/1.2.0/ https://maven.apache.org/xsd/settings-1.2.0.xsd">
+      <mirrors>
+      <mirror>
+      <id>aliyun</id>
+      <mirrorOf>central</mirrorOf>
+      <name>aliyun</name>
+      <url>https://maven.aliyun.com/nexus/content/groups/public</url>
+      </mirror>
+      <mirror>
+      <id>aliyun2</id>
+      <mirrorOf>jitpack.io</mirrorOf>
+      <name>aliyun2</name>
+      <url>https://maven.aliyun.com/nexus/content/groups/public</url>
+      </mirror>
+      </mirrors>
+      <servers>
+      <server>
+      <id>${HARBOR_ID}</id>
+      <username>HARBOR_USERNAME</username>
+      <password>${HARBOR_PASSWORD}</password>
+      <configuration>
+      <email>${HARBOR_EMAIL}</email>
+      </configuration>
+      </server>
+      </settings>
+      ' > $CI_PROJECT_DIR/.m2/settings.xml
+    - cd $CI_PROJECT_DIR/ && mvn package -B -Dmaven.test.skip=true && mvn dockerfile:push
+  artifacts:
+    paths: 
+      - target/$jar_name
+#打包成docker镜像并上传
+# job_build:
+#   stage: docker-build
+#   before_script:
+#      #设置登录认证
+#     - mkdir -p $HOME/.docker
+#     - echo $DOCKER_AUTH_CONFIG > $HOME/.docker/config.json
+#   script:
+#     # 通过Dockerfile生成镜像1
+#     - docker build -t cicdtest .
+#     # 以流水线id给镜像打tag
+#     - docker tag cicdtest $NEXUS_IP/cicdtest:$CI_PIPELINE_ID
+#     #上传镜像
+#     #- docker login -u $NEXUS_USER -p $NEXUS_PWD $NEXUS_IP
+#     - docker push $NEXUS_IP/cicdtest:$CI_PIPELINE_ID
