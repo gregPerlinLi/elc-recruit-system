@@ -1,16 +1,16 @@
-#添加docker服务并指定私服地址
-services:
-  - name: docker:dind
-    command: ["--insecure-registry=reg.gdutelc.com --registry-mirrors=reg.gdutelc.com"]
-#docker服务启动参数
-variables:
-  DOCKER_HOST: tcp://docker:2375/
-  DOCKER_DRIVER: overlay2 
-  DOCKER_TLS_CERTDIR: ""
+# #添加docker服务并指定私服地址
+# services:
+#   - name: docker:dind
+#     command: ["--insecure-registry=reg.gdutelc.com --registry-mirrors=reg.gdutelc.com"]
+# #docker服务启动参数
+# variables:
+#   DOCKER_HOST: tcp://docker:2375/
+#   DOCKER_DRIVER: overlay2 
+#   DOCKER_TLS_CERTDIR: ""
 #流水线阶段
 stages:
   - maven-build
-  - docker-build
+  #- docker-build
 #maven 打包
 maven-build:
   stage: maven-build
@@ -46,7 +46,7 @@ maven-build:
       </server>
       </settings>
       ' > $CI_PROJECT_DIR/.m2/settings.xml
-    # - cd $CI_PROJECT_DIR/ && mvn package -B -Dmaven.test.skip=true && mvn dockerfile:push
+    - cd $CI_PROJECT_DIR/ && mvn package -B -Dmaven.test.skip=true && mvn dockerfile:push
   artifacts:
     paths: 
       - target/$jar_name
