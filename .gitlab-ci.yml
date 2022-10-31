@@ -1,6 +1,6 @@
 #添加docker服务并指定私服地址
 services:
-  - name: docker:stable
+  - name: docker:dind
     command: ["--insecure-registry=reg.gdutelc.com --registry-mirrors=reg.gdutelc.com"]
 #docker服务启动参数
 variables:
