@@ -1,3 +1,4 @@
+image: docker:latest
 #添加docker服务并指定私服地址
 services:
   - name: docker:dind
