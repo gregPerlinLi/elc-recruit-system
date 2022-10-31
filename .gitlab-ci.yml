@@ -1,68 +1,162 @@
-#添加docker服务并指定私服地址
-services:
-  - name: docker:dind
-    #command: ["--insecure-registry=reg.gdutelc.com --registry-mirrors=reg.gdutelc.com"]
-#docker服务启动参数
-variables:
-  DOCKER_HOST: tcp://docker:2375/
-  DOCKER_DRIVER: overlay2 
-  DOCKER_TLS_CERTDIR: ""
-  MAVEN_OPTS: "-Dmaven.repo.local=/root/.m2/repository"
-#流水线阶段
-stages:
-  - maven-build
-  #- docker-build
-#maven 打包
-maven-build:
-  stage: maven-build
-  image: maven:3.5.0-jdk-8
-  script:
-    - export DOCKER_HOST=tcp://docker:2375/
-    - mkdir $CI_PROJECT_DIR/.m2/
-    - echo '<settings xmlns="https://maven.apache.org/SETTINGS/1.2.0"
-      xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="https://maven.apache.org/SETTINGS/1.2.0/ https://maven.apache.org/xsd/settings-1.2.0.xsd">
-      <mirrors>
-      <mirror>
-      <id>aliyun</id>
-      <mirrorOf>central</mirrorOf>
-      <name>aliyun</name>
-      <url>https://maven.aliyun.com/nexus/content/groups/public</url>
-      </mirror>
-      <mirror>
-      <id>aliyun2</id>
-      <mirrorOf>jitpack.io</mirrorOf>
-      <name>aliyun2</name>
-      <url>https://maven.aliyun.com/nexus/content/groups/public</url>
-      </mirror>
-      </mirrors>
-      <servers>
-      <server>
-      <id>${HARBOR_ID}</id>
-      <username>HARBOR_USERNAME</username>
-      <password>${HARBOR_PASSWORD}</password>
-      <configuration>
-      <email>${HARBOR_EMAIL}</email>
-      </configuration>
-      </server>
-      </settings>
-      ' > $CI_PROJECT_DIR/.m2/settings.xml
-    - cd $CI_PROJECT_DIR/ && mvn package -B -Dmaven.test.skip=true && mvn dockerfile:push
-  artifacts:
-    paths: 
-      - target/$jar_name
-#打包成docker镜像并上传
-# job_build:
-#   stage: docker-build
-#   before_script:
-#      #设置登录认证
-#     - mkdir -p $HOME/.docker
-#     - echo $DOCKER_AUTH_CONFIG > $HOME/.docker/config.json
+# #添加docker服务并指定私服地址
+# services:
+#   - name: docker:dind
+#     #command: ["--insecure-registry=reg.gdutelc.com --registry-mirrors=reg.gdutelc.com"]
+# #docker服务启动参数
+# variables:
+#   DOCKER_HOST: tcp://docker:2375/
+#   DOCKER_DRIVER: overlay2 
+#   DOCKER_TLS_CERTDIR: ""
+#   MAVEN_OPTS: "-Dmaven.repo.local=/root/.m2/repository"
+# #流水线阶段
+# stages:
+#   - maven-build
+#   #- docker-build
+# #maven 打包
+# maven-build:
+#   stage: maven-build
+#   image: maven:3.5.0-jdk-8
 #   script:
-#     # 通过Dockerfile生成镜像1
-#     - docker build -t cicdtest .
-#     # 以流水线id给镜像打tag
-#     - docker tag cicdtest $NEXUS_IP/cicdtest:$CI_PIPELINE_ID
-#     #上传镜像
-#     #- docker login -u $NEXUS_USER -p $NEXUS_PWD $NEXUS_IP
-#     - docker push $NEXUS_IP/cicdtest:$CI_PIPELINE_ID
+#     - export DOCKER_HOST=tcp://docker:2375/
+#     - mkdir $CI_PROJECT_DIR/.m2/
+#     - echo '<settings xmlns="https://maven.apache.org/SETTINGS/1.2.0"
+#       xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+#       xsi:schemaLocation="https://maven.apache.org/SETTINGS/1.2.0/ https://maven.apache.org/xsd/settings-1.2.0.xsd">
+#       <mirrors>
+#       <mirror>
+#       <id>aliyun</id>
+#       <mirrorOf>central</mirrorOf>
+#       <name>aliyun</name>
+#       <url>https://maven.aliyun.com/nexus/content/groups/public</url>
+#       </mirror>
+#       <mirror>
+#       <id>aliyun2</id>
+#       <mirrorOf>jitpack.io</mirrorOf>
+#       <name>aliyun2</name>
+#       <url>https://maven.aliyun.com/nexus/content/groups/public</url>
+#       </mirror>
+#       </mirrors>
+#       <servers>
+#       <server>
+#       <id>${HARBOR_ID}</id>
+#       <username>HARBOR_USERNAME</username>
+#       <password>${HARBOR_PASSWORD}</password>
+#       <configuration>
+#       <email>${HARBOR_EMAIL}</email>
+#       </configuration>
+#       </server>
+#       </settings>
+#       ' > $CI_PROJECT_DIR/.m2/settings.xml
+#     - cd $CI_PROJECT_DIR/ && mvn package -B -Dmaven.test.skip=true && mvn dockerfile:push
+#   artifacts:
+#     paths: 
+#       - target/$jar_name
+# #打包成docker镜像并上传
+# # job_build:
+# #   stage: docker-build
+# #   before_script:
+# #      #设置登录认证
+# #     - mkdir -p $HOME/.docker
+# #     - echo $DOCKER_AUTH_CONFIG > $HOME/.docker/config.json
+# #   script:
+# #     # 通过Dockerfile生成镜像1
+# #     - docker build -t cicdtest .
+# #     # 以流水线id给镜像打tag
+# #     - docker tag cicdtest $NEXUS_IP/cicdtest:$CI_PIPELINE_ID
+# #     #上传镜像
+# #     #- docker login -u $NEXUS_USER -p $NEXUS_PWD $NEXUS_IP
+# #     - docker push $NEXUS_IP/cicdtest:$CI_PIPELINE_ID
+
+before_script:
+  - export COMMIT_TIME=$(git show -s --format=%ct $CI_COMMIT_SHA)
+ 
+stages:
+  - check
+  - build
+  - test
+  - deploy
+  - push
+ 
+java-check:
+  stage: check
+  script:
+    - java -version
+ 
+before_chomd:
+  variables: # 全局定义新增变量值
+    GIT_STRATEGY: none  #clone，fetch，和none 设置为none 防止git删除打包
+  stage: check
+  script:
+    - ls -la .
+    - chmod +x ./mvnw
+ 
+.sonar-check:
+  variables:
+    GIT_STRATEGY: none
+    GIT_CHECKOUT: "false"
+  stage: check
+  script:
+    - ./mvnw clean package -DskipTests sonar:sonar -Dsonar.host.url=http://127.0.0.1:9100 -Dsonar.projectName=iCatering-serviceshow
+ 
+.unit-test:
+  variables:
+    GIT_STRATEGY: none
+    GIT_CHECKOUT: "false"
+  stage: test
+  script:
+    - ./mvnw test -Dmaven.test.skip=true
+ 
+.compile:
+  variables:
+    GIT_STRATEGY: none
+    GIT_CHECKOUT: "false"
+  stage: build
+  script:
+    - ./mvnw clean package -Dmaven.test.skip=true
+ 
+.deploy_release:
+  variables: #  全局定义新增变量值
+    GIT_STRATEGY: none  #clone，fetch，和none 设置为none 防止git删除打包
+    GIT_CHECKOUT: "false"  #默认true
+  stage: deploy
+  script:
+    - ./mvnw clean package dockerfile:build -Ddockerfile.tag=release
+  environment:  # 定义此作业完成部署的环境名称
+    name: release
+  only:
+    - release
+ 
+deploy_master:
+  variables: # 全局定义新增变量值
+    GIT_STRATEGY: none  #clone，fetch，和none 设置为none 防止git删除打包
+    GIT_CHECKOUT: "false"  #默认true
+  stage: deploy
+  script:
+    - ./mvnw clean package dockerfile:build -Ddockerfile.tag=master$COMMIT_TIME
+  environment:  # 定义此作业完成部署的环境名称
+    name: master
+  only:
+    - master
+ 
+.release_push:
+  variables: # 全局定义新增变量值
+    GIT_STRATEGY: none  #clone，fetch，和none 设置为none 防止git删除打包
+    GIT_CHECKOUT: "false"  #默认true
+  stage: push
+  script:
+    - docker push $(./mvnw exec:exec -q -Dexec.executable=echo -Dexec.args='${docker.image.prefix}'):release
+    - docker rmi $(./mvnw exec:exec -q -Dexec.executable=echo -Dexec.args='${docker.image.prefix}'):release
+  only:
+    - release
+ 
+ 
+master_push:
+  variables: # 全局定义新增变量值
+    GIT_STRATEGY: none  #clone，fetch，和none 设置为none 防止git删除打包
+    GIT_CHECKOUT: "false"  #默认true
+  stage: push
+  script:
+    - docker push $(./mvnw exec:exec -q -Dexec.executable=echo -Dexec.args='${docker.image.prefix}'):master$COMMIT_TIME
+    - docker rmi $(./mvnw exec:exec -q -Dexec.executable=echo -Dexec.args='${docker.image.prefix}'):master$COMMIT_TIME
+  only:
+    - master
