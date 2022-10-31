@@ -15,7 +15,7 @@ stages:
 #maven 打包
 maven-build:
   stage: maven-build
-  image: maven:3-jdk-17
+  image: maven:3.8.5-openjdk-17
   only:
     - master
     - dev
@@ -60,7 +60,7 @@ maven-build:
       </server>
       </settings>
       ' > $CI_PROJECT_DIR/.m2/settings.xml
-    - cd $CI_PROJECT_DIR/ && mvn package -B -Dmaven.test.skip=true && mvn dockerfile:push
+    - /usr/local/maven/apache-maven-3.8.5/bin/mvn package -B -Dmaven.test.skip=true && mvn dockerfile:push
 #打包成docker镜像并上传
 # job_build:
 #   stage: docker-build
