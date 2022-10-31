@@ -1,10 +1,10 @@
 #添加docker服务并指定私服地址
 services:
-  - name: docker:19.03.12-dind
+  - name: docker:stable
     command: ["--insecure-registry=reg.gdutelc.com --registry-mirrors=reg.gdutelc.com"]
 #docker服务启动参数
 variables:
-  DOCKER_HOST: tcp://:2375/
+  DOCKER_HOST: tcp://docker:2375/
   DOCKER_DRIVER: overlay2 
   DOCKER_TLS_CERTDIR: ""
 #流水线阶段
@@ -16,6 +16,7 @@ maven-build:
   stage: maven-build
   image: maven:3.5.0-jdk-8
   script:
+    - export DOCKER_HOST=tcp://docker:2375/
     - mkdir $CI_PROJECT_DIR/.m2/
     - echo '<settings xmlns="https://maven.apache.org/SETTINGS/1.2.0"
       xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
