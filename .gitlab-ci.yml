@@ -1,0 +1,37 @@
+# #添加docker服务并指定私服地址
+# services:
+#   - name: docker:19.03.12-dind
+#     command: ["--insecure-registry=reg.gdutelc.com"]
+# #docker服务启动参数
+# variables:
+#   DOCKER_HOST: tcp://docker:2375/
+#   DOCKER_DRIVER: overlay2 
+#   DOCKER_TLS_CERTDIR: ""
+# #流水线阶段
+# stages:
+#   - maven-build
+#   - docker-build
+# #maven 打包
+# maven-build:
+#   stage: maven-build
+#   image: maven:3.5.0-jdk-8
+#   script:
+#     - mvn package -B -Dmaven.test.skip=true
+#   artifacts:
+#     paths: 
+#       - target/$jar_name
+# #打包成docker镜像并上传
+# job_build:
+#   stage: docker-build
+#   before_script:
+#      #设置登录认证
+#     - mkdir -p $HOME/.docker
+#     - echo $DOCKER_AUTH_CONFIG > $HOME/.docker/config.json
+#   script:
+#     # 通过Dockerfile生成镜像1
+#     - docker build -t cicdtest .
+#     # 以流水线id给镜像打tag
+#     - docker tag cicdtest $NEXUS_IP/cicdtest:$CI_PIPELINE_ID
+#     #上传镜像
+#     #- docker login -u $NEXUS_USER -p $NEXUS_PWD $NEXUS_IP
+#     - docker push $NEXUS_IP/cicdtest:$CI_PIPELINE_ID
