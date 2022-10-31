@@ -16,41 +16,52 @@ stages:
 maven-build:
   stage: maven-build
   image: maven:3.5.0-jdk-8
-  script:
-    - export DOCKER_HOST=tcp://docker:2375/
-    - mkdir $CI_PROJECT_DIR/.m2/
-    - echo '<settings xmlns="https://maven.apache.org/SETTINGS/1.2.0"
-      xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="https://maven.apache.org/SETTINGS/1.2.0/ https://maven.apache.org/xsd/settings-1.2.0.xsd">
-      <mirrors>
-      <mirror>
-      <id>aliyun</id>
-      <mirrorOf>central</mirrorOf>
-      <name>aliyun</name>
-      <url>https://maven.aliyun.com/nexus/content/groups/public</url>
-      </mirror>
-      <mirror>
-      <id>aliyun2</id>
-      <mirrorOf>jitpack.io</mirrorOf>
-      <name>aliyun2</name>
-      <url>https://maven.aliyun.com/nexus/content/groups/public</url>
-      </mirror>
-      </mirrors>
-      <servers>
-      <server>
-      <id>${HARBOR_ID}</id>
-      <username>HARBOR_USERNAME</username>
-      <password>${HARBOR_PASSWORD}</password>
-      <configuration>
-      <email>${HARBOR_EMAIL}</email>
-      </configuration>
-      </server>
-      </settings>
-      ' > $CI_PROJECT_DIR/.m2/settings.xml
-    #- cd $CI_PROJECT_DIR/ && mvn package -B -Dmaven.test.skip=true && mvn dockerfile:push
+  only:
+    - master
+    - dev
+  variables:
+    MAVEN_OPTS: "-Xmx512m -Xms512m -Dmaven.repo.local=$CI_PROJECT_DIR/repository"
   artifacts:
-    paths: 
+    paths:
+      - admin/target
+    expire_in: 1 week
+  cache:
+    paths:
+      - repository
       - target/$jar_name
+  script:
+    - mvn -s .ci/settings.xml --batch-mode clean deploy -Drevision=1.0-${CI_PIPELINE_IID}
+    # - export DOCKER_HOST=tcp://docker:2375/
+    # - mkdir $CI_PROJECT_DIR/.m2/
+    # - echo '<settings xmlns="https://maven.apache.org/SETTINGS/1.2.0"
+    #   xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+    #   xsi:schemaLocation="https://maven.apache.org/SETTINGS/1.2.0/ https://maven.apache.org/xsd/settings-1.2.0.xsd">
+    #   <mirrors>
+    #   <mirror>
+    #   <id>aliyun</id>
+    #   <mirrorOf>central</mirrorOf>
+    #   <name>aliyun</name>
+    #   <url>https://maven.aliyun.com/nexus/content/groups/public</url>
+    #   </mirror>
+    #   <mirror>
+    #   <id>aliyun2</id>
+    #   <mirrorOf>jitpack.io</mirrorOf>
+    #   <name>aliyun2</name>
+    #   <url>https://maven.aliyun.com/nexus/content/groups/public</url>
+    #   </mirror>
+    #   </mirrors>
+    #   <servers>
+    #   <server>
+    #   <id>${HARBOR_ID}</id>
+    #   <username>HARBOR_USERNAME</username>
+    #   <password>${HARBOR_PASSWORD}</password>
+    #   <configuration>
+    #   <email>${HARBOR_EMAIL}</email>
+    #   </configuration>
+    #   </server>
+    #   </settings>
+    #   ' > $CI_PROJECT_DIR/.m2/settings.xml
+    # - cd $CI_PROJECT_DIR/ && mvn package -B -Dmaven.test.skip=true && mvn dockerfile:push
 #打包成docker镜像并上传
 # job_build:
 #   stage: docker-build
