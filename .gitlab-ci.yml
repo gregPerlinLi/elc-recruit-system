@@ -16,7 +16,6 @@ maven-build:
   stage: maven-build
   image: maven:3.5.0-jdk-8
   script:
-    - apt-get install docker.io
     - export DOCKER_HOST=tcp://docker:2375/
     - mkdir $CI_PROJECT_DIR/.m2/
     - echo '<settings xmlns="https://maven.apache.org/SETTINGS/1.2.0"
@@ -47,7 +46,7 @@ maven-build:
       </server>
       </settings>
       ' > $CI_PROJECT_DIR/.m2/settings.xml
-    - cd $CI_PROJECT_DIR/ && mvn package -B -Dmaven.test.skip=true && mvn dockerfile:push
+    # - cd $CI_PROJECT_DIR/ && mvn package -B -Dmaven.test.skip=true && mvn dockerfile:push
   artifacts:
     paths: 
       - target/$jar_name
