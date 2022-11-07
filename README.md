@@ -310,3 +310,37 @@ wget https://github.com/gregPerlinLi/elc-recruit-system/master/elc-recruit-syste
 ```shell
 $ docker-compose -f elc-recruit-system-docker-compose-cluster.yml up -d
 ```
+
+### 端口使用状况
+
+|           服务名            |   端口   |         说明         |
+|:------------------------:|:------:|:------------------:|
+|          Nacos           | `8848` |        配置中心        |
+|         Sentinel         | `8088` |        熔断降级        |
+|          MySQL           | `3306` |      MySQL数据库      |
+|          Redis           | `6379` |      Redis缓存       |
+|  cloud-consumer-recruit  |  `91`  |      服务消费者,网关      |
+|   cloud-provider-apply   | `9001` |    服务提供者,报名相关服务    |
+| cloud-provider-interview | `9002` |    服务提供者,面试相关服务    |
+|  cloud-provider-message  | `9003` | 服务提供者,消息推送和管理员相关服务 |
+
+### 服务调用关系
+
+```mermaid
+graph LR
+Br[/Browser/] --> Sen[[Sentinel]]
+subgraph Nacos
+Sen --> A[cloud-consumer-recruit]
+subgraph elc-recruit-system
+A --> B[cloud-provider-apply]
+A --> C[cloud-provider-interview]
+A --> D[cloud-provider-message]
+end
+end
+B --> E[(MySQL)]
+C --> E
+D --> E
+B --> F[(Redis)]
+C --> F
+D --> F
+```
