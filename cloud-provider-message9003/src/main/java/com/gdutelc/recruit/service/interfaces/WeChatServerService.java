@@ -42,6 +42,27 @@ public interface WeChatServerService {
     SendMessageDTO sendFirstInterviewNotify(String toUser);
 
     /**
+     * 向用户发送一面通过提醒
+     * @param toUser 接收者的openid
+     * @return 请求返回信息
+     */
+    SendMessageDTO sendFirstInterviewPassedNotify(String toUser);
+
+    /**
+     * 向用户发送一面未通过提醒
+     * @param toUser 接收者的openid
+     * @return 请求返回信息
+     */
+    SendMessageDTO sendFirstInterviewFailedNotify(String toUser);
+
+    /**
+     * 向用户发送笔试提醒
+     * @param toUser 接收者的openid
+     * @return 请求返回信息
+     */
+    SendMessageDTO sendWrittenTestNotify(String toUser);
+
+    /**
      * 向用户发送第二次面试提醒
      * @param toUser 接收者的openid
      * @return 请求返回信息
@@ -57,11 +78,13 @@ public interface WeChatServerService {
     SendMessageDTO sendFinallyPassedNotify(String toUser);
 
     /**
-     * 向用户发送笔试提醒
+     * 向用户发送最终未通过提醒
+     * @author TUFSolareyes
      * @param toUser 接收者的openid
      * @return 请求返回信息
      */
-    SendMessageDTO sendWrittenTestNotify(String toUser);
+    SendMessageDTO sendFinallyFailedNotify(String toUser);
+
 
     /**
      * 向用户发送报名成功消息

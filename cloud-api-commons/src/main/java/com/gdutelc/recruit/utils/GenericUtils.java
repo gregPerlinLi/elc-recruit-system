@@ -43,6 +43,7 @@ public class GenericUtils {
         titleEngToChinese.put("whereFind","哪里了解的电协");
         titleEngToChinese.put("skill","个人技能");
         titleEngToChinese.put("status","当前状态");
+        titleEngToChinese.put("admission_dept","最终录取部门");
     }
 
     static {

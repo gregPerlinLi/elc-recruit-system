@@ -226,6 +226,13 @@ public class SentinelBlockHandler {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
 
+    /**
+     * Sentinel异常处理——获取学生的状态统计
+     */
+    public static ResultVO<List<Long>> getStatusPeopleCountHandlerException(BlockException exception) {
+        return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
+    }
+
     /* StudentStatusController */
 
     /**
@@ -322,9 +329,23 @@ public class SentinelBlockHandler {
     }
 
     /**
+     * Sentinel 异常处理——发送一面结果通知接口
+     */
+    public static ResultVO<Void> firstInterviewResultNotifyBlockHandler(BlockException exception) {
+        return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
+    }
+
+    /**
      * Sentinel 异常处理——发送二面通知接口
      */
     public static ResultVO<Void> secondInterviewNotifyBlockHandler(BlockException exception) {
+        return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
+    }
+
+    /**
+     * Sentinel 异常处理——发送二面结果通知接口
+     */
+    public static ResultVO<Void> secondInterviewResultNotifyBlockHandler(BlockException exception) {
         return new ResultVO<>(ResultStatusCodeConstant.TO_MANY_REQUEST, exception.getClass().getCanonicalName() + "\t REQUEST BLOCKED BY SENTINEL ...");
     }
 

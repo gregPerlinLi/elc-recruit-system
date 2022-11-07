@@ -186,9 +186,21 @@ public class InterviewController {
      */
     @GetMapping(value = "/getDeptPeopleCount")
     @SentinelResource(value = "getDeptPeopleCount",blockHandlerClass = SentinelBlockHandler.class,blockHandler = "getDeptPeopleCountHandlerException")
-    @ApiOperation(value = "获取各个部门的人数情况", tags = "deptPeopleCount", response = ResultVO.class)
+    @ApiOperation(value = "获取各个部门的人数情况", tags = "studentStatic", response = ResultVO.class)
     public ResultVO<List<Integer>> getDeptPeopleCount() {
         return interviewService.getDeptPeopleCount();
+    }
+
+    /**
+     * 获取学生的状态统计
+     *
+     * @return {@link ResultVO}，其中数据为当前学生的状态统计
+     */
+    @GetMapping(value = "/get_status_people_count")
+    @SentinelResource(value = "getStatusPeopleCount",blockHandlerClass = SentinelBlockHandler.class,blockHandler = "getStatusPeopleCountHandlerException")
+    @ApiOperation(value = "获取学生的状态统计", tags = "studentStatic", response = ResultVO.class)
+    public ResultVO<List<Long>> getStatusPeopleCount() {
+        return interviewService.getStatusPeopleCount();
     }
 
 }

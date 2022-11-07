@@ -43,15 +43,15 @@ mybatis-plus:
 
 wx:
   applet:
-    appid: wxb30cee030fca9a84
-    secret: f9a1d9fbd323d25a2e578bcbe21969b2
+    appid: appid
+    secret: secret
   url:
     code2Session: https://api.weixin.qq.com/sns/jscode2session
 
 
 wechat-server:
-  appid: wxb30cee030fca9a84
-  secret: f9a1d9fbd323d25a2e578bcbe21969b2
+  appid: appid
+  secret: secret
   grantType: client_credential
   tokenUrl: https://api.weixin.qq.com/cgi-bin/token
   sendMessageUrl: https://api.weixin.qq.com/cgi-bin/message/subscribe/send
@@ -60,31 +60,43 @@ wechat-server:
 
 wechat-notify:
   model:
-    first-interview:
-      id: i5rbTJ70IEajfuWmYG7jCeE4fsh3c9fZ1aqkQY3Cqos
-      fields: thing7,thing3,time2,thing9
-      contents: 电子科技协会,实验-4 306,2022-10-10 20:00,电协招新第一次面试即日开始~
-    written-test:
-      id: i5rbTJ70IEajfuWmYG7jCeE4fsh3c9fZ1aqkQY3Cqos
-      fields: thing7,thing3,time2,thing9
-      contents: 电子科技协会,实验-4 308,2022-10-11 20:00,电协招新笔试即日开始~
-    second-interview:
-      id: i5rbTJ70IEajfuWmYG7jCeE4fsh3c9fZ1aqkQY3Cqos
-      fields: thing7,thing3,time2,thing9
-      contents: 电子科技协会,实验-4 208,2022-10-12 20:00,电协招新第二次面试即日开始~
-    finally-passed:
-      id: i5rbTJ70IEajfuWmYG7jCeE4fsh3c9fZ1aqkQY3Cqos
-      fields: thing7,thing3,time2,thing9
-      contents: 电子科技协会,实验-4 ,2022-10-16 20:00,恭喜你通过电子科技协会的笔试和面试！~
     apply-success:
-      id: i5rbTJ70IEajfuWmYG7jCeE4fsh3c9fZ1aqkQY3Cqos
+      id: notify-id
       fields: thing7,thing3,time2,thing9
-      contents: 电子科技协会,实验4,{nowTime},电协招新报名成功~
+      contents: 电子科技协会,实验4-306,{当前时间},电协招新报名成功~
+    first-interview:
+      id: notify-id
+      fields: thing7,thing3,time2,thing9
+      contents: 电子科技协会,实验4-209,2022-10-29 19:00,电协招新第一次面试即日开始~
+    first-interview-passed:
+      id: notify-id
+      fields: thing7,thing3,time2,thing9
+      contents: 电子科技协会,实验4-306,{当前时间},恭喜您通过第一次面试~
+    first-interview-failed:
+      id: notify-id
+      fields: thing7,thing3,time2,thing9
+      contents: 电子科技协会,实验4-306,{当前时间},很遗憾，您未通过第一次面试T_T
+    written-test:
+      id: notify-id
+      fields: thing7,thing3,time2,thing9
+      contents: 电子科技协会,实验4-209,2022-10-30 15:00,电协招新笔试即日开始~
+    second-interview:
+      id: notify-id
+      fields: thing7,thing3,time2,thing9
+      contents: 电子科技协会,实验4-209,2022-10-30 19:00,电协招新第二次面试即日开始~
+    finally-passed:
+      id: notify-id
+      fields: thing7,thing3,time2,thing9
+      contents: 电子科技协会,实验4-306,{当前时间},恭喜您通所有笔试和面试\^o^/
+    finally-failed:
+      id: notify-id
+      fields: thing7,thing3,time2,thing9
+      contents: 电子科技协会,实验4-306,{当前时间},很遗憾，您未通过最终面试T_T
     sign-in-success:
-      id: i5rbTJ70IEajfuWmYG7jCeE4fsh3c9fZ1aqkQY3Cqos
+      id: notify-id
       fields: thing7,thing3,time2,thing9
-      contents: 电子科技协会,实验4,{nowTime},面试签到成功~
+      contents: 电子科技协会,实验4-209,{当前时间},面试签到成功~
     interview-start:
-      id: i5rbTJ70IEajfuWmYG7jCeE4fsh3c9fZ1aqkQY3Cqos
+      id: notify-id
       fields: thing7,thing3,time2,thing9
-      contents: 电子科技协会,实验4,{nowTime},轮到你面试啦~
+      contents: 电子科技协会,实验4-211,{当前时间},轮到你面试啦~

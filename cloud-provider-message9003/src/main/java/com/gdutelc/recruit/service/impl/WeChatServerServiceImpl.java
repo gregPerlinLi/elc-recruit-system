@@ -109,6 +109,28 @@ public class WeChatServerServiceImpl implements WeChatServerService {
         return sendSubscribeMessage(toUser,modelId,data);
     }
 
+
+    @Override
+    public SendMessageDTO sendFirstInterviewPassedNotify(String toUser) {
+        String modelId = contentManageService.getNotifyModelId(Usage.FIRST_PASSED);
+        Map<String, Object> data = contentManageService.getPackedNotifyData(Usage.FIRST_PASSED);
+        return sendSubscribeMessage(toUser,modelId,data);
+    }
+
+    @Override
+    public SendMessageDTO sendFirstInterviewFailedNotify(String toUser) {
+        String modelId = contentManageService.getNotifyModelId(Usage.FIRST_FAILED);
+        Map<String, Object> data = contentManageService.getPackedNotifyData(Usage.FIRST_FAILED);
+        return sendSubscribeMessage(toUser,modelId,data);
+    }
+
+    @Override
+    public SendMessageDTO sendWrittenTestNotify(String toUser) {
+        String modelId = contentManageService.getNotifyModelId(Usage.WRITTEN_TEST);
+        Map<String, Object> data = contentManageService.getPackedNotifyData(Usage.WRITTEN_TEST);
+        return sendSubscribeMessage(toUser,modelId,data);
+    }
+
     @Override
     public SendMessageDTO sendSecondInterviewNotify(String toUser) {
         String modelId = contentManageService.getNotifyModelId(Usage.SECOND_INTERVIEW);
@@ -124,9 +146,9 @@ public class WeChatServerServiceImpl implements WeChatServerService {
     }
 
     @Override
-    public SendMessageDTO sendWrittenTestNotify(String toUser) {
-        String modelId = contentManageService.getNotifyModelId(Usage.WRITTEN_TEST);
-        Map<String, Object> data = contentManageService.getPackedNotifyData(Usage.WRITTEN_TEST);
+    public SendMessageDTO sendFinallyFailedNotify(String toUser) {
+        String modelId = contentManageService.getNotifyModelId(Usage.FINALLY_FAILED);
+        Map<String, Object> data = contentManageService.getPackedNotifyData(Usage.FINALLY_FAILED);
         return sendSubscribeMessage(toUser,modelId,data);
     }
 

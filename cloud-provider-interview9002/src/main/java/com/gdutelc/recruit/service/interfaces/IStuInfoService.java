@@ -61,4 +61,11 @@ public interface IStuInfoService extends IService<StuInfo> {
      */
     ResultVO<List<Integer>> getDeptPeopleCount();
 
+    /**
+     * 获取学生的状态统计
+     *
+     * @return {@link ResultVO}，其中数据为当前学生的状态统计
+     */
+    ResultVO<List<Long>> getStatusPeopleCount();
+
 }

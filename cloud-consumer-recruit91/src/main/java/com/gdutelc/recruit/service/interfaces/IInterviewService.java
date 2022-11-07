@@ -310,4 +310,12 @@ public interface IInterviewService {
     @GetMapping(value = "/pro/interview/elc_access/getDeptPeopleCount")
     ResultVO<List<Integer>> getDeptPeopleCount();
 
+    /**
+     * 生产者获取学生状态统计接口
+     *
+     * @return {@link ResultVO}，其中数据为当前学生状态统计
+     */
+    @GetMapping(value = "/pro/interview/elc_access/get_status_people_count")
+    ResultVO<List<Long>> getStatusPeopleCount();
+
 }

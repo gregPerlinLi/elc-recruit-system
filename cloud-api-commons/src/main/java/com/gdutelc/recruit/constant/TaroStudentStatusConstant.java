@@ -10,7 +10,7 @@ public interface TaroStudentStatusConstant {
     /**
      * 正在招新阶段
      */
-    int INAPPLY = 0;
+    int IN_APPLY = 0;
 
     /**
      * 一面
@@ -18,9 +18,14 @@ public interface TaroStudentStatusConstant {
     int FIRST_INTERVIEW = 1;
 
     /**
+     * 笔试
+     */
+    int WRITTEN_EXAM = 2;
+
+    /**
      * 二面
      */
-    int SECOND_INTERVIEW = 2;
+    int SECOND_INTERVIEW = 3;
 
     /**
      * 已经G了

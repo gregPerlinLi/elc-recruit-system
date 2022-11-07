@@ -2,6 +2,7 @@ package com.gdutelc.recruit;
 
 import com.gdutelc.recruit.constant.RedisKeyConstant;
 import com.gdutelc.recruit.domain.wx.AccessTokenDTO;
+import com.gdutelc.recruit.service.impl.ExportServiceImpl;
 import com.gdutelc.recruit.service.interfaces.WeChatServerService;
 import com.gdutelc.recruit.utils.SpringUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +14,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
+import java.io.File;
 
 /**
  * @author gregPerlinLi
@@ -26,8 +28,8 @@ public class MessageMain9003 {
         SpringApplication.run(MessageMain9003.class, args);
         Init init = SpringUtils.getBeanByClazz(Init.class);
         init.checkProcessKey();
-
         init.initAccessToken();
+        init.createExportFile();
     }
 }
 
@@ -60,6 +62,14 @@ class Init {
         if(Boolean.FALSE.equals(stringRedisTemplate.hasKey(RedisKeyConstant.PROCESS))){
             stringRedisTemplate.opsForValue().set(RedisKeyConstant.PROCESS,"10");
             log.warn("Redis数据库中不存在面试总体进度值，已自动添加...");
+        }
+    }
+
+
+    public void createExportFile() {
+        File file = new File(ExportServiceImpl.TMP_PATH);
+        if(!file.exists()) {
+            file.mkdir();
         }
     }
 }

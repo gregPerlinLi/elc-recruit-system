@@ -21,4 +21,13 @@ public interface IStuInfoService extends IService<StuInfo> {
      */
     String getOpenidByStuId(String stuId);
 
+
+    /**
+     * 将学生的状态从失败设置为一面失败
+     *
+     * @param openId 需要获取openid
+     * @return openid，如果返回空则代表无此学生
+     */
+    String setFailedAtFirstStatusByOpenId(String openId);
+
 }

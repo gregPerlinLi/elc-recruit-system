@@ -1,0 +1,143 @@
+#################################################################################################################
+# 此Docker编排文件为多实例集群部署, 每一个生产者服务使用3台实例, 如果需要单实例部署请使用"elc-recruit-system-docker-compose.yml" #
+#################################################################################################################
+version: '3'
+services:
+
+  #######################
+  # 服务消费者, 网关, 负载均衡
+  #######################
+  cloud-consumer-recruit-01:
+    image: reg.gdutelc.com/elc-recruit-system/cloud-consumer-recruit91:latest
+    container_name: cloud-consumer-recruit-01
+    ports:
+      - "91:91"
+    environment:
+      SERVER_PORT: 91
+      SPRING_PROFILES_ACTIVE: prod
+      NACOS_DISCOVERY_SERVER: 127.0.0.1:8848
+      NACOS_CONFIG_SERVER: 127.0.0.1:8848
+      SENTINEL_DASHBOARD_SERVER: 127.0.0.1:8080
+      SENTINEL_CLIENT_IP: 127.0.0.1
+    network_mode: host
+    restart: always
+
+  ############
+  # 服务生产者-1
+  ############
+  cloud-provider-apply-01:
+    image: reg.gdutelc.com/elc-recruit-system/cloud-provider-apply9001:latest
+    container_name: cloud-provider-apply-01
+    ports:
+      - "9001:9001"
+    environment:
+      SERVER_PORT: 9001
+      SPRING_PROFILES_ACTIVE: prod
+      NACOS_DISCOVERY_SERVER: 127.0.0.1:8848
+      NACOS_CONFIG_SERVER: 127.0.0.1:8848
+    network_mode: host
+    restart: always
+  cloud-provider-interview-01:
+    image: reg.gdutelc.com/elc-recruit-system/cloud-provider-interview9002:latest
+    container_name: cloud-provider-interview-01
+    ports:
+      - "9002:9002"
+    environment:
+      SERVER_PORT: 9002
+      SPRING_PROFILES_ACTIVE: prod
+      NACOS_DISCOVERY_SERVER: 127.0.0.1:8848
+      NACOS_CONFIG_SERVER: 127.0.0.1:8848
+    network_mode: host
+    restart: always
+  cloud-provider-message-01:
+    image: reg.gdutelc.com/elc-recruit-system/cloud-provider-message9003:latest
+    container_name: cloud-provider-message-01
+    ports:
+      - "9003:9003"
+    environment:
+      SERVER_PORT: 9003
+      SPRING_PROFILES_ACTIVE: prod
+      NACOS_DISCOVERY_SERVER: 127.0.0.1:8848
+      NACOS_CONFIG_SERVER: 127.0.0.1:8848
+    network_mode: host
+    restart: always
+
+  ############
+  # 服务生产者-2
+  ############
+  cloud-provider-apply-02:
+    image: reg.gdutelc.com/elc-recruit-system/cloud-provider-apply9001:latest
+    container_name: cloud-provider-apply-01
+    ports:
+      - "9001:9001"
+    environment:
+      SERVER_PORT: 9011
+      SPRING_PROFILES_ACTIVE: prod
+      NACOS_DISCOVERY_SERVER: 127.0.0.1:8848
+      NACOS_CONFIG_SERVER: 127.0.0.1:8848
+    network_mode: host
+    restart: always
+  cloud-provider-interview-02:
+    image: reg.gdutelc.com/elc-recruit-system/cloud-provider-interview9002:latest
+    container_name: cloud-provider-interview-01
+    ports:
+      - "9002:9002"
+    environment:
+      SERVER_PORT: 9012
+      SPRING_PROFILES_ACTIVE: prod
+      NACOS_DISCOVERY_SERVER: 127.0.0.1:8848
+      NACOS_CONFIG_SERVER: 127.0.0.1:8848
+    network_mode: host
+    restart: always
+  cloud-provider-message-02:
+    image: reg.gdutelc.com/elc-recruit-system/cloud-provider-message9003:latest
+    container_name: cloud-provider-message-01
+    ports:
+      - "9003:9003"
+    environment:
+      SERVER_PORT: 9013
+      SPRING_PROFILES_ACTIVE: prod
+      NACOS_DISCOVERY_SERVER: 127.0.0.1:8848
+      NACOS_CONFIG_SERVER: 127.0.0.1:8848
+    network_mode: host
+    restart: always
+
+  ############
+  # 服务生产者-3
+  ############
+  cloud-provider-apply-03:
+    image: reg.gdutelc.com/elc-recruit-system/cloud-provider-apply9001:latest
+    container_name: cloud-provider-apply-01
+    ports:
+      - "9001:9001"
+    environment:
+      SERVER_PORT: 9021
+      SPRING_PROFILES_ACTIVE: prod
+      NACOS_DISCOVERY_SERVER: 127.0.0.1:8848
+      NACOS_CONFIG_SERVER: 127.0.0.1:8848
+    network_mode: host
+    restart: always
+  cloud-provider-interview-03:
+    image: reg.gdutelc.com/elc-recruit-system/cloud-provider-interview9002:latest
+    container_name: cloud-provider-interview-01
+    ports:
+      - "9002:9002"
+    environment:
+      SERVER_PORT: 9022
+      SPRING_PROFILES_ACTIVE: prod
+      NACOS_DISCOVERY_SERVER: 127.0.0.1:8848
+      NACOS_CONFIG_SERVER: 127.0.0.1:8848
+    network_mode: host
+    restart: always
+  cloud-provider-message-03:
+    image: reg.gdutelc.com/elc-recruit-system/cloud-provider-message9003:latest
+    container_name: cloud-provider-message-01
+    ports:
+      - "9003:9003"
+    environment:
+      SERVER_PORT: 9023
+      SPRING_PROFILES_ACTIVE: prod
+      NACOS_DISCOVERY_SERVER: 127.0.0.1:8848
+      NACOS_CONFIG_SERVER: 127.0.0.1:8848
+    network_mode: host
+    restart: always

@@ -95,6 +95,7 @@ public class StuInfoServiceImpl extends ServiceImpl<StuInfoMapper, StuInfo> impl
         QueryWrapper<InterviewerList> interviewerListQueryWrapper = new QueryWrapper<>();
         studentQueryWrapper.eq("stu_id", stuId);
         StuInfo stuInfo = getOne(studentQueryWrapper);
+        Integer currentStatus = stuInfo.getStatus();
         interviewerListQueryWrapper.eq("username", interviewerUsername);
         InterviewerList interviewerList = interviewerListMapper.selectOne(interviewerListQueryWrapper);
         if ( stuInfo == null || interviewerList == null ) {
@@ -105,9 +106,14 @@ public class StuInfoServiceImpl extends ServiceImpl<StuInfoMapper, StuInfo> impl
         }
         UpdateWrapper<StuInfo> studentUpdateWrapper = new UpdateWrapper<>();
         studentUpdateWrapper.eq("stu_id", stuId);
-        studentUpdateWrapper.eq("status", StudentStatusConstant.INTERVIEWING);
+        studentUpdateWrapper.ge("status", StudentStatusConstant.INTERVIEWING);
         stuInfo.setStatus(StudentStatusConstant.PASS);
-        int update = stuInfoMapper.update(stuInfo, studentUpdateWrapper);
+        int update = 0;
+        if ( currentStatus != StudentStatusConstant.PASS ) {
+            update = stuInfoMapper.update(stuInfo, studentUpdateWrapper);
+        } else {
+            update = 1;
+        }
         if ( update == 1 ) {
             if ( Integer.parseInt(Objects.requireNonNull(stringRedisTemplate.opsForValue().get(RedisKeyConstant.PROCESS))) == RecruitStatusConstant.SECOND_INTERVIEW ) {
                 // 此为二面最终录取
@@ -167,5 +173,27 @@ public class StuInfoServiceImpl extends ServiceImpl<StuInfoMapper, StuInfo> impl
         List<Integer> ans = new ArrayList<>();
         Collections.addAll(ans, anss);
         return new ResultVO<>(ResultStatusCodeConstant.SUCCESS,"获取成功",ans);
+    }
+
+    @Override
+    public ResultVO<List<Long>> getStatusPeopleCount() {
+        Long[] longs = new Long[8];
+        QueryWrapper<StuInfo> queryWrapper = new QueryWrapper<>();
+        Long sum = 0L;
+        for (int i = StudentStatusConstant.FAILED; i <= StudentStatusConstant.PASS; i++) {
+            queryWrapper.eq("status", i);
+            Long statusCount = stuInfoMapper.selectCount(queryWrapper);
+            longs[i + 2] = statusCount;
+            queryWrapper.clear();
+            sum += statusCount;
+        }
+        queryWrapper.eq("status", StudentStatusConstant.EMPLOYMENT);
+        Long statusCount = stuInfoMapper.selectCount(queryWrapper);
+        longs[7] = statusCount;
+        sum += statusCount;
+        longs[0] = sum;
+        ArrayList<Long> statusCounts = new ArrayList<>();
+        Collections.addAll(statusCounts, longs);
+        return new ResultVO<>(ResultStatusCodeConstant.SUCCESS, "获取成功", statusCounts);
     }
 }

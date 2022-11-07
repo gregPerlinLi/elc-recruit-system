@@ -2,6 +2,7 @@ package com.gdutelc.recruit.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.gdutelc.recruit.constant.StudentStatusConstant;
 import com.gdutelc.recruit.domain.entities.StuInfo;
 import com.gdutelc.recruit.mapper.StuInfoMapper;
 import com.gdutelc.recruit.service.interfaces.IStuInfoService;
@@ -25,6 +26,19 @@ public class StuInfoServiceImpl extends ServiceImpl<StuInfoMapper, StuInfo> impl
         if ( stuInfo == null ) {
             return null;
         }
+        return stuInfo.getOpenid();
+    }
+
+    @Override
+    public String setFailedAtFirstStatusByOpenId(String openId) {
+        QueryWrapper<StuInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("openid", openId).eq("status", StudentStatusConstant.FAILED);
+        StuInfo stuInfo = this.getOne(queryWrapper);
+        if ( stuInfo == null ) {
+            return null;
+        }
+        stuInfo.setStatus(StudentStatusConstant.FAILED_AT_FIRST);
+        this.updateById(stuInfo);
         return stuInfo.getOpenid();
     }
 }

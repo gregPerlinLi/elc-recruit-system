@@ -59,7 +59,7 @@ public class ExportServiceImpl implements IExPeopleList {
     public ResultVO exportApplyList() {
         String s = stringRedisTemplate.opsForValue().get(RedisKeyConstant.PROCESS);
         Integer process = Integer.parseInt(s);
-        if(process != RecruitStatusConstant.FIRST_INTERVIEW) {
+        if(process != RecruitStatusConstant.FIRST_INTERVIEW && process != RecruitStatusConstant.WRITTEN_EXAM) {
             return new ResultVO(ResultStatusCodeConstant.FAILED,"当前状态不符合");
         }
         QueryWrapper<StuInfo> wrapper = new QueryWrapper<>();
@@ -90,6 +90,7 @@ public class ExportServiceImpl implements IExPeopleList {
                 fw.write(titleStr + "\n");
                 for(int i=0;i<stuInfos.size();i++) {
                     String parse = CsvUtil.getCsvStr(stuInfos.get(i));
+                    parse = parse.replaceAll("\n","");
                     fw.write(parse + "\n");
                 }
                 fw.close();
@@ -114,7 +115,7 @@ public class ExportServiceImpl implements IExPeopleList {
     public ResultVO exportFirstPassList() {
         String s = stringRedisTemplate.opsForValue().get(RedisKeyConstant.PROCESS);
         Integer process = Integer.parseInt(s);
-        if(process != RecruitStatusConstant.SECOND_INTERVIEW) {
+        if(process != RecruitStatusConstant.WRITTEN_EXAM) {
             return new ResultVO(ResultStatusCodeConstant.FAILED,"当前状态不符合");
         }
 
@@ -145,6 +146,7 @@ public class ExportServiceImpl implements IExPeopleList {
                 fw.write(titleStr + "\n");
                 for(int i=0;i<stuInfos.size();i++) {
                     String parse = CsvUtil.getCsvStr(stuInfos.get(i));
+                    parse = parse.replaceAll("\n","");
                     fw.write(parse + "\n");
                 }
                 fw.close();
@@ -198,6 +200,7 @@ public class ExportServiceImpl implements IExPeopleList {
                 fw.write(titleStr + "\n");
                 for(int i=0;i<stuInfos.size();i++) {
                     String parse = CsvUtil.getCsvStr(stuInfos.get(i));
+                    parse = parse.replaceAll("\n","");
                     fw.write(parse + "\n");
                 }
             } catch (IOException e) {
@@ -251,6 +254,7 @@ public class ExportServiceImpl implements IExPeopleList {
                 fw.write(titleStr + "\n");
                 for(int i=0;i<stuInfos.size();i++) {
                     String parse = CsvUtil.getCsvStr(stuInfos.get(i));
+                    parse = parse.replaceAll("\n","");
                     fw.write(parse + "\n");
                 }
                 fw.close();
@@ -295,6 +299,7 @@ public class ExportServiceImpl implements IExPeopleList {
                 fw.write(titleStr + "\n");
                 for(int k=0;k<admissionStus.size();k++) {
                     String str = CsvUtil.getCsvStr(admissionStus.get(k));
+                    str = str.replaceAll("\n","");
                     fw.write(str + "\n");
                 }
                 queryWrapper.clear();

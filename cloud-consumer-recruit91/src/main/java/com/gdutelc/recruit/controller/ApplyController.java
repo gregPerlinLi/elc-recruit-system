@@ -38,17 +38,16 @@ public class ApplyController {
     @PostMapping(value = "/apply")
     @SentinelResource(value = "apply", blockHandlerClass = SentinelBlockHandler.class, blockHandler = "applyHandlerException")
     @ApiOperation(value = "报名", tags = "apply", response = ResultVO.class)
-    public ResultVO<String> apply (@RequestBody @ApiParam(value = "报名信息", required = true) ApplyInfoDTO applyInfoDTO) {
+    public ResultVO<String> apply (@RequestBody @ApiParam(value = "报名信息", required = true) ApplyInfoDTO applyInfoDTO) throws IllegalArgumentException {
         //log.warn(applyInfoDTO.toString());
         ResultVO<String> result = applyService.apply(applyInfoDTO);
-        if ( result.getCode()  == ResultStatusCodeConstant.SUCCESS ) {
-            String openid = applyInfoDTO.getOpenid();
-            ResultVO<Void> sendMessageResult = messageService.signInSuccessNotify(openid);
-            if (sendMessageResult.getCode() != ResultStatusCodeConstant.SUCCESS) {
-                log.warn("面试开始面试接口，微信推送开始面试消息失败，openid: {}, 失败原因: {}", openid, sendMessageResult.getMsg());
-
-            }
-        }
+//        if ( result.getCode()  == ResultStatusCodeConstant.SUCCESS ) {
+//           String openid = applyInfoDTO.getOpenid();
+//           ResultVO<Void> sendMessageResult = messageService.applySuccessNotify(openid);
+//           if (sendMessageResult.getCode() != ResultStatusCodeConstant.SUCCESS) {
+//               log.warn("面试开始面试接口，微信推送开始面试消息失败，openid: {}, 失败原因: {}", openid, sendMessageResult.getMsg());
+//           }
+//        }
         return result;
     }
 

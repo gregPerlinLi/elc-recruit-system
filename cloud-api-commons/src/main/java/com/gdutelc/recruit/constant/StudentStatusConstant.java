@@ -47,4 +47,9 @@ public interface StudentStatusConstant {
      * 失败
      */
     int FAILED = -1;
+
+    /**
+     * 一面失败
+     */
+    int FAILED_AT_FIRST = -2;
 }

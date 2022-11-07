@@ -44,7 +44,7 @@ public class GlobalExceptionHandler {
             // response.setStatus(ResultStatusCodeConstant.SERVER_TIME_OUT);
             return new ResultVO<>(ResultStatusCodeConstant.SERVER_TIME_OUT, msg);
         }
-        response.setStatus(ResultStatusCodeConstant.SERVER_ERROR);
+        // response.setStatus(ResultStatusCodeConstant.SERVER_ERROR);
         return new ResultVO<>(ResultStatusCodeConstant.SERVER_ERROR, msg);
     }
 }

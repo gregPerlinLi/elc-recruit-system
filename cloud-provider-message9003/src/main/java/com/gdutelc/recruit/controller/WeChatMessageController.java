@@ -1,5 +1,7 @@
 package com.gdutelc.recruit.controller;
 
+import com.gdutelc.recruit.constant.RecruitStatusConstant;
+import com.gdutelc.recruit.constant.RedisKeyConstant;
 import com.gdutelc.recruit.constant.ResultStatusCodeConstant;
 import com.gdutelc.recruit.constant.StudentStatusConstant;
 import com.gdutelc.recruit.domain.entities.StuInfo;
@@ -9,6 +11,8 @@ import com.gdutelc.recruit.service.interfaces.IOverAllProgress;
 import com.gdutelc.recruit.service.interfaces.IPassListService;
 import com.gdutelc.recruit.service.interfaces.IStuInfoService;
 import com.gdutelc.recruit.service.interfaces.WeChatServerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,9 +35,10 @@ public class WeChatMessageController {
     WeChatServerService weChatServerService;
     @Resource
     IOverAllProgress iOverAllProgress;
-
     @Resource
     IStuInfoService stuInfoService;
+    @Resource
+    StringRedisTemplate stringRedisTemplate;
 
     @GetMapping(value = "/first_interview_notify")
     public ResultVO<Void> firstInterviewNotify(){
@@ -54,9 +59,42 @@ public class WeChatMessageController {
     }
 
 
+    @GetMapping(value = "/first_interview_result_notify")
+    public ResultVO<Void> firstInterviewResultNotify(){
+        String currentProgressStr = stringRedisTemplate.opsForValue().get(RedisKeyConstant.PROCESS);
+        Integer currentProgress = Integer.parseInt(currentProgressStr);
+        if(currentProgress == RecruitStatusConstant.FIRST_INTERVIEW) {
+            return new ResultVO<>(ResultStatusCodeConstant.FAILED,"当前状态不符合");
+        }
+        List<StuInfo> firstInterviewPassedList = iPassListService.getOpenIdList(StudentStatusConstant.REGISTERED);
+        List<StuInfo> firstInterviewFailedList = iPassListService.getOpenIdList(StudentStatusConstant.FAILED);
+        List<String> successSendingList = new LinkedList<>();
+        for (StuInfo stuInfo :
+                firstInterviewPassedList) {
+            SendMessageDTO sendMessageDTO = weChatServerService.sendFirstInterviewPassedNotify(stuInfo.getOpenid());
+            if(sendMessageDTO.getErrCode() == 0){
+                successSendingList.add(stuInfo.getName());
+            }
+        }
+        for (StuInfo stuInfo :
+                firstInterviewFailedList) {
+            SendMessageDTO sendMessageDTO = weChatServerService.sendFirstInterviewFailedNotify(stuInfo.getOpenid());
+            stuInfoService.setFailedAtFirstStatusByOpenId(stuInfo.getOpenid());
+            if(sendMessageDTO.getErrCode() == 0){
+                successSendingList.add(stuInfo.getName());
+            }
+        }
+        if(successSendingList.size() == firstInterviewPassedList.size()+firstInterviewFailedList.size()){
+            return new ResultVO<> (ResultStatusCodeConstant.SUCCESS,"所有一面结果发送成功");
+        }else {
+            return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND,"部分一面结果发送成功");
+        }
+    }
+
+
     @GetMapping(value = "/second_interview_notify")
     public ResultVO<Void> secondInterviewNotify(){
-        List<StuInfo> firstInterviewList = iPassListService.getOpenIdList(StudentStatusConstant.PASS);
+        List<StuInfo> firstInterviewList = iPassListService.getOpenIdList(StudentStatusConstant.REGISTERED);
         List<String> successSendingList = new LinkedList<>();
         for (StuInfo stuInfo :
                 firstInterviewList) {
@@ -74,7 +112,7 @@ public class WeChatMessageController {
 
     @GetMapping(value = "/written_test_notify")
     public ResultVO<Void> writtenTestNotify(){
-        List<StuInfo> firstInterviewList = iPassListService.getOpenIdList(StudentStatusConstant.PASS);
+        List<StuInfo> firstInterviewList = iPassListService.getOpenIdList(StudentStatusConstant.REGISTERED);
         List<String> successSendingList = new LinkedList<>();
         for (StuInfo stuInfo :
                 firstInterviewList) {
@@ -89,6 +127,39 @@ public class WeChatMessageController {
             return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND,"部分笔试提醒发送成功");
         }
     }
+
+
+    @GetMapping(value = "/second_interview_result_notify")
+    public ResultVO<Void> secondInterviewResultNotify(){
+        String currentProgressStr = stringRedisTemplate.opsForValue().get(RedisKeyConstant.PROCESS);
+        Integer currentProgress = Integer.parseInt(currentProgressStr);
+        if(currentProgress != RecruitStatusConstant.END) {
+            return new ResultVO<>(ResultStatusCodeConstant.FAILED,"当前状态不符合");
+        }
+        List<StuInfo> secondInterviewPassedList = iPassListService.getOpenIdList(StudentStatusConstant.EMPLOYMENT);
+        List<StuInfo> secondInterviewFailedList = iPassListService.getOpenIdList(StudentStatusConstant.FAILED);
+        List<String> successSendingList = new LinkedList<>();
+        for (StuInfo stuInfo :
+                secondInterviewPassedList) {
+            SendMessageDTO sendMessageDTO = weChatServerService.sendFinallyPassedNotify(stuInfo.getOpenid());
+            if(sendMessageDTO.getErrCode() == 0){
+                successSendingList.add(stuInfo.getName());
+            }
+        }
+        for (StuInfo stuInfo :
+                secondInterviewFailedList) {
+            SendMessageDTO sendMessageDTO = weChatServerService.sendFinallyFailedNotify(stuInfo.getOpenid());
+            if(sendMessageDTO.getErrCode() == 0){
+                successSendingList.add(stuInfo.getName());
+            }
+        }
+        if(successSendingList.size() == secondInterviewPassedList.size()+secondInterviewFailedList.size()){
+            return new ResultVO<> (ResultStatusCodeConstant.SUCCESS,"所有终面结果发送成功");
+        }else {
+            return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND,"部分终面结果发送成功");
+        }
+    }
+
 
     /**
      * 发送报名成功消息

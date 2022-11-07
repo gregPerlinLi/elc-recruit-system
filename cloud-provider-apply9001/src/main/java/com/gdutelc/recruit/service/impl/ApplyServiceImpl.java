@@ -53,6 +53,9 @@ public class ApplyServiceImpl implements IApplyService {
         if ( !GenericUtils.allOfNullable(applyInfoDTO) ) {
             return new ResultVO<>(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION,"参数有误",null);
         }
+        if(applyInfoDTO.getName().length() >= 45) {
+            return new ResultVO<>(ResultStatusCodeConstant.PARAM_VALIDATE_EXCEPTION,"参数有误",null);
+        }
         String openid = applyInfoDTO.getOpenid();
         //判断openid
         if ( Boolean.FALSE.equals(stringRedisTemplate.opsForSet().isMember(RedisKeyConstant.STU_OPENID, openid)) ) {
@@ -97,24 +100,30 @@ public class ApplyServiceImpl implements IApplyService {
         if(!GenericUtils.ofNullable(applyInfoDTO) || !GenericUtils.ofNullable(applyInfoDTO.getStatus())) {
             return new ResultVO<>(ResultStatusCodeConstant.NOT_FIND,"搜索无果",null);
         }
-        if(applyInfoDTO.getStatus() == -1) {
+
+        System.out.println(applyInfoDTO.getStatus());
+        if(applyInfoDTO.getStatus() < 0) {
             return new ResultVO<>(ResultStatusCodeConstant.SUCCESS,"获取信息成功",TaroStudentStatusConstant.FAILED);
         }
 
+
         int ans = -2;
         switch (cur) {
-            case RecruitStatusConstant.APPLY:
-                ans = TaroStudentStatusConstant.INAPPLY;
-                break;
-            case RecruitStatusConstant.FIRST_INTERVIEW:
+            case RecruitStatusConstant.APPLY -> {
+                ans = TaroStudentStatusConstant.IN_APPLY;
+            }
+            case RecruitStatusConstant.FIRST_INTERVIEW -> {
                 ans = TaroStudentStatusConstant.FIRST_INTERVIEW;
-                break;
-            case RecruitStatusConstant.SECOND_INTERVIEW:
+            }
+            case RecruitStatusConstant.WRITTEN_EXAM -> {
+                ans = TaroStudentStatusConstant.WRITTEN_EXAM;
+            }
+            case RecruitStatusConstant.SECOND_INTERVIEW -> {
                 ans = TaroStudentStatusConstant.SECOND_INTERVIEW;
-                break;
-            case RecruitStatusConstant.END:
+            }
+            case RecruitStatusConstant.END -> {
                 ans = TaroStudentStatusConstant.END;
-                break;
+            }
         }
         return new ResultVO<>(ResultStatusCodeConstant.SUCCESS,"获取信息成功",ans);
     }
@@ -128,7 +137,7 @@ public class ApplyServiceImpl implements IApplyService {
         wrapper.eq("openid",openid);
         StuInfo stuInfo = stuInfoMapper.selectOne(wrapper);
         Integer status = stuInfo.getStatus();
-        if(status == StudentStatusConstant.CHECKED_IN) {
+        if(status > 0) {
             return new ResultVO<>(ResultStatusCodeConstant.SUCCESS,"签到成功",TaroStudentStatusConstant.SIGNIN_SUCCESS);
         }
         return new ResultVO<>(ResultStatusCodeConstant.FAILED,"签到失败",TaroStudentStatusConstant.SIGNIN_FAILED);
@@ -162,7 +171,7 @@ public class ApplyServiceImpl implements IApplyService {
         Integer curProcess = Integer.parseInt(curProcessStr);
         if(curProcess == RecruitStatusConstant.APPLY) {
             return new ResultVO<>(ResultStatusCodeConstant.FORBIDDEN,"签到失败，当前状态不符合",null);
-        }else if(curProcess == RecruitStatusConstant.FIRST_INTERVIEW) {
+        }else if(curProcess == RecruitStatusConstant.FIRST_INTERVIEW ) {
             //如果不是一面阶段则不能签到
             if(!firstKey.equals(key)) {
 //                System.out.println(firstKey + " " + key);
