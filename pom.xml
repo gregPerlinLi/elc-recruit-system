@@ -110,7 +110,7 @@
         <artifactId>dockerfile-maven-plugin</artifactId>
         <version>${dockerfile.maven.plugin.version}</version>
         <!--不需打包推送镜像到仓库时将此处executions屏蔽即可-->
-        <executions>
+        <!--<executions>
           <execution>
             <id>default</id>
             <goals>
@@ -118,7 +118,7 @@
               <goal>push</goal>
             </goals>
           </execution>
-        </executions>
+        </executions>-->
         <configuration>
           <!--suppress UnresolvedMavenProperty -->
           <repository>${docker.repository}/${docker.repository.project}/${docker.image.name}</repository>
