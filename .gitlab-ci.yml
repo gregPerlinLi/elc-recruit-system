@@ -15,13 +15,10 @@ qodana:
     - dev
     - merge_requests
   image:
-    name: jetbrains/qodana
+    name: jetbrains/qodana-jvm
     entrypoint: [""]
   variables:
-    QODANA_REMOTE_URL: git@$CI_SERVER_HOST:$CI_PROJECT_PATH.git
-    QODANA_BRANCH: $CI_COMMIT_BRANCH
-    QODANA_REPO_URL: $CI_PROJECT_URL
-    QODANA_JOB_URL: $CI_JOB_URL
+    QODANA_TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJvcmdhbml6YXRpb24iOiIzSkp5aiIsInByb2plY3QiOiJwNUdNTiIsInRva2VuIjoiM3c5WkoifQ.pGZXcJijT23zYiz3QEQV9gb-bEyguF5kqUHbm-ZnVYc
   script:
     - qodana --save-report --results-dir=$CI_PROJECT_DIR/qodana --report-dir=$CI_PROJECT_DIR/qodana/report
   artifacts:
