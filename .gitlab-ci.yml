@@ -8,6 +8,8 @@ cache:
 
 qodana:
   stage: qodana
+  tags:
+    - Docker
   only:
     - master
     - dev
@@ -30,6 +32,8 @@ qodana:
 
 sonarqube-check:
   stage: sonarqube-check
+  tags:
+    - Maven
   image: maven:3.6.3-jdk-11
   variables:
     SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
