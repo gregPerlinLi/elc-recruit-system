@@ -43,4 +43,4 @@ sonarqube-check:
     - mvn verify sonar:sonar -Dsonar.projectKey=gregPerinLi_elc-recruit-system_AYfiTGW2QMaXzOjwASMA -DskipTests -Dmaven.repo.local=cache
   allow_failure: true
   only:
-    - main
+    - master
