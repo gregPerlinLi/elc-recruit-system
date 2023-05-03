@@ -15,7 +15,7 @@ qodana:
     - dev
     - merge_requests
   image:
-    name: jetbrains/qodana-<linter>
+    name: jetbrains/qodana
     entrypoint: [""]
   variables:
     QODANA_REMOTE_URL: git@$CI_SERVER_HOST:$CI_PROJECT_PATH.git
