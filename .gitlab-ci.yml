@@ -1,34 +1,12 @@
 stages:
-  - qodana
-  - sonarqube-check
+  - quality-check
 
 cache:
   paths:
     - cache
 
-qodana:
-  stage: qodana
-  tags:
-    - Docker
-  only:
-    - master
-    - dev
-    - merge_requests
-  image:
-    name: jetbrains/qodana-jvm
-    entrypoint: [""]
-  variables:
-    QODANA_TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJvcmdhbml6YXRpb24iOiIzSkp5aiIsInByb2plY3QiOiJwNUdNTiIsInRva2VuIjoiM3c5WkoifQ.pGZXcJijT23zYiz3QEQV9gb-bEyguF5kqUHbm-ZnVYc
-  script:
-    - qodana --save-report --results-dir=$CI_PROJECT_DIR/qodana --report-dir=$CI_PROJECT_DIR/qodana/report
-  artifacts:
-    paths:
-      - qodana/report/
-    expose_as: 'Qodana report'
-  allow_failure: true
-
 sonarqube-check:
-  stage: sonarqube-check
+  stage: quality-check
   tags:
     - Maven
   image: maven:3.6.3-jdk-11
@@ -44,3 +22,24 @@ sonarqube-check:
   allow_failure: true
   only:
     - master
+    - dev
+
+qodana:
+  stage: quality-check
+  tags:
+    - Docker
+  only:
+    - master
+    - dev
+  image:
+    name: jetbrains/qodana-jvm
+    entrypoint: [""]
+  variables:
+    QODANA_TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJvcmdhbml6YXRpb24iOiIzSkp5aiIsInByb2plY3QiOiJwNUdNTiIsInRva2VuIjoiM3c5WkoifQ.pGZXcJijT23zYiz3QEQV9gb-bEyguF5kqUHbm-ZnVYc
+  script:
+    - qodana --save-report --results-dir=$CI_PROJECT_DIR/qodana --report-dir=$CI_PROJECT_DIR/qodana/report
+  artifacts:
+    paths:
+      - qodana/report/
+    expose_as: 'Qodana report'
+  allow_failure: true
